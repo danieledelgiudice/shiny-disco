@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateClientsTable extends Migration
+class CreateClientiTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,12 +15,12 @@ class CreateClientsTable extends Migration
         Schema::create('clienti', function (Blueprint $table) {
             $table->increments('id');
             
-            $table->string('nome');
-            $table->string('cognome');
+            $table->string('nome')->nullable();
+            $table->string('cognome')->nullable();
             
-            $table->integer('sesso');                       // pseudo enum
-            $table->date('nato_il')->nullable();
-            $table->string('nato_a')->nullable();
+            $table->integer('sesso')->nullable();                       // pseudo enum
+            $table->date('data_nascita')->nullable();
+            $table->string('luogo_nascita')->nullable();
             $table->string('codice_fiscale')->nullable();
             
             $table->string('via')->nullable();
@@ -43,6 +43,8 @@ class CreateClientsTable extends Migration
             $table->string('numero_card')->nullable();
             $table->text('note')->nullable();
             
+            // aggiungere relazione con filiali
+            
             $table->timestamps();
         });
     }
@@ -54,6 +56,6 @@ class CreateClientsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('clients');
+        Schema::drop('clienti');
     }
 }
