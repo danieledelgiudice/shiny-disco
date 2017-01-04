@@ -8,32 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Cliente extends Model
 {
     protected $table = 'clienti';
-    
-    public $displayName = [
-        'nome' => 'Nome',
-        'cognome' => 'Cognome',
-        'sesso' => 'Sesso',
-        'data_nascita' => 'Data di nascita',
-        'citta_nascita' => 'Città di nascita',
-        'codice_fiscale' => 'Codice Fiscale',
-        'via' => 'Via',
-        'citta_residenza' => 'Città di residenza',
-        'provincia' => 'Provincia',
-        'cap' => 'CAP',
-        'cellulare' => 'Cellulare',
-        'telefono' => 'Telefono',
-        'email' => 'Email',
-        'fax' => 'FAX',
-        'partita_iva' => 'P. IVA',
-        'tipo_documento' => 'Tipo documento',
-        'numero_documento' => 'Numero documento',
-        'stato_civile' => 'Stato civile',
-        'reddito' => 'Reddito',
-        'numero_card' => 'Numero Card',
-        'note' => 'Note',
-    ];
-    
-    
+
     /**
      * The attributes that are mass assignable.
      *
@@ -63,6 +38,43 @@ class Cliente extends Model
         'note',
     ];
     
+    private $enumSesso = [
+        0 => 'Non definito',
+        1 => 'Maschio',
+        2 => 'Femmina'
+    ];
+    
+    private $enumStatoCivile = [
+        0 => 'Nubile/Celibe',
+        1 => 'Sposato/a',
+        2 => 'Divorziato/a',
+        3 => 'Separato/a',
+        4 => 'Vedovo/a',
+    ];
+    
+    public function getSessoAttribute($value)
+    {
+        return $this->enumSesso[$value];
+    }
+    
+    public function setSessoAttribute($value)
+    {
+        $index = array_search($value, $this->enumSesso);
+        if($index != false)
+            return $this->attributes['sesso'] = $index;
+    }
+    
+    public function getStatoCivileAttribute($value)
+    {
+        return $this->enumStatoCivile[$value];
+    }
+    
+    public function setStatoCivileAttribute($value)
+    {
+        $index = array_search($value, $this->enumStatoCivile);
+        if($index != false)
+            return $this->attributes['stato_civile'] = $index;
+    }
     
     /**
      *  Ritorna le pratiche relative al cliente

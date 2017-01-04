@@ -25,7 +25,7 @@ $factory->define(App\Cliente::class, function (Faker\Generator $faker) {
     return [
         'nome' => $faker->firstName($sex ? 'male' : 'female'),
         'cognome' => $faker->lastName,
-        'sesso' => ($sex ? 'male' : 'female'),
+        'sesso' => ($sex ? 1 : 2),
         'data_nascita' => $faker->date(),
         'citta_nascita' => $faker->city,
         'codice_fiscale' => $faker->swiftBicNumber,
