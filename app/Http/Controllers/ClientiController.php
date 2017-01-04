@@ -10,7 +10,13 @@ class ClientiController extends Controller
     public function index(Request $request)
     {
         $clienti = \App\Cliente::all();
-        return $clienti;
+        return view('clienti.index', compact('clienti'));
+    }
+    
+    public function show($id)
+    {
+        $cliente = \App\Cliente::find($id);
+        return view('clienti.show', compact('cliente'));
     }
 
     public function edit($id)

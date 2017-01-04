@@ -207,20 +207,14 @@
                                 {!! Form::textarea('note', null, ['class' => 'form-control']) !!}
                             </div>
                         </div>
-
-
-                        <!-- Conferma/Annulla cambiamenti -->
-                        <div class="form-group">
-                            <div class="col-md-offset-3 col-md-6">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fa fa-btn fa-pencil"></i>Modifica Cliente
-                                </button>
-                                
-                                <a href="{{ action('ClientiController@index')}}" class="btn btn-success pull-right">
-                                    <i class="fa fa-btn fa-undo"></i>Annulla Cambiamenti
-                                </a>
-                            </div>
-                        </div>
+                    </div>
+                </div>
+                <!-- Conferma/Annulla cambiamenti -->
+                <div class="form-group">
+                    <div class="center-block">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa fa-btn fa-pencil"></i>Modifica cliente
+                        </button>
                     </div>
                 </div>
             {!! Form::close() !!}
