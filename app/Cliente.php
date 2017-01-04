@@ -9,6 +9,31 @@ class Cliente extends Model
 {
     protected $table = 'clienti';
     
+    public $displayName = [
+        'nome' => 'Nome',
+        'cognome' => 'Cognome',
+        'sesso' => 'Sesso',
+        'data_nascita' => 'Data di nascita',
+        'citta_nascita' => 'Città di nascita',
+        'codice_fiscale' => 'Codice Fiscale',
+        'via' => 'Via',
+        'citta_residenza' => 'Città di residenza',
+        'provincia' => 'Provincia',
+        'cap' => 'CAP',
+        'cellulare' => 'Cellulare',
+        'telefono' => 'Telefono',
+        'email' => 'Email',
+        'fax' => 'FAX',
+        'partita_iva' => 'P. IVA',
+        'tipo_documento' => 'Tipo documento',
+        'numero_documento' => 'Numero documento',
+        'stato_civile' => 'Stato civile',
+        'reddito' => 'Reddito',
+        'numero_card' => 'Numero Card',
+        'note' => 'Note',
+    ];
+    
+    
     /**
      * The attributes that are mass assignable.
      *

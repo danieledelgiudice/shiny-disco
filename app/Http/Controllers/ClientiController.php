@@ -16,6 +16,7 @@ class ClientiController extends Controller
     public function edit($id)
     {
         $cliente = \App\Cliente::find($id);
+        // return $cliente->toArray();
         return view('clienti.edit', compact('cliente'));
     }
 

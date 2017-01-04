@@ -14,15 +14,20 @@
 
                     <!-- Form Modifica Cliente -->
                     {!! Form::model($cliente, ['action' => ['ClientiController@update', $cliente], 'method' => 'put', 'class' => 'form-horizontal']) !!}
+                        
+                        @foreach ($cliente->toArray() as $colonna => $valore)
+                            @if (array_key_exists($colonna, $cliente->displayName)) 
+                                <!-- Nome Cliente -->
+                                <div class="form-group">
+                                    {!! Form::label($colonna, $cliente->displayName[$colonna], ['class' => 'col-sm-3 control-label']) !!}
+        
+                                    <div class="col-sm-6">
+                                        {!! Form::text($colonna, null, ['class' => 'form-control']) !!}
+                                    </div>
+                                </div>
+                            @endif
+                        @endforeach
 
-                        <!-- Nome Cliente -->
-                        <div class="form-group">
-                            {!! Form::label('name', 'Name', ['class' => 'col-sm-3 control-label']) !!}
-
-                            <div class="col-sm-6">
-                                {!! Form::text('name', null, ['class' => 'form-control']) !!}
-                            </div>
-                        </div>
                         
                         <!-- Conferma/Annulla cambiamenti -->
                         <div class="form-group">
