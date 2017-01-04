@@ -16,21 +16,18 @@ class ClientiController extends Controller
     public function edit($id)
     {
         $cliente = \App\Cliente::find($id);
-        // return array_combine(array_values($cliente->enumSesso), array_values($cliente->enumSesso));
         return view('clienti.edit', compact('cliente'));
     }
 
     public function update(Request $request, $id)
     {
-        // $city = \App\City::find($id);
+        $city = \App\Cliente::find($id);
+        $new_values = $request->all();
         
-        // $city->fill([
-        //     'name' => $request->name,
-        //     'district' => $request->district,
-        //     'population' => $request->population,
-        // ]);
-        // $city->save();
+        $city->fill($new_values);
+        $city->save();
         
-        // return redirect(action('CityController@index'));
+        // TODO: mostrare messaggio nella view
+        return redirect()->back()->with('success', 'Cliente salvato con successo!');
     }
 }

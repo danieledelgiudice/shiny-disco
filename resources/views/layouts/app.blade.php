@@ -53,6 +53,8 @@
             </div>
         </div>
     </nav>
+    
+    @include('common.errors')
 
     @yield('content')
 
