@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h1 class="jumbotron text-center">Modifica Cliente</h1>
+        <h1 class="page-header text-center">Modifica Cliente</h1>
         <div class="col-md-offset-1 col-md-10">
             <!-- Mostra errori di validazione -->
             @include('common.errors')
@@ -155,26 +155,28 @@
                             <div class="col-md-4">
                                 {!! Form::text('partita_iva', null, ['class' => 'form-control']) !!}
                             </div>
-                        
-                            <!-- Tipo documento Cliente -->
-                            {!! Form::label('tipo_documento', "Tipo documento" , ['class' => 'col-md-2 control-label']) !!}
-                            <div class="col-md-4">
-                                {!! Form::text('tipo_documento', null, ['class' => 'form-control']) !!}
-                            </div>
-                        </div>
-                        
-                        
-                        <div class="form-group">
-                            <!-- Numero documento Cliente -->
-                            {!! Form::label('numero_documento', "N. documento" , ['class' => 'col-md-2 control-label']) !!}
-                            <div class="col-md-4">
-                                {!! Form::text('numero_documento', null, ['class' => 'form-control']) !!}
-                            </div>
                             
                             <!-- Stato civile Cliente -->
                             {!! Form::label('stato_civile', "Stato civile" , ['class' => 'col-md-2 control-label']) !!}
                             <div class="col-md-4">
                                 {{ Form::select('stato_civile', $cliente->enumStatoCivile, null, ['class' => 'form-control']) }}
+                            </div>
+                        
+                            
+                        </div>
+                        
+                        
+                        <div class="form-group">
+                            <!-- Tipo documento Cliente -->
+                            {!! Form::label('tipo_documento', "Tipo documento" , ['class' => 'col-md-2 control-label']) !!}
+                            <div class="col-md-4">
+                                {{ Form::select('tipo_documento', $cliente->enumTipoDocumento, null, ['class' => 'form-control']) }}
+                            </div>
+                            
+                            <!-- Numero documento Cliente -->
+                            {!! Form::label('numero_documento', "N. documento" , ['class' => 'col-md-2 control-label']) !!}
+                            <div class="col-md-4">
+                                {!! Form::text('numero_documento', null, ['class' => 'form-control']) !!}
                             </div>
                         </div>
                         

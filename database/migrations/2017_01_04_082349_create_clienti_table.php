@@ -18,7 +18,7 @@ class CreateClientiTable extends Migration
             $table->string('nome')->nullable();
             $table->string('cognome')->nullable();
             
-            $table->integer('sesso')->nullable();                       // pseudo enum
+            $table->integer('sesso')->default(0);                       // pseudo enum
             $table->date('data_nascita')->nullable();
             $table->string('citta_nascita')->nullable();
             $table->string('codice_fiscale')->nullable();
@@ -34,10 +34,10 @@ class CreateClientiTable extends Migration
             $table->string('fax')->nullable();
             
             $table->string('partita_iva')->nullable();
-            $table->string('tipo_documento')->nullable();   // relazione o enum?
+            $table->integer('tipo_documento')->default(0);   // relazione o enum?
             $table->string('numero_documento')->nullable();
             
-            $table->integer('stato_civile')->nullable();    // pseudo enum
+            $table->integer('stato_civile')->default(0);    // pseudo enum
             //$table->string('professione')->nullable();    // deve diventare una relazione
             $table->decimal('reddito', 10, 2)->nullable();
             $table->string('numero_card')->nullable();

@@ -39,18 +39,30 @@ class Cliente extends Model
     ];
     
     public $enumSesso = [
-        0 => 'Non definito',
+        0 => 'Sconosciuto',
         1 => 'Uomo',
-        2 => 'Donna'
+        2 => 'Donna',
+        100 => 'Altro',
     ];
     
     public $enumStatoCivile = [
-        0 => 'Nubile/Celibe',
-        1 => 'Sposato/a',
-        2 => 'Divorziato/a',
-        3 => 'Separato/a',
-        4 => 'Vedovo/a',
+        0 => 'Sconosciuto',
+        1 => 'Nubile/Celibe',
+        2 => 'Sposato/a',
+        3 => 'Divorziato/a',
+        4 => 'Unito/a civilmente',
+        5 => 'Vedovo/a',
+        100 => 'Altro'
     ];
+    
+    public $enumTipoDocumento = [
+        0 => 'Sconosciuto',
+        1 => 'Carta d\'identità',
+        2 => 'Patente di guida',
+        3 => 'Passaporto',
+        4 => 'Patente nautica',
+        100 => 'Altro',
+        ];
     
     
     /**
