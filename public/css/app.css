@@ -1,0 +1,3 @@
+.navbar-fixed-top ~ div {
+    margin-top: 70px;
+}

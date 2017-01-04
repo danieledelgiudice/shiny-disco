@@ -53,11 +53,7 @@
                             <!-- Sesso Cliente -->    
                             {!! Form::label('sesso', "Sesso" , ['class' => 'col-md-2 control-label']) !!}
                             <div class="col-md-4">
-                                {{ Form::text('sesso', null, ['class' => 'form-control']) }}
-                                <!-- select class="form-control">
-                                    <option>Maschio</option>
-                                    <option>Femmina</option>
-                                </select> -->
+                                {{ Form::select('sesso', $cliente->enumSesso, null, ['class' => 'form-control']) }}
                             </div>
 
                             
@@ -153,74 +149,76 @@
                     </div>
                     <div class="panel-body">                            
                             
-                            <div class="form-group">
-                                <!-- P. IVA Cliente -->
-                                {!! Form::label('partita_iva', "P. IVA" , ['class' => 'col-md-2 control-label']) !!}
-                                <div class="col-md-4">
-                                    {!! Form::text('partita_iva', null, ['class' => 'form-control']) !!}
-                                </div>
-                            
-                                <!-- Tipo documento Cliente -->
-                                {!! Form::label('tipo_documento', "Tipo documento" , ['class' => 'col-md-2 control-label']) !!}
-                                <div class="col-md-4">
-                                    {!! Form::text('tipo_documento', null, ['class' => 'form-control']) !!}
-                                </div>
+                        <div class="form-group">
+                            <!-- P. IVA Cliente -->
+                            {!! Form::label('partita_iva', "P. IVA" , ['class' => 'col-md-2 control-label']) !!}
+                            <div class="col-md-4">
+                                {!! Form::text('partita_iva', null, ['class' => 'form-control']) !!}
+                            </div>
+                        
+                            <!-- Tipo documento Cliente -->
+                            {!! Form::label('tipo_documento', "Tipo documento" , ['class' => 'col-md-2 control-label']) !!}
+                            <div class="col-md-4">
+                                {!! Form::text('tipo_documento', null, ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        
+                        
+                        <div class="form-group">
+                            <!-- Numero documento Cliente -->
+                            {!! Form::label('numero_documento', "N. documento" , ['class' => 'col-md-2 control-label']) !!}
+                            <div class="col-md-4">
+                                {!! Form::text('numero_documento', null, ['class' => 'form-control']) !!}
                             </div>
                             
-                            
-                            <div class="form-group">
-                                <!-- Numero documento Cliente -->
-                                {!! Form::label('numero_documento', "N. documento" , ['class' => 'col-md-2 control-label']) !!}
-                                <div class="col-md-4">
-                                    {!! Form::text('numero_documento', null, ['class' => 'form-control']) !!}
-                                </div>
-                                
-                                <!-- Stato civile Cliente -->
-                                {!! Form::label('stato_civile', "Stato civile" , ['class' => 'col-md-2 control-label']) !!}
-                                <div class="col-md-4">
-                                    {!! Form::text('stato_civile', null, ['class' => 'form-control']) !!}
-                                </div>
+                            <!-- Stato civile Cliente -->
+                            {!! Form::label('stato_civile', "Stato civile" , ['class' => 'col-md-2 control-label']) !!}
+                            <div class="col-md-4">
+                                {{ Form::select('stato_civile', $cliente->enumStatoCivile, null, ['class' => 'form-control']) }}
                             </div>
-                            
-                            
-                            <div class="form-group">
-                                <!-- Reddito Cliente -->
-                                {!! Form::label('reddito', "Reddito" , ['class' => 'col-md-2 control-label']) !!}
-                                <div class="col-md-4">
+                        </div>
+                        
+                        
+                        <div class="form-group">
+                            <!-- Reddito Cliente -->
+                            {!! Form::label('reddito', "Reddito" , ['class' => 'col-md-2 control-label']) !!}
+                            <div class="col-md-4">
+                                <div class="input-group">
                                     {!! Form::text('reddito', null, ['class' => 'form-control']) !!}
-                                </div>
-                            
-                                <!-- Numero Card Cliente -->
-                                {!! Form::label('numero_card', "Numero Card" , ['class' => 'col-md-2 control-label']) !!}
-                            
-                                <div class="col-md-4">
-                                    {!! Form::text('numero_card', null, ['class' => 'form-control']) !!}
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <!-- Note Cliente -->
-                                {!! Form::label('note', "Note" , ['class' => 'col-md-2 control-label']) !!}
-                            
-                                <div class="col-md-10">
-                                    {!! Form::textarea('note', null, ['class' => 'form-control']) !!}
-                                </div>
-                            </div>
-    
-    
-                            <!-- Conferma/Annulla cambiamenti -->
-                            <div class="form-group">
-                                <div class="col-md-offset-3 col-md-6">
-                                    <button type="submit" class="btn btn-primary">
-                                        <i class="fa fa-btn fa-pencil"></i>Modifica Cliente
-                                    </button>
-                                    
-                                    <a href="{{ action('ClientiController@index')}}" class="btn btn-success pull-right">
-                                        <i class="fa fa-btn fa-undo"></i>Annulla Cambiamenti
-                                    </a>
+                                    <span class="input-group-addon">€</span>
                                 </div>
                             </div>
                         
+                            <!-- Numero Card Cliente -->
+                            {!! Form::label('numero_card', "Numero Card" , ['class' => 'col-md-2 control-label']) !!}
+                        
+                            <div class="col-md-4">
+                                {!! Form::text('numero_card', null, ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <!-- Note Cliente -->
+                            {!! Form::label('note', "Note" , ['class' => 'col-md-2 control-label']) !!}
+                        
+                            <div class="col-md-10">
+                                {!! Form::textarea('note', null, ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+
+
+                        <!-- Conferma/Annulla cambiamenti -->
+                        <div class="form-group">
+                            <div class="col-md-offset-3 col-md-6">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa fa-btn fa-pencil"></i>Modifica Cliente
+                                </button>
+                                
+                                <a href="{{ action('ClientiController@index')}}" class="btn btn-success pull-right">
+                                    <i class="fa fa-btn fa-undo"></i>Annulla Cambiamenti
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             {!! Form::close() !!}

@@ -38,13 +38,13 @@ class Cliente extends Model
         'note',
     ];
     
-    private $enumSesso = [
+    public $enumSesso = [
         0 => 'Non definito',
-        1 => 'Maschio',
-        2 => 'Femmina'
+        1 => 'Uomo',
+        2 => 'Donna'
     ];
     
-    private $enumStatoCivile = [
+    public $enumStatoCivile = [
         0 => 'Nubile/Celibe',
         1 => 'Sposato/a',
         2 => 'Divorziato/a',
@@ -52,29 +52,6 @@ class Cliente extends Model
         4 => 'Vedovo/a',
     ];
     
-    public function getSessoAttribute($value)
-    {
-        return $this->enumSesso[$value];
-    }
-    
-    public function setSessoAttribute($value)
-    {
-        $index = array_search($value, $this->enumSesso);
-        if($index != false)
-            return $this->attributes['sesso'] = $index;
-    }
-    
-    public function getStatoCivileAttribute($value)
-    {
-        return $this->enumStatoCivile[$value];
-    }
-    
-    public function setStatoCivileAttribute($value)
-    {
-        $index = array_search($value, $this->enumStatoCivile);
-        if($index != false)
-            return $this->attributes['stato_civile'] = $index;
-    }
     
     /**
      *  Ritorna le pratiche relative al cliente
