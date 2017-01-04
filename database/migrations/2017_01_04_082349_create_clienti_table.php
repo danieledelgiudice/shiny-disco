@@ -20,11 +20,11 @@ class CreateClientiTable extends Migration
             
             $table->integer('sesso')->nullable();                       // pseudo enum
             $table->date('data_nascita')->nullable();
-            $table->string('luogo_nascita')->nullable();
+            $table->string('citta_nascita')->nullable();
             $table->string('codice_fiscale')->nullable();
             
             $table->string('via')->nullable();
-            $table->string('città')->nullable();
+            $table->string('citta_residenza')->nullable();
             $table->string('provincia', 2)->nullable();     // relazione?
             $table->string('cap', 5)->nullable();
             
@@ -33,7 +33,7 @@ class CreateClientiTable extends Migration
             $table->string('email')->nullable();
             $table->string('fax')->nullable();
             
-            $table->string('piva')->nullable();
+            $table->string('partita_iva')->nullable();
             $table->string('tipo_documento')->nullable();   // relazione o enum?
             $table->string('numero_documento')->nullable();
             
