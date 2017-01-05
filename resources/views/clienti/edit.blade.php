@@ -2,8 +2,21 @@
 
 @section('content')
     <div class="container">
-        <h1 class="page-header text-center">Modifica Cliente</h1>
-        <div class="col-md-offset-1 col-md-10">
+        <!-- Mostra pulsanti navigazione -->
+        <div class="page-header">
+            <h1 class="text-center">
+                Modifica Cliente
+            </h1>
+            <div>
+                <div class="pull-left">
+                    <a id="backButton" href="#" class="btn btn-default"><i class="fa fa-arrow-left"></i></a>
+                </div>
+                <div class="pull-right">
+                </div>
+            </div>
+        </div>
+
+        <div>
             <!-- Mostra errori di validazione -->
             @include('common.errors')
     
@@ -44,7 +57,10 @@
                             <!-- Data di nascita Cliente -->
                             {!! Form::label('data_nascita', "Data di nascita" , ['class' => 'col-md-2 control-label']) !!}
                             <div class="col-md-4">
-                                {!! Form::text('data_nascita', null, ['class' => 'form-control']) !!}
+                                <div class="input-group date">
+                                    {!! Form::text('data_nascita', $cliente->data_nascita->format('d/m/Y'), ['class' => 'form-control date-control']) !!}
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                </div>
                             </div>
                         </div>
                         
@@ -211,11 +227,9 @@
                 </div>
                 <!-- Conferma/Annulla cambiamenti -->
                 <div class="form-group">
-                    <div class="center-block">
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fa fa-btn fa-pencil"></i>Modifica cliente
-                        </button>
-                    </div>
+                    <button type="submit" class="btn btn-primary center-block">
+                        <i class="fa fa-btn fa-pencil"></i>Modifica cliente
+                    </button>
                 </div>
             {!! Form::close() !!}
             <!--</form>-->

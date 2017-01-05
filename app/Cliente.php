@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Cliente extends Model
 {
     protected $table = 'clienti';
+    protected $dates = ['data_nascita'];
 
     /**
      * The attributes that are mass assignable.

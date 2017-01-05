@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <h1 class="page-header text-center">Elenco Clienti</h1>
-        <div class="col-md-offset-1 col-md-10">
+        <div>
             <div class="panel panel-default">
                 <!-- Lista clienti -->
                 @if (count($clienti) > 0)
@@ -19,7 +19,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($clienti as $cliente)
-                                    <tr>
+                                    <tr class="link-row" data-href="{{ action('ClientiController@show', $cliente)}}">
                                         <td class="table-text"><div>{{ $cliente->nome }}</div></td>
                                         <td class="table-text"><div>{{ $cliente->cognome }}</div></td>
                                         <td class="table-text"><div>{{ $cliente->citta_residenza }}</div></td>

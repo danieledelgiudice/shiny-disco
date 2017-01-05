@@ -2,14 +2,23 @@
 
 @section('content')
     <div class="container">
-        <h1 class="page-header text-center">
-            Dettagli Cliente
-        </h1>
-        <a href="{{ action('ClientiController@show', $cliente)}}" class="btn btn-default pull-left"><i class="fa fa-arrow-left"></i></a>
-    
-        <a class="btn btn-danger pull-right"><i class="fa fa-trash"></i></a>
-        <a href="{{ action('ClientiController@edit', $cliente) }}" class="btn btn-success pull-right"><i class="fa fa-pencil"></i></a>
-        <div class="col-md-offset-1 col-md-10">
+        <!-- Mostra pulsanti navigazione -->
+        <div class="page-header">
+            <h1 class="text-center">
+                Dettagli Cliente
+            </h1>
+            <div>
+                <div class="pull-left">
+                    <a id="backButton" href="#" class="btn btn-default"><i class="fa fa-arrow-left"></i></a>
+                </div>
+                <div class="pull-right">
+                    <a class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                    <a href="{{ action('ClientiController@edit', $cliente) }}" class="btn btn-success"><i class="fa fa-pencil"></i></a>
+                </div>
+            </div>
+        </div>
+       
+        <div>
             <!-- Mostra errori di validazione -->
             @include('common.errors')
     
@@ -48,7 +57,7 @@
                         <!-- Data di nascita Cliente -->
                         <strong class="col-md-2 form-control-static">Data di nascita</strong>
                         <div class="col-md-4">
-                            <p value="" class="form-control-static">{{ $cliente->data_nascita }}</p>
+                            <p value="" class="form-control-static">{{ $cliente->data_nascita->format('d/m/Y') }}</p>
                         </div>
                     </div>
                     
