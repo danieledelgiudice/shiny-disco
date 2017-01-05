@@ -23,7 +23,7 @@
                                         <td class="table-text"><div>{{ $cliente->nome }}</div></td>
                                         <td class="table-text"><div>{{ $cliente->cognome }}</div></td>
                                         <td class="table-text"><div>{{ $cliente->citta_residenza }}</div></td>
-                                        <td class="table-text"><div>{{ $cliente->data_nascita }}</div></td>
+                                        <td class="table-text"><div>{{ $cliente->data_nascita->format('d/m/Y') }}</div></td>
                                         <td class="table-text"><div>{{ $cliente->codice_fiscale }}</div></td>
 
                                         <!-- Modifica cliente -->

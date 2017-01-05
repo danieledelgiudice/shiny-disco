@@ -76,7 +76,7 @@
                             <!-- Codice Fiscale Cliente -->
                             {!! Form::label('codice_fiscale', "Codice Fiscale" , ['class' => 'col-md-2 control-label']) !!}
                             <div class="col-md-4">
-                                {!! Form::text('codice_fiscale', null, ['class' => 'form-control']) !!}
+                                {!! Form::text('codice_fiscale', null, ['class' => 'form-control', 'maxlength' => '16']) !!}
                             </div>
                         </div>
                     </div>
@@ -109,13 +109,13 @@
                             <!-- Provincia Cliente -->
                             {!! Form::label('provincia', "Provincia" , ['class' => 'col-md-2 control-label']) !!}
                             <div class="col-md-4">
-                                {!! Form::text('provincia', null, ['class' => 'form-control']) !!}
+                                {!! Form::text('provincia', null, ['class' => 'form-control', 'maxlength' => '2']) !!}
                             </div>
                             
                             <!-- CAP Cliente -->
                             {!! Form::label('cap', "CAP" , ['class' => 'col-md-2 control-label']) !!}
                             <div class="col-md-4">
-                                {!! Form::text('cap', null, ['class' => 'form-control']) !!}
+                                {!! Form::text('cap', null, ['class' => 'form-control', 'maxlength' => '5' ]) !!}
                             </div>
                         </div>
                     </div>
@@ -145,7 +145,7 @@
                             <!-- Email Cliente -->
                             {!! Form::label('email', "Email" , ['class' => 'col-md-2 control-label']) !!}
                             <div class="col-md-4">
-                                {!! Form::text('email', null, ['class' => 'form-control']) !!}
+                                {!! Form::email('email', null, ['class' => 'form-control']) !!}
                             </div>
                         
                             <!-- FAX Cliente -->
@@ -202,7 +202,7 @@
                             {!! Form::label('reddito', "Reddito" , ['class' => 'col-md-2 control-label']) !!}
                             <div class="col-md-4">
                                 <div class="input-group">
-                                    {!! Form::text('reddito', null, ['class' => 'form-control']) !!}
+                                    {!! Form::number('reddito', null, ['class' => 'form-control']) !!}
                                     <span class="input-group-addon">€</span>
                                 </div>
                             </div>
