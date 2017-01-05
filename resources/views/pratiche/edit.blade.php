@@ -8,7 +8,7 @@
             @include('common.errors')
     
             <!-- Form Modifica Cliente -->
-            {!! Form::open(['method' => 'put', 'class' => 'form-horizontal']) !!}
+            {!! Form::model($pratica, ['method' => 'put', 'class' => 'form-horizontal']) !!}
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <i class="fa fa-file-text"></i>

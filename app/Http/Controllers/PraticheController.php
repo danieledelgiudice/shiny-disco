@@ -17,7 +17,8 @@ class PraticheController extends Controller
 
     public function edit($id)
     {
-        return view('pratiche.edit');
+        $pratica = \App\Pratica::find($id);
+        return view('pratiche.edit', compact('pratica'));
     }
 
     public function update(Request $request, $id)
