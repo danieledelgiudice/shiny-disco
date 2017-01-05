@@ -74,4 +74,12 @@ class Cliente extends Model
     {
         return $this->hasMany('\App\Pratica', 'cliente_id', 'id');
     }
+    
+    
+    
+    
+    // public function setDataNascitaAttribute($value)
+    // {
+    //     $this->attributes['data_nascita'] = \Carbon\Carbon::createFromFormat('d/m/Y', $value);
+    // }
 }

@@ -39,7 +39,7 @@ class CreatePraticheTable extends Migration
             
             $table->string('legale')->nullable();
             $table->date('in_data')->nullable();
-            $table->boolean('controllato')->nullable();
+            $table->integer('controllato')->nullable();
             $table->date('data_ultima_lettera')->nullable();
             $table->string('mezzo_liquidabile')->nullable();                // ?
             $table->decimal('valore_mezzo_liquidabile', 10, 2)->nullable();

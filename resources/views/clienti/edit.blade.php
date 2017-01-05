@@ -58,8 +58,8 @@
                             {!! Form::label('data_nascita', "Data di nascita" , ['class' => 'col-md-2 control-label']) !!}
                             <div class="col-md-4">
                                 <div class="input-group date">
-                                    {!! Form::text('data_nascita', $cliente->data_nascita->format('d/m/Y'), ['class' => 'form-control date-control']) !!}
-                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    {!! Form::text('data_nascita', null, ['class' => 'form-control date-control']) !!}
+                                    <span class="input-group-addon"><i class="fa fa-fw fa-calendar"></i></span>
                                 </div>
                             </div>
                         </div>
@@ -203,13 +203,12 @@
                             <div class="col-md-4">
                                 <div class="input-group">
                                     {!! Form::number('reddito', null, ['class' => 'form-control']) !!}
-                                    <span class="input-group-addon">€</span>
+                                    <span class="input-group-addon"><i class="fa fa-fw fa-eur"></i></span>
                                 </div>
                             </div>
                         
                             <!-- Numero Card Cliente -->
                             {!! Form::label('numero_card', "Numero Card" , ['class' => 'col-md-2 control-label']) !!}
-                        
                             <div class="col-md-4">
                                 {!! Form::text('numero_card', null, ['class' => 'form-control']) !!}
                             </div>
