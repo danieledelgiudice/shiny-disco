@@ -27,13 +27,13 @@ class ClientiController extends Controller
 
     public function update(Request $request, $id)
     {
-        $city = \App\Cliente::find($id);
+        $cliente = \App\Cliente::find($id);
         $new_values = $request->all();
         
-        $city->fill($new_values);
-        $city->save();
+        $cliente->fill($new_values);
+        $cliente->save();
         
         // TODO: mostrare messaggio nella view
-        return redirect()->back()->with('success', 'Cliente salvato con successo!');
+        return redirect()->action('ClientiController@show', $cliente)->with('success', 'Cliente salvato con successo!');
     }
 }

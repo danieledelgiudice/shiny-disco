@@ -23,5 +23,13 @@ class PraticheController extends Controller
 
     public function update(Request $request, $id)
     {
+        $pratica = \App\Pratica::find($id);
+        $new_values = $request->all();
+        
+        $pratica->fill($new_values);
+        $pratica->save();
+        
+        // TODO: mostrare messaggio nella view
+        return redirect()->action('PraticheController@show', $pratica)->with('success', 'Pratica salvato con successo!');
     }
 }
