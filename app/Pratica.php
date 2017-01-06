@@ -43,8 +43,8 @@ class Pratica extends Model
 		13 => 'INAIL',
 		14 => 'Furto',
 		15 => 'Malattia',
-		18 => 'RCT/RCG', 
-		19 => 'Infortuni', 
+		16 => 'RCT/RCG', 
+		17 => 'Infortuni', 
 	];
 
     public $enumMezzoLiquidabile = [	

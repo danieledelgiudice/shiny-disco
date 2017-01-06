@@ -9,6 +9,8 @@ class PraticheController extends Controller
 {
     public function index(Request $request)
     {
+        $pratiche = \App\Pratica::all();
+        return view('pratiche.index', compact('pratiche'));
     }
     
     public function show($id)

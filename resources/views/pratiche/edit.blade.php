@@ -51,7 +51,7 @@
                         {!! Form::label('data_apertura', 'Data apertura' , ['class' => 'col-md-2 control-label']) !!}
                         <div class="col-md-4">
                             <div class="input-group date">
-                                {!! Form::text('data_apertura', $pratica->data_apertura->format('d/m/Y'), ['class' => 'form-control date-control']) !!}
+                                {!! Form::text('data_apertura', $pratica->data_apertura && $pratica->data_apertura->format('d/m/Y'), ['class' => 'form-control date-control']) !!}
                                 <span class="input-group-addon"><i class="fa fa-fw fa-calendar"></i></span>
                             </div>
                         </div>
@@ -213,7 +213,7 @@
                         {!! Form::label('in_data', 'In data' , ['class' => 'col-md-2 control-label']) !!}
                         <div class="col-md-4">
                             <div class="input-group date">
-                                {!! Form::text('in_data', $pratica->in_data->format('d/m/Y'), ['class' => 'form-control date-control']) !!}
+                                {!! Form::text('in_data', $pratica->in_data && $pratica->in_data->format('d/m/Y'), ['class' => 'form-control date-control']) !!}
                                 <span class="input-group-addon"><i class="fa fa-fw fa-calendar"></i></span>
                             </div>
                         </div>
@@ -230,7 +230,7 @@
                         {!! Form::label('data_ultima_lettera', 'Data ultima lettera' , ['class' => 'col-md-2 control-label']) !!}
                         <div class="col-md-4">
                             <div class="input-group date">
-                                {!! Form::text('data_ultima_lettera', $pratica->data_ultima_lettera->format('d/m/Y'), ['class' => 'form-control date-control']) !!}
+                                {!! Form::text('data_ultima_lettera', $pratica->data_ultima_lettera && $pratica->data_ultima_lettera->format('d/m/Y'), ['class' => 'form-control date-control']) !!}
                                 <span class="input-group-addon"><i class="fa fa-fw fa-calendar"></i></span>
                             </div>
                         </div>
@@ -264,7 +264,7 @@
                         {!! Form::label('data_chiusura', 'Data chiusura' , ['class' => 'col-md-2 control-label']) !!}
                         <div class="col-md-4">
                             <div class="input-group date">
-                                {!! Form::text('data_chiusura', $pratica->data_chiusura->format('d/m/Y'), ['class' => 'form-control date-control']) !!}
+                                {!! Form::text('data_chiusura', $pratica->data_chiusura && $pratica->data_chiusura->format('d/m/Y'), ['class' => 'form-control date-control']) !!}
                                 <span class="input-group-addon"><i class="fa fa-fw fa-calendar"></i></span>
                             </div>
                         </div>
@@ -284,7 +284,7 @@
                         {!! Form::label('data_sospeso', 'Data sospeso' , ['class' => 'col-md-2 control-label']) !!}
                         <div class="col-md-4">
                             <div class="input-group date">
-                                {!! Form::text('data_sospeso', $pratica->data_sospeso->format('d/m/Y'), ['class' => 'form-control date-control']) !!}
+                                {!! Form::text('data_sospeso', $pratica->data_sospeso && $pratica->data_sospeso->format('d/m/Y'), ['class' => 'form-control date-control']) !!}
                                 <span class="input-group-addon"><i class="fa fa-fw fa-calendar"></i></span>
                             </div>
                         </div>
@@ -314,7 +314,7 @@
                         {!! Form::label('data_sinistro', 'Data sinistro' , ['class' => 'col-md-2 control-label']) !!}
                         <div class="col-md-4">
                             <div class="input-group date">
-                                {!! Form::text('data_sinistro', $pratica->data_sinistro->format('d/m/Y') , ['class' => 'form-control date-control']) !!}
+                                {!! Form::text('data_sinistro', $pratica->data_sinistro && $pratica->data_sinistro->format('d/m/Y') , ['class' => 'form-control date-control']) !!}
                                 <span class="input-group-addon"><i class="fa fa-fw fa-calendar"></i></span>
                             </div>
                         </div>

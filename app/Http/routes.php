@@ -21,5 +21,6 @@ Route::get('/clienti/{cliente}', 'ClientiController@show');
 Route::put('/clienti/{cliente}', 'ClientiController@update');
 
 
+Route::get('/pratiche', 'PraticheController@index');
 Route::get('/pratiche/{pratica}/edit', 'PraticheController@edit');
 Route::put('/pratiche/{pratica}', 'PraticheController@update');

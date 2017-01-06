@@ -208,7 +208,7 @@ $factory->define(App\Cliente::class, function (Faker\Generator $faker) {
         'numero_pratica' => $faker->unique()->numberBetween(0, 50000),
         'numero_registrazione' => $faker->unique()->numberBetween(0, 100000),
         'stato_pratica' => $faker->numberBetween(0, 4), 
-        'tipo_pratica' => $faker->numberBetween(0, 19), 
+        'tipo_pratica' => $faker->numberBetween(0, 17), 
         'data_apertura' => $faker->dateTimeThisDecade(),
         
         'veicolo_parte' => $faker->randomElement($modelliAuto),

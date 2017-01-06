@@ -50,6 +50,7 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     <li><a href="{{ action('ClientiController@index') }}">Clienti</a></li>
+                    <li><a href="{{ action('PraticheController@index') }}">Pratiche</a></li>
                 </ul>
             </div>
         </div>
