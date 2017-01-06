@@ -15,6 +15,8 @@ class PraticheController extends Controller
     
     public function show($id)
     {
+        $pratica = \App\Pratica::find($id);
+        return view('pratiche.show', compact('pratica'));
     }
 
     public function edit($id)

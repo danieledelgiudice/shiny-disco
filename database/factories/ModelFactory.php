@@ -231,7 +231,7 @@ $factory->define(App\Cliente::class, function (Faker\Generator $faker) {
         'in_data' => $faker->dateTimeThisDecade(),
         'controllato' => $faker->numberBetween(0, 1),
         'data_ultima_lettera' => $faker->optional($weight = 0.8)->dateTimeThisDecade(),
-        'mezzo_liquidabile' => $faker->numberBetween(0, 3), 
+        'mezzo_liquidabile' => $faker->numberBetween(0, 2), 
         'valore_mezzo_liquidabile' => $faker->randomFloat($nbMaxDecimals = 2, $min = 500, $max = 10000),
         'rilievi' => $faker->numberBetween(0, 3),
         'data_chiusura' => $faker->optional($weight = 0.8)->dateTimeThisDecade(),

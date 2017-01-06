@@ -228,4 +228,14 @@ class Pratica extends Model
         else
             $this->attributes['data_sinistro'] = $value;
     }
+    
+    
+    
+    // Mutator data_ultima_lettera
+    public function getDataUltimaLetteraHAttribute($value)
+    {
+        if ($this->data_ultima_lettera instanceof \Carbon\Carbon)
+            return $this->data_ultima_lettera->format('m/d/Y');
+        else '';
+    }
 }
