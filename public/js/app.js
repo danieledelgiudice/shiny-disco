@@ -17,11 +17,10 @@
     });
     
     $('.input-group.date').datepicker({
-        format: "dd/mm/yyyy",
+        format: 'dd/mm/yyyy',
         weekStart: 1,
-        language: "it",
-        todayBtn: "linked",
-        autoclose: true
+        language: 'it',
+        todayBtn: 'linked',
     });
     
 })();

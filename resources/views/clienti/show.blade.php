@@ -57,7 +57,7 @@
                         <!-- Data di nascita Cliente -->
                         <strong class="col-md-2 form-control-static">Data di nascita</strong>
                         <div class="col-md-4">
-                            <p value="" class="form-control-static">{{ $cliente->data_nascita }}</p>
+                            <p value="" class="form-control-static">{{ $cliente->data_nascita->format('d/m/Y') }}</p>
                         </div>
                     </div>
                     

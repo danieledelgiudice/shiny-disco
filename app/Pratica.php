@@ -13,6 +13,7 @@ class Pratica extends Model
         'in_data',
         'data_ultima_lettera',
         'data_chiusura',
+        'data_sospeso',
         'data_sinistro',
     ];
     
@@ -167,5 +168,64 @@ class Pratica extends Model
     public function clienti()
     {
         return $this->belongsTo('\App\Cliente', 'cliente_id');
+    }
+    
+    
+    // Mutator data_apertura
+    public function setDataAperturaAttribute($value)
+    {
+        if (is_string($value))
+            $this->attributes['data_apertura'] = \Carbon\Carbon::createFromFormat('d/m/Y', $value);
+        else
+            $this->attributes['data_apertura'] = $value;
+    }
+        
+    // Mutator in_data
+    public function setInDataAttribute($value)
+    {
+        if (is_string($value))
+            $this->attributes['in_data'] = \Carbon\Carbon::createFromFormat('d/m/Y', $value);
+        else
+            $this->attributes['in_data'] = $value;
+    }
+    
+        
+    // Mutator data_ultima_lettera
+    public function setDataUltimaLetteraAttribute($value)
+    {
+        if (is_string($value))
+            $this->attributes['data_ultima_lettera'] = \Carbon\Carbon::createFromFormat('d/m/Y', $value);
+        else
+            $this->attributes['data_ultima_lettera'] = $value;
+    }
+    
+        
+    // Mutator data_chiusura
+    public function setDataChiusuraAttribute($value)
+    {
+        if (is_string($value))
+            $this->attributes['data_chiusura'] = \Carbon\Carbon::createFromFormat('d/m/Y', $value);
+        else
+            $this->attributes['data_chiusura'] = $value;
+    }
+    
+        
+    // Mutator data_sospeso
+    public function setDataSospesoAttribute($value)
+    {
+        if (is_string($value))
+            $this->attributes['data_sospeso'] = \Carbon\Carbon::createFromFormat('d/m/Y', $value);
+        else
+            $this->attributes['data_sospeso'] = $value;
+    }
+    
+        
+    // Mutator data_sinistro
+    public function setDataSinistroAttribute($value)
+    {
+        if (is_string($value))
+            $this->attributes['data_sinistro'] = \Carbon\Carbon::createFromFormat('d/m/Y', $value);
+        else
+            $this->attributes['data_sinistro'] = $value;
     }
 }
