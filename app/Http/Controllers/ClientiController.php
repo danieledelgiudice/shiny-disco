@@ -16,7 +16,9 @@ class ClientiController extends Controller
     public function show($id)
     {
         $cliente = \App\Cliente::find($id);
-        return view('clienti.show', compact('cliente'));
+        $pratiche = $cliente->pratiche()->latest('data_apertura')->get();
+        
+        return view('clienti.show', compact('cliente', 'pratiche'));
     }
 
     public function edit($id)

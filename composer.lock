@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a091f1493ce447099001d32f67e76201",
-    "content-hash": "629d336385a176cae7c4fc6a693db110",
+    "hash": "9f9648d1b671c7a5b80a10e6ca584247",
+    "content-hash": "1ae1ea95048e500c2250fd5cfed4b64d",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -1792,6 +1792,59 @@
                 "dump"
             ],
             "time": "2016-07-26 08:03:56"
+        },
+        {
+            "name": "tucker-eric/eloquentfilter",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Tucker-Eric/EloquentFilter.git",
+                "reference": "b76a619631b1cc0201ac8317fceb70dd2e279925"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Tucker-Eric/EloquentFilter/zipball/b76a619631b1cc0201ac8317fceb70dd2e279925",
+                "reference": "b76a619631b1cc0201ac8317fceb70dd2e279925",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/config": "~5.0",
+                "illuminate/console": "~5.0",
+                "illuminate/database": "~5.0",
+                "illuminate/filesystem": "~5.0",
+                "illuminate/support": "~5.0",
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9.5",
+                "phpunit/phpunit": "~5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "EloquentFilter\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Eric Tucker",
+                    "email": "tucker.ericm@gmail.com"
+                }
+            ],
+            "description": "An Eloquent way to filter Eloquent Models",
+            "keywords": [
+                "eloquent",
+                "filter",
+                "laravel",
+                "model",
+                "query",
+                "search"
+            ],
+            "time": "2016-12-06 18:06:17"
         },
         {
             "name": "vlucas/phpdotenv",
