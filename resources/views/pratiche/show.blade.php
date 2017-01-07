@@ -11,6 +11,7 @@
                 <div class="pull-left">
                 </div>
                 <div class="pull-right">
+                    <a href="{{ action('PraticheController@edit', $pratica) }}" class="btn btn-success"><i class="fa fa-pencil"></i></a>
                 </div>
             </div>
         </div>

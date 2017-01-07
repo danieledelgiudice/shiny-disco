@@ -8,7 +8,7 @@
                 <!-- Lista clienti -->
                 @if (count($clienti) > 0)
                     <div class="panel-body">
-                        <table class="table table-striped">
+                        <table class="table table-hover table-striped">
                             <thead>
                                 <th>Nome</th>
                                 <th>Cognome</th>
