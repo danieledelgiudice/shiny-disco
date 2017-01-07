@@ -8,7 +8,7 @@
                 <!-- Lista clienti -->
                 @if (count($clienti) > 0)
                     <div class="panel-body">
-                        <table class="table table-hover table-striped">
+                        <table class="table table-hover table-striped table-filterable">
                             <thead>
                                 <th>Nome</th>
                                 <th>Cognome</th>
@@ -20,9 +20,9 @@
                             <tbody>
                                 @foreach ($clienti as $cliente)
                                     <tr>
-                                        <td class="table-text"><div>{{ $cliente->nome }}</div></td>
-                                        <td class="table-text"><div>{{ $cliente->cognome }}</div></td>
-                                        <td class="table-text"><div>{{ $cliente->citta_residenza }}</div></td>
+                                        <td class="table-text" data-field="nome"><div>{{ $cliente->nome }}</div></td>
+                                        <td class="table-text" data-field="cognome"><div>{{ $cliente->cognome }}</div></td>
+                                        <td class="table-text" data-field="citta_residenza"><div>{{ $cliente->citta_residenza }}</div></td>
                                         <td class="table-text"><div>{{ format_date($cliente->data_nascita) }}</div></td>
                                         <td class="table-text"><div>{{ $cliente->codice_fiscale }}</div></td>
 

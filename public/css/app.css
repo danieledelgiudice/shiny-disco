@@ -27,7 +27,11 @@ body {
 }
 
 
-/* Tasti tabelle */
+/* Tabelle */
 table a.btn {
     margin-left: 10px;
+}
+
+.table-filterable td[data-field] {
+    cursor: pointer;
 }
