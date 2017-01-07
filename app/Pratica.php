@@ -3,10 +3,123 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Collective\Html\Eloquent\FormAccessible;
 
 class Pratica extends Model
 {
+    use FormAccessible;
+    
     protected $table = 'pratiche';
+    
+    /**
+     *  Ritorna le pratiche relative al cliente
+     *
+     */
+    public function cliente()
+    {
+        return $this->belongsTo('\App\Cliente', 'cliente_id');
+    }
+    
+    
+    // Mutator data_apertura
+    public function setDataAperturaAttribute($value)
+    {
+        if (is_string($value) && $value !== '')
+            $this->attributes['data_apertura'] = \Carbon\Carbon::createFromFormat('d/m/Y', $value);
+        else
+            $this->attributes['data_apertura'] = $value;
+    }
+
+    // Mutator in_data
+    public function setInDataAttribute($value)
+    {
+        if (is_string($value) && $value !== '')
+            $this->attributes['in_data'] = \Carbon\Carbon::createFromFormat('d/m/Y', $value);
+        else
+            $this->attributes['in_data'] = $value;
+    }
+
+    // Mutator data_ultima_lettera
+    public function setDataUltimaLetteraAttribute($value)
+    {
+        if (is_string($value) && $value !== '')
+            $this->attributes['data_ultima_lettera'] = \Carbon\Carbon::createFromFormat('d/m/Y', $value);
+        else
+            $this->attributes['data_ultima_lettera'] = $value;
+    }
+    
+    // Mutator data_chiusura
+    public function setDataChiusuraAttribute($value)
+    {
+        if (is_string($value) && $value !== '')
+            $this->attributes['data_chiusura'] = \Carbon\Carbon::createFromFormat('d/m/Y', $value);
+        else
+            $this->attributes['data_chiusura'] = $value;
+    }
+    
+    // Mutator data_sospeso
+    public function setDataSospesoAttribute($value)
+    {
+        if (is_string($value) && $value !== '')
+            $this->attributes['data_sospeso'] = \Carbon\Carbon::createFromFormat('d/m/Y', $value);
+        else
+            $this->attributes['data_sospeso'] = $value;
+    }
+    
+    // Mutator data_sinistro
+    public function setDataSinistroAttribute($value)
+    {
+        if (is_string($value) && $value !== '')
+            $this->attributes['data_sinistro'] = \Carbon\Carbon::createFromFormat('d/m/Y', $value);
+        else
+            $this->attributes['data_sinistro'] = $value;
+    }
+    
+    // Mutator data_ultima_lettera
+    public function getDataUltimaLetteraHAttribute($value)
+    {
+        if ($this->data_ultima_lettera instanceof \Carbon\Carbon)
+            return $this->data_ultima_lettera->format('m/d/Y');
+        else '';
+    }
+    
+    
+    // Form Accessor data_apertura
+    public function formDataAperturaAttribute($value)
+    {
+        return format_date($value);
+    }
+    
+    // Form Accessor in_data
+    public function formInDataAttribute($value)
+    {
+        return format_date($value);
+    }
+    
+    // Form Accessor data_ultima_lettera
+    public function formDataUltimaLetteraAttribute($value)
+    {
+        return format_date($value);
+    }
+    
+    // Form Accessor data_chiusura
+    public function formDatChiusuraAttribute($value)
+    {
+        return format_date($value);
+    }
+    
+    // Form Accessor data_sospeso
+    public function formDataSospesoAttribute($value)
+    {
+        return format_date($value);
+    }
+    
+    // Form Accessor data_sospeso
+    public function formDataSinistroAttribute($value)
+    {
+        return format_date($value);
+    }
+    
     
     protected $dates = [
         'data_apertura',
@@ -18,7 +131,7 @@ class Pratica extends Model
     ];
     
     
-    public $enumStatoPratica = [
+    public static $enumStatoPratica = [
 		0 => 'Aperto',
 		1 => 'Chiuso',
 		2 => 'SS',
@@ -26,7 +139,7 @@ class Pratica extends Model
 		4 => 'Aperto liq. pari', 
 	];
 
-    public $enumTipoPratica = [
+    public static $enumTipoPratica = [
         0 => 'Sconosciuto',
 		1 => 'RCT',
 		2 => 'RCA lesioni',
@@ -47,18 +160,18 @@ class Pratica extends Model
 		17 => 'Infortuni', 
 	];
 
-    public $enumMezzoLiquidabile = [	
+    public static $enumMezzoLiquidabile = [	
  		0 => '',
 		1 => 'Sì',
 		2 => 'No'
 	];
 	
-	public $enumControllato = [
+	public static $enumControllato = [
 		0 => 'No',
 		1 => 'Sì',
 	];
     						
-    public $enumStatoAvanzamento = [
+    public static $enumStatoAvanzamento = [
         0 => 'Sconosciuto',
 		1 => 'Trattabile',
 		2 => 'Attesa importo da direzione',
@@ -70,14 +183,14 @@ class Pratica extends Model
 		9 => 'Attesa certifizaione medici propri',
 	];
     
-    public $enumRilievi = [
+    public static $enumRilievi = [
 		0 => 'Rilievi non necessari', 
 		1 => 'Rilievi presi',
 		2 => 'Rilievi da prendere',
 		3 => 'Rilievi portati da cliente',
 	];
     						
-    public $enumAutorita = [
+    public static $enumAutorita = [
 		0 => 'Sconosciuta',
 		1 => 'Polizia',
 		2 => 'Polizia stradale',
@@ -85,7 +198,7 @@ class Pratica extends Model
 		4 => 'Vigili urbani',
 	];
     
-    public $enumRivalsa = [
+    public static $enumRivalsa = [
 		0 => 'No rivalsa',
 		1 => 'Da verificare',
 		2 => 'Rivalsa INPS',
@@ -93,7 +206,7 @@ class Pratica extends Model
 		4 => 'Rivalsa altre ass',
 	];
     				
-    public $enumSoccorso = [
+    public static $enumSoccorso = [
 		0 => 'Da solo', 
 		1 => 'Da terzi',
 		2 => 'Ambulanza',
@@ -159,83 +272,4 @@ class Pratica extends Model
         'dinamica_sinistro',
         'note',
     ];
-    
-    
-    /**
-     *  Ritorna le pratiche relative al cliente
-     *
-     */
-    public function clienti()
-    {
-        return $this->belongsTo('\App\Cliente', 'cliente_id');
-    }
-    
-    
-    // Mutator data_apertura
-    public function setDataAperturaAttribute($value)
-    {
-        if (is_string($value))
-            $this->attributes['data_apertura'] = \Carbon\Carbon::createFromFormat('d/m/Y', $value);
-        else
-            $this->attributes['data_apertura'] = $value;
-    }
-        
-    // Mutator in_data
-    public function setInDataAttribute($value)
-    {
-        if (is_string($value))
-            $this->attributes['in_data'] = \Carbon\Carbon::createFromFormat('d/m/Y', $value);
-        else
-            $this->attributes['in_data'] = $value;
-    }
-    
-        
-    // Mutator data_ultima_lettera
-    public function setDataUltimaLetteraAttribute($value)
-    {
-        if (is_string($value))
-            $this->attributes['data_ultima_lettera'] = \Carbon\Carbon::createFromFormat('d/m/Y', $value);
-        else
-            $this->attributes['data_ultima_lettera'] = $value;
-    }
-    
-        
-    // Mutator data_chiusura
-    public function setDataChiusuraAttribute($value)
-    {
-        if (is_string($value))
-            $this->attributes['data_chiusura'] = \Carbon\Carbon::createFromFormat('d/m/Y', $value);
-        else
-            $this->attributes['data_chiusura'] = $value;
-    }
-    
-        
-    // Mutator data_sospeso
-    public function setDataSospesoAttribute($value)
-    {
-        if (is_string($value))
-            $this->attributes['data_sospeso'] = \Carbon\Carbon::createFromFormat('d/m/Y', $value);
-        else
-            $this->attributes['data_sospeso'] = $value;
-    }
-    
-        
-    // Mutator data_sinistro
-    public function setDataSinistroAttribute($value)
-    {
-        if (is_string($value))
-            $this->attributes['data_sinistro'] = \Carbon\Carbon::createFromFormat('d/m/Y', $value);
-        else
-            $this->attributes['data_sinistro'] = $value;
-    }
-    
-    
-    
-    // Mutator data_ultima_lettera
-    public function getDataUltimaLetteraHAttribute($value)
-    {
-        if ($this->data_ultima_lettera instanceof \Carbon\Carbon)
-            return $this->data_ultima_lettera->format('m/d/Y');
-        else '';
-    }
 }

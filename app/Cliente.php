@@ -83,7 +83,7 @@ class Cliente extends Model
     // Mutator data_nascita
     public function setDataNascitaAttribute($value)
     {
-        if (is_string($value))
+        if (is_string($value) && $value !== '')
             $this->attributes['data_nascita'] = \Carbon\Carbon::createFromFormat('d/m/Y', $value);
         else
             $this->attributes['data_nascita'] = $value;

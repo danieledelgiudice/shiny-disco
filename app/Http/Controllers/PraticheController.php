@@ -36,4 +36,25 @@ class PraticheController extends Controller
         // TODO: mostrare messaggio nella view
         return redirect()->action('PraticheController@show', $pratica)->with('success', 'Pratica salvato con successo!');
     }
+    
+    public function create(Request $request, $id)
+    {
+        $cliente = \App\Cliente::find($id);
+        return view('pratiche.create', compact('cliente'));
+    }
+    
+    public function store(Request $request, $id)
+    {
+        $pratica = new \App\Pratica;
+        $new_values = $request->all();
+        
+        $pratica->fill($new_values);
+        
+        $cliente = \App\Cliente::find($id);
+        $pratica->cliente()->associate($cliente);
+        $pratica->save();
+        
+        // TODO: mostrare messaggio nella view
+        return redirect()->action('PraticheController@show', $pratica)->with('success', 'Pratica salvato con successo!');
+    }
 }

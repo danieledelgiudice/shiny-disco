@@ -237,8 +237,8 @@
                                     @foreach ($pratiche as $pratica)
                                         <tr class="">
                                             <td class="table-text"><div>{{ $pratica->numero_pratica }}</div></td>
-                                            <td class="table-text"><div>{{ $pratica->enumStatoPratica[$pratica->stato_pratica] }}</div></td>
-                                            <td class="table-text"><div>{{ $pratica->enumTipoPratica[$pratica->tipo_pratica] }}</div></td>
+                                            <td class="table-text"><div>{{ \App\Pratica::$enumStatoPratica[$pratica->stato_pratica] }}</div></td>
+                                            <td class="table-text"><div>{{ \App\Pratica::$enumTipoPratica[$pratica->tipo_pratica] }}</div></td>
                                             <td class="table-text"><div>{{ format_date($pratica->data_apertura) }}</div></td>
     
                                             <!-- Dettagli/Modifica pratica -->
@@ -258,6 +258,12 @@
                     @else
                         <p>Non sono presenti pratiche relative al cliente.</p>
                     @endif
+                    <div class="">
+                        <a class="btn btn-success center-block" href="{{ action('PraticheController@create', $cliente)}}">
+                            <i class="fa fa-plus fa-btn"></i>
+                            Aggiungi pratica
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

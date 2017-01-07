@@ -16,15 +16,17 @@ Route::get('/', function () {
 });
 
 Route::get('/clienti', 'ClientiController@index');
-Route::get('/clienti/create', 'ClientiController@create');
 Route::get('/clienti/{cliente}', 'ClientiController@show');
+Route::get('/clienti/{cliente}/modifica', 'ClientiController@edit');
 Route::put('/clienti/{cliente}', 'ClientiController@update');
-Route::post('/clienti/store', 'ClientiController@store');
-Route::get('/clienti/{cliente}/edit', 'ClientiController@edit');
-Route::post('/clienti/filter', 'ClientiController@filter');
+Route::get('/clienti/nuovo', 'ClientiController@create');
+Route::post('/clienti/salva', 'ClientiController@store');
+Route::post('/clienti/filtra', 'ClientiController@filter');
 
 
 Route::get('/pratiche', 'PraticheController@index');
-Route::get('/pratiche/{pratica}/edit', 'PraticheController@edit');
 Route::get('/pratiche/{pratica}', 'PraticheController@show');
+Route::get('/pratiche/{pratica}/modifica', 'PraticheController@edit');
 Route::put('/pratiche/{pratica}', 'PraticheController@update');
+Route::get('/clienti/{cliente}/nuova_pratica', 'PraticheController@create');
+Route::post('/clienti/{cliente}/salva_pratica', 'PraticheController@store');

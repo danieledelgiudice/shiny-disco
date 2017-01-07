@@ -5,7 +5,7 @@
         <!-- Mostra pulsanti navigazione -->
         <div class="page-header">
             <h1 class="text-center">
-                Modifica Pratica
+                Inserimento nuova Pratica
             </h1>
             <div>
                 <div class="pull-left">
@@ -14,11 +14,10 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Mostra errori di validazione -->
         @include('common.errors')
 
         @include('partials._form_pratica')
-        
     </div>
 @endsection
