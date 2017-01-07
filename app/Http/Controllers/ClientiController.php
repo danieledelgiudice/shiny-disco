@@ -39,6 +39,23 @@ class ClientiController extends Controller
         return redirect()->action('ClientiController@show', $cliente)->with('success', 'Cliente salvato con successo!');
     }
     
+    public function create()
+    {
+        return view('clienti.create');
+    }
+    
+    public function store(Request $request)
+    {
+        $cliente = new \App\Cliente;
+        $new_values = $request->all();
+        
+        $cliente->fill($new_values);
+        $cliente->save();
+        
+        // TODO: mostrare messaggio nella view
+        return redirect()->action('ClientiController@show', $cliente)->with('success', 'Cliente salvato con successo!');
+    }
+    
     public function filter(Request $request)
     {
         $params = [];

@@ -16,9 +16,11 @@ Route::get('/', function () {
 });
 
 Route::get('/clienti', 'ClientiController@index');
-Route::get('/clienti/{cliente}/edit', 'ClientiController@edit');
+Route::get('/clienti/create', 'ClientiController@create');
 Route::get('/clienti/{cliente}', 'ClientiController@show');
 Route::put('/clienti/{cliente}', 'ClientiController@update');
+Route::post('/clienti/store', 'ClientiController@store');
+Route::get('/clienti/{cliente}/edit', 'ClientiController@edit');
 Route::post('/clienti/filter', 'ClientiController@filter');
 
 

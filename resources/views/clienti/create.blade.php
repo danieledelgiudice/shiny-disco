@@ -5,7 +5,7 @@
         <!-- Mostra pulsanti navigazione -->
         <div class="page-header">
             <h1 class="text-center">
-                Modifica Cliente
+                Inserimento nuovo Cliente
             </h1>
             <div>
                 <div class="pull-left">
@@ -18,7 +18,7 @@
         <div>
             <!-- Mostra errori di validazione -->
             @include('common.errors')
-    
+
             @include('partials._form_cliente')
         </div>
     </div>

@@ -185,7 +185,7 @@
                         </div>
                         
                         <!-- Numero documento Cliente -->
-                        <strong class="col-md-2 form-control-static">N. documento</strong>
+                        <strong class="col-md-2 form-control-static">Numero documento</strong>
                         <div class="col-md-4">
                             <p value="" class="form-control-static">{{ $cliente->numero_documento }}</p>
                         </div>

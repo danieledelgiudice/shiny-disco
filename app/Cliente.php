@@ -4,10 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use EloquentFilter\Filterable;
+use Collective\Html\Eloquent\FormAccessible;
 
 class Cliente extends Model
 {
     use Filterable;
+    use FormAccessible;
     
     protected $table = 'clienti';
     protected $dates = ['data_nascita'];
@@ -41,14 +43,14 @@ class Cliente extends Model
         'note',
     ];
     
-    public $enumSesso = [
+    public static $enumSesso = [
         0 => 'Sconosciuto',
         1 => 'Uomo',
         2 => 'Donna',
         100 => 'Altro',
     ];
     
-    public $enumStatoCivile = [
+    public static $enumStatoCivile = [
         0 => 'Sconosciuto',
         1 => 'Nubile/Celibe',
         2 => 'Sposato/a',
@@ -58,7 +60,7 @@ class Cliente extends Model
         100 => 'Altro'
     ];
     
-    public $enumTipoDocumento = [
+    public static $enumTipoDocumento = [
         0 => 'Sconosciuto',
         1 => 'Carta d\'identità',
         2 => 'Patente di guida',
@@ -85,5 +87,11 @@ class Cliente extends Model
             $this->attributes['data_nascita'] = \Carbon\Carbon::createFromFormat('d/m/Y', $value);
         else
             $this->attributes['data_nascita'] = $value;
+    }
+    
+    // Form Accessor data_nascita
+    public function formDataNascitaAttribute($value)
+    {
+        return format_date($value);
     }
 }
