@@ -9,10 +9,9 @@
             </h1>
             <div>
                 <div class="pull-left">
-                    <a id="backButton" href="#" class="btn btn-default"><i class="fa fa-arrow-left"></i></a>
                 </div>
                 <div class="pull-right">
-                    <a class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                    <!-- <a class="btn btn-danger"><i class="fa fa-trash"></i></a> -->
                     <a href="{{ action('ClientiController@edit', $cliente) }}" class="btn btn-success"><i class="fa fa-pencil"></i></a>
                 </div>
             </div>
@@ -197,7 +196,7 @@
                         <!-- Reddito Cliente -->
                         <strong class="col-md-2 form-control-static">Reddito</strong>
                         <div class="col-md-4">
-                            <p value="" class="form-control-static">{{ $cliente->reddito }}€</p>
+                            <p value="" class="form-control-static">{{ $cliente->reddito }}</p>
                         </div>
                     
                         <!-- Numero Card Cliente -->
@@ -226,7 +225,7 @@
                 <div class="panel-body">
                     @if (count($pratiche) > 0)
                         <div class="panel-body">
-                            <table class="table table-striped city-table">
+                            <table class="table table-hover table-striped">
                                 <thead>
                                     <th>Numero pratica</th>
                                     <th>Stato pratica</th>
@@ -242,8 +241,11 @@
                                             <td class="table-text"><div>{{ $pratica->enumTipoPratica[$pratica->tipo_pratica] }}</div></td>
                                             <td class="table-text"><div>{{ $pratica->data_apertura->format('d/m/Y') }}</div></td>
     
-                                            <!-- Modifica pratica -->
+                                            <!-- Dettagli/Modifica pratica -->
                                             <td>
+                                                <a href="{{ action('PraticheController@show', $pratica)}}" class="btn btn-default">
+                                                   <i class="fa fa-eye"></i> 
+                                                </a>
                                                 <a href="{{ action('PraticheController@edit', $pratica)}}" class="btn btn-success">
                                                    <i class="fa fa-pencil"></i> 
                                                 </a>

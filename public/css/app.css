@@ -1,3 +1,4 @@
+/* Text area form modifiche */
 .form-group textarea.form-control { 
     resize: none;
     height: 100px;
@@ -5,10 +6,14 @@
     max-height:100px;
 }
 
+
+/* Leggero padding in fondo alla pagina */
 body {
     padding-bottom: 50px;
 }
 
+
+/* Tasti di navigazione */
 .page-header > div > div {
     margin-top: -35px;
 }
@@ -19,4 +24,10 @@ body {
 
 .page-header > div > div.pull-left > a {
     margin-right: 8px;
+}
+
+
+/* Tasti tabelle */
+table a.btn {
+    margin-left: 10px;
 }

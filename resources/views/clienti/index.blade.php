@@ -8,7 +8,7 @@
                 <!-- Lista clienti -->
                 @if (count($clienti) > 0)
                     <div class="panel-body">
-                        <table class="table table-striped city-table">
+                        <table class="table table-striped">
                             <thead>
                                 <th>Nome</th>
                                 <th>Cognome</th>
@@ -19,15 +19,18 @@
                             </thead>
                             <tbody>
                                 @foreach ($clienti as $cliente)
-                                    <tr class="link-row" data-href="{{ action('ClientiController@show', $cliente)}}">
+                                    <tr>
                                         <td class="table-text"><div>{{ $cliente->nome }}</div></td>
                                         <td class="table-text"><div>{{ $cliente->cognome }}</div></td>
                                         <td class="table-text"><div>{{ $cliente->citta_residenza }}</div></td>
                                         <td class="table-text"><div>{{ $cliente->data_nascita->format('d/m/Y') }}</div></td>
                                         <td class="table-text"><div>{{ $cliente->codice_fiscale }}</div></td>
 
-                                        <!-- Modifica cliente -->
+                                        <!-- Dettagli/Modifica cliente -->
                                         <td>
+                                            <a href="{{ action('ClientiController@show', $cliente)}}" class="btn btn-default">
+                                               <i class="fa fa-eye"></i> 
+                                            </a>
                                             <a href="{{ action('ClientiController@edit', $cliente)}}" class="btn btn-success">
                                                <i class="fa fa-pencil"></i> 
                                             </a>

@@ -9,7 +9,6 @@
             </h1>
             <div>
                 <div class="pull-left">
-                    <a id="backButton" href="#" class="btn btn-default"><i class="fa fa-arrow-left"></i></a>
                 </div>
                 <div class="pull-right">
                 </div>
