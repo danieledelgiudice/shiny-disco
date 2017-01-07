@@ -22,7 +22,7 @@
                                         <td class="table-text"><div>{{ $pratica->numero_pratica }}</div></td>
                                         <td class="table-text"><div>{{ $pratica->enumStatoPratica[$pratica->stato_pratica] }}</div></td>
                                         <td class="table-text"><div>{{ $pratica->enumTipoPratica[$pratica->tipo_pratica] }}</div></td>
-                                        <td class="table-text"><div>{{ $pratica->data_apertura->format('d/m/Y') }}</div></td>
+                                        <td class="table-text"><div>{{ format_date($pratica->data_apertura) }}</div></td>
 
                                         <!-- Dettagli/Modifica pratica -->
                                         <td>

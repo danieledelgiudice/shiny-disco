@@ -48,7 +48,7 @@
                     <!-- Data apertura -->
                     <strong class="col-md-2 form-control-static">Data apertura</strong>
                     <div class="col-md-4">
-                        <p class="form-control-static">{{ ($pratica->data_apertura instanceof \Carbon\Carbon) ? $pratica->data_apertura->format('m/d/Y') : '' }}</p>
+                        <p class="form-control-static">{{ format_date($pratica->data_apertura) }}</p>
                     </div>
                     
                     <!-- Stato pratica -->
@@ -207,7 +207,7 @@
                     <!-- In data -->
                     <strong class="col-md-2 form-control-static">In data</strong>
                     <div class="col-md-4">
-                        <p class="form-control-static">{{ ($pratica->in_data instanceof \Carbon\Carbon) ? $pratica->in_data->format('m/d/Y') : '' }}</p>
+                        <p class="form-control-static">{{ format_date($pratica->in_data) }}</p>
                     </div>
                 </div>
                 
@@ -221,7 +221,7 @@
                     <!-- Data ultima lettera -->
                     <strong class="col-md-2 form-control-static">Data ultima lettera</strong>
                     <div class="col-md-4">
-                        <p class="form-control-static">{{ ($pratica->data_ultima_lettera instanceof \Carbon\Carbon) ? $pratica->data_ultima_lettera->format('m/d/Y') : '' }}</p>
+                        <p class="form-control-static">{{ format_date($pratica->data_ultima_lettera) }}</p>
                     </div>
                 </div>
                 
@@ -249,7 +249,7 @@
                     <!-- Data chiusura -->
                     <strong class="col-md-2 form-control-static">Data chiusura</strong>
                     <div class="col-md-4">
-                        <p class="form-control-static">{{ ($pratica->data_chiusura instanceof \Carbon\Carbon) ? $pratica->data_chiusura->format('m/d/Y') : '' }}</p>
+                        <p class="form-control-static">{{ format_date($pratica->data_chiusura) }}</p>
                     </div>
                 </div>
                 
@@ -263,7 +263,7 @@
                     <!-- Data sospeso -->
                     <strong class="col-md-2 form-control-static">Data sospeso</strong>
                     <div class="col-md-4">
-                        <p class="form-control-static">{{ ($pratica->data_sospeso instanceof \Carbon\Carbon) ? $pratica->data_sospeso->format('m/d/Y') : '' }}</p>
+                        <p class="form-control-static">{{ format_date($pratica->data_sospeso) }}</p>
                     </div>
                 </div>
                 
@@ -290,7 +290,7 @@
                     <!-- Data sinistro -->
                     <strong class="col-md-2 form-control-static">Data sinistro</strong>
                     <div class="col-md-4">
-                        <p class="form-control-static">{{ ($pratica->data_sinistro instanceof \Carbon\Carbon) ? $pratica->data_sinistro->format('m/d/Y') : '' }}</p>
+                        <p class="form-control-static">{{ format_date($pratica->data_sinistro) }}</p>
                     </div>
                 
                     <!-- Orario sinistro -->
