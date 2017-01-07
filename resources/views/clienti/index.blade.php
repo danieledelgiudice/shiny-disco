@@ -10,12 +10,36 @@
                     <div class="panel-body">
                         <table class="table table-hover table-striped table-filterable">
                             <thead>
-                                <th>Nome</th>
-                                <th>Cognome</th>
-                                <th>Città di residenza</th>
-                                <th>Data di nascita</th>
-                                <th>Codice Fiscale</th>
-                                <th>&nbsp;</th>
+                                {{ Form::open(['action' => ['ClientiController@filter'], 'class' => 'form-horizontal']) }}
+                                    <th>
+                                        Nome
+                                        <br>
+                                        {{ Form::text('nome', null, [ 'class' => 'form-control']) }}
+                                    </th>
+                                    
+                                    <th>
+                                        Cognome
+                                        <br>
+                                        {{ Form::text('cognome', null, [ 'class' => 'form-control']) }}
+                                    </th>
+                                    
+                                    <th>
+                                        Città di residenza
+                                        <br>
+                                        {{ Form::text('citta_residenza', null, [ 'class' => 'form-control']) }}
+                                    </th>
+                                    
+                                    <th>Data di nascita</th>
+                                    <th>Codice Fiscale</th>
+                                    <th>
+                                        <a href="{{ action('ClientiController@index') }}" class="btn btn-default">
+                                               <i class="fa fa-times"></i> 
+                                        </a>
+                                        <button class="btn btn-primary">
+                                               <i class="fa fa-search"></i> 
+                                        </button>
+                                    </th>
+                                {{ Form::close() }}
                             </thead>
                             <tbody>
                                 @foreach ($clienti as $cliente)

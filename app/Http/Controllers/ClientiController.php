@@ -12,7 +12,7 @@ class ClientiController extends Controller
         $clienti = \App\Cliente::filter($request->all())->get();;
         return view('clienti.index', compact('clienti'));
     }
-    
+
     public function show($id)
     {
         $cliente = \App\Cliente::find($id);
@@ -38,4 +38,19 @@ class ClientiController extends Controller
         // TODO: mostrare messaggio nella view
         return redirect()->action('ClientiController@show', $cliente)->with('success', 'Cliente salvato con successo!');
     }
+    
+    public function filter(Request $request)
+    {
+        $params = [];
+        foreach($request->all() as $k => $v)
+        {
+            if ($k[0] != '_' && $v != '')
+                $params[$k] = $v;
+        }
+        
+        $query = http_build_query($params);
+        // return dd($params);
+        return redirect()->action('ClientiController@index', $query);
+    }
+    
 }
