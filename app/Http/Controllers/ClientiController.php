@@ -9,7 +9,7 @@ class ClientiController extends Controller
 {
     public function index(Request $request)
     {
-        $clienti = \App\Cliente::all();
+        $clienti = \App\Cliente::filter($request->all())->get();;
         return view('clienti.index', compact('clienti'));
     }
     

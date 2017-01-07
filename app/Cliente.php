@@ -3,10 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use EloquentFilter\Filterable;
 
 class Cliente extends Model
 {
+    use Filterable;
+    
     protected $table = 'clienti';
     protected $dates = ['data_nascita'];
 
