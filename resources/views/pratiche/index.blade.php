@@ -26,10 +26,12 @@
 
                                         <!-- Dettagli/Modifica pratica -->
                                         <td>
-                                            <a href="{{ action('PraticheController@show', $pratica)}}" class="btn btn-default">
+                                            <a href="{{ action('PraticheController@show', ['cliente' => $pratica->cliente,
+                                                'pratica' => $pratica])}}" class="btn btn-default">
                                                <i class="fa fa-eye"></i> 
                                             </a>
-                                            <a href="{{ action('PraticheController@edit', $pratica)}}" class="btn btn-success">
+                                            <a href="{{ action('PraticheController@edit', ['cliente' => $pratica->cliente,
+                                                'pratica' => $pratica])}}" class="btn btn-success">
                                                <i class="fa fa-pencil"></i> 
                                             </a>
                                         </td>

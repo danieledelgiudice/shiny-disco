@@ -11,7 +11,8 @@
                 <div class="pull-left">
                 </div>
                 <div class="pull-right">
-                    <a href="{{ action('PraticheController@edit', $pratica) }}" class="btn btn-success"><i class="fa fa-pencil"></i></a>
+                    <a href="{{ action('PraticheController@edit', ['cliente' => $pratica->cliente, 'pratica' => $pratica] ) }}"
+                        class="btn btn-success"><i class="fa fa-pencil"></i></a>
                 </div>
             </div>
         </div>
@@ -55,7 +56,7 @@
                     <!-- Stato pratica -->
                     <strong class="col-md-2 form-control-static">Stato pratica</strong>
                     <div class="col-md-4">
-                        <p class="form-control-static">{{ $pratica->enumStatoPratica[$pratica->stato_pratica] }}</p>
+                        <p class="form-control-static">{{ \App\Pratica::$enumStatoPratica[$pratica->stato_pratica] }}</p>
                     </div>
                 </div>
                 
@@ -64,7 +65,7 @@
                     <!-- Tipo pratica -->    
                     <strong class="col-md-2 form-control-static">Tipo pratica</strong>
                     <div class="col-md-4">
-                        <p class="form-control-static">{{ $pratica->enumTipoPratica[$pratica->tipo_pratica] }}</p>
+                        <p class="form-control-static">{{ \App\Pratica::$enumTipoPratica[$pratica->tipo_pratica] }}</p>
                     </div>
                 </div>
             </div>
@@ -216,7 +217,7 @@
                     <!-- Controllato -->
                     <strong class="col-md-2 form-control-static">Controllato</strong>
                     <div class="col-md-4">
-                        <p class="form-control-static">{{ $pratica->enumControllato[$pratica->controllato] }}</p>
+                        <p class="form-control-static">{{ \App\Pratica::$enumControllato[$pratica->controllato] }}</p>
                     </div>
                     
                     <!-- Data ultima lettera -->
@@ -230,7 +231,7 @@
                     <!-- Mezzo Liquidabile -->
                     <strong class="col-md-2 form-control-static">Mezzo liquidabile</strong>
                     <div class="col-md-4">
-                        <p class="form-control-static">{{ $pratica->enumMezzoLiquidabile[$pratica->mezzo_liquidabile] }}</p>
+                        <p class="form-control-static">{{ \App\Pratica::$enumMezzoLiquidabile[$pratica->mezzo_liquidabile] }}</p>
                     </div>
                 
                     <!-- Valore mezzo liquidabile -->
@@ -244,7 +245,7 @@
                     <!-- Rilievi -->
                     <strong class="col-md-2 form-control-static">Rilievi</strong>
                     <div class="col-md-4">
-                        <p class="form-control-static">{{ $pratica->enumRilievi[$pratica->rilievi] }}</p>
+                        <p class="form-control-static">{{ \App\Pratica::$enumRilievi[$pratica->rilievi] }}</p>
                     </div>
                 
                     <!-- Data chiusura -->
@@ -272,7 +273,7 @@
                     <!-- Stato avanzamento pratica -->
                     <strong class="col-md-2 form-control-static">Stato avanzamento pratica</strong>
                     <div class="col-md-4">
-                        <p class="form-control-static">{{ $pratica->enumStatoAvanzamento[$pratica->stato_avanzamento] }}</p>
+                        <p class="form-control-static">{{ \App\Pratica::$enumStatoAvanzamento[$pratica->stato_avanzamento] }}</p>
                     </div>
                 </div>
             </div>
@@ -319,7 +320,7 @@
                     <!-- Autorità -->
                     <strong class="col-md-2 form-control-static">Autorità</strong>
                     <div class="col-md-4">
-                        <p class="form-control-static">{{ $pratica->enumAutorita[$pratica->autorita] }}</p>
+                        <p class="form-control-static">{{ \App\Pratica::$enumAutorita[$pratica->autorita] }}</p>
                     </div>
                 
                     <!-- Comando di -->
@@ -333,13 +334,13 @@
                     <!-- Rivalsa -->
                     <strong class="col-md-2 form-control-static">Rivalsa</strong>
                     <div class="col-md-4">
-                        <p class="form-control-static">{{ $pratica->enumRivalsa[$pratica->rivalsa] }}</p>
+                        <p class="form-control-static">{{ \App\Pratica::$enumRivalsa[$pratica->rivalsa] }}</p>
                     </div>
                 
                     <!-- Soccorso -->
                     <strong class="col-md-2 form-control-static">Soccorso</strong>
                     <div class="col-md-4">
-                        <p class="form-control-static">{{ $pratica->enumSoccorso[$pratica->soccorso] }}</p>
+                        <p class="form-control-static">{{ \App\Pratica::$enumSoccorso[$pratica->soccorso] }}</p>
                     </div>
                 </div>
                 

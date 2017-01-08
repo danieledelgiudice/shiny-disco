@@ -1,7 +1,9 @@
 @if (isset($pratica))
-    {!! Form::model($pratica, ['action' => ['PraticheController@update', $pratica], 'method' => 'put', 'class' => 'form-horizontal']) !!}
+    {!! Form::model($pratica, ['action' => ['PraticheController@update', 'cliente' => $pratica->cliente, 'pratica' => $pratica],
+        'method' => 'put', 'class' => 'form-horizontal']) !!}
 @else
-    {!! Form::open(['action' => ['PraticheController@store', $cliente], 'class' => 'form-horizontal']) !!}
+    {!! Form::open(['action' => ['PraticheController@store', 'cliente' => $cliente],
+        'class' => 'form-horizontal']) !!}
 @endif
     <div class="panel panel-default">
         <div class="panel-heading">

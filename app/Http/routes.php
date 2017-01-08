@@ -15,18 +15,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/clienti', 'ClientiController@index');
-Route::get('/clienti/{cliente}', 'ClientiController@show');
-Route::get('/clienti/{cliente}/modifica', 'ClientiController@edit');
-Route::put('/clienti/{cliente}', 'ClientiController@update');
-Route::get('/clienti/nuovo', 'ClientiController@create');
-Route::post('/clienti/salva', 'ClientiController@store');
-Route::post('/clienti/filtra', 'ClientiController@filter');
+Route::get( '/clienti',                                                 'ClientiController@index');
+Route::get( '/clienti/new',                                             'ClientiController@create');
+Route::get( '/clienti/{cliente}/edit',                                  'ClientiController@edit');
+Route::get( '/clienti/{cliente}',                                       'ClientiController@show');
+Route::post('/clienti',                                                 'ClientiController@store');
+Route::post('/clienti/filter',                                          'ClientiController@filter');
+Route::put( '/clienti/{cliente}',                                       'ClientiController@update');
 
 
-Route::get('/pratiche', 'PraticheController@index');
-Route::get('/pratiche/{pratica}', 'PraticheController@show');
-Route::get('/pratiche/{pratica}/modifica', 'PraticheController@edit');
-Route::put('/pratiche/{pratica}', 'PraticheController@update');
-Route::get('/clienti/{cliente}/nuova_pratica', 'PraticheController@create');
-Route::post('/clienti/{cliente}/salva_pratica', 'PraticheController@store');
+
+Route::get( '/pratiche',                                                'PraticheController@indexAll');
+Route::get( '/clienti/{cliente}/pratiche/new',                          'PraticheController@create');
+Route::get( '/clienti/{cliente}/pratiche/{pratica}/edit',               'PraticheController@edit');
+Route::get( '/clienti/{cliente}/pratiche/{pratica}',                    'PraticheController@show');
+Route::post('/clienti/{cliente}/pratiche',                              'PraticheController@store');
+Route::put( '/clienti/{cliente}/pratiche/{pratica}',                    'PraticheController@update');

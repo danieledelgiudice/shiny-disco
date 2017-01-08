@@ -26,6 +26,8 @@ class Pratica extends Model
     {
         if (is_string($value) && $value !== '')
             $this->attributes['data_apertura'] = \Carbon\Carbon::createFromFormat('d/m/Y', $value);
+        else if ($value === '')
+            $this->attributes['data_apertura'] = null;
         else
             $this->attributes['data_apertura'] = $value;
     }
@@ -35,6 +37,8 @@ class Pratica extends Model
     {
         if (is_string($value) && $value !== '')
             $this->attributes['in_data'] = \Carbon\Carbon::createFromFormat('d/m/Y', $value);
+        else if ($value === '')
+            $this->attributes['in_data'] = null;
         else
             $this->attributes['in_data'] = $value;
     }
@@ -44,6 +48,8 @@ class Pratica extends Model
     {
         if (is_string($value) && $value !== '')
             $this->attributes['data_ultima_lettera'] = \Carbon\Carbon::createFromFormat('d/m/Y', $value);
+        else if ($value === '')
+            $this->attributes['data_ultima_lettera'] = null;
         else
             $this->attributes['data_ultima_lettera'] = $value;
     }
@@ -53,6 +59,8 @@ class Pratica extends Model
     {
         if (is_string($value) && $value !== '')
             $this->attributes['data_chiusura'] = \Carbon\Carbon::createFromFormat('d/m/Y', $value);
+        else if ($value === '')
+            $this->attributes['data_chiusura'] = null;
         else
             $this->attributes['data_chiusura'] = $value;
     }
@@ -62,6 +70,8 @@ class Pratica extends Model
     {
         if (is_string($value) && $value !== '')
             $this->attributes['data_sospeso'] = \Carbon\Carbon::createFromFormat('d/m/Y', $value);
+        else if ($value === '')
+            $this->attributes['data_sospeso'] = null;
         else
             $this->attributes['data_sospeso'] = $value;
     }
@@ -71,9 +81,12 @@ class Pratica extends Model
     {
         if (is_string($value) && $value !== '')
             $this->attributes['data_sinistro'] = \Carbon\Carbon::createFromFormat('d/m/Y', $value);
+        else if ($value === '')
+            $this->attributes['data_sinistro'] = null;
         else
             $this->attributes['data_sinistro'] = $value;
     }
+    
     
     // Mutator data_ultima_lettera
     public function getDataUltimaLetteraHAttribute($value)
@@ -103,7 +116,7 @@ class Pratica extends Model
     }
     
     // Form Accessor data_chiusura
-    public function formDatChiusuraAttribute($value)
+    public function formDataChiusuraAttribute($value)
     {
         return format_date($value);
     }
@@ -177,10 +190,10 @@ class Pratica extends Model
 		2 => 'Attesa importo da direzione',
 		3 => 'Attesa perizia di controparte',
 		4 => 'Attesa importo da cliente',
+		5 => 'Attesa certifizaione medici propri',
 		6 => 'Attesa certificazione medico convenzione',
 		7 => 'In gestione a terzi',
 		8 => 'Attesa perizia di parte',
-		9 => 'Attesa certifizaione medici propri',
 	];
     
     public static $enumRilievi = [

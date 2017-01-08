@@ -35,3 +35,9 @@ table .btn {
 .table-filterable td[data-field] {
     cursor: pointer;
 }
+
+
+/* Dettagli cliente */
+#aggiungi-pratica-button {
+    max-width: 200px;
+}

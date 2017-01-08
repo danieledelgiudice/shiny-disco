@@ -85,6 +85,8 @@ class Cliente extends Model
     {
         if (is_string($value) && $value !== '')
             $this->attributes['data_nascita'] = \Carbon\Carbon::createFromFormat('d/m/Y', $value);
+        else if ($value === '')
+            $this->attributes['data_nascita'] = null;
         else
             $this->attributes['data_nascita'] = $value;
     }

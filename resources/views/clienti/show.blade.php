@@ -65,7 +65,7 @@
                         <!-- Sesso Cliente -->    
                         <strong class="col-md-2 form-control-static">Sesso</strong>
                         <div class="col-md-4">
-                            <p value="" class="form-control-static">{{ $cliente->enumSesso[$cliente->sesso] }}</p>
+                            <p value="" class="form-control-static">{{ \App\Cliente::$enumSesso[$cliente->sesso] }}</p>
                         </div>
 
                         
@@ -170,7 +170,7 @@
                         <!-- Stato civile Cliente -->
                         <strong class="col-md-2 form-control-static">Stato civile</strong>
                         <div class="col-md-4">
-                            <p value="" class="form-control-static">{{ $cliente->enumStatoCivile[$cliente->stato_civile] }}</p>
+                            <p value="" class="form-control-static">{{ \App\Cliente::$enumStatoCivile[$cliente->stato_civile] }}</p>
                         </div>
                     
                         
@@ -181,7 +181,7 @@
                         <!-- Tipo documento Cliente -->
                         <strong class="col-md-2 form-control-static">Tipo documento</strong>
                         <div class="col-md-4">
-                            <p value="" class="form-control-static">{{ $cliente->enumTipoDocumento[$cliente->tipo_documento] }}</p>
+                            <p value="" class="form-control-static">{{ \App\Cliente::$enumTipoDocumento[$cliente->tipo_documento] }}</p>
                         </div>
                         
                         <!-- Numero documento Cliente -->
@@ -243,10 +243,12 @@
     
                                             <!-- Dettagli/Modifica pratica -->
                                             <td>
-                                                <a href="{{ action('PraticheController@show', $pratica)}}" class="btn btn-default">
+                                                <a href="{{ action('PraticheController@show', ['cliente' => $pratica->cliente,
+                                                    'pratica' => $pratica])}}" class="btn btn-default">
                                                    <i class="fa fa-eye"></i> 
                                                 </a>
-                                                <a href="{{ action('PraticheController@edit', $pratica)}}" class="btn btn-success">
+                                                <a href="{{ action('PraticheController@edit', ['cliente' => $pratica->cliente,
+                                                    'pratica' => $pratica])}}" class="btn btn-success">
                                                    <i class="fa fa-pencil"></i> 
                                                 </a>
                                             </td>
@@ -259,7 +261,7 @@
                         <p>Non sono presenti pratiche relative al cliente.</p>
                     @endif
                     <div class="">
-                        <a class="btn btn-success center-block" href="{{ action('PraticheController@create', $cliente)}}">
+                        <a id="aggiungi-pratica-button" class="btn btn-success center-block" href="{{ action('PraticheController@create', $cliente)}}">
                             <i class="fa fa-plus fa-btn"></i>
                             Aggiungi pratica
                         </a>
