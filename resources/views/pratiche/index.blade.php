@@ -20,13 +20,13 @@
                                 @foreach ($pratiche as $pratica)
                                     <tr class="">
                                         <td class="table-text"><div>{{ $pratica->numero_pratica }}</div></td>
-                                        <td class="table-text"><div>{{ $pratica->enumStatoPratica[$pratica->stato_pratica] }}</div></td>
-                                        <td class="table-text"><div>{{ $pratica->enumTipoPratica[$pratica->tipo_pratica] }}</div></td>
+                                        <td class="table-text"><div>{{ \App\Pratica::$enumStatoPratica[$pratica->stato_pratica] }}</div></td>
+                                        <td class="table-text"><div>{{ \App\Pratica::$enumTipoPratica[$pratica->tipo_pratica] }}</div></td>
                                         <td class="table-text"><div>{{ format_date($pratica->data_apertura) }}</div></td>
 
                                         <!-- Dettagli/Modifica pratica -->
                                         <td>
-                                            <a href="{{ action('ClientiController@show', $pratica)}}" class="btn btn-default">
+                                            <a href="{{ action('PraticheController@show', $pratica)}}" class="btn btn-default">
                                                <i class="fa fa-eye"></i> 
                                             </a>
                                             <a href="{{ action('PraticheController@edit', $pratica)}}" class="btn btn-success">
