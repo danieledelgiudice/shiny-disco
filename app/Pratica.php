@@ -20,6 +20,14 @@ class Pratica extends Model
         return $this->belongsTo('\App\Cliente', 'cliente_id');
     }
     
+    /**
+     *  Ritorna i documenti relativi alla pratica
+     */
+    public function documenti()
+    {
+        return $this->hasMany('\App\Documento', 'pratica_id', 'id');
+    }
+    
     
     // Mutator data_apertura
     public function setDataAperturaAttribute($value)

@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AddDocumentiTable' => $baseDir . '/database/migrations/2017_01_08_112206_add_documenti_table.php',
     'AddForeignKeyOnClienteIdOnPratiche' => $baseDir . '/database/migrations/2017_01_04_114225_add_foreign_key_on_cliente_id_on_pratiche.php',
     'ClientiSeeder' => $baseDir . '/database/seeds/ClientiSeeder.php',
     'CreateClientiTable' => $baseDir . '/database/migrations/2017_01_04_082349_create_clienti_table.php',

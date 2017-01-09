@@ -261,7 +261,8 @@
                         <p>Non sono presenti pratiche relative al cliente.</p>
                     @endif
                     <div class="">
-                        <a id="aggiungi-pratica-button" class="btn btn-success center-block" href="{{ action('PraticheController@create', $cliente)}}">
+                        <a id="aggiungi-pratica-button" class="btn btn-success center-block"
+                            href="{{ action('PraticheController@create', ['cliente' => $pratica->cliente, 'pratica' => $pratica]) }}">
                             <i class="fa fa-plus fa-btn"></i>
                             Aggiungi pratica
                         </a>

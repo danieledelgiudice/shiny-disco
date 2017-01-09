@@ -38,6 +38,8 @@ table .btn {
 
 
 /* Dettagli cliente */
-#aggiungi-pratica-button {
+#aggiungi-pratica-button,
+#aggiungi-documento-button {
     max-width: 200px;
 }
+

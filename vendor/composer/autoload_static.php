@@ -280,6 +280,7 @@ class ComposerStaticInite71f1c2458e3bce620b80a9a75eebedd
     );
 
     public static $classMap = array (
+        'AddDocumentiTable' => __DIR__ . '/../..' . '/database/migrations/2017_01_08_112206_add_documenti_table.php',
         'AddForeignKeyOnClienteIdOnPratiche' => __DIR__ . '/../..' . '/database/migrations/2017_01_04_114225_add_foreign_key_on_cliente_id_on_pratiche.php',
         'ClientiSeeder' => __DIR__ . '/../..' . '/database/seeds/ClientiSeeder.php',
         'CreateClientiTable' => __DIR__ . '/../..' . '/database/migrations/2017_01_04_082349_create_clienti_table.php',
