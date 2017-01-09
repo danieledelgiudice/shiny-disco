@@ -9,10 +9,12 @@
             </h1>
             <div>
                 <div class="pull-left">
+                    <a href="{{ action('ClientiController@show', ['cliente' => $pratica->cliente] ) }}"
+                        class="btn btn-default"><i class="fa fa-fw fa-user"></i></a>
                 </div>
                 <div class="pull-right">
                     <a href="{{ action('PraticheController@edit', ['cliente' => $pratica->cliente, 'pratica' => $pratica] ) }}"
-                        class="btn btn-success"><i class="fa fa-pencil"></i></a>
+                        class="btn btn-success"><i class="fa fa-fw fa-pencil"></i></a>
                 </div>
             </div>
         </div>

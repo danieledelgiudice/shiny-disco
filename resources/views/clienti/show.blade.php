@@ -9,10 +9,11 @@
             </h1>
             <div>
                 <div class="pull-left">
+                    <a href="{{ action('ClientiController@index') }}"
+                        class="btn btn-default"><i class="fa fa-fw fa-users"></i></a>
                 </div>
                 <div class="pull-right">
-                    <!-- <a class="btn btn-danger"><i class="fa fa-trash"></i></a> -->
-                    <a href="{{ action('ClientiController@edit', $cliente) }}" class="btn btn-success"><i class="fa fa-pencil"></i></a>
+                    <a href="{{ action('ClientiController@edit', $cliente) }}" class="btn btn-success"><i class="fa fa-fw fa-pencil"></i></a>
                 </div>
             </div>
         </div>
