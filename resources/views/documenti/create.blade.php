@@ -22,8 +22,7 @@
 
         <div class="panel panel-default col-md-6 col-md-offset-3">
             <div class="panel-body">
-                {!! Form::open(['action' => ['DocumentiController@store', 'cliente' => $cliente, 'pratica' => $pratica],
-                    'files' => true, 'class' => 'dropzone', 'id' => 'myDropzone']) !!}
+                {!! Form::open(['action' => 'DocumentiController@store', 'files' => true, 'class' => 'dropzone', 'id' => 'myDropzone']) !!}
                 {{ Form::close() }}
             </div>
         </div>

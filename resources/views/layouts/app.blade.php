@@ -51,6 +51,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="{{ action('ClientiController@index') }}">Clienti</a></li>
                     <li><a href="{{ action('PraticheController@indexAll') }}">Pratiche</a></li>
+                    <li><a href="{{ action('DocumentiController@create') }}">Carica documenti</a></li>
                 </ul>
             </div>
         </div>

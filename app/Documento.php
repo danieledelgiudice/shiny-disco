@@ -24,18 +24,9 @@ class Documento extends Model
      */
     protected $fillable = [
         'descrizione',
-	    'categoria',
 	    'nome_file',
 	    'nome_file_originale',
 	    'mime'
     ];
-    
-    
-    public static $enumCategoria = [
-        0 => 'Non definita',
-        1 => 'Anagrafica',
-        2 => 'Contabilità',
-        3 => 'Comunicazioni',
-        4 => 'Referti',
-    ];
+
 }

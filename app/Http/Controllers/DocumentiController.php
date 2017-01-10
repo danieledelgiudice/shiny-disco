@@ -33,39 +33,51 @@ class DocumentiController extends Controller
         return response($contents, 200)->header('Content-Type', $documento->mime);
     }
     
-    public function create(Request $request, $cliente_id, $pratica_id)
+    public function create(Request $request)
     {
-        $cliente = \App\Cliente::find($cliente_id);
-        $pratica = \App\Pratica::find($pratica_id);
-        
-        return view('documenti.create', compact('cliente', 'pratica'));
+        return view('documenti.create');
     }
     
-    public function store(Request $request, $cliente_id, $pratica_id)
+    public function store(Request $request)
     {
         $file = $request->documento;
+        
+        if(!$file->isValid()) {
+            return response()->json('Si è verificato un errore durante il caricamento del file', 400);
+        }
         
 		$ext = $file->getClientOriginalExtension();
 		$mime = $file->getClientMimeType();
 		$original_name = $file->getClientOriginalName();
 		
 		$storage_name = time() . uniqid() . ".$ext";
+		
+		$matches = [];
+		if (!preg_match('/(\d+?)\s*-\s*(.+)/i', $original_name, $matches)) {
+            return response()->json('Il file non presenta la struttura del nome adatta: "npratica - nome"', 400);
+        }
+        
+        $numero_pratica = $matches[1];
+        $descrizione = $matches[2];
+        $pratica = \App\Pratica::where('numero_pratica', '=', $numero_pratica)->first();
+        
+        if(!$pratica) {
+            return response()->json('Il numero della pratica è invalido', 400);
+        }
 
  		$path = Storage::disk('local_documents')->put($storage_name,  File::get($file));
 		$documento = new \App\Documento;
 		$documento->fill([
-		    'descrizione' => 'blabla',
-		    'categoria' => 0,
+		    'descrizione' => $descrizione,
 		    'nome_file' => $storage_name,
 		    'nome_file_originale' => $original_name,
 		    'mime' => $mime,
 		    ]);
 		    
-		$documento->pratica()->associate(\App\Pratica::find($pratica_id));
+		$documento->pratica()->associate($pratica);
 		$documento->save();
         
         // TODO: aggiungere messaggio successo
-        //return redirect()->action('PraticheController@show', ['cliente' => $cliente_id, 'pratica' => $pratica_id]);
         return response()->json('success', 200);
     }
 }

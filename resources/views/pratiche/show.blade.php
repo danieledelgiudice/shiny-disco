@@ -418,7 +418,6 @@
                         <thead>
                             <th>Nome documento</th>
                             <th>Tipo documento</th>
-                            <th>Categoria</th>
                             <th>Data inserimento</th>
                             <th>&nbsp;</th>
                         </thead>
@@ -427,7 +426,6 @@
                                 <tr class="">
                                     <td class="table-text"><div>{{ $documento->descrizione }}</div></td>
                                     <td class="table-text"><div>{{ $documento->mime }}</div></td>
-                                    <td class="table-text"><div>{{ \App\Documento::$enumCategoria[$documento->categoria] }}</div></td>
                                     <td class="table-text"><div>{{ format_date($documento->created_at) }}</div></td>
                                     
                                     <td class="table-text">
@@ -443,13 +441,6 @@
                 @else
                     <p>Non sono presenti documenti relativi alla pratica.</p>
                 @endif
-                <div class="">
-                    <a id="aggiungi-documento-button" class="btn btn-success center-block" 
-                        href="{{ action('DocumentiController@create', ['cliente' => $pratica->cliente, 'pratica' => $pratica]) }}">
-                        <i class="fa fa-plus fa-btn"></i>
-                        Aggiungi documento
-                    </a>
-                </div>
             </div>
         </div>
     </div>

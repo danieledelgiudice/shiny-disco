@@ -36,6 +36,6 @@ Route::put( '/clienti/{cliente}/pratiche/{pratica}',                            
 
 Route::get( '/documenti',                                                       'DocumentiController@indexAll');
 Route::get( '/clienti/{cliente}/pratiche/{pratica}/documenti',                  'DocumentiController@index');
-Route::get( '/clienti/{cliente}/pratiche/{pratica}/documenti/new',              'DocumentiController@create');
+Route::get( '/documenti/new',                                                   'DocumentiController@create');
 Route::get( '/clienti/{cliente}/pratiche/{pratica}/documenti/{documento}',      'DocumentiController@show');
-Route::post('/clienti/{cliente}/pratiche/{pratica}/documenti',                  'DocumentiController@store');
+Route::post('/documenti',                                                       'DocumentiController@store');
