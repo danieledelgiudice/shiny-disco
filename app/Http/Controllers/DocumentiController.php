@@ -54,8 +54,8 @@ class DocumentiController extends Controller
  		$path = Storage::disk('local_documents')->put($storage_name,  File::get($file));
 		$documento = new \App\Documento;
 		$documento->fill([
-		    'descrizione' => $request->descrizione,
-		    'categoria' => $request->categoria,
+		    'descrizione' => 'blabla',
+		    'categoria' => 0,
 		    'nome_file' => $storage_name,
 		    'nome_file_originale' => $original_name,
 		    'mime' => $mime,
@@ -65,6 +65,7 @@ class DocumentiController extends Controller
 		$documento->save();
         
         // TODO: aggiungere messaggio successo
-        return redirect()->action('PraticheController@show', ['cliente' => $cliente_id, 'pratica' => $pratica_id]);
+        //return redirect()->action('PraticheController@show', ['cliente' => $cliente_id, 'pratica' => $pratica_id]);
+        return response()->json('success', 200);
     }
 }
