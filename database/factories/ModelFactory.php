@@ -198,8 +198,6 @@ $factory->define(App\Cliente::class, function (Faker\Generator $faker) {
             'Venivo investito sulle strisce pedonali',
             'Venivo investito sulle strisce pedonali',
             'Malasanità',
-            'All\'uscita da scuola veniva avvicinata da due compagne di scuola. Le quali dopo averla minacciata ed ingiuriata l\'hanno percossa.',
-            'Cadeva in una buca con caratteristiche di insidia e trabocchetto',
             'Recupero crediti',
             'Tamponamento a catena',
         ];
@@ -237,7 +235,7 @@ $factory->define(App\Cliente::class, function (Faker\Generator $faker) {
         'data_chiusura' => $faker->optional($weight = 0.8)->dateTimeThisDecade(),
         'importo_sospeso' => $faker->optional($weight = 0.8)->randomFloat($nbMaxDecimals = 2, $min = 500, $max = 3000),
         'data_sospeso' => $faker->optional($weight = 0.8)->dateTimeThisDecade(),
-        'stato_avanzamento' => $faker->numberBetween(0, 9),
+        'stato_avanzamento' => $faker->numberBetween(0, 8),
         
         'data_sinistro' => $faker->dateTimeThisDecade(),
         'ora_sinistro' => $faker->time,
