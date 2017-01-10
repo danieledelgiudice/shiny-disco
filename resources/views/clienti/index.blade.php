@@ -31,7 +31,11 @@
                                     
                                     <th>Professione</th>
                                     
-                                    <th>Filiale</th>
+                                    <th>
+                                        Filiale
+                                        <br>
+                                        {{ Form::select('filiale', $filiali, null, [ 'placeholder' => '', 'class' => 'form-control' ]) }}
+                                    </th>
                                     
                                     <th>
                                         <a href="{{ action('ClientiController@index') }}" class="btn btn-default">

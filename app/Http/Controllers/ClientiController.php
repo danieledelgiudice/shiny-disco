@@ -22,7 +22,9 @@ class ClientiController extends Controller
             $clienti = $clienti_filiale->filter($request->all())->get();
         }
         
-        return view('clienti.index', compact('clienti'));
+        $filiali = \App\Filiale::pluck('nome', 'id');
+        
+        return view('clienti.index', compact('clienti', 'filiali'));
     }
 
     public function show($id)

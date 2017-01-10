@@ -20,4 +20,19 @@ class ClienteFilter extends ModelFilter
     {
         return $this->whereBeginsWith('citta_residenza', $value);
     }
+    
+    public function codiceFiscale($value)
+    {
+        return $this->whereBeginsWith('codice_fiscale', $value);
+    }
+    
+    // public function professione($value)
+    // {
+    //     return $this->whereBeginsWith('codice_fiscale', $value);
+    // }
+    
+    public function filiale($value)
+    {
+        return $this->where('filiale_id', $value);
+    }
 }
