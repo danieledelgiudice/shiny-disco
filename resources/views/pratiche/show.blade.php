@@ -9,10 +9,12 @@
             </h1>
             <div>
                 <div class="pull-left">
+                    <a href="{{ action('ClientiController@show', ['cliente' => $pratica->cliente] ) }}"
+                        class="btn btn-default"><i class="fa fa-fw fa-user"></i></a>
                 </div>
                 <div class="pull-right">
                     <a href="{{ action('PraticheController@edit', ['cliente' => $pratica->cliente, 'pratica' => $pratica] ) }}"
-                        class="btn btn-success"><i class="fa fa-pencil"></i></a>
+                        class="btn btn-success"><i class="fa fa-fw fa-pencil"></i></a>
                 </div>
             </div>
         </div>
@@ -120,10 +122,10 @@
             <div class="panel-body">
                     
                 <div class="row">
-                    <!-- Nominativo controparte -->
-                    <strong class="col-md-2 form-control-static">Nominativo controparte</strong>
+                    <!-- Conducente controparte -->
+                    <strong class="col-md-2 form-control-static">Conducente controparte</strong>
                     <div class="col-md-4">
-                        <p class="form-control-static">{{ $pratica->nominativo_controparte }}</p>
+                        <p class="form-control-static">{{ $pratica->conducente_controparte }}</p>
                     </div>
                 
                     <!-- Via controparte -->
@@ -237,7 +239,7 @@
                     <!-- Valore mezzo liquidabile -->
                     <strong class="col-md-2 form-control-static">Valore mezzo liquidabile</strong>
                     <div class="col-md-4">
-                        <p class="form-control-static">{{ $pratica->valore_mezzo_liquidabile }}</p>
+                        <p class="form-control-static">{{ ($pratica->valore_mezzo_liquidabile) ? "$pratica->valore_mezzo_liquidabile €" : '' }}</p>
                     </div>
                 </div>
                 
@@ -259,7 +261,7 @@
                     <!-- Importo sospeso -->
                     <strong class="col-md-2 form-control-static">Importo sospeso</strong>
                     <div class="col-md-4">
-                       <p class="form-control-static">{{ $pratica->importo_sospeso }}</p>
+                       <p class="form-control-static">{{ ($pratica->importo_sospeso) ? "$pratica->importo_sospeso €" : '' }}</p>
                     </div>
                 
                     <!-- Data sospeso -->
@@ -354,7 +356,7 @@
                     <!-- Danno presunto -->
                     <strong class="col-md-2 form-control-static">Danno presunto</strong>
                     <div class="col-md-4">
-                        <p class="form-control-static">{{ $pratica->danno_presunto }}</p>
+                        <p class="form-control-static">{{ ($pratica->danno_presunto) ? "$pratica->danno_presunto €" : '' }}</p>
 
                     </div>
                 </div>

@@ -12,25 +12,27 @@
                             <thead>
                                 {{ Form::open(['action' => ['ClientiController@filter'], 'class' => 'form-horizontal']) }}
                                     <th>
-                                        Nome
-                                        <br>
-                                        {{ Form::text('nome', null, [ 'class' => 'form-control']) }}
-                                    </th>
-                                    
-                                    <th>
                                         Cognome
                                         <br>
                                         {{ Form::text('cognome', null, [ 'class' => 'form-control']) }}
                                     </th>
                                     
                                     <th>
-                                        Città di residenza
+                                        Nome
                                         <br>
-                                        {{ Form::text('citta_residenza', null, [ 'class' => 'form-control']) }}
+                                        {{ Form::text('nome', null, [ 'class' => 'form-control']) }}
                                     </th>
                                     
-                                    <th>Data di nascita</th>
-                                    <th>Codice Fiscale</th>
+                                    <th>
+                                        Codice Fiscale
+                                        <br>
+                                        {{ Form::text('codice_fiscale', null, [ 'class' => 'form-control']) }}
+                                    </th>
+                                    
+                                    <th>Professione</th>
+                                    
+                                    <th>Filiale</th>
+                                    
                                     <th>
                                         <a href="{{ action('ClientiController@index') }}" class="btn btn-default">
                                                <i class="fa fa-times"></i> 
@@ -44,11 +46,11 @@
                             <tbody>
                                 @foreach ($clienti as $cliente)
                                     <tr>
-                                        <td class="table-text" data-field="nome"><div>{{ $cliente->nome }}</div></td>
                                         <td class="table-text" data-field="cognome"><div>{{ $cliente->cognome }}</div></td>
-                                        <td class="table-text" data-field="citta_residenza"><div>{{ $cliente->citta_residenza }}</div></td>
-                                        <td class="table-text"><div>{{ format_date($cliente->data_nascita) }}</div></td>
-                                        <td class="table-text"><div>{{ $cliente->codice_fiscale }}</div></td>
+                                        <td class="table-text" data-field="nome"><div>{{ $cliente->nome }}</div></td>
+                                        <td class="table-text" data-field="codice_fiscale"><div>{{ $cliente->codice_fiscale }}</div></td>
+                                        <td class="table-text"><div>Filiale1</div></td>
+                                        <td class="table-text"><div>Professione1</div></td>
 
                                         <!-- Dettagli/Modifica cliente -->
                                         <td>

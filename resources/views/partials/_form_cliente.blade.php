@@ -57,7 +57,15 @@
                 <!-- Codice Fiscale Cliente -->
                 {!! Form::label('codice_fiscale', "Codice Fiscale" , ['class' => 'col-md-2 control-label']) !!}
                 <div class="col-md-4">
-                    {!! Form::text('codice_fiscale', null, ['class' => 'form-control', 'maxlength' => '16']) !!}
+                    <div class="input-group">
+                        {!! Form::text('codice_fiscale', null, ['class' => 'form-control', 'maxlength' => '16']) !!}
+                        <span class="input-group-addon">
+                            <a href="http://codicefiscale.com" target="_blank">
+                                Genera &nbsp;
+                                <i class="fa fa-fw fa-calculator"></i>
+                            </a>
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>

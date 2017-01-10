@@ -9,10 +9,11 @@
             </h1>
             <div>
                 <div class="pull-left">
+                    <a href="{{ action('ClientiController@index') }}"
+                        class="btn btn-default"><i class="fa fa-fw fa-users"></i></a>
                 </div>
                 <div class="pull-right">
-                    <!-- <a class="btn btn-danger"><i class="fa fa-trash"></i></a> -->
-                    <a href="{{ action('ClientiController@edit', $cliente) }}" class="btn btn-success"><i class="fa fa-pencil"></i></a>
+                    <a href="{{ action('ClientiController@edit', $cliente) }}" class="btn btn-success"><i class="fa fa-fw fa-pencil"></i></a>
                 </div>
             </div>
         </div>
@@ -31,17 +32,16 @@
                 <div class="panel-body">
                         
                     <div class="row">
+                        <!-- Cognome Cliente -->
+                        <strong class="col-md-2 form-control-static">Cognome</strong>
+                        <div class="col-md-4">
+                            <p value="" class="form-control-static">{{ $cliente->cognome }}</p>
+                        </div>
                         
                         <!-- Nome Cliente -->
                         <strong class="col-md-2 form-control-static">Nome</strong>
                         <div class="col-md-4">
                             <p class="form-control-static">{{ $cliente->nome }}</p>
-                        </div>
-                        
-                        <!-- Cognome Cliente -->
-                        <strong class="col-md-2 form-control-static">Cognome</strong>
-                        <div class="col-md-4">
-                            <p value="" class="form-control-static">{{ $cliente->cognome }}</p>
                         </div>
                     </div>
                     
@@ -141,7 +141,9 @@
                         <!-- Email Cliente -->
                         <strong class="col-md-2 form-control-static">Email</strong>
                         <div class="col-md-4">
-                            <p value="" class="form-control-static">{{ $cliente->email }}</p>
+                            <a href="mailto:{{ $cliente->email }}">
+                                <p value="" class="form-control-static">{{ $cliente->email }}</p>    
+                            </a>
                         </div>
                     
                         <!-- FAX Cliente -->
@@ -196,7 +198,7 @@
                         <!-- Reddito Cliente -->
                         <strong class="col-md-2 form-control-static">Reddito</strong>
                         <div class="col-md-4">
-                            <p value="" class="form-control-static">{{ $cliente->reddito }}</p>
+                            <p value="" class="form-control-static">{{ ($cliente->reddito) ? "$cliente->reddito €" : '' }}</p>
                         </div>
                     
                         <!-- Numero Card Cliente -->
@@ -216,9 +218,9 @@
                 </div>
             </div>
             
-            <div class="panel panel-default">
+            <div class="panel panel-info">
                 <div class="panel-heading">
-                    <i class="fa fa-info"></i>
+                    <i class="fa fa-folder-open"></i>
                     &nbsp;
                     Elenco pratiche
                 </div>

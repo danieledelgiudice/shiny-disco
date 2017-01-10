@@ -26,7 +26,7 @@ class CreatePraticheTable extends Migration
             $table->string('numero_polizza_parte')->nullable();
             $table->string('assicurazione_parte')->nullable();
             
-            $table->string('nominativo_controparte')->nullable();
+            $table->string('conducente_controparte')->nullable();
             $table->string('via_controparte')->nullable();
             $table->string('citta_controparte')->nullable();
             $table->string('telefono_controparte')->nullable();

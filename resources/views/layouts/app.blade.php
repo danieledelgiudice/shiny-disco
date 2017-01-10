@@ -49,7 +49,15 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ action('ClientiController@index') }}">Clienti</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Clienti <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ action('ClientiController@index') }}"><i class="fa fa-fw fa-users"></i>&nbsp;&nbsp;Lista clienti</a></li>
+                            <li><a href="{{ action('ClientiController@create') }}"><i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Aggiungi cliente</a></li>
+                        </ul>
+                    </li>
+                    
+                    
                     <li><a href="{{ action('PraticheController@indexAll') }}">Pratiche</a></li>
                     <li><a href="{{ action('DocumentiController@create') }}">Carica documenti</a></li>
                 </ul>

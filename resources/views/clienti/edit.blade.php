@@ -9,6 +9,8 @@
             </h1>
             <div>
                 <div class="pull-left">
+                    <a href="{{ action('ClientiController@show', ['cliente' => $cliente] ) }}"
+                        class="btn btn-default" target="_blank"><i class="fa fa-fw fa-arrow-left"></i></a>
                 </div>
                 <div class="pull-right">
                 </div>
