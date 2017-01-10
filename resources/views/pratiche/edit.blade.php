@@ -74,13 +74,7 @@
                     <!-- Reddito -->    
                     <strong class="col-md-2 form-control-static">Reddito</strong>
                     <div class="col-md-4">
-                        <p class="form-control-static">{{ $pratica->cliente->reddito }}</p>
-                    </div>
-                    
-                    <!-- Filiale -->    
-                    <strong class="col-md-2 form-control-static">Filiale</strong>
-                    <div class="col-md-4">
-                        <p class="form-control-static">Filiale1</p>
+                        <p class="form-control-static">{{ ($pratica->cliente->reddito) ? $pratica->cliente->reddito . " €" : '' }}</p>
                     </div>
                 </div>
             </div>

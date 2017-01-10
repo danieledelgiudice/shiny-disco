@@ -29,4 +29,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo('\App\Filiale', 'filiale_id');
     }
+    
+    public function isAdmin()
+    {
+        return $this->admin;
+    }
 }

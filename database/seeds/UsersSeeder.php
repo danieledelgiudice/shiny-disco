@@ -14,7 +14,8 @@ class UsersSeeder extends Seeder
         foreach(\App\Filiale::all() as $filiale) {
             DB::table('users')->insert([
                 'password' => bcrypt('secret'),
-                'filiale_id' => $filiale->id
+                'filiale_id' => $filiale->id,
+                'admin' => ($filiale->id == 1),
                 ]);
         }
     }

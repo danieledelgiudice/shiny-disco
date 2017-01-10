@@ -19,7 +19,7 @@ class DocumentiController extends Controller
     {
         $documento = \App\Documento::find($documento_id);
         
-        if($documento->pratica->cliente->filiale != $this->filialeUtente()) {
+        if(!Auth::user()->isAdmin() && $documento->pratica->cliente->filiale != $this->filialeUtente()) {
             // L'utente non ha il permesso vedere documenti di pratiche di altre filiali
             abort(403);
         }
@@ -61,7 +61,7 @@ class DocumentiController extends Controller
             return response()->json('Il numero della pratica è invalido', 400);
         }
         
-        if($pratica->cliente->filiale != $this->filialeUtente()) {
+        if(!Auth::user()->isAdmin() && $pratica->cliente->filiale != $this->filialeUtente()) {
             // L'utente non ha il permesso di salvare documenti in questa pratica
             return response()->json('Il numero della pratica è invalido', 403);
         }

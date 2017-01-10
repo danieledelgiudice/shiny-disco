@@ -69,7 +69,12 @@
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->filiale->nome }} <span class="caret"></span>
+                                @if (Auth::user()->isAdmin())
+                                    <i class="fa fa-gear"></i>
+                                @endif
+                                {{ Auth::user()->filiale->nome }}
+                                &nbsp;
+                                <span class="caret"></span>
                             </a>
                             
                             <ul class="dropdown-menu" role="menu">

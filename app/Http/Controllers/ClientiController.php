@@ -15,8 +15,12 @@ class ClientiController extends Controller
     
     public function index(Request $request)
     {
-        $clienti_filiale = \App\Cliente::where('filiale_id', $this->filialeUtente()->id);
-        $clienti = $clienti_filiale->filter($request->all())->get();
+        if (Auth::user()->isAdmin()) {
+            $clienti = \App\Cliente::filter($request->all())->get();
+        } else {
+            $clienti_filiale = \App\Cliente::where('filiale_id', $this->filialeUtente()->id);
+            $clienti = $clienti_filiale->filter($request->all())->get();
+        }
         
         return view('clienti.index', compact('clienti'));
     }
@@ -25,7 +29,7 @@ class ClientiController extends Controller
     {
         $cliente = \App\Cliente::find($id);
         
-        if ($cliente->filiale != $this->filialeUtente()) {
+        if (!Auth::user()->isAdmin() && $cliente->filiale != $this->filialeUtente()) {
             // L'utente sta cercando di accedere ad un cliente che non gli appartiene
             abort(403);
         }
@@ -39,7 +43,7 @@ class ClientiController extends Controller
     {
         $cliente = \App\Cliente::find($id);
         
-        if ($cliente->filiale != $this->filialeUtente()) {
+        if (!Auth::user()->isAdmin() && $cliente->filiale != $this->filialeUtente()) {
             // L'utente sta cercando di accedere ad un cliente che non gli appartiene
             abort(403);
         }
@@ -51,7 +55,7 @@ class ClientiController extends Controller
     {
         $cliente = \App\Cliente::find($id);
         
-        if ($cliente->filiale != $this->filialeUtente()) {
+        if (!Auth::user()->isAdmin() && $cliente->filiale != $this->filialeUtente()) {
             // L'utente sta cercando di accedere ad un cliente che non gli appartiene
             abort(403);
         }
