@@ -2782,3 +2782,15 @@
 [08-Jan-2017 11:09:48 UTC] PHP  67. Illuminate\View\View->getContents() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/View/View.php:120
 [08-Jan-2017 11:09:48 UTC] PHP  68. Illuminate\View\Engines\CompilerEngine->get() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/View/View.php:149
 [08-Jan-2017 11:09:48 UTC] PHP  69. Illuminate\View\Engines\PhpEngine->evaluatePath() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php:59
+[10-Jan-2017 10:58:09 UTC] PHP Warning:  require(/home/ubuntu/workspace/shiny-disco/bootstrap/../vendor/autoload.php): failed to open stream: No such file or directory in /home/ubuntu/workspace/shiny-disco/bootstrap/autoload.php on line 17
+[10-Jan-2017 10:58:09 UTC] PHP Stack trace:
+[10-Jan-2017 10:58:09 UTC] PHP   1. {main}() /home/ubuntu/workspace/shiny-disco/public/index.php:0
+[10-Jan-2017 10:58:09 UTC] PHP   2. require() /home/ubuntu/workspace/shiny-disco/public/index.php:22
+[10-Jan-2017 10:58:09 UTC] PHP Fatal error:  require(): Failed opening required '/home/ubuntu/workspace/shiny-disco/bootstrap/../vendor/autoload.php' (include_path='.:/usr/share/php:/usr/share/pear') in /home/ubuntu/workspace/shiny-disco/bootstrap/autoload.php on line 17
+[10-Jan-2017 10:58:09 UTC] PHP Stack trace:
+[10-Jan-2017 10:58:09 UTC] PHP   1. {main}() /home/ubuntu/workspace/shiny-disco/public/index.php:0
+[10-Jan-2017 10:58:09 UTC] PHP   2. require() /home/ubuntu/workspace/shiny-disco/public/index.php:22
+[10-Jan-2017 10:58:30 UTC] PHP Fatal error:  Class 'Illuminate\Foundation\Application' not found in /home/ubuntu/workspace/shiny-disco/bootstrap/app.php on line 14
+[10-Jan-2017 10:58:30 UTC] PHP Stack trace:
+[10-Jan-2017 10:58:30 UTC] PHP   1. {main}() /home/ubuntu/workspace/shiny-disco/public/index.php:0
+[10-Jan-2017 10:58:30 UTC] PHP   2. require_once() /home/ubuntu/workspace/shiny-disco/public/index.php:36

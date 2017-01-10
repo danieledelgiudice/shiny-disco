@@ -239,7 +239,7 @@
                     <!-- Valore mezzo liquidabile -->
                     <strong class="col-md-2 form-control-static">Valore mezzo liquidabile</strong>
                     <div class="col-md-4">
-                        <p class="form-control-static">{{ $pratica->valore_mezzo_liquidabile }}</p>
+                        <p class="form-control-static">{{ ($pratica->valore_mezzo_liquidabile) ? "$pratica->valore_mezzo_liquidabile €" : '' }}</p>
                     </div>
                 </div>
                 
@@ -261,7 +261,7 @@
                     <!-- Importo sospeso -->
                     <strong class="col-md-2 form-control-static">Importo sospeso</strong>
                     <div class="col-md-4">
-                       <p class="form-control-static">{{ $pratica->importo_sospeso }}</p>
+                       <p class="form-control-static">{{ ($pratica->importo_sospeso) ? "$pratica->importo_sospeso €" : '' }}</p>
                     </div>
                 
                     <!-- Data sospeso -->
@@ -356,7 +356,7 @@
                     <!-- Danno presunto -->
                     <strong class="col-md-2 form-control-static">Danno presunto</strong>
                     <div class="col-md-4">
-                        <p class="form-control-static">{{ $pratica->danno_presunto }}</p>
+                        <p class="form-control-static">{{ ($pratica->danno_presunto) ? "$pratica->danno_presunto €" : '' }}</p>
 
                     </div>
                 </div>

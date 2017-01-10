@@ -32,17 +32,16 @@
                 <div class="panel-body">
                         
                     <div class="row">
+                        <!-- Cognome Cliente -->
+                        <strong class="col-md-2 form-control-static">Cognome</strong>
+                        <div class="col-md-4">
+                            <p value="" class="form-control-static">{{ $cliente->cognome }}</p>
+                        </div>
                         
                         <!-- Nome Cliente -->
                         <strong class="col-md-2 form-control-static">Nome</strong>
                         <div class="col-md-4">
                             <p class="form-control-static">{{ $cliente->nome }}</p>
-                        </div>
-                        
-                        <!-- Cognome Cliente -->
-                        <strong class="col-md-2 form-control-static">Cognome</strong>
-                        <div class="col-md-4">
-                            <p value="" class="form-control-static">{{ $cliente->cognome }}</p>
                         </div>
                     </div>
                     
@@ -199,7 +198,7 @@
                         <!-- Reddito Cliente -->
                         <strong class="col-md-2 form-control-static">Reddito</strong>
                         <div class="col-md-4">
-                            <p value="" class="form-control-static">{{ $cliente->reddito }}</p>
+                            <p value="" class="form-control-static">{{ ($cliente->reddito) ? "$cliente->reddito €" : '' }}</p>
                         </div>
                     
                         <!-- Numero Card Cliente -->
