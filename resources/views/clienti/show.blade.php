@@ -142,7 +142,9 @@
                         <!-- Email Cliente -->
                         <strong class="col-md-2 form-control-static">Email</strong>
                         <div class="col-md-4">
-                            <p value="" class="form-control-static">{{ $cliente->email }}</p>
+                            <a href="mailto:{{ $cliente->email }}">
+                                <p value="" class="form-control-static">{{ $cliente->email }}</p>    
+                            </a>
                         </div>
                     
                         <!-- FAX Cliente -->
@@ -217,9 +219,9 @@
                 </div>
             </div>
             
-            <div class="panel panel-default">
+            <div class="panel panel-info">
                 <div class="panel-heading">
-                    <i class="fa fa-info"></i>
+                    <i class="fa fa-folder-open"></i>
                     &nbsp;
                     Elenco pratiche
                 </div>

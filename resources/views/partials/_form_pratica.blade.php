@@ -398,18 +398,18 @@
                     {!! Form::textarea('mezzo_visibile', null, ['class' => 'form-control']) !!}
                 </div>
                 
-                <!-- Dinamica -->
-                {!! Form::label('dinamica', 'Dinamica' , ['class' => 'col-md-2 control-label']) !!}
+                <!-- Note -->
+                {!! Form::label('note', 'Note' , ['class' => 'col-md-2 control-label']) !!}
                 <div class="col-md-4">
-                    {!! Form::textarea('dinamica', null, ['class' => 'form-control']) !!}
+                    {!! Form::textarea('note', null, ['class' => 'form-control']) !!}
                 </div>
             </div>
             
             <div class="form-group">
-                <!-- Note -->
-                {!! Form::label('note', 'Note' , ['class' => 'col-md-2 control-label']) !!}
+                <!-- Dinamica -->
+                {!! Form::label('dinamica', 'Dinamica' , ['class' => 'col-md-2 control-label']) !!}
                 <div class="col-md-10">
-                    {!! Form::textarea('note', null, ['class' => 'form-control']) !!}
+                    {!! Form::textarea('dinamica', null, ['class' => 'form-control']) !!}
                 </div>
             </div>
         </div>
