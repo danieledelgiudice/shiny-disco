@@ -49,8 +49,8 @@
                                         <td class="table-text" data-field="cognome"><div>{{ $cliente->cognome }}</div></td>
                                         <td class="table-text" data-field="nome"><div>{{ $cliente->nome }}</div></td>
                                         <td class="table-text" data-field="codice_fiscale"><div>{{ $cliente->codice_fiscale }}</div></td>
-                                        <td class="table-text"><div>Filiale1</div></td>
                                         <td class="table-text"><div>Professione1</div></td>
+                                        <td class="table-text"><div>{{ $cliente->filiale->nome }}</div></td>
 
                                         <!-- Dettagli/Modifica cliente -->
                                         <td>

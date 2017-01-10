@@ -79,6 +79,15 @@ class Cliente extends Model
         return $this->hasMany('\App\Pratica', 'cliente_id', 'id');
     }
     
+    /**
+     *  Ritorna la filiale a cui appartiene il cliente
+     *
+     */
+    public function filiale()
+    {
+        return $this->belongsTo('\App\Filiale', 'filiale_id');
+    }
+    
     
     // Mutator data_nascita
     public function setDataNascitaAttribute($value)

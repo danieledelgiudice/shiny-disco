@@ -52,6 +52,8 @@ $factory->define(App\Cliente::class, function (Faker\Generator $faker) {
         'reddito' => $faker->numberBetween(2000, 50000),
         'numero_card' => $faker->creditCardNumber,
         'note' => $faker->text,
+        
+        'filiale_id' => App\Filiale::all()->random()->id,
     ];
 });
 

@@ -22,6 +22,15 @@
             <!-- Mostra errori di validazione -->
             @include('common.errors')
     
+            <!-- Solo se admin -->
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <i class="fa fa-id-card"></i>
+                    &nbsp;
+                    Filiale: {{ $cliente->filiale->nome }}
+                </div>
+            </div>
+    
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <i class="fa fa-id-card"></i>

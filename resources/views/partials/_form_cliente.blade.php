@@ -13,17 +13,16 @@
         <div class="panel-body">
                 
             <div class="form-group">
+                <!-- Cognome Cliente -->
+                {!! Form::label('cognome', "Cognome" , ['class' => 'col-md-2 control-label']) !!}
+                <div class="col-md-4">
+                    {!! Form::text('cognome', null, ['class' => 'form-control']) !!}
+                </div>
                 
                 <!-- Nome Cliente -->
                 {!! Form::label('nome', "Nome" , ['class' => 'col-md-2 control-label']) !!}
                 <div class="col-md-4">
                     {!! Form::text('nome', null, ['class' => 'form-control']) !!}
-                </div>
-                
-                <!-- Cognome Cliente -->
-                {!! Form::label('cognome', "Cognome" , ['class' => 'col-md-2 control-label']) !!}
-                <div class="col-md-4">
-                    {!! Form::text('cognome', null, ['class' => 'form-control']) !!}
                 </div>
             </div>
             

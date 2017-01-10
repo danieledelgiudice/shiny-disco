@@ -20,6 +20,15 @@
         <!-- Mostra errori di validazione -->
         @include('common.errors')
         
+        <!-- Solo se admin -->
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <i class="fa fa-id-card"></i>
+                &nbsp;
+                Filiale: {{ $pratica->cliente->filiale->nome }}
+            </div>
+        </div>
+        
         <!-- Riepilogo utente -->
         <div class="panel panel-info">
             <div class="panel-heading">
