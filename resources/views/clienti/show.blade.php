@@ -273,7 +273,7 @@
                     @endif
                     <div class="">
                         <a id="aggiungi-pratica-button" class="btn btn-success center-block"
-                            href="{{ action('PraticheController@create', ['cliente' => $pratica->cliente, 'pratica' => $pratica]) }}">
+                            href="{{ action('PraticheController@create', ['cliente' => $cliente]) }}">
                             <i class="fa fa-plus fa-btn"></i>
                             Aggiungi pratica
                         </a>

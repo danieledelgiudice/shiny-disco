@@ -15,7 +15,7 @@ class Filiale extends Model
     
     public function utenti()
     {
-        return $this->hasMany('\App\Users', 'filiale_id', 'id');
+        return $this->hasOne('\App\Users', 'filiale_id', 'id');
     }
     
     

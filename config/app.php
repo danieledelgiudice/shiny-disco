@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'https://shiny-disco-dunox1.c9users.io'),
 
     /*
     |--------------------------------------------------------------------------

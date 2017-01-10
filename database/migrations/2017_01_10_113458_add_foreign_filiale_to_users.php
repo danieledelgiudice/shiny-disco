@@ -13,7 +13,7 @@ class AddForeignFilialeToUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('filiale_id')->unsigned();
+            $table->integer('filiale_id')->unsigned()->unique();
             $table->foreign('filiale_id')->references('id')->on('filiali');
         });
     }
