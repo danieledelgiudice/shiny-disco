@@ -107,10 +107,10 @@
         <div class="panel-body">
                 
             <div class="form-group">
-                <!-- Nominativo controparte -->
-                {!! Form::label('nominativo_controparte', 'Nominativo controparte' , ['class' => 'col-md-2 control-label']) !!}
+                <!-- Conducente controparte -->
+                {!! Form::label('conducente_controparte', 'Conducente controparte' , ['class' => 'col-md-2 control-label']) !!}
                 <div class="col-md-4">
-                    {!! Form::text('nominativo_controparte', null, ['class' => 'form-control']) !!}
+                    {!! Form::text('conducente_controparte', null, ['class' => 'form-control']) !!}
                 </div>
             
                 <!-- Via controparte -->

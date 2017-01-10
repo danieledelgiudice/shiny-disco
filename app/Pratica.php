@@ -244,7 +244,7 @@ class Pratica extends Model
         'numero_polizza_parte',
         'assicurazione_parte',
         
-        'nominativo_controparte',
+        'conducente_controparte',
         'via_controparte',
         'citta_controparte',
         'telefono_controparte',

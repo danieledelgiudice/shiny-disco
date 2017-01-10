@@ -122,10 +122,10 @@
             <div class="panel-body">
                     
                 <div class="row">
-                    <!-- Nominativo controparte -->
-                    <strong class="col-md-2 form-control-static">Nominativo controparte</strong>
+                    <!-- Conducente controparte -->
+                    <strong class="col-md-2 form-control-static">Conducente controparte</strong>
                     <div class="col-md-4">
-                        <p class="form-control-static">{{ $pratica->nominativo_controparte }}</p>
+                        <p class="form-control-static">{{ $pratica->conducente_controparte }}</p>
                     </div>
                 
                     <!-- Via controparte -->

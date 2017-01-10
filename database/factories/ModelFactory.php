@@ -214,7 +214,7 @@ $factory->define(App\Cliente::class, function (Faker\Generator $faker) {
         'numero_polizza_parte' => strtoupper($faker->bothify('????######??##?#??')),
         'assicurazione_parte' => $faker->company,
         
-        'nominativo_controparte' => $faker->name,
+        'conducente_controparte' => $faker->name,
         'via_controparte' => $faker->streetAddress,
         'citta_controparte' => $faker->state,
         'telefono_controparte' => $faker->e164PhoneNumber,
