@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use Illuminate\Support\Facades\Auth;
 
 class ClientiController extends Controller
 {
@@ -15,23 +14,22 @@ class ClientiController extends Controller
     
     public function index(Request $request)
     {
-        if (Auth::user()->isAdmin()) {
+        if ($request->user()->isAdmin())
             $clienti = \App\Cliente::filter($request->all())->get();
-        } else {
-            $clienti_filiale = \App\Cliente::where('filiale_id', $this->filialeUtente()->id);
-            $clienti = $clienti_filiale->filter($request->all())->get();
-        }
+        else
+            $clienti = \App\Cliente::where('filiale_id', $request->user()->filiale->id)
+                                     ->filter($request->all())->get();
         
         $filiali = \App\Filiale::pluck('nome', 'id');
         
         return view('clienti.index', compact('clienti', 'filiali'));
     }
 
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $cliente = \App\Cliente::find($id);
         
-        if (!Auth::user()->isAdmin() && $cliente->filiale != $this->filialeUtente()) {
+        if ($request->user()->cannot('visualizzare-cliente', $cliente)) {
             // L'utente sta cercando di accedere ad un cliente che non gli appartiene
             abort(403);
         }
@@ -41,11 +39,11 @@ class ClientiController extends Controller
         return view('clienti.show', compact('cliente', 'pratiche'));
     }
 
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         $cliente = \App\Cliente::find($id);
         
-        if (!Auth::user()->isAdmin() && $cliente->filiale != $this->filialeUtente()) {
+        if ($request->user()->cannot('modificare-cliente', $cliente)) {
             // L'utente sta cercando di accedere ad un cliente che non gli appartiene
             abort(403);
         }
@@ -57,7 +55,7 @@ class ClientiController extends Controller
     {
         $cliente = \App\Cliente::find($id);
         
-        if (!Auth::user()->isAdmin() && $cliente->filiale != $this->filialeUtente()) {
+        if ($request->user()->cannot('modificare-cliente', $cliente)) {
             // L'utente sta cercando di accedere ad un cliente che non gli appartiene
             abort(403);
         }
@@ -81,7 +79,7 @@ class ClientiController extends Controller
         $cliente = new \App\Cliente;
         $new_values = $request->all();
         
-        $filiale = $this->filialeUtente();
+        $filiale = $request->user()->filiale;
         
         $cliente->fill($new_values);
         $cliente->filiale()->associate($filiale);
@@ -102,14 +100,6 @@ class ClientiController extends Controller
         }
         
         $query = http_build_query($params);
-        // return dd($params);
         return redirect()->action('ClientiController@index', $query);
-    }
-    
-    //Questa funzione è presente anche su PraticheController, un giorno mi ringrazierai Dani.
-    private function filialeUtente()
-    {
-        $user = Auth::user();
-        return $user->filiale;
     }
 }

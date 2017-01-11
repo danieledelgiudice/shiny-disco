@@ -26,6 +26,32 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies($gate);
 
+        $gate->before(function ($user, $ability) {
+            if ($user->isAdmin()) {
+                return true;
+            }
+        });
+        
+        $gate->define('visualizzare-pratica', function ($user, $pratica) {
+            return $user->filiale->id === $pratica->cliente->filiale->id;
+        });
+        
+        $gate->define('creare-pratica', function ($user, $cliente) {
+            return $user->filiale->id === $cliente->filiale->id;
+        });
+
+        $gate->define('modificare-pratica', function ($user, $pratica) {
+            return $user->filiale->id === $pratica->cliente->filiale->id;
+        });
+        
+        $gate->define('visualizzare-cliente', function ($user, $cliente) {
+            return $user->filiale->id === $cliente->filiale->id;
+        });
+        
+        $gate->define('modificare-cliente', function ($user, $cliente) {
+            return $user->filiale->id === $cliente->filiale->id;
+        });
+
         //
     }
 }

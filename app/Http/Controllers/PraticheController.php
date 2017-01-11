@@ -15,18 +15,21 @@ class PraticheController extends Controller
     
     public function indexAll(Request $request)
     {
-        $pratiche = \App\Pratica::whereHas('cliente', function($query) {
-            $query->where('filiale_id', $this->filialeUtente()->id);
-        })->get();
+        if ($request->user()->isAdmin())
+            $pratiche = \App\Pratica::all();
+        else
+            $pratiche = \App\Pratica::whereHas('cliente', function($query) use ($request) {
+                $query->where('filiale_id', $request->user()->filiale->id);
+            })->get();
         
         return view('pratiche.index', compact('pratiche'));
     }
     
-    public function show($cliente_id, $pratica_id)
+    public function show(Request $request, $cliente_id, $pratica_id)
     {
         $pratica = \App\Pratica::find($pratica_id);
         
-        if($pratica->cliente->filiale != $this->filialeUtente()) {
+        if ($request->user()->cannot('visualizzare-pratica', $pratica)) {
             // L'utente non ha il permesso di vedere questa pratica
             abort(403);
         }
@@ -39,7 +42,7 @@ class PraticheController extends Controller
     {
         $pratica = \App\Pratica::find($pratica_id);
         
-        if($pratica->cliente->filiale != $this->filialeUtente()) {
+        if ($request->user()->cannot('modificare-pratica', $pratica)) {
             // L'utente non ha il permesso di vedere questa pratica
             abort(403);
         }
@@ -51,7 +54,7 @@ class PraticheController extends Controller
     {
         $pratica = \App\Pratica::find($pratica_id);
         
-        if($pratica->cliente->filiale != $this->filialeUtente()) {
+        if ($request->user()->cannot('modificare-pratica', $pratica)) {
             // L'utente non ha il permesso di vedere questa pratica
             abort(403);
         }
@@ -70,7 +73,7 @@ class PraticheController extends Controller
     {
         $cliente = \App\Cliente::find($id);
         
-        if($cliente->filiale != $this->filialeUtente()) {
+        if ($request->user()->cannot('creare-pratica', $pratica)) {
             // L'utente non ha il permesso di aggiungere pratiche a clienti di altre filiali
             abort(403);
         }
@@ -82,7 +85,7 @@ class PraticheController extends Controller
     {
         $cliente = \App\Cliente::find($cliente_id);
         
-        if($cliente->filiale != $this->filialeUtente()) {
+        if ($request->user()->cannot('creare-pratica', $pratica)) {
             // L'utente non ha il permesso di aggiungere pratiche a clienti di altre filiali
             abort(403);
         }
@@ -98,12 +101,5 @@ class PraticheController extends Controller
         // TODO: mostrare messaggio nella view
         return redirect()->action('PraticheController@show', ['cliente' => $pratica->cliente, 'pratica' => $pratica])
                     ->with('success', 'Pratica salvato con successo!');
-    }
-    
-    //Questa funzione è presente anche su ClientiController, un giorno mi ringrazierai Dani.
-    private function filialeUtente()
-    {
-        $user = Auth::user();
-        return $user->filiale;
     }
 }
