@@ -17,7 +17,17 @@ class DocumentiController extends Controller
     
     public function show(Request $request, $cliente_id, $pratica_id, $documento_id)
     {
-        $documento = \App\Documento::find($documento_id);
+        $documento = \App\Documento::findOrFail($documento_id);
+        
+        if ($documento->pratica->id != $pratica_id) {
+            // La pratica nell'url non corrisponde alla pratica del documento
+            abort(404);
+        }
+        
+        if ($documento->pratica->cliente->id != $cliente_id) {
+            // Il cliente nell'url non corrisponde al cliente della pratica
+            abort(404);
+        }
         
         if ($request->user()->cannot('visualizzare-pratica', $pratica)) {
             // L'utente non ha il permesso vedere documenti di pratiche di altre filiali

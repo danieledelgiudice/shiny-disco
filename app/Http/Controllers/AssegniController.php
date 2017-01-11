@@ -15,7 +15,13 @@ class AssegniController extends Controller
     
     public function create(Request $request, $cliente_id, $pratica_id)
     {
-        $pratica = \App\Pratica::find($pratica_id);
+        $pratica = \App\Pratica::findOrFail($pratica_id);
+        
+        if ($pratica->cliente->id != $cliente_id) {
+            // Il cliente nell'url non corrisponde al cliente della pratica
+            abort(404);
+        }
+        
         if($request->user()->cannot('modificare-pratica', $pratica)) {
             // L'utente non può aggiungere assegni a pratiche di altre filiali
             abort(403);
@@ -26,7 +32,13 @@ class AssegniController extends Controller
     
     public function store(Request $request, $cliente_id, $pratica_id)
     {
-        $pratica = \App\Pratica::find($pratica_id);
+        $pratica = \App\Pratica::findOrFail($pratica_id);
+        
+        if ($pratica->cliente->id != $cliente_id) {
+            // Il cliente nell'url non corrisponde al cliente della pratica
+            abort(404);
+        }
+        
         if($request->user()->cannot('modificare-pratica', $pratica)) {
             // L'utente non può aggiungere assegni a pratiche di altre filiali
             abort(403);
@@ -43,7 +55,18 @@ class AssegniController extends Controller
     
     public function edit(Request $request, $cliente_id, $pratica_id, $assegno_id)
     {
-        $assegno = \App\Assegno::find($assegno_id);
+        $assegno = \App\Assegno::findOrFail($assegno_id);
+        
+        if ($assegno->pratica->id != $pratica_id) {
+            // La pratica nell'url non corrisponde alla pratica dell'assegno
+            abort(404);
+        }
+        
+        if ($assegno->pratica->cliente->id != $cliente_id) {
+            // Il cliente nell'url non corrisponde al cliente della pratica
+            abort(404);
+        }
+        
         if($request->user()->cannot('modificare-pratica', $assegno->pratica)) {
             // L'utente non può aggiungere assegni a pratiche di altre filiali
             abort(403);
@@ -54,16 +77,26 @@ class AssegniController extends Controller
     
     public function update(Request $request, $cliente_id, $pratica_id, $assegno_id)
     {
-        $pratica = \App\Pratica::find($pratica_id);
-        if($request->user()->cannot('modificare-pratica', $pratica)) {
+        $assegno = \App\Assegno::findOrFail($assegno_id);
+        
+        if ($assegno->pratica->id != $pratica_id) {
+            // La pratica nell'url non corrisponde alla pratica dell'assegno
+            abort(404);
+        }
+        
+        if ($assegno->pratica->cliente->id != $cliente_id) {
+            // Il cliente nell'url non corrisponde al cliente della pratica
+            abort(404);
+        }
+        
+        if($request->user()->cannot('modificare-pratica', $assegno->pratica)) {
             // L'utente non può modificare assegni di pratiche di altre filiali
             abort(403);
         }
         
-        $assegno = \App\Assegno::find($assegno_id);
         $assegno->fill($request->all());
         $assegno->save();
         
-        return redirect()->action('PraticheController@show', ['cliente' => $pratica->cliente, 'pratica' => $pratica]);
+        return redirect()->action('PraticheController@show', ['cliente' => $pratica->cliente, 'pratica' => $assegno->pratica]);
     }
 }

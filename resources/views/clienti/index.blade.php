@@ -6,47 +6,47 @@
         <div>
             <div class="panel panel-default">
                 <!-- Lista clienti -->
-                @if (count($clienti) > 0)
-                    <div class="panel-body">
-                        <table class="table table-hover table-striped table-filterable">
-                            <thead>
-                                {{ Form::open(['action' => ['ClientiController@filter'], 'class' => 'form-horizontal']) }}
-                                    <th>
-                                        Cognome
-                                        <br>
-                                        {{ Form::text('cognome', null, [ 'class' => 'form-control']) }}
-                                    </th>
-                                    
-                                    <th>
-                                        Nome
-                                        <br>
-                                        {{ Form::text('nome', null, [ 'class' => 'form-control']) }}
-                                    </th>
-                                    
-                                    <th>
-                                        Codice Fiscale
-                                        <br>
-                                        {{ Form::text('codice_fiscale', null, [ 'class' => 'form-control']) }}
-                                    </th>
-                                    
-                                    <th>Professione</th>
-                                    
-                                    <th>
-                                        Filiale
-                                        <br>
-                                        {{ Form::select('filiale', $filiali, null, [ 'placeholder' => '', 'class' => 'form-control' ]) }}
-                                    </th>
-                                    
-                                    <th>
-                                        <a href="{{ action('ClientiController@index') }}" class="btn btn-default">
-                                               <i class="fa fa-times"></i> 
-                                        </a>
-                                        <button class="btn btn-primary">
-                                               <i class="fa fa-search"></i> 
-                                        </button>
-                                    </th>
-                                {{ Form::close() }}
-                            </thead>
+                <div class="panel-body">
+                    <table class="table table-hover table-striped table-filterable">
+                        <thead>
+                            {{ Form::open(['action' => ['ClientiController@filter'], 'class' => 'form-horizontal']) }}
+                                <th>
+                                    Cognome
+                                    <br>
+                                    {{ Form::text('cognome', null, [ 'class' => 'form-control']) }}
+                                </th>
+                                
+                                <th>
+                                    Nome
+                                    <br>
+                                    {{ Form::text('nome', null, [ 'class' => 'form-control']) }}
+                                </th>
+                                
+                                <th>
+                                    Codice Fiscale
+                                    <br>
+                                    {{ Form::text('codice_fiscale', null, [ 'class' => 'form-control']) }}
+                                </th>
+                                
+                                <th>Professione</th>
+                                
+                                <th>
+                                    Filiale
+                                    <br>
+                                    {{ Form::select('filiale', $filiali, null, [ 'placeholder' => '', 'class' => 'form-control' ]) }}
+                                </th>
+                                
+                                <th>
+                                    <a href="{{ action('ClientiController@index') }}" class="btn btn-default">
+                                           <i class="fa fa-times"></i> 
+                                    </a>
+                                    <button class="btn btn-primary">
+                                           <i class="fa fa-search"></i> 
+                                    </button>
+                                </th>
+                            {{ Form::close() }}
+                        </thead>
+                        @if (count($clienti) > 0)
                             <tbody>
                                 @foreach ($clienti as $cliente)
                                     <tr>
@@ -68,10 +68,11 @@
                                     </tr>
                                 @endforeach
                             </tbody>
-                        </table>
-                    </div>
-                @else
-                    <p>Non sono presenti clienti</p>
+                        @endif
+                    </table>
+                </div>
+                @if (count($clienti) == 0)
+                    <p class="text-center">Non sono presenti clienti</p>
                 @endif
             </div>
         </div>

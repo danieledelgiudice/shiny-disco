@@ -27,7 +27,7 @@ class ClientiController extends Controller
 
     public function show(Request $request, $id)
     {
-        $cliente = \App\Cliente::find($id);
+        $cliente = \App\Cliente::findOrFail($id);
         
         if ($request->user()->cannot('visualizzare-cliente', $cliente)) {
             // L'utente sta cercando di accedere ad un cliente che non gli appartiene
@@ -41,7 +41,7 @@ class ClientiController extends Controller
 
     public function edit(Request $request, $id)
     {
-        $cliente = \App\Cliente::find($id);
+        $cliente = \App\Cliente::findOrFail($id);
         
         if ($request->user()->cannot('modificare-cliente', $cliente)) {
             // L'utente sta cercando di accedere ad un cliente che non gli appartiene
@@ -53,7 +53,7 @@ class ClientiController extends Controller
 
     public function update(Request $request, $id)
     {
-        $cliente = \App\Cliente::find($id);
+        $cliente = \App\Cliente::findOrFail($id);
         
         if ($request->user()->cannot('modificare-cliente', $cliente)) {
             // L'utente sta cercando di accedere ad un cliente che non gli appartiene

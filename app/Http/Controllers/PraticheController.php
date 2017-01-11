@@ -27,7 +27,12 @@ class PraticheController extends Controller
     
     public function show(Request $request, $cliente_id, $pratica_id)
     {
-        $pratica = \App\Pratica::find($pratica_id);
+        $pratica = \App\Pratica::findOrFail($pratica_id);
+        
+        if ($pratica->cliente->id != $cliente_id) {
+            // Il cliente nell'url non corrisponde al cliente della pratica
+            abort(404);
+        }
         
         if ($request->user()->cannot('visualizzare-pratica', $pratica)) {
             // L'utente non ha il permesso di vedere questa pratica
@@ -41,7 +46,12 @@ class PraticheController extends Controller
 
     public function edit(Request $request, $cliente_id, $pratica_id)
     {
-        $pratica = \App\Pratica::find($pratica_id);
+        $pratica = \App\Pratica::findOrFail($pratica_id);
+        
+        if ($pratica->cliente->id != $cliente_id) {
+            // Il cliente nell'url non corrisponde al cliente della pratica
+            abort(404);
+        }
         
         if ($request->user()->cannot('modificare-pratica', $pratica)) {
             // L'utente non ha il permesso di vedere questa pratica
@@ -53,7 +63,12 @@ class PraticheController extends Controller
 
     public function update(Request $request, $cliente_id, $pratica_id)
     {
-        $pratica = \App\Pratica::find($pratica_id);
+        $pratica = \App\Pratica::findOrFail($pratica_id);
+        
+        if ($pratica->cliente->id != $cliente_id) {
+            // Il cliente nell'url non corrisponde al cliente della pratica
+            abort(404);
+        }
         
         if ($request->user()->cannot('modificare-pratica', $pratica)) {
             // L'utente non ha il permesso di vedere questa pratica
@@ -72,7 +87,7 @@ class PraticheController extends Controller
     
     public function create(Request $request, $id)
     {
-        $cliente = \App\Cliente::find($id);
+        $cliente = \App\Cliente::findOrFail($id);
         
         if ($request->user()->cannot('creare-pratica', $cliente)) {
             // L'utente non ha il permesso di aggiungere pratiche a clienti di altre filiali
@@ -84,7 +99,7 @@ class PraticheController extends Controller
     
     public function store(Request $request, $cliente_id)
     {
-        $cliente = \App\Cliente::find($cliente_id);
+        $cliente = \App\Cliente::findOrFail($cliente_id);
         
         if ($request->user()->cannot('creare-pratica', $cliente)) {
             // L'utente non ha il permesso di aggiungere pratiche a clienti di altre filiali
