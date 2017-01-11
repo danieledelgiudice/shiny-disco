@@ -44,6 +44,14 @@ class AssegniController extends Controller
             abort(403);
         }
         
+        $this->validate($request, [
+            'data'              => 'required|date_format:d/m/Y',
+            'importo'           => 'required|numeric|max:100000000',
+            'banca'             => 'required|max:255',
+            'tipologia'         => 'required|in:0,1',
+            'data_azione'       => 'required|date_format:d/m/Y',
+        ]);
+        
         $assegno = new \App\Assegno;
         $assegno->fill($request->all());
         
@@ -93,6 +101,14 @@ class AssegniController extends Controller
             // L'utente non può modificare assegni di pratiche di altre filiali
             abort(403);
         }
+        
+        $this->validate($request, [
+            'data'              => 'required|date_format:d/m/Y',
+            'importo'           => 'required|numeric|max:100000000',
+            'banca'             => 'required|max:255',
+            'tipologia'         => 'required|in:0,1',
+            'data_azione'       => 'required|date_format:d/m/Y',
+        ]);
         
         $assegno->fill($request->all());
         $assegno->save();

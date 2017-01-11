@@ -15,8 +15,8 @@ class CreateClientiTable extends Migration
         Schema::create('clienti', function (Blueprint $table) {
             $table->increments('id');
             
-            $table->string('nome')->nullable();
-            $table->string('cognome')->nullable();
+            $table->string('nome');
+            $table->string('cognome');
             
             $table->integer('sesso')->default(0);                       // pseudo enum
             $table->date('data_nascita')->nullable();

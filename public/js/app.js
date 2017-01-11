@@ -72,6 +72,12 @@ var parseQueryString = function() {
         else
             $('#label_data_azione').text('Restituito il');
     });
+    
+    $('#elenco-errori li').each(function() {
+        var fieldName = $(this).text();
+        $(`label[for=${fieldName}]`).addClass('text-danger');
+    });
+    
 })();
 
 (function() {

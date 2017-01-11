@@ -47,7 +47,6 @@ class Cliente extends Model
         0 => 'Sconosciuto',
         1 => 'Uomo',
         2 => 'Donna',
-        100 => 'Altro',
     ];
     
     public static $enumStatoCivile = [
