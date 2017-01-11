@@ -66,6 +66,15 @@ var parseQueryString = function() {
         });
     });
     
+    $('input[type=radio][name=tipologia]').change(function() {
+        if ($(this).val() == 0)
+            $('#label_data_azione').text('Consegnato il');
+        else
+            $('#label_data_azione').text('Restituito il');
+    });
+})();
+
+(function() {
     Dropzone.options.myDropzone = {
       paramName: "documento", // The name that will be used to transfer the file
       maxFilesize: 10, // MB
@@ -84,5 +93,4 @@ var parseQueryString = function() {
         else { done(); }
       }
     };
-        
 })();

@@ -43,3 +43,10 @@ Route::post('/documenti',                                                       
 Route::get( '/login',                                                           'Auth\AuthController@showLoginForm');
 Route::get( '/logout',                                                          'Auth\AuthController@logout');
 Route::post('/login',                                                           'Auth\AuthController@login');
+
+
+
+Route::get( '/clienti/{cliente}/pratiche/{pratica}/assegni/new',                'AssegniController@create');
+Route::get( '/clienti/{cliente}/pratiche/{pratica}/assegni/{assegno}',          'AssegniController@edit');
+Route::post('/clienti/{cliente}/pratiche/{pratica}/assegni/',                   'AssegniController@store');
+Route::put( '/clienti/{cliente}/pratiche/{pratica}/assegni/{assegno}',          'AssegniController@update');

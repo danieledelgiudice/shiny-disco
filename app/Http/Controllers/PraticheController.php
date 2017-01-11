@@ -35,10 +35,11 @@ class PraticheController extends Controller
         }
         
         $documenti = $pratica->documenti()->get();
-        return view('pratiche.show', compact('pratica', 'documenti'));
+        $assegni = $pratica->assegni()->oldest('data')->get();
+        return view('pratiche.show', compact('pratica', 'documenti', 'assegni'));
     }
 
-    public function edit($cliente_id, $pratica_id)
+    public function edit(Request $request, $cliente_id, $pratica_id)
     {
         $pratica = \App\Pratica::find($pratica_id);
         
@@ -73,7 +74,7 @@ class PraticheController extends Controller
     {
         $cliente = \App\Cliente::find($id);
         
-        if ($request->user()->cannot('creare-pratica', $pratica)) {
+        if ($request->user()->cannot('creare-pratica', $cliente)) {
             // L'utente non ha il permesso di aggiungere pratiche a clienti di altre filiali
             abort(403);
         }
@@ -85,7 +86,7 @@ class PraticheController extends Controller
     {
         $cliente = \App\Cliente::find($cliente_id);
         
-        if ($request->user()->cannot('creare-pratica', $pratica)) {
+        if ($request->user()->cannot('creare-pratica', $cliente)) {
             // L'utente non ha il permesso di aggiungere pratiche a clienti di altre filiali
             abort(403);
         }

@@ -29,6 +29,15 @@ class Pratica extends Model
     }
     
     
+    /**
+     *  Ritorna gli assegni relativi alla pratica
+     */
+    public function assegni()
+    {
+        return $this->hasMany('\App\Assegno', 'pratica_id', 'id');
+    }
+    
+    
     // Mutator data_apertura
     public function setDataAperturaAttribute($value)
     {

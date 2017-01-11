@@ -261,3 +261,24 @@ $factory->define(App\Cliente::class, function (Faker\Generator $faker) {
         'cliente_id' => App\Cliente::all()->random()->id,
     ];
 });
+
+
+$factory->define(App\Assegno::class, function (Faker\Generator $faker) {
+    $faker->addProvider(new Faker\Provider\it_IT\Person($faker));
+    $faker->addProvider(new Faker\Provider\it_IT\Address($faker));
+    $faker->addProvider(new Faker\Provider\it_IT\PhoneNumber($faker));
+    $faker->addProvider(new Faker\Provider\it_IT\Company($faker));
+    $faker->addProvider(new Faker\Provider\it_IT\Internet($faker));
+    $faker->addProvider(new Faker\Provider\it_IT\Payment($faker));
+    $faker->addProvider(new Faker\Provider\it_IT\Text($faker));
+    
+    return [
+        'data' => $faker->dateTimeThisDecade(),
+        'importo' => $faker->randomFloat($nbMaxDecimals = 2, $min = 500, $max = 3000),
+        'banca' => $faker->company,
+        'data_azione' => $faker->dateTimeThisDecade(),
+        'tipologia' => $faker->numberBetween(0, 1),
+        
+        'pratica_id' => App\Pratica::all()->random()->id
+    ];
+});
