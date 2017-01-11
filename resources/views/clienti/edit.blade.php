@@ -21,6 +21,7 @@
             <!-- Mostra errori di validazione -->
             @include('common.errors')
             
+            @if ( Auth::user()->isAdmin() )
             <!-- Solo se admin -->
             <div class="panel panel-warning">
                 <div class="panel-heading">
@@ -29,6 +30,7 @@
                     Filiale: {{ $cliente->filiale->nome }}
                 </div>
             </div>
+            @endif
     
             @include('partials._form_cliente')
         </div>

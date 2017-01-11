@@ -20,6 +20,7 @@
         <!-- Mostra errori di validazione -->
         @include('common.errors')
         
+        @if ( Auth::user()->isAdmin() )
         <!-- Solo se admin -->
         <div class="panel panel-warning">
             <div class="panel-heading">
@@ -28,57 +29,10 @@
                 Filiale: {{ $pratica->cliente->filiale->nome }}
             </div>
         </div>
+        @endif
         
         <!-- Riepilogo utente -->
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <i class="fa fa-user"></i>
-                &nbsp;
-                Dati Utente
-            </div>
-
-            <div class="panel-body">
-                    
-                <div class="row">
-                    
-                    <!-- Cognome cliente -->
-                    <strong class="col-md-2 form-control-static">Cognome</strong>
-                    <div class="col-md-4">
-                        <p class="form-control-static">{{ $pratica->cliente->nome }}</p>
-                    </div>
-                    
-                    <!-- Nome cliente -->
-                    <strong class="col-md-2 form-control-static">Nome</strong>
-                    <div class="col-md-4">
-                        <p class="form-control-static">{{ $pratica->cliente->nome }}</p>
-                    </div>
-                </div>
-                
-                
-                <div class="row">
-                    <!-- Codice fiscale -->
-                    <strong class="col-md-2 form-control-static">Codice fiscale</strong>
-                    <div class="col-md-4">
-                        <p class="form-control-static">{{ $pratica->cliente->codice_fiscale }}</p>
-                    </div>
-                    
-                    <!-- Professione -->
-                    <strong class="col-md-2 form-control-static">Professione</strong>
-                    <div class="col-md-4">
-                        <p class="form-control-static">Professione1</p>
-                    </div>
-                </div>
-                
-                
-                <div class="row">
-                    <!-- Reddito -->    
-                    <strong class="col-md-2 form-control-static">Reddito</strong>
-                    <div class="col-md-4">
-                        <p class="form-control-static">{{ ($pratica->cliente->reddito) ? $pratica->cliente->reddito . " €" : '' }}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @include('partials._riepilogo_cliente')
 
         @include('partials._form_pratica')
         
