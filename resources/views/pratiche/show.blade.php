@@ -34,15 +34,15 @@
         @endif
         
         <!-- Riepilogo utente -->
-        @include('partials._riepilogo_cliente')
+        @include('clienti._riepilogo')
         
         <!-- Dettagli pratica -->
-        @include('partials._dettagli_pratica')
+        @include('pratiche._dettagli')
         
         <!-- Elenco documenti pratica -->
-        @include('partials._elenco_documenti_pratica')
+        @include('documenti._elenco')
         
         <!-- Elenco assegni pratica -->
-        @include('partials._elenco_assegni_pratica')
+        @include('assegni._elenco')
     </div>
 @endsection

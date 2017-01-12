@@ -21,18 +21,9 @@
             <!-- Mostra errori di validazione -->
             @include('common.errors')
             
-            @if ( Auth::user()->isAdmin() )
-            <!-- Solo se admin -->
-            <div class="panel panel-warning">
-                <div class="panel-heading">
-                    <i class="fa fa-id-card"></i>
-                    &nbsp;
-                    Filiale: {{ $cliente->filiale->nome }}
-                </div>
-            </div>
-            @endif
+            @include('common._barra_filiale')
     
-            @include('partials._form_cliente')
+            @include('clienti._form')
         </div>
     </div>
 @endsection

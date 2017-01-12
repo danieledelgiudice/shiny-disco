@@ -19,7 +19,9 @@
 
         <!-- Mostra errori di validazione -->
         @include('common.errors')
+        
+        @include('common._barra_filiale')
 
-        @include('partials._form_pratica')
+        @include('pratiche._form')
     </div>
 @endsection

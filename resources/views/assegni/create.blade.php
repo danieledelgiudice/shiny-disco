@@ -20,8 +20,8 @@
         <div class="col-md-offset-1 col-md-10">
             <!-- Mostra errori di validazione -->
             @include('common.errors')
-
-            @include('partials._form_assegno')
+            
+            @include('assegni._form')
         </div>
     </div>
 @endsection

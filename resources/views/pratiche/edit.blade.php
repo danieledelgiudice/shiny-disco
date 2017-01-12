@@ -32,9 +32,9 @@
         @endif
         
         <!-- Riepilogo utente -->
-        @include('partials._riepilogo_cliente')
+        @include('clienti._riepilogo')
 
-        @include('partials._form_pratica')
+        @include('pratiche._form')
         
     </div>
 @endsection

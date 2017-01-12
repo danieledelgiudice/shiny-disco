@@ -19,7 +19,7 @@
             <!-- Mostra errori di validazione -->
             @include('common.errors')
 
-            @include('partials._form_cliente')
+            @include('clienti._form')
         </div>
     </div>
 @endsection

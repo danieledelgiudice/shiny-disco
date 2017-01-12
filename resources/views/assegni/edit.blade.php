@@ -17,22 +17,11 @@
             </div>
         </div>
 
-        <div>
+        <div class="col-md-offset-1 col-md-10">
             <!-- Mostra errori di validazione -->
             @include('common.errors')
             
-            <!-- Solo se admin -->
-            @if ( Auth::user()->isAdmin() )
-            <div class="panel panel-warning">
-                <div class="panel-heading">
-                    <i class="fa fa-id-card"></i>
-                    &nbsp;
-                    Filiale: {{ $assegno->pratica->cliente->filiale->nome }}
-                </div>
-            </div>
-            @endif
-    
-            @include('partials._form_assegno')
+            @include('assegni._form')
         </div>
     </div>
 @endsection
