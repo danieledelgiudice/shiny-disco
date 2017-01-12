@@ -74,7 +74,9 @@ class PraticheController extends Controller
             // L'utente non ha il permesso di vedere questa pratica
             abort(403);
         }
-        
+
+        $this->validateInput($request);
+
         $new_values = $request->all();
         
         $pratica->fill($new_values);
@@ -106,6 +108,8 @@ class PraticheController extends Controller
             abort(403);
         }
         
+        $this->validateInput($request);
+        
         $pratica = new \App\Pratica;
         $new_values = $request->all();
         
@@ -117,5 +121,58 @@ class PraticheController extends Controller
         // TODO: mostrare messaggio nella view
         return redirect()->action('PraticheController@show', ['cliente' => $pratica->cliente, 'pratica' => $pratica])
                     ->with('success', 'Pratica salvato con successo!');
+    }
+    
+    private function validateInput(Request $request)
+    {
+        $this->validate($request, [
+            'numero_pratica'                    => 'required|numeric',
+            'numero_registrazione'              => 'required|numeric',
+            'stato_pratica'                     => 'numeric|in:' . implode(',', array_keys(\App\Pratica::$enumStatoPratica)),
+            'tipo_pratica'                      => 'numeric|in:' . implode(',', array_keys(\App\Pratica::$enumTipoPratica)),
+            'data_apertura'                     => 'date_format:d/m/Y',
+            
+            'veicolo_parte'                     => 'max:255',
+            'targa_parte'                       => 'max:255',
+            'numero_polizza_parte'              => 'max:255',
+            'assicurazione_parte'               => 'max:255',
+            
+            'conducente_controparte'            => 'max:255',
+            'via_controparte'                   => 'max:255',
+            'citta_controparte'                 => 'max:255',
+            'telefono_controparte'              => 'max:255',
+            'veicolo_controparte'               => 'max:255',
+            'targa_controparte'                 => 'max:255',
+            'numero_polizza_controparte'        => 'max:255',
+            'proprietario_mezzo_responsabile'   => 'max:255',
+            'assicurazione_controparte'         => 'max:255',
+            'medico_controparte'                => 'max:255',
+            
+            'legale'                            => 'max:255',                                             
+            'in_data'                           => 'date_format:d/m/Y',
+            'controllato'                       => 'numeric|in:' . implode(',', array_keys(\App\Pratica::$enumControllato)),
+            'data_ultima_lettera'               => 'date_format:d/m/Y',
+            'mezzo_liquidabile'                 => 'numeric|in:' . implode(',', array_keys(\App\Pratica::$enumMezzoLiquidabile)),
+            'valore_mezzo_liquidabile'          => 'numeric|max:100000000',
+            'rilievi'                           => 'numeric|in:' . implode(',', array_keys(\App\Pratica::$enumRilievi)),
+            'data_chiusura'                     => 'date_format:d/m/Y',
+            'importo_sospeso'                   => 'numeric|max:100000000',
+            'data_sospeso'                      => 'date_format:d/m/Y',
+            'stato_avanzamento'                 => 'numeric|in:' . implode(',', array_keys(\App\Pratica::$enumStatoAvanzamento)),
+            
+            'data_sinistro'                     => 'date_format:d/m/Y',
+            'ora_sinistro'                      => 'max:255',   //potrebbero voler scrivere "Intorno alle 22" o simili
+            'luogo_sinistro'                    => 'max:255',
+            'autorita'                          => 'numeric|in:' . implode(',', array_keys(\App\Pratica::$enumAutorita)),
+            'comando_autorita'                  => 'max:255',
+            'testimoni'                         => 'max:255',
+            'rivalsa'                           => 'numeric|in:' . implode(',', array_keys(\App\Pratica::$enumRivalsa)),
+            'soccorso'                          => 'numeric|in:' . implode(',', array_keys(\App\Pratica::$enumSoccorso)),
+            'tipologia_intervento'              => 'max:255',
+            'danno_presunto'                    => 'numeric|max:100000000',
+            
+            'assicurazione_risarcente'          => 'max:255',
+            'assicurazione_responsabile'        => 'max:255',
+        ]);
     }
 }
