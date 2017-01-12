@@ -18,7 +18,7 @@ class DocumentiController extends Controller
     public function show(Request $request, $cliente_id, $pratica_id, $documento_id)
     {
         $documento = \App\Documento::findOrFail($documento_id);
-        
+
         if ($documento->pratica->id != $pratica_id) {
             // La pratica nell'url non corrisponde alla pratica del documento
             abort(404);
@@ -29,7 +29,7 @@ class DocumentiController extends Controller
             abort(404);
         }
         
-        if ($request->user()->cannot('visualizzare-pratica', $pratica)) {
+        if ($request->user()->cannot('visualizzare-pratica', $documento->pratica)) {
             // L'utente non ha il permesso vedere documenti di pratiche di altre filiali
             abort(403);
         }
@@ -48,7 +48,7 @@ class DocumentiController extends Controller
     {
         $file = $request->documento;
         
-        if(!$file->isValid()) {
+        if(!($file && $file->isValid())) {
             return response()->json('Si è verificato un errore durante il caricamento del file', 400);
         }
         

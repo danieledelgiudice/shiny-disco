@@ -11,6 +11,19 @@ class Pratica extends Model
     
     protected $table = 'pratiche';
     
+    protected static function boot() {
+        parent::boot();
+
+        static::deleting(function($pratica) {
+            foreach($pratica->assegni as $assegno) {
+                $assegno->delete();
+            }
+            foreach($pratica->documenti as $documento) {
+                $documento->delete();
+            }
+        });
+    }
+    
     /**
      *  Ritorna le pratiche relative al cliente
      *

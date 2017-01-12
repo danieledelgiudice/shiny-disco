@@ -14,6 +14,16 @@ class Cliente extends Model
     protected $table = 'clienti';
     protected $dates = ['data_nascita'];
 
+    protected static function boot() {
+        parent::boot();
+
+        static::deleting(function($cliente) {
+            foreach($cliente->pratiche as $pratica) {
+                $pratica->delete();
+            }
+        });
+    }
+
     /**
      * The attributes that are mass assignable.
      *

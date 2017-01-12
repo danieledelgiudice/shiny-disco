@@ -3,17 +3,26 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Storage;
 
 class Documento extends Model
 {
     protected $table = 'documenti';
+    
+    protected static function boot() {
+        parent::boot();
+
+        static::deleting(function($documento) {
+             Storage::disk('local_documents')->delete($documento->nome_file);
+        });
+    }
     
     /**
      *  Ritorna la pratica relativa al documento
      */
     public function pratica()
     {
-        return $this->belongsTo('\App\Documento', 'pratica_id');
+        return $this->belongsTo('\App\Pratica', 'pratica_id');
     }
     
     

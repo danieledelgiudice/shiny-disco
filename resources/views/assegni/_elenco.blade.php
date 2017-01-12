@@ -29,9 +29,21 @@
                             <td class="table-text"><div>{{ $assegno->tipologia ? format_date($assegno->data_azione) : '' }}</div></td>
                             
                             <td class="table-text">
+                                <!-- Form eliminazione pratica -->
+                                {{ Form::open(['action' => ['AssegniController@destroy',
+                                    'cliente' => $assegno->pratica->cliente, 'pratica' => $assegno->pratica, 'assegno' => $assegno],
+                                    'id' => "assegno{$assegno->id}DestroyForm", 'method' => 'delete']) }}
+                                {{ Form::close() }}
+                                <!-- Fine form eliminazione pratica -->
+                                
                                 <a class="btn btn-success" href="{{ action('AssegniController@edit',
                                     ['cliente' => $pratica->cliente, 'pratica' => $pratica, 'assegno' => $assegno ]) }}">
                                     <i class="fa fa-fw fa-pencil"></i>
+                                </a>
+                                
+                                <a href="#" class="btn btn-danger showAssegnoDestroyModal"
+                                    data-toggle="modal" data-target="#assegnoDestroyModal" data-assegno="{{$assegno->id}}">
+                                    <i class="fa fa-fw fa-trash"></i>
                                 </a>
                             </td>
                         </tr>

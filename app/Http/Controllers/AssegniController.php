@@ -44,13 +44,7 @@ class AssegniController extends Controller
             abort(403);
         }
         
-        $this->validate($request, [
-            'data'              => 'required|date_format:d/m/Y',
-            'importo'           => 'required|numeric|max:100000000',
-            'banca'             => 'required|max:255',
-            'tipologia'         => 'required|in:0,1',
-            'data_azione'       => 'required|date_format:d/m/Y',
-        ]);
+        $this->validateInput($request);
         
         $assegno = new \App\Assegno;
         $assegno->fill($request->all());
@@ -102,6 +96,40 @@ class AssegniController extends Controller
             abort(403);
         }
         
+        $this->validateInput($request);
+        
+        $assegno->fill($request->all());
+        $assegno->save();
+        
+        return redirect()->action('PraticheController@show', ['cliente' => $assegno->pratica->cliente, 'pratica' => $assegno->pratica]);
+    }
+    
+    public function destroy(Request $request, $cliente_id, $pratica_id, $assegno_id)
+    {
+        $assegno = \App\Assegno::findOrFail($assegno_id);
+        
+        if ($assegno->pratica->id != $pratica_id) {
+            // La pratica nell'url non corrisponde alla pratica dell'assegno
+            abort(404);
+        }
+        
+        if ($assegno->pratica->cliente->id != $cliente_id) {
+            // Il cliente nell'url non corrisponde al cliente della pratica
+            abort(404);
+        }
+        
+        if($request->user()->cannot('modificare-pratica', $assegno->pratica)) {
+            // L'utente non può modificare assegni di pratiche di altre filiali
+            abort(403);
+        }
+        
+        $assegno->delete();
+                
+        return redirect()->action('PraticheController@show', ['cliente' => $assegno->pratica->cliente, 'pratica' => $assegno->pratica]);
+    }
+    
+    private function validateInput(Request $request)
+    {
         $this->validate($request, [
             'data'              => 'required|date_format:d/m/Y',
             'importo'           => 'required|numeric|max:100000000',
@@ -109,10 +137,5 @@ class AssegniController extends Controller
             'tipologia'         => 'required|in:0,1',
             'data_azione'       => 'required|date_format:d/m/Y',
         ]);
-        
-        $assegno->fill($request->all());
-        $assegno->save();
-        
-        return redirect()->action('PraticheController@show', ['cliente' => $pratica->cliente, 'pratica' => $assegno->pratica]);
     }
 }

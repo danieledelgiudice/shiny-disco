@@ -12,7 +12,7 @@
             <!-- Cognome cliente -->
             <strong class="col-md-2 form-control-static">Cognome</strong>
             <div class="col-md-4">
-                <p class="form-control-static">{{ $pratica->cliente->nome }}</p>
+                <p class="form-control-static">{{ $pratica->cliente->cognome }}</p>
             </div>
             
             <!-- Nome cliente -->

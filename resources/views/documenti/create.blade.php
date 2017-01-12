@@ -3,6 +3,7 @@
 @section('content')
     <link href="{{ URL::asset('css/lib/dropzone.css') }}" rel="stylesheet">
     <script type="text/javascript" src="{{ URL::asset('js/lib/dropzone.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/dropzone_config.js') }}"></script>
     
     <div class="container">
         <!-- Mostra pulsanti navigazione -->

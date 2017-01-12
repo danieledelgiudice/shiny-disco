@@ -94,6 +94,21 @@ class ClientiController extends Controller
         return redirect()->action('ClientiController@show', $cliente)->with('success', 'Cliente salvato con successo!');
     }
     
+    public function destroy(Request $request, $cliente_id)
+    {
+        $cliente = \App\Cliente::findOrFail($cliente_id);
+        
+        if ($request->user()->cannot('eliminare-cliente', $cliente)) {
+            // L'utente sta cercando di eliminare un cliente che non gli appartiene
+            abort(403);
+        }
+        
+        $cliente->delete();
+        
+        // TODO: mostrare messaggio nella view
+        return redirect()->action('ClientiController@index')->with('success', 'Cliente eliminato con successo!');
+    }
+    
     public function filter(Request $request)
     {
         $params = [];

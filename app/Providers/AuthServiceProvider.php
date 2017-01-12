@@ -44,6 +44,14 @@ class AuthServiceProvider extends ServiceProvider
             return $user->filiale->id === $pratica->cliente->filiale->id;
         });
         
+        $gate->define('eliminare-pratica', function ($user, $pratica) {
+            return $user->filiale->id === $pratica->cliente->filiale->id;
+        });
+        
+        
+        
+        
+        
         $gate->define('visualizzare-cliente', function ($user, $cliente) {
             return $user->filiale->id === $cliente->filiale->id;
         });
@@ -52,6 +60,8 @@ class AuthServiceProvider extends ServiceProvider
             return $user->filiale->id === $cliente->filiale->id;
         });
 
-        //
+        $gate->define('eliminare-cliente', function ($user, $cliente) {
+            return $user->filiale->id === $cliente->filiale->id;
+        });
     }
 }

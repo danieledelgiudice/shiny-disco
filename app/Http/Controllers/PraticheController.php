@@ -130,6 +130,27 @@ class PraticheController extends Controller
                     ->with('success', 'Pratica salvato con successo!');
     }
     
+    public function destroy(Request $request, $cliente_id, $pratica_id)
+    {
+        $pratica = \App\Pratica::findOrFail($pratica_id);
+        
+        if ($pratica->cliente->id != $cliente_id) {
+            // Il cliente nell'url non corrisponde al cliente della pratica
+            abort(404);
+        }
+        
+        if ($request->user()->cannot('eliminare-pratica', $pratica)) {
+            // L'utente sta cercando di eliminare una pratica che non gli appartiene
+            abort(403);
+        }
+        
+        $pratica->delete();
+        
+        // TODO: mostrare messaggio nella view
+        return redirect()->action('ClientiController@show', ['cliente' => $pratica->cliente])
+                    ->with('success', 'Pratica eliminata con successo!');
+    }
+    
     private function validateInput(Request $request)
     {
         $this->validate($request, [

@@ -22,6 +22,7 @@ Route::get( '/clienti/{cliente}',                                               
 Route::post('/clienti',                                                         'ClientiController@store');
 Route::post('/clienti/filter',                                                  'ClientiController@filter');
 Route::put( '/clienti/{cliente}',                                               'ClientiController@update');
+Route::delete( '/clienti/{cliente}',                                            'ClientiController@destroy');
 
 
 
@@ -31,6 +32,7 @@ Route::get( '/clienti/{cliente}/pratiche/{pratica}/edit',                       
 Route::get( '/clienti/{cliente}/pratiche/{pratica}',                            'PraticheController@show');
 Route::post('/clienti/{cliente}/pratiche',                                      'PraticheController@store');
 Route::put( '/clienti/{cliente}/pratiche/{pratica}',                            'PraticheController@update');
+Route::delete( '/clienti/{cliente}/pratiche/{pratica}',                         'PraticheController@destroy');
 
 
 
@@ -50,3 +52,4 @@ Route::get( '/clienti/{cliente}/pratiche/{pratica}/assegni/new',                
 Route::get( '/clienti/{cliente}/pratiche/{pratica}/assegni/{assegno}',          'AssegniController@edit');
 Route::post('/clienti/{cliente}/pratiche/{pratica}/assegni/',                   'AssegniController@store');
 Route::put( '/clienti/{cliente}/pratiche/{pratica}/assegni/{assegno}',          'AssegniController@update');
+Route::delete( '/clienti/{cliente}/pratiche/{pratica}/assegni/{assegno}',       'AssegniController@destroy');
