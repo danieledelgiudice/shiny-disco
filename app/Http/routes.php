@@ -55,3 +55,8 @@ Route::get( '/clienti/{cliente}/pratiche/{pratica}/assegni/{assegno}',          
 Route::post('/clienti/{cliente}/pratiche/{pratica}/assegni/',                   'AssegniController@store');
 Route::put( '/clienti/{cliente}/pratiche/{pratica}/assegni/{assegno}',          'AssegniController@update');
 Route::delete( '/clienti/{cliente}/pratiche/{pratica}/assegni/{assegno}',       'AssegniController@destroy');
+
+
+
+Route::post('/professioni',                                                     'ProfessioniController@store');
+

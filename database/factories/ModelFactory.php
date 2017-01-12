@@ -54,6 +54,7 @@ $factory->define(App\Cliente::class, function (Faker\Generator $faker) {
         'note' => $faker->text,
         
         'filiale_id' => App\Filiale::all()->random()->id,
+        'professione_id' => App\Professione::all()->random()->id
     ];
 });
 

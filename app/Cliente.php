@@ -97,6 +97,16 @@ class Cliente extends Model
         return $this->belongsTo('\App\Filiale', 'filiale_id');
     }
     
+    /**
+     *  Ritorna la professione del cliente
+     *
+     */
+    public function professione()
+    {
+        return $this->belongsTo('\App\Professione', 'professione_id');
+    }
+    
+    
     
     // Mutator data_nascita
     public function setDataNascitaAttribute($value)

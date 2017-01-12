@@ -1,8 +1,29 @@
+ <div class="modal fade" tabindex="-1" role="dialog" id="createProfessioneModal">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="text-center modal-title">Aggiungi nuova professione</h4>
+            </div>
+            {{ Form::open(['action' => 'ProfessioniController@store']) }}
+                <div class="modal-body">
+                    {{ Form::text('nome', null, ['class' => 'form-control']) }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annulla</button>
+                    <button type="submit" class="btn btn-primary">Aggiungi</button>
+                </div>
+            {{ Form::close() }}
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 @if (isset($cliente))
     {!! Form::model($cliente, ['action' => ['ClientiController@update', $cliente], 'method' => 'put', 'class' => 'form-horizontal']) !!}
 @else
     {!! Form::open(['action' => ['ClientiController@store'], 'class' => 'form-horizontal']) !!}
 @endif
+
     <div class="panel panel-default">
         <div class="panel-heading">
             <i class="fa fa-id-card"></i>
@@ -58,8 +79,8 @@
                 <div class="col-md-4">
                     <div class="input-group">
                         {!! Form::text('codice_fiscale', null, ['class' => 'form-control', 'maxlength' => '16']) !!}
-                        <span class="input-group-addon">
-                            <a href="http://codicefiscale.com" target="_blank">
+                        <span class="input-group-btn">
+                            <a href="http://codicefiscale.com" target="_blank" class="btn btn-primary">
                                 Genera &nbsp;
                                 <i class="fa fa-fw fa-calculator"></i>
                             </a>
@@ -181,6 +202,28 @@
                 {!! Form::label('numero_documento', "Numero documento" , ['class' => 'col-md-2 control-label']) !!}
                 <div class="col-md-4">
                     {!! Form::text('numero_documento', null, ['class' => 'form-control']) !!}
+                </div>
+            </div>
+            
+            
+            <div class="form-group">
+                <!-- Professione Cliente -->
+                {!! Form::label('professione_id', "Professione" , ['class' => 'col-md-2 control-label']) !!}
+                <div class="col-md-4">
+                    <div class="input-group">
+                        {{ Form::select('professione_id', $professioni, null, ['class' => 'form-control', 'placeholder' => '']) }}
+                        <div class="input-group-btn">
+                            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#createProfessioneModal">
+                                <i class="fa fa-fw fa-plus"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Dettagli Professione Cliente -->
+                {!! Form::label('dettagli_professioni', "Dettagli professione" , ['class' => 'col-md-2 control-label']) !!}
+                <div class="col-md-4">
+                    {!! Form::text('dettagli_professioni', null, ['class' => 'form-control']) !!}
                 </div>
             </div>
             

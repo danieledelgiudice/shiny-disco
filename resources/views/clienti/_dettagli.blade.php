@@ -134,7 +134,7 @@
     <div class="panel-heading">
         <i class="fa fa-info"></i>
         &nbsp;
-        Documenti
+        Ulteriori informazioni
     </div>
     <div class="panel-body">                            
             
@@ -169,6 +169,19 @@
             </div>
         </div>
         
+        <div class="row">
+            <!-- Professione Cliente -->
+            <strong class="col-md-2 form-control-static">Professione</strong>
+            <div class="col-md-4">
+                <p value="" class="form-control-static">{{ $cliente->professione ? $cliente->professione->nome : '' }}</p>
+            </div>
+        
+            <!-- Dettagli professione Cliente -->
+            <strong class="col-md-2 form-control-static">Dettagli professione</strong>
+            <div class="col-md-4">
+                <p value="" class="form-control-static">{{ $cliente->dettagli_professione }}</p>
+            </div>
+        </div>
         
         <div class="row">
             <!-- Reddito Cliente -->

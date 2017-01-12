@@ -48,7 +48,10 @@ class ClientiController extends Controller
             abort(403);
         }
         
-        return view('clienti.edit', compact('cliente'));
+        $professioni = \App\Professione::pluck('nome', 'id');
+        
+        
+        return view('clienti.edit', compact('cliente', 'professioni'));
     }
 
     public function update(Request $request, $id)
@@ -63,8 +66,15 @@ class ClientiController extends Controller
         $this->validateInput($request);
 
         $new_values = $request->all();
-        
         $cliente->fill($new_values);
+        
+        if ($request->professione_id) {
+            $professione = \App\Professione::findOrFail($request->professione_id);
+            $cliente->professione()->associate($professione);
+        } else {
+            $cliente->professione()->dissociate();
+        }
+            
         $cliente->save();
         
         // TODO: mostrare messaggio nella view
@@ -73,7 +83,8 @@ class ClientiController extends Controller
     
     public function create()
     {
-        return view('clienti.create');
+        $professioni = \App\Professione::pluck('nome', 'id');
+        return view('clienti.create', compact('professioni'));
     }
     
     public function store(Request $request)
@@ -87,6 +98,10 @@ class ClientiController extends Controller
         
         $cliente->fill($new_values);
         $cliente->filiale()->associate($filiale);
+        
+        $professione = \App\Professione::findOrFail($request->professione_id);
+        $cliente->professione()->associate($professione);
+        
         
         $cliente->save();
         
