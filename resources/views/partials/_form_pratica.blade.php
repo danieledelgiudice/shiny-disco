@@ -1,8 +1,8 @@
-@if (isset($pratica))
+@if ($pratica->id)
     {!! Form::model($pratica, ['action' => ['PraticheController@update', 'cliente' => $pratica->cliente, 'pratica' => $pratica],
         'method' => 'put', 'class' => 'form-horizontal']) !!}
 @else
-    {!! Form::open(['action' => ['PraticheController@store', 'cliente' => $cliente],
+    {!! Form::model($pratica, ['action' => ['PraticheController@store', 'cliente' => $cliente],
         'class' => 'form-horizontal']) !!}
 @endif
     <div class="panel panel-default">
@@ -415,7 +415,7 @@
         </div>
     </div>
 
-    @if (isset($pratica))
+    @if ($pratica->id)
         <!-- Conferma cambiamenti -->
         <div class="form-group">
             <button type="submit" class="btn btn-primary center-block">

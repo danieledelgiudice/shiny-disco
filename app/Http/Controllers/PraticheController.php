@@ -96,7 +96,14 @@ class PraticheController extends Controller
             abort(403);
         }
         
-        return view('pratiche.create', compact('cliente'));
+        // Creo pratica  per popolare la form di creazione con valori default
+        $pratica = new \App\Pratica;
+        $pratica->fill([
+            'numero_pratica'                => \App\Pratica::max('numero_pratica') + 1,
+            'numero_registrazione'          => \App\Pratica::max('numero_registrazione') + 1,
+            'data_apertura'                 => \Carbon\Carbon::today(),
+        ]);
+        return view('pratiche.create', compact('cliente', 'pratica'));
     }
     
     public function store(Request $request, $cliente_id)
@@ -130,7 +137,7 @@ class PraticheController extends Controller
             'numero_registrazione'              => 'required|numeric',
             'stato_pratica'                     => 'numeric|in:' . implode(',', array_keys(\App\Pratica::$enumStatoPratica)),
             'tipo_pratica'                      => 'numeric|in:' . implode(',', array_keys(\App\Pratica::$enumTipoPratica)),
-            'data_apertura'                     => 'date_format:d/m/Y',
+            'data_apertura'                     => 'date_format:d/m/Y|before:tomorrow',
             
             'veicolo_parte'                     => 'max:255',
             'targa_parte'                       => 'max:255',
@@ -151,7 +158,7 @@ class PraticheController extends Controller
             'legale'                            => 'max:255',                                             
             'in_data'                           => 'date_format:d/m/Y',
             'controllato'                       => 'numeric|in:' . implode(',', array_keys(\App\Pratica::$enumControllato)),
-            'data_ultima_lettera'               => 'date_format:d/m/Y',
+            'data_ultima_lettera'               => 'date_format:d/m/Y|before:tomorrow',
             'mezzo_liquidabile'                 => 'numeric|in:' . implode(',', array_keys(\App\Pratica::$enumMezzoLiquidabile)),
             'valore_mezzo_liquidabile'          => 'numeric|max:100000000',
             'rilievi'                           => 'numeric|in:' . implode(',', array_keys(\App\Pratica::$enumRilievi)),
@@ -160,7 +167,7 @@ class PraticheController extends Controller
             'data_sospeso'                      => 'date_format:d/m/Y',
             'stato_avanzamento'                 => 'numeric|in:' . implode(',', array_keys(\App\Pratica::$enumStatoAvanzamento)),
             
-            'data_sinistro'                     => 'date_format:d/m/Y',
+            'data_sinistro'                     => 'date_format:d/m/Y|before:tomorrow',
             'ora_sinistro'                      => 'max:255',   //potrebbero voler scrivere "Intorno alle 22" o simili
             'luogo_sinistro'                    => 'max:255',
             'autorita'                          => 'numeric|in:' . implode(',', array_keys(\App\Pratica::$enumAutorita)),
