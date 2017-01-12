@@ -97,7 +97,7 @@ var parseQueryString = function() {
         console.log(documento);
         var formSelector = `#documento${documento}DestroyForm`;
         $(formSelector).submit();
-    })
+    });
     
     
     $('.showAssegnoDestroyModal').click(function() {
@@ -109,6 +109,23 @@ var parseQueryString = function() {
         var assegno = $(this).data('assegno');
         var formSelector = `#assegno${assegno}DestroyForm`;
         $(formSelector).submit();
-    })
+    });
+    
+    $('#professione_id').selectize({
+        sortField: 'text',
+        create: function(input, callback) {
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            var url = $('#professione_id').data('storeurl');
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {_token: CSRF_TOKEN, nome: input},
+                dataType: 'JSON',
+                success: function (data) {
+                    callback( { 'value': data.id, 'text': data.nome});
+                }
+            });
+        },
+    });
     
 })();

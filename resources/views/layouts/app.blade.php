@@ -15,7 +15,10 @@
     <!-- Styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" />
+    <link href="{{ URL::asset('css/lib/selectize.bootstrap3.css') }}" rel="stylesheet">
+    
     <link href="{{ URL::asset('css/app.css') }}" rel="stylesheet">
+
 
     <style>
         body {
@@ -99,6 +102,8 @@
 
     <script type="text/javascript" src="http://spin.js.org/spin.min.js"></script>
     <script type="text/javascript" src="http://spin.js.org/jquery.spin.js"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/lib/selectize.min.js') }}"></script>
+    
     <script type="text/javascript" src="{{ URL::asset('js/app.js') }}"></script>
 </body>
 </html>

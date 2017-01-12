@@ -210,14 +210,15 @@
                 <!-- Professione Cliente -->
                 {!! Form::label('professione_id', "Professione" , ['class' => 'col-md-2 control-label']) !!}
                 <div class="col-md-4">
-                    <div class="input-group">
-                        {{ Form::select('professione_id', $professioni, null, ['class' => 'form-control', 'placeholder' => '']) }}
-                        <div class="input-group-btn">
-                            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#createProfessioneModal">
-                                <i class="fa fa-fw fa-plus"></i>
-                            </a>
-                        </div>
-                    </div>
+                        {{ Form::select('professione_id', $professioni, null, ['class' => 'form-control', 'placeholder' => '',
+                            'data-storeurl' => action('ProfessioniController@store')]) }}
+                    <!--<div class="input-group">-->
+                    <!--    <div class="input-group-btn">-->
+                    <!--        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#createProfessioneModal">-->
+                    <!--            <i class="fa fa-fw fa-plus"></i>-->
+                    <!--        </a>-->
+                    <!--    </div>-->
+                    <!--</div>-->
                 </div>
                 
                 <!-- Dettagli Professione Cliente -->

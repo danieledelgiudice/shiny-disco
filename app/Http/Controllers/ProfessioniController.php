@@ -14,8 +14,10 @@ class ProfessioniController extends Controller
     
     public function store(Request $request)
     {
-        if ($request->nome)
-            \App\Professione::create(['nome' => $request->nome]);
-        return redirect()->back();
+        if ($request->nome) {
+            $professione = \App\Professione::create(['nome' => $request->nome]);
+            
+            return response()->json(['id' => $professione->id, 'nome' => $professione->nome], 200); //redirect()->back();
+        }
     }
 }
