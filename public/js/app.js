@@ -86,6 +86,20 @@ var parseQueryString = function() {
         $('#praticaDestroyForm').submit(); 
     });
     
+    
+    $('.showDocumentoDestroyModal').click(function() {
+        var id_documento = $(this).data('documento');
+        $('#documentoDestroyConfirm').data('documento', id_documento);
+    });
+    
+    $('#documentoDestroyConfirm').click(function() {
+        var documento = $(this).data('documento');
+        console.log(documento);
+        var formSelector = `#documento${documento}DestroyForm`;
+        $(formSelector).submit();
+    })
+    
+    
     $('.showAssegnoDestroyModal').click(function() {
         var id_assegno = $(this).data('assegno');
         $('#assegnoDestroyConfirm').data('assegno', id_assegno);

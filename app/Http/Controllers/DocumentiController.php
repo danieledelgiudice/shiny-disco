@@ -91,4 +91,29 @@ class DocumentiController extends Controller
         // TODO: aggiungere messaggio successo
         return response()->json('success', 200);
     }
+    
+    public function destroy(Request $request, $cliente_id, $pratica_id, $documento_id)
+    {
+        $documento = \App\Documento::findOrFail($documento_id);
+
+        if ($documento->pratica->id != $pratica_id) {
+            // La pratica nell'url non corrisponde alla pratica del documento
+            abort(404);
+        }
+        
+        if ($documento->pratica->cliente->id != $cliente_id) {
+            // Il cliente nell'url non corrisponde al cliente della pratica
+            abort(404);
+        }
+        
+        if ($request->user()->cannot('modificare-pratica', $documento->pratica)) {
+            // L'utente non ha il permesso vedere documenti di pratiche di altre filiali
+            abort(403);
+        }
+        
+        Storage::disk('local_documents')->delete($documento->nome_file);
+        $documento->delete();
+        
+        return redirect()->action('PraticheController@show', ['cliente' => $documento->pratica->cliente, 'pratica' => $documento->pratica]);
+    }
 }

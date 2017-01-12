@@ -6,6 +6,10 @@
         'message' => 'Sei sicuro di voler eliminare la pratica? Questa operazione non potrà essere annullata.'])
     
     @include('common._modal_elimina',
+       ['resource' => 'documento',
+        'message' => 'Sei sicuro di voler eliminare il documento? Questa operazione non potrà essere annullata.'])
+        
+    @include('common._modal_elimina',
        ['resource' => 'assegno',
         'message' => 'Sei sicuro di voler eliminare l\'assegno? Questa operazione non potrà essere annullata.'])
 
