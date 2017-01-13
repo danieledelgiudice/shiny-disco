@@ -89,9 +89,17 @@
                 </div>
                 
                 <!-- Assicurazione di parte -->
-                {!! Form::label('assicurazione_parte', 'Assicurazione di parte' , ['class' => 'col-md-2 control-label']) !!}
+                {!! Form::label('assicurazione_parte_id', 'Assicurazione di parte' , ['class' => 'col-md-2 control-label']) !!}
                 <div class="col-md-4">
-                    {!! Form::text('assicurazione_parte', null, ['class' => 'form-control']) !!}
+                    <select class="form-control" placeholder="" data-selecttype="assicurazioni" name="assicurazione_parte_id" id="assicurazione_parte_id">
+                        <option value="" {{ (!$pratica->id || !$pratica->assicurazione_parte_id) ? 'selected' : ''}}> </option>
+                        @foreach($assicurazioni as $assicurazione)
+                            <option value="{{ $assicurazione->id }}" data-data="{{ json_encode(['indirizzo' => $assicurazione->indirizzo]) }}"
+                                {{ ($pratica && $pratica->assicurazione_parte_id == $assicurazione->id) ? 'selected' : ''}}>
+                                {{ $assicurazione->nome}}
+                            </option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
         </div>
@@ -164,9 +172,17 @@
             
             <div class="form-group">
                 <!-- Assicurazione controparte -->
-                {!! Form::label('assicurazione_controparte', 'Assicurazione controparte' , ['class' => 'col-md-2 control-label']) !!}
+                {!! Form::label('assicurazione_controparte_id', 'Assicurazione controparte' , ['class' => 'col-md-2 control-label']) !!}
                 <div class="col-md-4">
-                    {!! Form::text('assicurazione_controparte', null, ['class' => 'form-control']) !!}
+                    <select class="form-control" placeholder="" data-selecttype="assicurazioni" name="assicurazione_controparte_id" id="assicurazione_controparte_id">
+                        <option value="" {{ (!$pratica->id || !$pratica->assicurazione_parte_id) ? 'selected' : ''}}> </option>
+                        @foreach($assicurazioni as $assicurazione)
+                            <option value="{{ $assicurazione->id }}" data-data="{{ json_encode(['indirizzo' => $assicurazione->indirizzo]) }}"
+                                {{ ($pratica && $pratica->assicurazione_controparte_id == $assicurazione->id) ? 'selected' : ''}}>
+                                {{ $assicurazione->nome}}
+                            </option>
+                        @endforeach
+                    </select>
                 </div>
             
                 <!-- Medico controparte -->

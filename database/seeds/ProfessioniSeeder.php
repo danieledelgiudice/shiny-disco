@@ -14,9 +14,9 @@ class ProfessioniSeeder extends Seeder
         DB::table('professioni')->insert(['nome' => 'Calzolaio']);
         DB::table('professioni')->insert(['nome' => 'Giardiniere']);
         DB::table('professioni')->insert(['nome' => 'Insegnante']);
-        DB::table('professioni')->insert(['nome' => 'Show-girl']);
-        DB::table('professioni')->insert(['nome' => 'Culturista']);
-        DB::table('professioni')->insert(['nome' => 'Responsabile delle comunicazioni']);
-        DB::table('professioni')->insert(['nome' => 'Politico']);
+        DB::table('professioni')->insert(['nome' => 'Autista']);
+        DB::table('professioni')->insert(['nome' => 'Dentista']);
+        DB::table('professioni')->insert(['nome' => 'Contabile']);
+        DB::table('professioni')->insert(['nome' => 'Impiegato']);
     }
 }

@@ -24,30 +24,29 @@ class Pratica extends Model
         });
     }
     
-    /**
-     *  Ritorna le pratiche relative al cliente
-     *
-     */
     public function cliente()
     {
         return $this->belongsTo('\App\Cliente', 'cliente_id');
     }
     
-    /**
-     *  Ritorna i documenti relativi alla pratica
-     */
     public function documenti()
     {
         return $this->hasMany('\App\Documento', 'pratica_id', 'id');
     }
     
-    
-    /**
-     *  Ritorna gli assegni relativi alla pratica
-     */
     public function assegni()
     {
         return $this->hasMany('\App\Assegno', 'pratica_id', 'id');
+    }
+    
+    public function assicurazione_parte()
+    {
+        return $this->belongsTo('\App\CompagniaAssicurativa', 'assicurazione_parte_id');
+    }
+    
+    public function assicurazione_controparte()
+    {
+        return $this->belongsTo('\App\CompagniaAssicurativa', 'assicurazione_controparte_id');
     }
     
     

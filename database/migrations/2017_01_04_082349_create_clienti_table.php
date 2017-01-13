@@ -38,7 +38,7 @@ class CreateClientiTable extends Migration
             $table->string('numero_documento')->nullable();
             
             $table->integer('stato_civile')->default(0);    // pseudo enum
-            $table->string('detagli_professione')->nullable();    
+            $table->string('dettagli_professione')->nullable();    
             $table->decimal('reddito', 10, 2)->nullable();
             $table->string('numero_card')->nullable();
             $table->text('note')->nullable();

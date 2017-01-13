@@ -18,6 +18,11 @@ class Filiale extends Model
         return $this->hasOne('\App\Users', 'filiale_id', 'id');
     }
     
+    public function compagnieAssicurative()
+    {
+        return $this->hasMany('\App\CompagniaAssicurativa', 'filiale_id', 'id');
+    }
+    
     
     /**
      * The attributes that are mass assignable.

@@ -82,7 +82,8 @@
             <!-- Assicurazione di parte -->
             <strong class="col-md-2 form-control-static">Assicurazione di parte</strong>
             <div class="col-md-4">
-               <p class="form-control-static">{{ $pratica->assicurazione_parte }}</p>
+               <p class="form-control-static"><strong>{{ $pratica->assicurazione_parte ? $pratica->assicurazione_parte->nome : '' }}</strong></p>
+               <small>{{ $pratica->assicurazione_parte ? $pratica->assicurazione_parte->indirizzo : '' }}</small>
             </div>
         </div>
     </div>
@@ -157,7 +158,8 @@
             <!-- Assicurazione controparte -->
             <strong class="col-md-2 form-control-static">Assicurazione controparte</strong>
             <div class="col-md-4">
-                <p class="form-control-static">{{ $pratica->assicurazione_controparte }}</p>
+                <p class="form-control-static"><strong>{{ $pratica->assicurazione_controparte ? $pratica->assicurazione_controparte->nome : '' }}</strong></p>
+                <small>{{ $pratica->assicurazione_controparte ? $pratica->assicurazione_controparte->indirizzo : '' }}</small>
             </div>
         
             <!-- Medico controparte -->

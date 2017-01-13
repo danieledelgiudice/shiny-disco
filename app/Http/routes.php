@@ -58,5 +58,4 @@ Route::delete( '/clienti/{cliente}/pratiche/{pratica}/assegni/{assegno}',       
 
 
 
-Route::post('/professioni',                                                     'ProfessioniController@store');
-
+Route::get( '/filiali/{filiale}/compagnie_assicurative/',                       'CompagnieAssicurativeController@index');

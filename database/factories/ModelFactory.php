@@ -204,6 +204,8 @@ $factory->define(App\Cliente::class, function (Faker\Generator $faker) {
             'Recupero crediti',
             'Tamponamento a catena',
         ];
+        
+    $cliente = App\Cliente::all()->random();
 
     return [
         'numero_pratica' => $faker->unique()->numberBetween(0, 50000),
@@ -215,7 +217,6 @@ $factory->define(App\Cliente::class, function (Faker\Generator $faker) {
         'veicolo_parte' => $faker->randomElement($modelliAuto),
         'targa_parte' => strtoupper($faker->bothify('??###??')),
         'numero_polizza_parte' => strtoupper($faker->bothify('????######??##?#??')),
-        'assicurazione_parte' => $faker->company,
         
         'conducente_controparte' => $faker->name,
         'via_controparte' => $faker->streetAddress,
@@ -225,7 +226,6 @@ $factory->define(App\Cliente::class, function (Faker\Generator $faker) {
         'targa_controparte' => strtoupper($faker->bothify('??###??')),
         'numero_polizza_controparte' => strtoupper($faker->bothify('????######??##?#??')),
         'proprietario_mezzo_responsabile' => $faker->optional($weight = 0.2)->name,
-        'assicurazione_controparte' => $faker->company,
         'medico_controparte' => $faker->optional($weight = 0.8)->name,
         
         'legale' => $faker->optional($weight = 0.8)->name,
@@ -259,7 +259,9 @@ $factory->define(App\Cliente::class, function (Faker\Generator $faker) {
         'dinamica_sinistro' => $faker->optional($weight = 0.8)->randomElement($dinamiche),                                                                                                                                                              
         'note' => $faker->optional()->text,
         
-        'cliente_id' => App\Cliente::all()->random()->id,
+        'cliente_id' => $cliente->id,
+        'assicurazione_parte_id' =>  App\CompagniaAssicurativa::where('filiale_id', $cliente->filiale->id)->get()->random()->id,
+        'assicurazione_controparte_id' => App\CompagniaAssicurativa::where('filiale_id', $cliente->filiale->id)->get()->random()->id,
     ];
 });
 
@@ -281,5 +283,26 @@ $factory->define(App\Assegno::class, function (Faker\Generator $faker) {
         'tipologia' => $faker->numberBetween(0, 1),
         
         'pratica_id' => App\Pratica::all()->random()->id
+    ];
+});
+
+
+$factory->define(App\CompagniaAssicurativa::class, function (Faker\Generator $faker) {
+    $faker->addProvider(new Faker\Provider\it_IT\Person($faker));
+    $faker->addProvider(new Faker\Provider\it_IT\Address($faker));
+    $faker->addProvider(new Faker\Provider\it_IT\PhoneNumber($faker));
+    $faker->addProvider(new Faker\Provider\it_IT\Company($faker));
+    $faker->addProvider(new Faker\Provider\it_IT\Internet($faker));
+    $faker->addProvider(new Faker\Provider\it_IT\Payment($faker));
+    $faker->addProvider(new Faker\Provider\it_IT\Text($faker));
+    
+    return [
+        'nome' => $faker->company,
+        'indirizzo' => $faker->address,
+        'telefono' => $faker->e164PhoneNumber,
+        'fax' => $faker->tollFreePhoneNumber,
+        'email' => $faker->email,
+
+        'filiale_id' => \App\Filiale::all()->random()->id,
     ];
 });

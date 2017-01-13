@@ -58,7 +58,9 @@ class PraticheController extends Controller
             abort(403);
         }
         
-        return view('pratiche.edit', compact('pratica'));
+        $assicurazioni = \App\CompagniaAssicurativa::where('filiale_id', $pratica->cliente->filiale->id)->get();
+        
+        return view('pratiche.edit', compact('pratica', 'assicurazioni'));
     }
 
     public function update(Request $request, $cliente_id, $pratica_id)
@@ -80,6 +82,25 @@ class PraticheController extends Controller
         $new_values = $request->all();
         
         $pratica->fill($new_values);
+        
+        if ($request->assicurazione_parte_id) {
+            // Se una assicurazione parte è specificata la cerco
+            $assicurazione = \App\CompagniaAssicurativa::findOrFail($request->assicurazione_parte_id);
+            $pratica->assicurazione_parte()->associate($assicurazione);
+        } else {
+            // Se non è specificata una assicurazione parte cancello la relazione
+            $pratica->assicurazione_parte()->dissociate();
+        }
+        
+        if ($request->assicurazione_controparte_id) {
+            // Se una assicurazione controparte è specificata la cerco
+            $assicurazione = \App\CompagniaAssicurativa::findOrFail($request->assicurazione_controparte_id);
+            $pratica->assicurazione_controparte()->associate($assicurazione);
+        } else {
+            // Se non è specificata una assicurazione controparte cancello la relazione
+            $pratica->assicurazione_controparte()->dissociate();
+        }
+        
         $pratica->save();
         
         // TODO: mostrare messaggio nella view
@@ -103,7 +124,10 @@ class PraticheController extends Controller
             'numero_registrazione'          => \App\Pratica::max('numero_registrazione') + 1,
             'data_apertura'                 => \Carbon\Carbon::today(),
         ]);
-        return view('pratiche.create', compact('cliente', 'pratica'));
+        
+        $assicurazioni = \App\CompagniaAssicurativa::where('filiale_id', $cliente->filiale->id)->get();
+        
+        return view('pratiche.create', compact('cliente', 'pratica', 'assicurazioni'));
     }
     
     public function store(Request $request, $cliente_id)
@@ -121,6 +145,24 @@ class PraticheController extends Controller
         $new_values = $request->all();
         
         $pratica->fill($new_values);
+        
+        if ($request->assicurazione_parte_id) {
+            // Se una assicurazione parte è specificata la cerco
+            $assicurazione = \App\CompagniaAssicurativa::findOrFail($request->assicurazione_parte_id);
+            $pratica->assicurazione_parte()->associate($assicurazione);
+        } else {
+            // Se non è specificata una assicurazione parte cancello la relazione
+            $pratica->assicurazione_parte()->dissociate();
+        }
+        
+        if ($request->assicurazione_controparte_id) {
+            // Se una assicurazione controparte è specificata la cerco
+            $assicurazione = \App\CompagniaAssicurativa::findOrFail($request->assicurazione_controparte_id);
+            $pratica->assicurazione_controparte()->associate($assicurazione);
+        } else {
+            // Se non è specificata una assicurazione controparte cancello la relazione
+            $pratica->assicurazione_controparte()->dissociate();
+        }
         
         $pratica->cliente()->associate($cliente);
         $pratica->save();
@@ -154,8 +196,8 @@ class PraticheController extends Controller
     private function validateInput(Request $request)
     {
         $this->validate($request, [
-            'numero_pratica'                    => 'required|numeric',
-            'numero_registrazione'              => 'required|numeric',
+            'numero_pratica'                    => 'required|numeric|unique:pratiche,numero_pratica',
+            'numero_registrazione'              => 'required|numeric|unique:pratiche,numero_registrazione',
             'stato_pratica'                     => 'numeric|in:' . implode(',', array_keys(\App\Pratica::$enumStatoPratica)),
             'tipo_pratica'                      => 'numeric|in:' . implode(',', array_keys(\App\Pratica::$enumTipoPratica)),
             'data_apertura'                     => 'date_format:d/m/Y|before:tomorrow',

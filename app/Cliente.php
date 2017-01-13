@@ -51,6 +51,7 @@ class Cliente extends Model
         'reddito',
         'numero_card',
         'note',
+        'dettagli_professione',
     ];
     
     public static $enumSesso = [

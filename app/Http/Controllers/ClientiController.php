@@ -67,11 +67,19 @@ class ClientiController extends Controller
 
         $new_values = $request->all();
         $cliente->fill($new_values);
-        
+
         if ($request->professione_id) {
-            $professione = \App\Professione::findOrFail($request->professione_id);
+            // Se una professione è specificata la cerco
+            $professione = \App\Professione::find($request->professione_id);
+            if ($professione == null)
+            {
+                // Se la professione non esiste la creo
+                $professione = \App\Professione::create(['nome' => $request->professione_id]);
+            }
+            
             $cliente->professione()->associate($professione);
         } else {
+            // Se non è specificata una professione cancello la relazione
             $cliente->professione()->dissociate();
         }
             
@@ -99,9 +107,14 @@ class ClientiController extends Controller
         $cliente->fill($new_values);
         $cliente->filiale()->associate($filiale);
         
-        $professione = \App\Professione::findOrFail($request->professione_id);
-        $cliente->professione()->associate($professione);
+        $professione = \App\Professione::find($request->professione_id);
+        if ($professione == null)
+        {
+            // Se la professione non esiste la creo
+            $professione = \App\Professione::create(['nome' => $request->professione_id]);
+        }
         
+        $cliente->professione()->associate($professione);
         
         $cliente->save();
         

@@ -111,32 +111,42 @@ var parseQueryString = function() {
         $(formSelector).submit();
     });
     
-    $('select:not(.select-rel)').selectize({
+    $('select:not([data-selecttype])').selectize({
         sortField: 'text',
     });
     
     $('#professione_id').selectize({
         sortField: 'text',
-        create: function(input, callback) {
-            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-            var url = $('#professione_id').data('storeurl');
-            $.ajax({
-                url: url,
-                type: 'POST',
-                data: {_token: CSRF_TOKEN, nome: input},
-                dataType: 'JSON',
-                success: function (data) {
-                    callback( { 'value': data.id, 'text': data.nome});
-                }
-            });
-        },
-        // create: true,
+        create: true,
         createOnBlur: true,
         persist: false,
         render: {
             option_create: function(data, escape) {
               return '<div class="create">Aggiungi <strong>' + escape(data.input) + '</strong>&hellip;</div>';
             }
+        }
+    });
+    
+    $('select[data-selecttype="assicurazioni"').selectize({
+        sortField: 'text',
+        searchField: ['text', 'indirizzo'],
+        render: {
+            option: function(item, escape) {
+                var label = item.text;
+                var caption = item.indirizzo;
+                return '<div>' +
+                    '<strong>' + escape(label) + '</strong><br>' +
+                    (caption ? '<small class="caption">' + escape(caption) + '</small>' : '') +
+                '</div>';
+            },
+            item: function(item, escape) {
+                var label = item.text;
+                var caption = item.indirizzo;
+                return '<div>' +
+                    '<strong>' + escape(label) + '</strong><br>' +
+                    (caption ? '<small class="caption">' + escape(caption) + '</small>' : '') +
+                '</div>';
+            },
         }
     });
     

@@ -24,7 +24,6 @@ class CreatePraticheTable extends Migration
             $table->string('veicolo_parte')->nullable();
             $table->string('targa_parte')->nullable();
             $table->string('numero_polizza_parte')->nullable();
-            $table->string('assicurazione_parte')->nullable();
             
             $table->string('conducente_controparte')->nullable();
             $table->string('via_controparte')->nullable();
@@ -34,8 +33,7 @@ class CreatePraticheTable extends Migration
             $table->string('targa_controparte')->nullable();
             $table->string('numero_polizza_controparte')->nullable();
             $table->string('proprietario_mezzo_responsabile')->nullable();  // ?
-            $table->string('assicurazione_controparte')->nullable();
-            $table->string('medico_controparte')->nullable();            
+            $table->string('medico_controparte')->nullable();          
             
             $table->string('legale')->nullable();
             $table->date('in_data')->nullable();
