@@ -111,6 +111,10 @@ var parseQueryString = function() {
         $(formSelector).submit();
     });
     
+    $('select:not(.select-rel)').selectize({
+        sortField: 'text',
+    });
+    
     $('#professione_id').selectize({
         sortField: 'text',
         create: function(input, callback) {
@@ -126,6 +130,14 @@ var parseQueryString = function() {
                 }
             });
         },
+        // create: true,
+        createOnBlur: true,
+        persist: false,
+        render: {
+            option_create: function(data, escape) {
+              return '<div class="create">Aggiungi <strong>' + escape(data.input) + '</strong>&hellip;</div>';
+            }
+        }
     });
     
 })();
