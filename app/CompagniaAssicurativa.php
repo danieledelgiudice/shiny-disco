@@ -15,12 +15,12 @@ class CompagniaAssicurativa extends Model
     
     public function parti_assicurate()
     {
-        return $this->hasMany('\App\Pratiche', 'assicurazione_parte_id', 'id');
+        return $this->hasMany('\App\Pratica', 'assicurazione_parte_id', 'id');
     }
     
     public function controparti_assicurate()
     {
-        return $this->hasMany('\App\Pratiche', 'assicurazione_controparte_id', 'id');
+        return $this->hasMany('\App\Pratica', 'assicurazione_controparte_id', 'id');
     }
     
 

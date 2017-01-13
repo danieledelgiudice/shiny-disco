@@ -2,7 +2,7 @@
     {!! Form::model($pratica, ['action' => ['PraticheController@update', 'cliente' => $pratica->cliente, 'pratica' => $pratica],
         'method' => 'put', 'class' => 'form-horizontal']) !!}
 @else
-    {!! Form::model($pratica, ['action' => ['PraticheController@store', 'cliente' => $cliente],
+    {!! Form::model($pratica, ['action' => ['PraticheController@store', 'cliente' => $pratica->cliente],
         'class' => 'form-horizontal']) !!}
 @endif
     <div class="panel panel-default">
@@ -91,7 +91,7 @@
                 <!-- Assicurazione di parte -->
                 {!! Form::label('assicurazione_parte_id', 'Assicurazione di parte' , ['class' => 'col-md-2 control-label']) !!}
                 <div class="col-md-4">
-                    <select class="form-control" placeholder="" data-selecttype="assicurazioni" name="assicurazione_parte_id" id="assicurazione_parte_id">
+                    <select class="" placeholder="" data-selecttype="assicurazioni" name="assicurazione_parte_id" id="assicurazione_parte_id">
                         <option value="" {{ (!$pratica->id || !$pratica->assicurazione_parte_id) ? 'selected' : ''}}> </option>
                         @foreach($assicurazioni as $assicurazione)
                             <option value="{{ $assicurazione->id }}" data-data="{{ json_encode(['indirizzo' => $assicurazione->indirizzo]) }}"
@@ -100,6 +100,9 @@
                             </option>
                         @endforeach
                     </select>
+                    <a href="{{ action('CompagnieAssicurativeController@create', ['filiale' => $filiale]) }}" class="btn btn-primary">
+                        <i class="fa fa-fw fa-plus"></i>
+                    </a>
                 </div>
             </div>
         </div>
@@ -172,9 +175,9 @@
             
             <div class="form-group">
                 <!-- Assicurazione controparte -->
-                {!! Form::label('assicurazione_controparte_id', 'Assicurazione controparte' , ['class' => 'col-md-2 control-label']) !!}
+                {!! Form::label('assicurazione_controparte_id', 'Assicurazione controparte' , ['class' => 'control-label col-md-2']) !!}
                 <div class="col-md-4">
-                    <select class="form-control" placeholder="" data-selecttype="assicurazioni" name="assicurazione_controparte_id" id="assicurazione_controparte_id">
+                    <select class="" placeholder="" data-selecttype="assicurazioni" name="assicurazione_controparte_id" id="assicurazione_controparte_id">
                         <option value="" {{ (!$pratica->id || !$pratica->assicurazione_parte_id) ? 'selected' : ''}}> </option>
                         @foreach($assicurazioni as $assicurazione)
                             <option value="{{ $assicurazione->id }}" data-data="{{ json_encode(['indirizzo' => $assicurazione->indirizzo]) }}"
@@ -183,8 +186,11 @@
                             </option>
                         @endforeach
                     </select>
+                    <a href="{{ action('CompagnieAssicurativeController@create', ['filiale' => $filiale]) }}" class="btn btn-primary">
+                        <i class="fa fa-fw fa-plus"></i>
+                    </a>
                 </div>
-            
+                
                 <!-- Medico controparte -->
                 {!! Form::label('medico_controparte', 'Medico controparte' , ['class' => 'col-md-2 control-label']) !!}
                 <div class="col-md-4">

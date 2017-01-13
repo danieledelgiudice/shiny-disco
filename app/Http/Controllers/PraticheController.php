@@ -60,7 +60,9 @@ class PraticheController extends Controller
         
         $assicurazioni = \App\CompagniaAssicurativa::where('filiale_id', $pratica->cliente->filiale->id)->get();
         
-        return view('pratiche.edit', compact('pratica', 'assicurazioni'));
+        $filiale = $pratica->cliente->filiale;
+        
+        return view('pratiche.edit', compact('pratica', 'assicurazioni', 'filiale'));
     }
 
     public function update(Request $request, $cliente_id, $pratica_id)
@@ -78,6 +80,10 @@ class PraticheController extends Controller
         }
 
         $this->validateInput($request);
+        $this->validate($request, [
+            'numero_pratica'                    => "required|numeric|unique:pratiche,numero_pratica,$pratica->id",
+            'numero_registrazione'              => "required|numeric|unique:pratiche,numero_registrazione,$pratica->id",
+        ]);
 
         $new_values = $request->all();
         
@@ -127,7 +133,9 @@ class PraticheController extends Controller
         
         $assicurazioni = \App\CompagniaAssicurativa::where('filiale_id', $cliente->filiale->id)->get();
         
-        return view('pratiche.create', compact('cliente', 'pratica', 'assicurazioni'));
+        $filiale = $cliente->filiale;
+        
+        return view('pratiche.create', compact('cliente', 'pratica', 'assicurazioni', 'filiale'));
     }
     
     public function store(Request $request, $cliente_id)
@@ -140,6 +148,10 @@ class PraticheController extends Controller
         }
         
         $this->validateInput($request);
+        $this->validate($request, [
+            'numero_pratica'                    => 'required|numeric|unique:pratiche,numero_pratica',
+            'numero_registrazione'              => 'required|numeric|unique:pratiche,numero_registrazione',
+        ]);
         
         $pratica = new \App\Pratica;
         $new_values = $request->all();
@@ -196,8 +208,6 @@ class PraticheController extends Controller
     private function validateInput(Request $request)
     {
         $this->validate($request, [
-            'numero_pratica'                    => 'required|numeric|unique:pratiche,numero_pratica',
-            'numero_registrazione'              => 'required|numeric|unique:pratiche,numero_registrazione',
             'stato_pratica'                     => 'numeric|in:' . implode(',', array_keys(\App\Pratica::$enumStatoPratica)),
             'tipo_pratica'                      => 'numeric|in:' . implode(',', array_keys(\App\Pratica::$enumTipoPratica)),
             'data_apertura'                     => 'date_format:d/m/Y|before:tomorrow',

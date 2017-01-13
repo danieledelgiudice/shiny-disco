@@ -271,8 +271,7 @@ class Pratica extends Model
         'veicolo_parte',
         'targa_parte',
         'numero_polizza_parte',
-        'assicurazione_parte',
-        
+
         'conducente_controparte',
         'via_controparte',
         'citta_controparte',
@@ -281,7 +280,6 @@ class Pratica extends Model
         'targa_controparte',
         'numero_polizza_controparte',
         'proprietario_mezzo_responsabile',
-        'assicurazione_controparte',
         'medico_controparte',
         
         'legale',

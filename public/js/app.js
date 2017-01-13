@@ -111,6 +111,20 @@ var parseQueryString = function() {
         $(formSelector).submit();
     });
     
+    
+    $('.showCompagniaDestroyModal').click(function() {
+        var id_compagnia = $(this).data('compagnia');
+        $('#compagniaDestroyConfirm').data('compagnia', id_compagnia);
+    });
+    
+    $('#compagniaDestroyConfirm').click(function() {
+        var compagnia = $(this).data('compagnia');
+        var formSelector = `#compagnia${compagnia}DestroyForm`;
+        $(formSelector).submit();
+    });
+    
+    $('[data-toggle="tooltip"]').tooltip();
+    
     $('select:not([data-selecttype])').selectize({
         sortField: 'text',
     });
@@ -127,7 +141,7 @@ var parseQueryString = function() {
         }
     });
     
-    $('select[data-selecttype="assicurazioni"').selectize({
+    $('select[data-selecttype="assicurazioni"]').selectize({
         sortField: 'text',
         searchField: ['text', 'indirizzo'],
         render: {
