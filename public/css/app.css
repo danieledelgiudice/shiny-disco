@@ -32,7 +32,8 @@ table .btn {
     margin-left: 10px;
 }
 
-.table-filterable td[data-field] {
+.table-filterable td[data-field],
+.table-filterable td[data-field-select] {
     cursor: pointer;
 }
 
@@ -43,3 +44,7 @@ table .btn {
     max-width: 200px;
 }
 
+#toggleImportanteBtn {
+    cursor: pointer;
+    -webkit-text-stroke: 1px white;
+}

@@ -22,6 +22,7 @@ Route::get( '/clienti/{cliente}',                                               
 Route::post('/clienti',                                                         'ClientiController@store');
 Route::post('/clienti/filter',                                                  'ClientiController@filter');
 Route::put( '/clienti/{cliente}',                                               'ClientiController@update');
+Route::put( '/clienti/{cliente}/importante',                                    'ClientiController@toggleImportante');
 Route::delete( '/clienti/{cliente}',                                            'ClientiController@destroy');
 
 

@@ -10,6 +10,11 @@
         <div class="page-header">
             <h1 class="text-center">
                 Dettagli Cliente
+                @if($cliente->importante)
+                    <a class="" id="toggleImportanteBtn"><i class="fa fa-fw fa-star" style="color: gold"></i></a>
+                @else
+                    <a class="" id="toggleImportanteBtn"><i class="fa fa-fw fa-star-o" style="color: #AAAAAA"></i></a>
+                @endif
             </h1>
             <div>
                 <div class="pull-left">
@@ -22,6 +27,14 @@
                         'id' => 'clienteDestroyForm', 'method' => 'delete']) }}
                     {{ Form::close() }}
                     <!-- Fine form eliminazione cliente -->
+                    
+                    <!-- Form toggle importante -->
+                    {{ Form::open(['action' => ['ClientiController@toggleImportante', 'cliente' => $cliente],
+                        'id' => 'toggleImportanteForm', 'method' => 'put']) }}
+                    {{ Form::close() }}
+                    <!-- Fine form toggle importante -->
+                    
+                    
                     
                     <a href="{{ action('ClientiController@edit', $cliente) }}" class="btn btn-success"><i class="fa fa-fw fa-pencil"></i></a>
                     

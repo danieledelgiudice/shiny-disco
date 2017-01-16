@@ -21,8 +21,9 @@ class ClientiController extends Controller
                                      ->filter($request->all())->get();
         
         $filiali = \App\Filiale::pluck('nome', 'id');
+        $professioni = \App\Professione::pluck('nome', 'id');
         
-        return view('clienti.index', compact('clienti', 'filiali'));
+        return view('clienti.index', compact('clienti', 'filiali', 'professioni'));
     }
 
     public function show(Request $request, $id)
@@ -148,6 +149,22 @@ class ClientiController extends Controller
         
         $query = http_build_query($params);
         return redirect()->action('ClientiController@index', $query);
+    }
+    
+    public function toggleImportante(Request $request, $cliente_id)
+    {
+        $cliente = \App\Cliente::findOrFail($cliente_id);
+        
+        if ($request->user()->cannot('modificare-cliente', $cliente)) {
+            // L'utente sta cercando di accedere ad un cliente che non gli appartiene
+            abort(403);
+        }
+        
+        $old_importante = $cliente->importante;
+        $cliente->importante = !$old_importante;
+        $cliente->save();
+        
+        return redirect()->back()->with('success', 'Importanza modificata con successo!');
     }
     
     private function validateInput(Request $request)

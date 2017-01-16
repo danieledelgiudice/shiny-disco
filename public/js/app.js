@@ -35,13 +35,30 @@ var parseQueryString = function() {
         window.location.search = queryString;
     });
     
+    $('.table-filterable td[data-field-select]').click(function() {
+        var field_select = $(this).data('field-select');
+        var value = $(this).data('field-id');
+        
+        var params = parseQueryString();
+        params[field_select] = value;
+        var queryString = $.param(params);
+        
+        window.location.search = queryString;
+    });
+    
     (function() {
         var params = parseQueryString();
         $('.table-filterable input[type=text]').each(function() {
-            console.log($(this));
             var name = $(this).attr('name');
             if (params[name])
                 $(this).attr('value', params[name]);
+        });
+        
+        $('.table-filterable select').each(function() {
+            var name = $(this).attr('name');
+            if (params[name]) {
+                $(this).children(`[value=${params[name]}]`).attr('selected', 'selected');
+            }
         });
     })();
     
@@ -80,6 +97,10 @@ var parseQueryString = function() {
     
     $('#clienteDestroyConfirm').click(function() {
         $('#clienteDestroyForm').submit(); 
+    });
+    
+    $('#toggleImportanteBtn').click(function() {
+        $('#toggleImportanteForm').submit(); 
     });
     
     $('#praticaDestroyConfirm').click(function() {

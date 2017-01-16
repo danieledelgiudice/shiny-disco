@@ -35,4 +35,9 @@ class ClienteFilter extends ModelFilter
     {
         return $this->where('filiale_id', $value);
     }
+    
+    public function professione($value)
+    {
+        return $this->where('professione_id', $value);
+    }
 }

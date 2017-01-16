@@ -28,7 +28,11 @@
                                     {{ Form::text('codice_fiscale', null, [ 'class' => 'form-control']) }}
                                 </th>
                                 
-                                <th>Professione</th>
+                                <th>
+                                    Professione
+                                    <br>
+                                    {{ Form::select('professione', $professioni, null, [ 'placeholder' => '', 'class' => 'form-control' ]) }}
+                                </th>
                                 
                                 <th>
                                     Filiale
@@ -50,11 +54,15 @@
                             <tbody>
                                 @foreach ($clienti as $cliente)
                                     <tr>
-                                        <td class="table-text" data-field="cognome"><div>{{ $cliente->cognome }}</div></td>
-                                        <td class="table-text" data-field="nome"><div>{{ $cliente->nome }}</div></td>
-                                        <td class="table-text" data-field="codice_fiscale"><div>{{ $cliente->codice_fiscale }}</div></td>
-                                        <td class="table-text"><div>Professione1</div></td>
-                                        <td class="table-text"><div>{{ $cliente->filiale->nome }}</div></td>
+                                        <td class="table-text col-md-2" data-field="cognome"><div>{{ $cliente->cognome }}</div></td>
+                                        <td class="table-text col-md-2" data-field="nome"><div>{{ $cliente->nome }}</div></td>
+                                        <td class="table-text col-md-2" data-field="codice_fiscale"><div>{{ $cliente->codice_fiscale }}</div></td>
+                                        <td class="table-text col-md-2" data-field-select="professione" data-field-id="{{ $cliente->professione_id }}">
+                                            <div>{{ $cliente->professione ? $cliente->professione->nome : '' }}</div>
+                                        </td>
+                                        <td class="table-text col-md-2" data-field-select="filiale" data-field-id="{{ $cliente->filiale_id }}">
+                                            <div>{{ $cliente->filiale ? $cliente->filiale->nome : '' }}</div>
+                                        </td>
 
                                         <!-- Dettagli/Modifica cliente -->
                                         <td>
