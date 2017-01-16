@@ -48,7 +48,7 @@ $factory->define(App\Cliente::class, function (Faker\Generator $faker) {
         'partita_iva' => $faker->iban('IT'),
         'tipo_documento' => $faker->numberBetween(0, 4),
         'numero_documento' => $faker->creditCardNumber,
-        'stato_civile' => $faker->numberBetween(0, 5),
+        'stato_civile' => $faker->numberBetween(0, 6),
         'reddito' => $faker->numberBetween(2000, 50000),
         'numero_card' => $faker->creditCardNumber,
         'note' => $faker->text,

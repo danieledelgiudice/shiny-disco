@@ -62,11 +62,12 @@ class Cliente extends Model
     
     public static $enumStatoCivile = [
         0 => 'Sconosciuto',
-        1 => 'Nubile/Celibe',
+        1 => 'Celibe/Nubile',
         2 => 'Sposato/a',
         3 => 'Divorziato/a',
         4 => 'Unito/a civilmente',
         5 => 'Vedovo/a',
+        6 => 'Separato/a'
         100 => 'Altro'
     ];
     
