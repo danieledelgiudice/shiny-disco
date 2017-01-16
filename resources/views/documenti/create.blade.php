@@ -25,6 +25,7 @@
             <div class="panel-body">
                 {!! Form::open(['action' => 'DocumentiController@store', 'files' => true, 'class' => 'dropzone', 'id' => 'myDropzone']) !!}
                 {{ Form::close() }}
+                <p class="text-center">I documenti devono essere chiamati nel formato <code class="text-nowrap">&lt;num. pratica&gt; - &lt;descrizione file&gt;</code></p>
             </div>
         </div>
     </div>
