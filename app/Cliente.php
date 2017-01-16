@@ -67,7 +67,7 @@ class Cliente extends Model
         3 => 'Divorziato/a',
         4 => 'Unito/a civilmente',
         5 => 'Vedovo/a',
-        6 => 'Separato/a'
+        6 => 'Separato/a',
         100 => 'Altro'
     ];
     
@@ -77,6 +77,7 @@ class Cliente extends Model
         2 => 'Patente di guida',
         3 => 'Passaporto',
         4 => 'Patente nautica',
+        5 => 'Tessera ministero',
         100 => 'Altro',
         ];
     
