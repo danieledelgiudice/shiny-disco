@@ -208,16 +208,16 @@
         </div>
         
         <div class="row">
-            <!-- Mezzo Liquidabile -->
-            <strong class="col-md-2 form-control-static">Mezzo liquidabile</strong>
+            <!-- Mezzo Liquidato -->
+            <strong class="col-md-2 form-control-static">Mezzo liquidato</strong>
             <div class="col-md-4">
-                <p class="form-control-static">{{ \App\Pratica::$enumMezzoLiquidabile[$pratica->mezzo_liquidabile] }}</p>
+                <p class="form-control-static">{{ format_date($pratica->mezzo_liquidato) }}</p>
             </div>
         
-            <!-- Valore mezzo liquidabile -->
-            <strong class="col-md-2 form-control-static">Valore mezzo liquidabile</strong>
+            <!-- Valore mezzo liquidato -->
+            <strong class="col-md-2 form-control-static">Valore mezzo liquidato</strong>
             <div class="col-md-4">
-                <p class="form-control-static">{{ ($pratica->valore_mezzo_liquidabile) ? "$pratica->valore_mezzo_liquidabile €" : '' }}</p>
+                <p class="form-control-static">{{ ($pratica->valore_mezzo_liquidato) ? "$pratica->valore_mezzo_liquidato €" : '' }}</p>
             </div>
         </div>
         

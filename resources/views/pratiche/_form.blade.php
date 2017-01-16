@@ -243,17 +243,20 @@
             </div>
             
             <div class="form-group">
-                <!-- Mezzo Liquidabile -->
-                {!! Form::label('mezzo_liquidabile', 'Mezzo Liquidabile' , ['class' => 'col-md-2 control-label']) !!}
+                <!-- Mezzo Liquidato -->
+                {!! Form::label('mezzo_liquidato', 'Mezzo Liquidato' , ['class' => 'col-md-2 control-label']) !!}
                 <div class="col-md-4">
-                    {!! Form::select('mezzo_liquidabile', \App\Pratica::$enumMezzoLiquidabile, null, ['class' => 'form-control']) !!}
+                    <div class="input-group date">
+                        {!! Form::text('mezzo_liquidato', null, ['class' => 'form-control date-control']) !!}
+                        <span class="input-group-addon"><i class="fa fa-fw fa-calendar"></i></span>
+                    </div>
                 </div>
             
-                <!-- Valore mezzo liquidabile -->
-                {!! Form::label('valore_mezzo_liquidabile', 'Valore mezzo liquidabile' , ['class' => 'col-md-2 control-label']) !!}
+                <!-- Valore mezzo liquidato -->
+                {!! Form::label('valore_mezzo_liquidato', 'Valore mezzo liquidato' , ['class' => 'col-md-2 control-label']) !!}
                 <div class="col-md-4">
                     <div class="input-group">
-                        {!! Form::number('valore_mezzo_liquidabile', null, ['class' => 'form-control']) !!}
+                        {!! Form::number('valore_mezzo_liquidato', null, ['class' => 'form-control']) !!}
                         <span class="input-group-addon"><i class="fa fa-fw fa-eur"></i></span>
                     </div>
                 </div>
@@ -281,7 +284,7 @@
                 {!! Form::label('importo_sospeso', 'Importo sospeso' , ['class' => 'col-md-2 control-label']) !!}
                 <div class="col-md-4">
                     <div class="input-group">
-                        {!! Form::number('valore_mezzo_liquidabile', null, ['class' => 'form-control']) !!}
+                        {!! Form::number('importo_sospeso', null, ['class' => 'form-control']) !!}
                         <span class="input-group-addon"><i class="fa fa-fw fa-eur"></i></span>
                     </div>
                 </div>

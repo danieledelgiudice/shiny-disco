@@ -116,16 +116,19 @@ class Pratica extends Model
             $this->attributes['data_sinistro'] = $value;
     }
     
-    
-    // Mutator data_ultima_lettera
-    public function getDataUltimaLetteraHAttribute($value)
+    // Mutator mezzo_liquidato
+    public function setMezzoLiquidatoAttribute($value)
     {
-        if ($this->data_ultima_lettera instanceof \Carbon\Carbon)
-            return $this->data_ultima_lettera->format('m/d/Y');
-        else '';
+        if (is_string($value) && $value !== '')
+            $this->attributes['mezzo_liquidato'] = \Carbon\Carbon::createFromFormat('d/m/Y', $value);
+        else if ($value === '')
+            $this->attributes['mezzo_liquidato'] = null;
+        else
+            $this->attributes['mezzo_liquidato'] = $value;
     }
     
     
+
     // Form Accessor data_apertura
     public function formDataAperturaAttribute($value)
     {
@@ -162,6 +165,12 @@ class Pratica extends Model
         return format_date($value);
     }
     
+    // Form Accessor mezzo_liquidato
+    public function formMezzoLiquidatoAttribute($value)
+    {
+        return format_date($value);
+    }
+    
     
     protected $dates = [
         'data_apertura',
@@ -170,6 +179,7 @@ class Pratica extends Model
         'data_chiusura',
         'data_sospeso',
         'data_sinistro',
+        'mezzo_liquidato'
     ];
     
     
@@ -196,12 +206,6 @@ class Pratica extends Model
 		100 => 'Altro',
 	];
 
-    public static $enumMezzoLiquidabile = [	
- 		0 => '',
-		1 => 'Sì',
-		2 => 'No'
-	];
-	
 	public static $enumControllato = [
 		0 => 'No',
 		1 => 'Sì',
@@ -280,8 +284,8 @@ class Pratica extends Model
         'in_data',
         'controllato',
         'data_ultima_lettera',
-        'mezzo_liquidabile',
-        'valore_mezzo_liquidabile',
+        'mezzo_liquidato',
+        'valore_mezzo_liquidato',
         'rilievi',
         'data_chiusura',
         'importo_sospeso',

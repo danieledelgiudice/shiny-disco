@@ -39,8 +39,8 @@ class CreatePraticheTable extends Migration
             $table->date('in_data')->nullable();
             $table->integer('controllato')->nullable();
             $table->date('data_ultima_lettera')->nullable();
-            $table->string('mezzo_liquidabile')->nullable();                // ?
-            $table->decimal('valore_mezzo_liquidabile', 10, 2)->nullable();
+            $table->date('mezzo_liquidato')->nullable();                
+            $table->decimal('valore_mezzo_liquidato', 10, 2)->nullable();
             $table->integer('rilievi')->nullable();                         // pseudo enum
             $table->date('data_chiusura')->nullable();
             $table->decimal('importo_sospeso', 10, 2)->nullable();
