@@ -252,8 +252,8 @@
         <div class="row">
             <!-- Stato avanzamento pratica -->
             <strong class="col-md-2 form-control-static">Stato avanzamento pratica</strong>
-            <div class="col-md-4">
-                <p class="form-control-static">{{ \App\Pratica::$enumStatoAvanzamento[$pratica->stato_avanzamento] }}</p>
+            <div class="col-md-10">
+                <p class="form-control-static">{{ $pratica->stato_avanzamento }}</p>
             </div>
         </div>
     </div>

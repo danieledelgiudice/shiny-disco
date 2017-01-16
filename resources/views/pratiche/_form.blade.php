@@ -302,8 +302,8 @@
             <div class="form-group">
                 <!-- Stato avanzamento pratica -->
                 {!! Form::label('stato_avanzamento', 'Stato avanzamento pratica' , ['class' => 'col-md-2 control-label']) !!}
-                <div class="col-md-4">
-                    {!! Form::select('stato_avanzamento', \App\Pratica::$enumStatoAvanzamento, null, ['class' => 'form-control']) !!}
+                <div class="col-md-10">
+                    {!! Form::textarea('stato_avanzamento', null, ['class' => 'form-control']) !!}
                 </div>
             </div>
         </div>

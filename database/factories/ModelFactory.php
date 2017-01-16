@@ -238,7 +238,7 @@ $factory->define(App\Cliente::class, function (Faker\Generator $faker) {
         'data_chiusura' => $faker->optional($weight = 0.8)->dateTimeThisDecade(),
         'importo_sospeso' => $faker->optional($weight = 0.8)->randomFloat($nbMaxDecimals = 2, $min = 500, $max = 3000),
         'data_sospeso' => $faker->optional($weight = 0.8)->dateTimeThisDecade(),
-        'stato_avanzamento' => $faker->numberBetween(0, 8),
+        'stato_avanzamento' => $faker->text,
         
         'data_sinistro' => $faker->dateTimeThisDecade(),
         'ora_sinistro' => $faker->time,
