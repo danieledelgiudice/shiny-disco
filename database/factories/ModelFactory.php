@@ -46,7 +46,7 @@ $factory->define(App\Cliente::class, function (Faker\Generator $faker) {
         'email' => $faker->email,
         'fax' => $faker->tollFreePhoneNumber,
         'partita_iva' => $faker->iban('IT'),
-        'tipo_documento' => $faker->numberBetween(0, 4),
+        'tipo_documento' => $faker->numberBetween(0, 5),
         'numero_documento' => $faker->creditCardNumber,
         'stato_civile' => $faker->numberBetween(0, 6),
         'reddito' => $faker->numberBetween(2000, 50000),
@@ -210,7 +210,7 @@ $factory->define(App\Cliente::class, function (Faker\Generator $faker) {
     return [
         'numero_pratica' => $faker->unique()->numberBetween(0, 50000),
         'numero_registrazione' => $faker->unique()->numberBetween(0, 100000),
-        'stato_pratica' => $faker->numberBetween(0, 4), 
+        'stato_pratica' => $faker->numberBetween(0, 3), 
         'tipo_pratica' => $faker->numberBetween(0, 17), 
         'data_apertura' => $faker->dateTimeThisDecade(),
         

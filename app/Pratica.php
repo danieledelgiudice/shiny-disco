@@ -178,7 +178,6 @@ class Pratica extends Model
 		1 => 'Chiuso',
 		2 => 'SS',
 		3 => 'SS. Legale',
-		4 => 'Aperto liq. pari', 
 	];
 
     public static $enumTipoPratica = [
