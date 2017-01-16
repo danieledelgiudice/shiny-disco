@@ -300,6 +300,26 @@
             </div>
             
             <div class="form-group">
+                <!-- Onorari omnia -->
+                {!! Form::label('onorari_omnia', 'Onorari omnia' , ['class' => 'col-md-2 control-label']) !!}
+                <div class="col-md-4">
+                    <div class="input-group">
+                        {!! Form::number('onorari_omnia', null, ['class' => 'form-control']) !!}
+                        <span class="input-group-addon"><i class="fa fa-fw fa-eur"></i></span>
+                    </div>
+                </div>
+            
+                <!-- Liquidato omnia -->
+                {!! Form::label('liquidato_omnia', 'Liquidato omnia' , ['class' => 'col-md-2 control-label']) !!}
+                <div class="col-md-4">
+                    <div class="input-group">
+                        {!! Form::number('liquidato_omnia', null, ['class' => 'form-control']) !!}
+                        <span class="input-group-addon"><i class="fa fa-fw fa-eur"></i></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
                 <!-- Stato avanzamento pratica -->
                 {!! Form::label('stato_avanzamento', 'Stato avanzamento pratica' , ['class' => 'col-md-2 control-label']) !!}
                 <div class="col-md-10">

@@ -45,6 +45,8 @@ class CreatePraticheTable extends Migration
             $table->date('data_chiusura')->nullable();
             $table->decimal('importo_sospeso', 10, 2)->nullable();
             $table->date('data_sospeso')->nullable();
+            $table->decimal('onorari_omnia', 10, 2)->nullable();
+            $table->decimal('liquidato_omnia', 10, 2)->nullable();
             $table->text('stato_avanzamento')->nullable();
 
             $table->date('data_sinistro')->nullable();

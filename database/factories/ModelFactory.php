@@ -238,6 +238,8 @@ $factory->define(App\Cliente::class, function (Faker\Generator $faker) {
         'data_chiusura' => $faker->optional($weight = 0.8)->dateTimeThisDecade(),
         'importo_sospeso' => $faker->optional($weight = 0.8)->randomFloat($nbMaxDecimals = 2, $min = 500, $max = 3000),
         'data_sospeso' => $faker->optional($weight = 0.8)->dateTimeThisDecade(),
+        'onorari_omnia' => $faker->randomFloat($nbMaxDecimals = 2, $min = 500, $max = 10000),
+        'liquidato_omnia' => $faker->randomFloat($nbMaxDecimals = 2, $min = 500, $max = 10000),
         'stato_avanzamento' => $faker->text,
         
         'data_sinistro' => $faker->dateTimeThisDecade(),

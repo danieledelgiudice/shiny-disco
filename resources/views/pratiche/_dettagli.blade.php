@@ -250,6 +250,20 @@
         </div>
         
         <div class="row">
+            <!-- Onorari omnia -->
+            <strong class="col-md-2 form-control-static">Onorari omnia</strong>
+            <div class="col-md-4">
+               <p class="form-control-static">{{ ($pratica->onorari_omnia) ? "$pratica->onorari_omnia €" : '' }}</p>
+            </div>
+        
+            <!-- Liquidato omnia -->
+            <strong class="col-md-2 form-control-static">Liquidato omnia</strong>
+            <div class="col-md-4">
+                <p class="form-control-static">{{ ($pratica->liquidato_omnia) ? "$pratica->liquidato_omnia €" : '' }}</p>
+            </div>
+        </div>
+        
+        <div class="row">
             <!-- Stato avanzamento pratica -->
             <strong class="col-md-2 form-control-static">Stato avanzamento pratica</strong>
             <div class="col-md-10">

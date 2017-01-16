@@ -238,6 +238,8 @@ class PraticheController extends Controller
             'data_chiusura'                     => 'date_format:d/m/Y',
             'importo_sospeso'                   => 'numeric|max:100000000',
             'data_sospeso'                      => 'date_format:d/m/Y',
+            'onorari_omnia'                     => 'numeric|max:100000000',
+            'liquidato_omnia'                   => 'numeric|max:100000000',
             
             'data_sinistro'                     => 'date_format:d/m/Y|before:tomorrow',
             'ora_sinistro'                      => 'max:255',   //potrebbero voler scrivere "Intorno alle 22" o simili

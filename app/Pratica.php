@@ -290,6 +290,8 @@ class Pratica extends Model
         'data_chiusura',
         'importo_sospeso',
         'data_sospeso',
+        'liquidato_omnia',
+        'onorari_omnia',
         'stato_avanzamento',
         
         'data_sinistro',
