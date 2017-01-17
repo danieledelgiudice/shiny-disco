@@ -168,6 +168,42 @@
                 <p class="form-control-static">{{ $pratica->medico_controparte }}</p>
             </div>
         </div>
+        
+        <div class="row">
+            <!-- Luogo medico controparte -->
+            <strong class="col-md-2 form-control-static">Luogo medico</strong>
+            <div class="col-md-4">
+                <p class="form-control-static">{{ $pratica->luogo_medico_controparte }}</p>
+            </div>
+        
+            <!-- Data medico controparte -->
+            <strong class="col-md-2 form-control-static">Data medico</strong>
+            <div class="col-md-4">
+                <p class="form-control-static">{{ $pratica->data_medico_controparte }}</p>
+            </div>
+        </div>
+        
+        <div class="row">
+            <!-- Liquidatore -->
+            <strong class="col-md-2 form-control-static">Liquidatore</strong>
+            <div class="col-md-4">
+                <p class="form-control-static">{{ $pratica->liquidatore }}</p>
+            </div>
+        
+            <!-- Reperibilità liquidatore -->
+            <strong class="col-md-2 form-control-static">Reperibilità liquidatore</strong>
+            <div class="col-md-4">
+                <p class="form-control-static">{{ $pratica->reperibilita_liquidatore }}</p>
+            </div>
+        </div>
+        
+        <div class="row">
+            <!-- Parcella presunta -->
+            <strong class="col-md-2 form-control-static">Parcella presunta</strong>
+            <div class="col-md-4">
+                <p class="form-control-static">{{ ($pratica->parcella_presunta) ? "$pratica->parcella_presunta €" : '' }}</p>
+            </div>
+        </div>
     </div>
 </div>
 <div class="panel panel-default">

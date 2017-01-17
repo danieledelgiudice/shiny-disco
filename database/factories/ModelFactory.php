@@ -227,6 +227,11 @@ $factory->define(App\Cliente::class, function (Faker\Generator $faker) {
         'numero_polizza_controparte' => strtoupper($faker->bothify('????######??##?#??')),
         'proprietario_mezzo_responsabile' => $faker->optional($weight = 0.2)->name,
         'medico_controparte' => $faker->optional($weight = 0.8)->name,
+        'luogo_medico_controparte' => $faker->streetAddress,
+        'data_medico_controparte' => strtoupper($faker->bothify('##/##/## ORE ##:##')),
+        'liquidatore' => $faker->name,
+        'reperibilita_liquidatore' => "Sempre reperibile",
+        'parcella_presunta' => $faker->randomFloat($nbMaxDecimals = 2, $min = 500, $max = 10000),
         
         'legale' => $faker->optional($weight = 0.8)->name,
         'in_data' => $faker->dateTimeThisDecade(),

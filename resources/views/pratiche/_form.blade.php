@@ -197,6 +197,45 @@
                     {!! Form::text('medico_controparte', null, ['class' => 'form-control']) !!}
                 </div>
             </div>
+            
+            <div class="form-group">
+                <!-- Luogo medico controparte -->
+                {!! Form::label('luogo_medico_controparte', 'Luogo medico' , ['class' => 'col-md-2 control-label']) !!}
+                <div class="col-md-4">
+                    {!! Form::text('luogo_medico_controparte', null, ['class' => 'form-control']) !!}
+                </div>
+            
+                <!-- Data medico controparte -->
+                {!! Form::label('data_medico_controparte', 'Data medico' , ['class' => 'col-md-2 control-label']) !!}
+                <div class="col-md-4">
+                    {!! Form::text('data_medico_controparte', null, ['class' => 'form-control']) !!}
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <!-- Liquidatore -->
+                {!! Form::label('liquidatore', 'Liquidatore' , ['class' => 'col-md-2 control-label']) !!}
+                <div class="col-md-4">
+                    {!! Form::text('liquidatore', null, ['class' => 'form-control']) !!}
+                </div>
+            
+                <!-- Reperibilità liquidatore -->
+                {!! Form::label('reperibilita_liquidatore', 'Reperibilità liquidatore' , ['class' => 'col-md-2 control-label']) !!}
+                <div class="col-md-4">
+                    {!! Form::text('reperibilita_liquidatore', null, ['class' => 'form-control']) !!}
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <!-- Parcella presunta -->
+                {!! Form::label('parcella_presunta', 'Parcella presunta' , ['class' => 'col-md-2 control-label']) !!}
+                <div class="col-md-4">
+                    <div class="input-group">
+                        {!! Form::number('parcella_presunta', null, ['class' => 'form-control']) !!}
+                        <span class="input-group-addon"><i class="fa fa-fw fa-eur"></i></span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="panel panel-default">

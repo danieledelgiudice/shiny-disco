@@ -33,7 +33,12 @@ class CreatePraticheTable extends Migration
             $table->string('targa_controparte')->nullable();
             $table->string('numero_polizza_controparte')->nullable();
             $table->string('proprietario_mezzo_responsabile')->nullable();  // ?
-            $table->string('medico_controparte')->nullable();          
+            $table->string('medico_controparte')->nullable();
+            $table->string('luogo_medico_controparte')->nullable();
+            $table->string('data_medico_controparte')->nullable();
+            $table->string('liquidatore')->nullable();
+            $table->string('reperibilita_liquidatore')->nullable();
+            $table->decimal('parcella_presunta', 10, 2)->nullable();
             
             $table->string('legale')->nullable();
             $table->date('in_data')->nullable();

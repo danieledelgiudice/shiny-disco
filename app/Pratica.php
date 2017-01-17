@@ -279,6 +279,11 @@ class Pratica extends Model
         'numero_polizza_controparte',
         'proprietario_mezzo_responsabile',
         'medico_controparte',
+        'luogo_medico_controparte',
+        'data_medico_controparte',
+        'liquidatore',
+        'reperibilita_liquidatore',
+        'parcella_presunta',
         
         'legale',
         'in_data',

@@ -227,7 +227,12 @@ class PraticheController extends Controller
             'proprietario_mezzo_responsabile'   => 'max:255',
             'assicurazione_controparte'         => 'max:255',
             'medico_controparte'                => 'max:255',
-            
+            'luogo_medico_controparte'          => 'max:255',
+            'data_medico_controparte'           => 'max:255',
+            'liquidatore'                       => 'max:255',
+            'reperibilita_liquidatore'          => 'max:255',
+            'parcella_presunta'                 => 'numeric|max:100000000',
+                
             'legale'                            => 'max:255',                                             
             'in_data'                           => 'date_format:d/m/Y',
             'controllato'                       => 'numeric|in:' . implode(',', array_keys(\App\Pratica::$enumControllato)),
