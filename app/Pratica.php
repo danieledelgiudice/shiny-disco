@@ -49,6 +49,10 @@ class Pratica extends Model
         return $this->belongsTo('\App\CompagniaAssicurativa', 'assicurazione_controparte_id');
     }
     
+    public function autorita()
+    {
+        return $this->belongsTo('\App\Autorita', 'autorita_id');
+    }
     
     // Mutator data_apertura
     public function setDataAperturaAttribute($value)
@@ -230,14 +234,6 @@ class Pratica extends Model
 		3 => 'Rilievi portati da cliente',
 	];
     						
-    public static $enumAutorita = [
-		0 => 'Sconosciuta',
-		1 => 'Polizia',
-		2 => 'Polizia stradale',
-		3 => 'Carabinieri',
-		4 => 'Vigili urbani',
-	];
-    
     public static $enumRivalsa = [
 		0 => 'No rivalsa',
 		1 => 'Da verificare',

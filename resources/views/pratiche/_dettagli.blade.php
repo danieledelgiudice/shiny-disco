@@ -350,7 +350,7 @@
             <!-- Autorità -->
             <strong class="col-md-2 form-control-static">Autorità</strong>
             <div class="col-md-4">
-                <p class="form-control-static">{{ \App\Pratica::$enumAutorita[$pratica->autorita] }}</p>
+                <p class="form-control-static">{{ $pratica->autorita ? $pratica->autorita->nome : '' }}</p>
             </div>
         
             <!-- Comando di -->

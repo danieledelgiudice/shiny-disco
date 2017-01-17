@@ -250,7 +250,6 @@ $factory->define(App\Cliente::class, function (Faker\Generator $faker) {
         'data_sinistro' => $faker->dateTimeThisDecade(),
         'ora_sinistro' => $faker->time,
         'luogo_sinistro' => $faker->city,
-        'autorita' => $faker->numberBetween(0, 4),
         'comando_autorita' => $faker->optional($weight = 0.8)->state,
         'testimoni' => $faker->optional($weight = 0.8)->name,
         'rivalsa' => $faker->numberBetween(0, 4), 
@@ -269,6 +268,7 @@ $factory->define(App\Cliente::class, function (Faker\Generator $faker) {
         'cliente_id' => $cliente->id,
         'assicurazione_parte_id' =>  App\CompagniaAssicurativa::where('filiale_id', $cliente->filiale->id)->get()->random()->id,
         'assicurazione_controparte_id' => App\CompagniaAssicurativa::where('filiale_id', $cliente->filiale->id)->get()->random()->id,
+        'autorita_id' => \App\Autorita::all()->random()->id,
     ];
 });
 

@@ -57,7 +57,6 @@ class CreatePraticheTable extends Migration
             $table->date('data_sinistro')->nullable();
             $table->string('ora_sinistro')->nullable();
             $table->string('luogo_sinistro')->nullable();
-            $table->integer('autorita')->nullable();            // pseudo enum
             $table->string('comando_autorita')->nullable();
             $table->string('testimoni')->nullable();
             $table->integer('rivalsa')->nullable();             // pseudo enum

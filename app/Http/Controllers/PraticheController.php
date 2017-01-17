@@ -59,10 +59,10 @@ class PraticheController extends Controller
         }
         
         $assicurazioni = \App\CompagniaAssicurativa::where('filiale_id', $pratica->cliente->filiale->id)->get();
-        
+        $autorita = \App\Autorita::pluck('nome', 'id');
         $filiale = $pratica->cliente->filiale;
         
-        return view('pratiche.edit', compact('pratica', 'assicurazioni', 'filiale'));
+        return view('pratiche.edit', compact('pratica', 'assicurazioni', 'filiale', 'autorita'));
     }
 
     public function update(Request $request, $cliente_id, $pratica_id)
@@ -106,6 +106,15 @@ class PraticheController extends Controller
             // Se non è specificata una assicurazione controparte cancello la relazione
             $pratica->assicurazione_controparte()->dissociate();
         }
+        
+        $autorita = \App\Autorita::find($request->autorita_id);
+        if ($autorita == null)
+        {
+            // Se l'autorità non esiste la creo
+            $autorita = \App\Autorita::create(['nome' => $request->autorita_id]);
+        }
+        
+        $pratica->autorita()->associate($autorita);
         
         $pratica->save();
         
@@ -175,6 +184,15 @@ class PraticheController extends Controller
             // Se non è specificata una assicurazione controparte cancello la relazione
             $pratica->assicurazione_controparte()->dissociate();
         }
+        
+        $autorita = \App\Autorita::find($request->autorita_id);
+        if ($autorita == null)
+        {
+            // Se l'autorità non esiste la creo
+            $autorita = \App\Autorita::create(['nome' => $request->autorita_id]);
+        }
+        
+        $pratica->autorita()->associate($autorita);
         
         $pratica->cliente()->associate($cliente);
         $pratica->save();
@@ -249,7 +267,6 @@ class PraticheController extends Controller
             'data_sinistro'                     => 'date_format:d/m/Y|before:tomorrow',
             'ora_sinistro'                      => 'max:255',   //potrebbero voler scrivere "Intorno alle 22" o simili
             'luogo_sinistro'                    => 'max:255',
-            'autorita'                          => 'numeric|in:' . implode(',', array_keys(\App\Pratica::$enumAutorita)),
             'comando_autorita'                  => 'max:255',
             'testimoni'                         => 'max:255',
             'rivalsa'                           => 'numeric|in:' . implode(',', array_keys(\App\Pratica::$enumRivalsa)),

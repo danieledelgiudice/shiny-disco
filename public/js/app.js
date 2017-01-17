@@ -150,7 +150,7 @@ var parseQueryString = function() {
         sortField: 'text',
     });
     
-    $('#professione_id').selectize({
+    $('#professione_id, #autorita_id').selectize({
         sortField: 'text',
         create: true,
         createOnBlur: true,

@@ -410,9 +410,10 @@
             
             <div class="form-group">
                 <!-- Autorità -->
-                {!! Form::label('autorita', 'Autorità' , ['class' => 'col-md-2 control-label']) !!}
+                {!! Form::label('autorita_id', 'Autorità' , ['class' => 'col-md-2 control-label']) !!}
                 <div class="col-md-4">
-                    {!! Form::select('autorita', \App\Pratica::$enumAutorita, null, ['class' => 'form-control']) !!}
+                    {{ Form::select('autorita_id', $autorita, null, ['class' => 'form-control', 'placeholder' => '',
+                            'data-selecttype' => 'autorita']) }}
                 </div>
             
                 <!-- Comando di -->
