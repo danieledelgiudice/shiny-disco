@@ -31,7 +31,7 @@
                                                <i class="fa fa-eye"></i> 
                                             </a>
                                             <a href="{{ action('PraticheController@edit', ['cliente' => $pratica->cliente,
-                                                'pratica' => $pratica])}}" class="btn btn-success">
+                                                'pratica' => $pratica])}}" class="btn btn-primary">
                                                <i class="fa fa-pencil"></i> 
                                             </a>
                                         </td>

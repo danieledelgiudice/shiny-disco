@@ -24,7 +24,12 @@ class Authenticate
                 return redirect()->guest('login');
             }
         }
-
-        return $next($request);
+        
+        if (Auth::user()->isEnabled())
+            return $next($request);
+        else {
+            Auth::logout();
+            return redirect()->guest('login');
+        }
     }
 }

@@ -16,6 +16,8 @@ class CreateFilialiTable extends Migration
             $table->increments('id');
             
             $table->string('nome');
+            $table->string('indirizzo');
+            $table->string('telefono')->nullable();
             
             $table->timestamps();
         });

@@ -10,12 +10,12 @@ class Filiale extends Model
     
     public function clienti()
     {
-        return $this->hasMany('\App\Clienti', 'filiale_id', 'id');
+        return $this->hasMany('\App\Cliente', 'filiale_id', 'id');
     }
     
-    public function utenti()
+    public function utente()
     {
-        return $this->hasOne('\App\Users', 'filiale_id', 'id');
+        return $this->hasOne('\App\User', 'filiale_id', 'id');
     }
     
     public function compagnieAssicurative()
@@ -29,6 +29,6 @@ class Filiale extends Model
      *
      * @var array
      */
-    protected $fillable = ['nome'];
+    protected $fillable = ['nome', 'indirizzo', 'telefono'];
 
 }

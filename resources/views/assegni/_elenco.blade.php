@@ -36,7 +36,7 @@
                                 {{ Form::close() }}
                                 <!-- Fine form eliminazione pratica -->
                                 
-                                <a class="btn btn-success" href="{{ action('AssegniController@edit',
+                                <a class="btn btn-primary" href="{{ action('AssegniController@edit',
                                     ['cliente' => $pratica->cliente, 'pratica' => $pratica, 'assegno' => $assegno ]) }}">
                                     <i class="fa fa-fw fa-pencil"></i>
                                 </a>

@@ -33,7 +33,7 @@
                                         <td class="table-text col-md-1"><div>{{ $compagnia->giorni }}</div></td>
                                         <td class="table-text col-md-2">
                                             <a href="{{ action('CompagnieAssicurativeController@edit', ['filiale' => $compagnia->filiale, 'compagnia_assicurativa' => $compagnia])}}"
-                                                class="btn btn-success">
+                                                class="btn btn-primary">
                                                 <i class="fa fa-fw fa-pencil"></i>
                                             </a>
                                             

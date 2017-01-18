@@ -34,7 +34,7 @@
                     <!-- Fine form eliminazione pratica -->
                     
                     <a href="{{ action('PraticheController@edit', ['cliente' => $pratica->cliente, 'pratica' => $pratica] ) }}"
-                        class="btn btn-success"><i class="fa fa-fw fa-pencil"></i></a>
+                        class="btn btn-primary"><i class="fa fa-fw fa-pencil"></i></a>
                     
                     <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#praticaDestroyModal">
                         <i class="fa fa-fw fa-trash"></i>

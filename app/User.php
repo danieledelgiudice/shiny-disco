@@ -34,4 +34,9 @@ class User extends Authenticatable
     {
         return $this->admin;
     }
+    
+    public function isEnabled()
+    {
+        return $this->enabled;
+    }
 }

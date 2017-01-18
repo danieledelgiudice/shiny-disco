@@ -69,7 +69,7 @@
                                             <a href="{{ action('ClientiController@show', $cliente)}}" class="btn btn-default">
                                                <i class="fa fa-eye"></i> 
                                             </a>
-                                            <a href="{{ action('ClientiController@edit', $cliente)}}" class="btn btn-success">
+                                            <a href="{{ action('ClientiController@edit', $cliente)}}" class="btn btn-primary">
                                                <i class="fa fa-pencil"></i> 
                                             </a>
                                         </td>

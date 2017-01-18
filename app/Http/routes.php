@@ -52,7 +52,7 @@ Route::post('/login',                                                           
 
 
 Route::get( '/clienti/{cliente}/pratiche/{pratica}/assegni/new',                'AssegniController@create');
-Route::get( '/clienti/{cliente}/pratiche/{pratica}/assegni/{assegno}',          'AssegniController@edit');
+Route::get( '/clienti/{cliente}/pratiche/{pratica}/assegni/{assegno}/edit',     'AssegniController@edit');
 Route::post('/clienti/{cliente}/pratiche/{pratica}/assegni/',                   'AssegniController@store');
 Route::put( '/clienti/{cliente}/pratiche/{pratica}/assegni/{assegno}',          'AssegniController@update');
 Route::delete( '/clienti/{cliente}/pratiche/{pratica}/assegni/{assegno}',       'AssegniController@destroy');
@@ -70,3 +70,11 @@ Route::delete( '/filiali/{filiale}/compagnie_assicurative/{compagnia_assicurativ
 Route::get( '/filiali/{filiale}/agenda',                                        'PromemoriaController@indexToday');
 Route::post('/clienti/{cliente}/pratiche/{pratica}/promemoria/new',             'PromemoriaController@store');
 Route::delete('/clienti/{cliente}/pratiche/{pratica}/promemoria/{promemoria}',  'PromemoriaController@destroy');
+
+
+Route::get( '/filiali',                                                         'FilialiController@index');
+Route::get( '/filiali/new',                                                     'FilialiController@create');
+Route::get( '/filiali/{filiale}/edit',                                          'FilialiController@edit');
+Route::put( '/filiali/{filiale}/toggleEnabled',                                 'FilialiController@toggleEnabled');
+Route::put( '/filiali/{filiale}',                                               'FilialiController@update');
+Route::post( '/filiali/',                                                       'FilialiController@store');
