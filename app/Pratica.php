@@ -54,6 +54,11 @@ class Pratica extends Model
         return $this->belongsTo('\App\Autorita', 'autorita_id');
     }
     
+    public function promemoria()
+    {
+        return $this->hasMany('\App\Promemoria', 'pratica_id', 'id');
+    }
+    
     // Mutator data_apertura
     public function setDataAperturaAttribute($value)
     {

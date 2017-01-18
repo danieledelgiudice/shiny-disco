@@ -1,7 +1,7 @@
 <!-- Elenco assegni relativi alla pratica -->
 <div class="panel panel-default">
     <div class="panel-heading">
-        <i class="fa fa-sticky-note"></i>
+        <i class="fa fa-credit-card"></i>
         &nbsp;
         Assegni pratica
     </div>

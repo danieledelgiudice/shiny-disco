@@ -77,5 +77,12 @@ class AuthServiceProvider extends ServiceProvider
         $gate->define('eliminare-compagnia-assicurativa', function ($user, $compagnia) {
             return $user->filiale->id === $compagnia->filiale->id;
         });
+        
+        
+        
+        
+        $gate->define('visualizzare-agenda', function ($user, $filiale) {
+            return $user->filiale->id === $filiale->id;
+        });
     }
 }

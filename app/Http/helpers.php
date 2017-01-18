@@ -6,3 +6,15 @@ function format_date($value) {
     else
         return '';
 }
+
+function date_diff_days($value) {
+    \Carbon\Carbon::setLocale('it');
+    
+    if ($value->isToday()) return "oggi";
+    if ($value->isYesterday()) return "ieri";
+    if ($value->isTomorrow()) return "domani";
+    
+    $diffH = $value->diffForHumans();
+    $s = format_date($value);
+    return "$diffH ($s)";
+}

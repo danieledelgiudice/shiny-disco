@@ -184,5 +184,4 @@ var parseQueryString = function() {
             },
         }
     });
-    
 })();

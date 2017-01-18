@@ -65,3 +65,8 @@ Route::get( '/filiali/{filiale}/compagnie_assicurative/{compagnia_assicurativa}/
 Route::post( '/filiali/{filiale}/compagnie_assicurative/',                              'CompagnieAssicurativeController@store');
 Route::put( '/filiali/{filiale}/compagnie_assicurative/{compagnia_assicurativa}',       'CompagnieAssicurativeController@update');
 Route::delete( '/filiali/{filiale}/compagnie_assicurative/{compagnia_assicurativa}',    'CompagnieAssicurativeController@destroy');
+
+
+Route::get( '/filiali/{filiale}/agenda',                                        'PromemoriaController@indexToday');
+Route::post('/clienti/{cliente}/pratiche/{pratica}/promemoria/new',             'PromemoriaController@store');
+Route::delete('/clienti/{cliente}/pratiche/{pratica}/promemoria/{promemoria}',  'PromemoriaController@destroy');

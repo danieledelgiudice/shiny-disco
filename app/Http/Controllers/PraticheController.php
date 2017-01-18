@@ -41,7 +41,9 @@ class PraticheController extends Controller
         
         $documenti = $pratica->documenti()->get();
         $assegni = $pratica->assegni()->oldest('data')->get();
-        return view('pratiche.show', compact('pratica', 'documenti', 'assegni'));
+        $promemoria = $pratica->promemoria()->oldest('quando')->get();
+        
+        return view('pratiche.show', compact('pratica', 'documenti', 'assegni', 'promemoria'));
     }
 
     public function edit(Request $request, $cliente_id, $pratica_id)

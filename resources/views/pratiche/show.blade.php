@@ -12,6 +12,8 @@
     @include('common._modal_elimina',
        ['resource' => 'assegno',
         'message' => 'Sei sicuro di voler eliminare l\'assegno? Questa operazione non potrà essere annullata.'])
+    
+    @include('promemoria._modal_create')
 
     <div class="container">
         <!-- Mostra pulsanti navigazione -->
@@ -57,5 +59,8 @@
         
         <!-- Elenco assegni pratica -->
         @include('assegni._elenco')
+        
+        <!-- Elenco promemoria pratica -->
+        @include('promemoria._elenco')
     </div>
 @endsection
