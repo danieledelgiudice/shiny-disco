@@ -6,7 +6,16 @@
         'message' => 'Sei sicuro di voler eliminare la compagnia? Questa operazione non potrà essere annullata.'])
     
     <div class="container">
-        <h1 class="page-header text-center">Agenda di oggi</h1>
+        <div class="page-header text-center">
+            <h1>Agenda di oggi</h1>
+            <div>
+                <div class="pull-left">
+                </div>
+                <div class="pull-right">
+                    @include ('common._dropdown_selezione_filiale')
+                </div>
+            </div>
+        </div>
         <div>
             @include('common._barra_filiale')
             <div class="panel panel-default">

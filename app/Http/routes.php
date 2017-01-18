@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',                                                                 'PromemoriaController@indexToday');
 
 Route::get( '/clienti',                                                         'ClientiController@index');
 Route::get( '/clienti/new',                                                     'ClientiController@create');

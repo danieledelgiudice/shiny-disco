@@ -18,3 +18,10 @@ function date_diff_days($value) {
     $s = format_date($value);
     return "$diffH ($s)";
 }
+
+function url_filiale($value, $f) {
+    $id = $f->id;
+    $pattern = '#/filiali/(\d+)/#i';
+    $replacement = "/filiali/$id/";
+    return preg_replace($pattern, $replacement, $value);
+}

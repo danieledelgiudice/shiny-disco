@@ -13,8 +13,11 @@ class PromemoriaController extends Controller
         $this->middleware('auth');
     }
     
-    public function indexToday(Request $request, $filiale_id)
+    public function indexToday(Request $request, $filiale_id = null)
     {
+        if (!$filiale_id)
+            return redirect()->action('PromemoriaController@indexToday', ['filiale' => $request->user()->filiale->id ]);
+            
         $filiale = \App\Filiale::findOrFail($filiale_id);
         
         if($request->user()->cannot('visualizzare-agenda', $filiale)) {
@@ -26,7 +29,8 @@ class PromemoriaController extends Controller
                     ->whereHas('pratica.cliente.filiale', function($query) use ($filiale) {
                         $query->where('id', $filiale->id);
                     })->oldest('quando')->get();
-        return view('promemoria.indexToday', compact('filiale', 'promemoria'));
+        $filiali = \App\Filiale::all();
+        return view('promemoria.indexToday', compact('filiale', 'promemoria', 'filiali'));
     }
     
     public function store(Request $request, $cliente_id, $pratica_id)
