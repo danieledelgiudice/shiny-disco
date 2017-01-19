@@ -191,4 +191,9 @@ var parseQueryString = function() {
     });
     
     $('.alert.auto-slide').delay(5000).slideUp(350);
+    
+    $('form').submit(function() {
+        $(this).find("button[type='submit']").prop('disabled',true);
+    });
+    
 })();

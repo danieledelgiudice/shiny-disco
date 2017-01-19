@@ -148,8 +148,9 @@ class PraticheController extends Controller
         $assicurazioni = \App\CompagniaAssicurativa::where('filiale_id', $cliente->filiale->id)->get();
         
         $filiale = $cliente->filiale;
+        $autorita = \App\Autorita::pluck('nome', 'id');
         
-        return view('pratiche.create', compact('cliente', 'pratica', 'assicurazioni', 'filiale'));
+        return view('pratiche.create', compact('cliente', 'pratica', 'assicurazioni', 'filiale', 'autorita'));
     }
     
     public function store(Request $request, $cliente_id)
@@ -201,7 +202,7 @@ class PraticheController extends Controller
         
         $pratica->cliente()->associate($cliente);
         $pratica->save();
-        
+
         // TODO: mostrare messaggio nella view
         return redirect()->action('PraticheController@show', ['cliente' => $pratica->cliente, 'pratica' => $pratica])
                     ->with('success', 'Pratica salvata con successo!');

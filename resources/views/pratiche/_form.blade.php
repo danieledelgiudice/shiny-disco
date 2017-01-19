@@ -2,7 +2,7 @@
     {!! Form::model($pratica, ['action' => ['PraticheController@update', 'cliente' => $pratica->cliente, 'pratica' => $pratica],
         'method' => 'put', 'class' => 'form-horizontal']) !!}
 @else
-    {!! Form::model($pratica, ['action' => ['PraticheController@store', 'cliente' => $pratica->cliente],
+    {!! Form::model($pratica, ['action' => ['PraticheController@store', 'cliente' => $cliente],
         'class' => 'form-horizontal']) !!}
 @endif
     <div class="panel panel-default">

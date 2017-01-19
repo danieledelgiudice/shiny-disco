@@ -8324,3 +8324,31 @@ Stack trace:
 [18-Jan-2017 15:42:38 UTC] PHP  22. spl_autoload_call() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Routing/Route.php:280
 [18-Jan-2017 15:42:38 UTC] PHP  23. Composer\Autoload\ClassLoader->loadClass() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Routing/Route.php:280
 [18-Jan-2017 15:42:38 UTC] PHP  24. Composer\Autoload\includeFile() /home/ubuntu/workspace/shiny-disco/vendor/composer/ClassLoader.php:301
+[19-Jan-2017 14:30:42 UTC] PHP Fatal error:  Call to a member function getPath() on a non-object in /home/ubuntu/workspace/shiny-disco/storage/framework/views/03089470c372a2c36f8f1b06a2d79154bd9d5d48.php on line 45
+[19-Jan-2017 14:30:42 UTC] PHP Stack trace:
+[19-Jan-2017 14:30:42 UTC] PHP   1. {main}() /home/ubuntu/workspace/shiny-disco/server.php:0
+[19-Jan-2017 14:30:42 UTC] PHP   2. require_once() /home/ubuntu/workspace/shiny-disco/server.php:21
+[19-Jan-2017 14:30:42 UTC] PHP   3. Illuminate\Foundation\Http\Kernel->handle() /home/ubuntu/workspace/shiny-disco/public/index.php:54
+[19-Jan-2017 14:30:42 UTC] PHP   4. Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php:99
+[19-Jan-2017 14:30:42 UTC] PHP   5. Illuminate\Pipeline\Pipeline->then() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php:132
+[19-Jan-2017 14:30:42 UTC] PHP   6. call_user_func:{/home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php:103}() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php:103
+[19-Jan-2017 14:30:42 UTC] PHP   7. Illuminate\Routing\Pipeline->Illuminate\Routing\{closure}() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php:103
+[19-Jan-2017 14:30:42 UTC] PHP   8. call_user_func:{/home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php:32}() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php:32
+[19-Jan-2017 14:30:42 UTC] PHP   9. Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php:32
+[19-Jan-2017 14:30:42 UTC] PHP  10. call_user_func_array:{/home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php:136}() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php:136
+[19-Jan-2017 14:30:42 UTC] PHP  11. Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode->handle() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php:136
+[19-Jan-2017 14:30:42 UTC] PHP  12. Illuminate\Routing\Pipeline->Illuminate\Routing\{closure}() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/CheckForMaintenanceMode.php:44
+[19-Jan-2017 14:30:42 UTC] PHP  13. Illuminate\Routing\Pipeline->handleException() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php:54
+[19-Jan-2017 14:30:42 UTC] PHP  14. App\Exceptions\Handler->render() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php:80
+[19-Jan-2017 14:30:42 UTC] PHP  15. Illuminate\Foundation\Exceptions\Handler->render() /home/ubuntu/workspace/shiny-disco/app/Exceptions/Handler.php:48
+[19-Jan-2017 14:30:42 UTC] PHP  16. Illuminate\Foundation\Exceptions\Handler->renderHttpException() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php:113
+[19-Jan-2017 14:30:42 UTC] PHP  17. Illuminate\Routing\ResponseFactory->view() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php:156
+[19-Jan-2017 14:30:42 UTC] PHP  18. Illuminate\Routing\ResponseFactory->make() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Routing/ResponseFactory.php:71
+[19-Jan-2017 14:30:42 UTC] PHP  19. Symfony\Component\HttpFoundation\Response->__construct() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Routing/ResponseFactory.php:57
+[19-Jan-2017 14:30:42 UTC] PHP  20. Illuminate\Http\Response->setContent() /home/ubuntu/workspace/shiny-disco/vendor/symfony/http-foundation/Response.php:201
+[19-Jan-2017 14:30:42 UTC] PHP  21. Illuminate\View\View->render() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Http/Response.php:53
+[19-Jan-2017 14:30:42 UTC] PHP  22. Illuminate\View\View->renderContents() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/View/View.php:85
+[19-Jan-2017 14:30:42 UTC] PHP  23. Illuminate\View\View->getContents() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/View/View.php:120
+[19-Jan-2017 14:30:42 UTC] PHP  24. Illuminate\View\Engines\CompilerEngine->get() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/View/View.php:149
+[19-Jan-2017 14:30:42 UTC] PHP  25. Illuminate\View\Engines\PhpEngine->evaluatePath() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php:59
+[19-Jan-2017 14:30:42 UTC] PHP  26. include() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php:42
