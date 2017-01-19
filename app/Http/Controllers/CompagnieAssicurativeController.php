@@ -13,20 +13,6 @@ class CompagnieAssicurativeController extends Controller
         $this->middleware('auth');
     }
     
-    public function index(Request $request, $filiale_id)
-    {
-        $filiale = \App\Filiale::findOrFail($filiale_id);
-        
-        if($request->user()->cannot('visualizzare-compagnia-assicurativa', $filiale)) {
-            // L'utente non ha il permesso di vedere le compagnie per questa filiale
-            abort(403);
-        }
-        
-        $compagnie_assicurative = $filiale->compagnieAssicurative;
-        
-        return view('compagnie_assicurative.index', compact('filiale', 'compagnie_assicurative'));
-    }
-    
     public function edit(Request $request, $filiale_id, $compagnia_assicurativa_id)
     {
         $filiale = \App\Filiale::findOrFail($filiale_id);
@@ -85,8 +71,8 @@ class CompagnieAssicurativeController extends Controller
         $compagnia_assicurativa->fill($request->all());
         $compagnia_assicurativa->save();
         
-        return redirect()->action('CompagnieAssicurativeController@index',
-            ['filiale' => $compagnia_assicurativa->filiale, 'compagnia_assicurativa' => $compagnia_assicurativa]);
+        return redirect()->action('PannelloFilialeController@compagnieAssicurative',
+            ['filiale' => $compagnia_assicurativa->filiale]);
     }
     
     public function create(Request $request, $filiale_id)
@@ -119,7 +105,7 @@ class CompagnieAssicurativeController extends Controller
         
         $compagnia_assicurativa->save();
         
-        return redirect()->action('CompagnieAssicurativeController@index', ['filiale' => $compagnia_assicurativa->filiale]);
+        return redirect()->action('PannelloFilialeController@compagnieAssicurative', ['filiale' => $compagnia_assicurativa->filiale]);
     }
     
     private function validateInput(Request $request)

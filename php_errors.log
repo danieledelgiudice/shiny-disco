@@ -8272,3 +8272,55 @@ Stack trace:
 [18-Jan-2017 15:10:40 UTC] PHP  67. Illuminate\View\View->getContents() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/View/View.php:120
 [18-Jan-2017 15:10:40 UTC] PHP  68. Illuminate\View\Engines\CompilerEngine->get() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/View/View.php:149
 [18-Jan-2017 15:10:40 UTC] PHP  69. Illuminate\View\Engines\PhpEngine->evaluatePath() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php:59
+[18-Jan-2017 15:42:35 UTC] PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR) in /home/ubuntu/workspace/shiny-disco/app/Http/Controllers/PannelloFilialeController.php on line 20
+[18-Jan-2017 15:42:35 UTC] PHP Stack trace:
+[18-Jan-2017 15:42:35 UTC] PHP   1. {main}() /home/ubuntu/workspace/shiny-disco/server.php:0
+[18-Jan-2017 15:42:35 UTC] PHP   2. require_once() /home/ubuntu/workspace/shiny-disco/server.php:21
+[18-Jan-2017 15:42:35 UTC] PHP   3. Illuminate\Foundation\Http\Kernel->handle() /home/ubuntu/workspace/shiny-disco/public/index.php:54
+[18-Jan-2017 15:42:35 UTC] PHP   4. Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php:99
+[18-Jan-2017 15:42:35 UTC] PHP   5. Illuminate\Pipeline\Pipeline->then() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php:132
+[18-Jan-2017 15:42:35 UTC] PHP   6. call_user_func:{/home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php:103}() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php:103
+[18-Jan-2017 15:42:35 UTC] PHP   7. Illuminate\Routing\Pipeline->Illuminate\Routing\{closure}() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php:103
+[18-Jan-2017 15:42:35 UTC] PHP   8. call_user_func:{/home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php:32}() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php:32
+[18-Jan-2017 15:42:35 UTC] PHP   9. Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php:32
+[18-Jan-2017 15:42:35 UTC] PHP  10. call_user_func_array:{/home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php:136}() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php:136
+[18-Jan-2017 15:42:35 UTC] PHP  11. Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode->handle() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php:136
+[18-Jan-2017 15:42:35 UTC] PHP  12. Illuminate\Routing\Pipeline->Illuminate\Routing\{closure}() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/CheckForMaintenanceMode.php:44
+[18-Jan-2017 15:42:35 UTC] PHP  13. call_user_func:{/home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php:52}() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php:52
+[18-Jan-2017 15:42:35 UTC] PHP  14. Illuminate\Foundation\Http\Kernel->Illuminate\Foundation\Http\{closure}() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php:52
+[18-Jan-2017 15:42:35 UTC] PHP  15. Illuminate\Routing\Router->dispatch() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php:246
+[18-Jan-2017 15:42:35 UTC] PHP  16. Illuminate\Routing\Router->dispatchToRoute() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Routing/Router.php:675
+[18-Jan-2017 15:42:35 UTC] PHP  17. Illuminate\Routing\Router->findRoute() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Routing/Router.php:691
+[18-Jan-2017 15:42:35 UTC] PHP  18. Illuminate\Routing\Router->substituteBindings() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Routing/Router.php:825
+[18-Jan-2017 15:42:35 UTC] PHP  19. Illuminate\Routing\Router->substituteImplicitBindings() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Routing/Router.php:842
+[18-Jan-2017 15:42:35 UTC] PHP  20. Illuminate\Routing\Route->signatureParameters() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Routing/Router.php:857
+[18-Jan-2017 15:42:35 UTC] PHP  21. ReflectionMethod->__construct() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Routing/Route.php:280
+[18-Jan-2017 15:42:35 UTC] PHP  22. spl_autoload_call() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Routing/Route.php:280
+[18-Jan-2017 15:42:35 UTC] PHP  23. Composer\Autoload\ClassLoader->loadClass() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Routing/Route.php:280
+[18-Jan-2017 15:42:35 UTC] PHP  24. Composer\Autoload\includeFile() /home/ubuntu/workspace/shiny-disco/vendor/composer/ClassLoader.php:301
+[18-Jan-2017 15:42:38 UTC] PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR) in /home/ubuntu/workspace/shiny-disco/app/Http/Controllers/PannelloFilialeController.php on line 20
+[18-Jan-2017 15:42:38 UTC] PHP Stack trace:
+[18-Jan-2017 15:42:38 UTC] PHP   1. {main}() /home/ubuntu/workspace/shiny-disco/server.php:0
+[18-Jan-2017 15:42:38 UTC] PHP   2. require_once() /home/ubuntu/workspace/shiny-disco/server.php:21
+[18-Jan-2017 15:42:38 UTC] PHP   3. Illuminate\Foundation\Http\Kernel->handle() /home/ubuntu/workspace/shiny-disco/public/index.php:54
+[18-Jan-2017 15:42:38 UTC] PHP   4. Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php:99
+[18-Jan-2017 15:42:38 UTC] PHP   5. Illuminate\Pipeline\Pipeline->then() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php:132
+[18-Jan-2017 15:42:38 UTC] PHP   6. call_user_func:{/home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php:103}() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php:103
+[18-Jan-2017 15:42:38 UTC] PHP   7. Illuminate\Routing\Pipeline->Illuminate\Routing\{closure}() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php:103
+[18-Jan-2017 15:42:38 UTC] PHP   8. call_user_func:{/home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php:32}() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php:32
+[18-Jan-2017 15:42:38 UTC] PHP   9. Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php:32
+[18-Jan-2017 15:42:38 UTC] PHP  10. call_user_func_array:{/home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php:136}() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php:136
+[18-Jan-2017 15:42:38 UTC] PHP  11. Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode->handle() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php:136
+[18-Jan-2017 15:42:38 UTC] PHP  12. Illuminate\Routing\Pipeline->Illuminate\Routing\{closure}() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/CheckForMaintenanceMode.php:44
+[18-Jan-2017 15:42:38 UTC] PHP  13. call_user_func:{/home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php:52}() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php:52
+[18-Jan-2017 15:42:38 UTC] PHP  14. Illuminate\Foundation\Http\Kernel->Illuminate\Foundation\Http\{closure}() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php:52
+[18-Jan-2017 15:42:38 UTC] PHP  15. Illuminate\Routing\Router->dispatch() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php:246
+[18-Jan-2017 15:42:38 UTC] PHP  16. Illuminate\Routing\Router->dispatchToRoute() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Routing/Router.php:675
+[18-Jan-2017 15:42:38 UTC] PHP  17. Illuminate\Routing\Router->findRoute() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Routing/Router.php:691
+[18-Jan-2017 15:42:38 UTC] PHP  18. Illuminate\Routing\Router->substituteBindings() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Routing/Router.php:825
+[18-Jan-2017 15:42:38 UTC] PHP  19. Illuminate\Routing\Router->substituteImplicitBindings() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Routing/Router.php:842
+[18-Jan-2017 15:42:38 UTC] PHP  20. Illuminate\Routing\Route->signatureParameters() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Routing/Router.php:857
+[18-Jan-2017 15:42:38 UTC] PHP  21. ReflectionMethod->__construct() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Routing/Route.php:280
+[18-Jan-2017 15:42:38 UTC] PHP  22. spl_autoload_call() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Routing/Route.php:280
+[18-Jan-2017 15:42:38 UTC] PHP  23. Composer\Autoload\ClassLoader->loadClass() /home/ubuntu/workspace/shiny-disco/vendor/laravel/framework/src/Illuminate/Routing/Route.php:280
+[18-Jan-2017 15:42:38 UTC] PHP  24. Composer\Autoload\includeFile() /home/ubuntu/workspace/shiny-disco/vendor/composer/ClassLoader.php:301

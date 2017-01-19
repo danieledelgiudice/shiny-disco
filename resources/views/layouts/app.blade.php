@@ -52,19 +52,21 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/') }}">Agenda</a></li>
-                    
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Clienti <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{{ action('ClientiController@index') }}"><i class="fa fa-fw fa-users"></i>&nbsp;&nbsp;Lista clienti</a></li>
-                            <li><a href="{{ action('ClientiController@create') }}"><i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Aggiungi cliente</a></li>
-                        </ul>
-                    </li>
-                    
-                    
-                    <li><a href="{{ action('PraticheController@indexAll') }}">Pratiche</a></li>
-                    <li><a href="{{ action('DocumentiController@create') }}">Carica documenti</a></li>
+                    @if (Auth::user())
+                        <li><a href="{{ action('PromemoriaController@indexToday', ['filiale' => Auth::user()->filiale]) }}">Agenda</a></li>
+                        
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Clienti <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ action('ClientiController@index') }}"><i class="fa fa-fw fa-users"></i>&nbsp;&nbsp;Lista clienti</a></li>
+                                <li><a href="{{ action('ClientiController@create') }}"><i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Aggiungi cliente</a></li>
+                            </ul>
+                        </li>
+                        
+                        
+                        <li><a href="{{ action('PraticheController@indexAll') }}">Pratiche</a></li>
+                        <li><a href="{{ action('DocumentiController@create') }}">Carica documenti</a></li>
+                    @endif
                 </ul>
                 
                 <ul class="nav navbar-nav navbar-right">
@@ -83,10 +85,12 @@
                             </a>
                             
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ secure_url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                                <li><a href="{{ action('PannelloFilialeController@home', ['filiale' => Auth::user()->filiale]) }}"><i class="fa fa-btn fa-window-maximize"></i>Pannello filiale</a></li>
                                 @if (Auth::user()->isAdmin())
                                     <li><a href="{{ action('FilialiController@index') }}"><i class="fa fa-btn fa-gear"></i>Gestione filiali</a></li>
                                 @endif
+                                <li role="separator" class="divider"></li>
+                                <li><a href="{{ secure_url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
                         </li>
                     @endif

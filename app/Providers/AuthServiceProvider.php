@@ -84,5 +84,10 @@ class AuthServiceProvider extends ServiceProvider
         $gate->define('visualizzare-agenda', function ($user, $filiale) {
             return $user->filiale->id === $filiale->id;
         });
+        
+        
+        $gate->define('visualizzare-pannello-filiale', function ($user, $filiale) {
+            return $user->filiale->id === $filiale->id;
+        });
     }
 }

@@ -48,3 +48,7 @@ table .btn {
     cursor: pointer;
     -webkit-text-stroke: 1px white;
 }
+
+.sidebar a.nav-link {
+    cursor: pointer;
+}

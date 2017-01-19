@@ -57,7 +57,6 @@ Route::delete( '/clienti/{cliente}/pratiche/{pratica}/assegni/{assegno}',       
 
 
 
-Route::get( '/filiali/{filiale}/compagnie_assicurative/',                               'CompagnieAssicurativeController@index');
 Route::get( '/filiali/{filiale}/compagnie_assicurative/new',                            'CompagnieAssicurativeController@create');
 Route::get( '/filiali/{filiale}/compagnie_assicurative/{compagnia_assicurativa}/edit',  'CompagnieAssicurativeController@edit');
 Route::post( '/filiali/{filiale}/compagnie_assicurative/',                              'CompagnieAssicurativeController@store');
@@ -76,3 +75,9 @@ Route::get( '/filiali/{filiale}/edit',                                          
 Route::put( '/filiali/{filiale}/toggleEnabled',                                 'FilialiController@toggleEnabled');
 Route::put( '/filiali/{filiale}',                                               'FilialiController@update');
 Route::post( '/filiali/',                                                       'FilialiController@store');
+
+
+
+Route::get( '/filiali/{filiale}/pannello',                                      'PannelloFilialeController@home');
+Route::get( '/filiali/{filiale}/pannello/compagnie_assicurative',               'PannelloFilialeController@compagnieAssicurative');
+Route::get( '/filiali/{filiale}/pannello/totali_omnia',                         'PannelloFilialeController@totaliOmnia');

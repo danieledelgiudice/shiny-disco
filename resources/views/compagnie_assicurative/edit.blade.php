@@ -9,7 +9,7 @@
             </h1>
             <div>
                 <div class="pull-left">
-                    <a href="{{ URL::previous() }}"
+                    <a id="history-back-btn"
                         class="btn btn-default"><i class="fa fa-fw fa-arrow-left"></i></a>
                 </div>
                 <div class="pull-right">
