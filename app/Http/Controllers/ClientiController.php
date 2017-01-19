@@ -87,7 +87,7 @@ class ClientiController extends Controller
         $cliente->save();
         
         // TODO: mostrare messaggio nella view
-        return redirect()->action('ClientiController@show', $cliente)->with('success', 'Cliente salvato con successo!');
+        return redirect()->action('ClientiController@show', $cliente)->with('success', 'Cliente modificato con successo!');
     }
     
     public function create()
@@ -164,7 +164,8 @@ class ClientiController extends Controller
         $cliente->importante = !$old_importante;
         $cliente->save();
         
-        return redirect()->back()->with('success', 'Importanza modificata con successo!');
+        $msg = $cliente->importante ? 'Il cliente è adesso importante' : 'Il cliente non è più importante';
+        return redirect()->back()->with('info', $msg);
     }
     
     private function validateInput(Request $request)
@@ -188,7 +189,7 @@ class ClientiController extends Controller
             'tipo_documento'            => 'numeric|in:' . implode(',', array_keys(\App\Cliente::$enumTipoDocumento)),
             'numero_documento'          => 'max:255',
             'stato_civile'              => 'numeric|in:' . implode(',', array_keys(\App\Cliente::$enumStatoCivile)),
-            'reddito'                   => 'numeric|max:100000000',
+            'reddito'                   => 'numeric|max:100000000|min:0',
             'numero_card'               => 'max:255'
         ]);
     }

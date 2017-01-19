@@ -33,7 +33,7 @@
             <!-- Professione -->
             <strong class="col-md-2 form-control-static">Professione</strong>
             <div class="col-md-4">
-                <p class="form-control-static">Professione1</p>
+                <p class="form-control-static">{{ $pratica->cliente->professione->nome }}</p>
             </div>
         </div>
         
@@ -42,7 +42,7 @@
             <!-- Reddito -->    
             <strong class="col-md-2 form-control-static">Reddito</strong>
             <div class="col-md-4">
-                <p class="form-control-static">{{ ($pratica->cliente->reddito) ? $pratica->cliente->reddito . " €" : '' }}</p>
+                <p class="form-control-static">{{ format_money($pratica->cliente->reddito) }}</p>
             </div>
 
         </div>

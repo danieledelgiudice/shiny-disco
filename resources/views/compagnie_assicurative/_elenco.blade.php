@@ -10,7 +10,7 @@
                 <th>Nome</th>
                 <th class="hidden-xs">Indirizzo</th>
                 <th class="hidden-xs">Telefono</th>
-                <th class="hidden-xs">Fax</th>
+                <th class="hidden-md hidden-sm hidden-xs">Fax</th>
                 <th class="hidden-xs">Email</th>
                 <th class="hidden-xs">Giorni</th>
                 <th>&nbsp;</th>
@@ -22,7 +22,7 @@
                             <td class="table-text col-sm-2"><div>{{ $compagnia->nome }}</div></td>
                             <td class="table-text hidden-xs col-sm-4"><div>{{ $compagnia->indirizzo }}</div></td>
                             <td class="table-text hidden-xs col-sm-1"><div>{{ $compagnia->telefono }}</div></td>
-                            <td class="table-text hidden-xs col-sm-1"><div>{{ $compagnia->fax }}</div></td>
+                            <td class="table-text hidden-md hidden-sm hidden-xs col-sm-1"><div>{{ $compagnia->fax }}</div></td>
                             <td class="table-text hidden-xs col-sm-1"><div>{{ $compagnia->email }}</div></td>
                             <td class="table-text hidden-xs col-sm-1"><div>{{ $compagnia->giorni }}</div></td>
                             <td class="table-text col-md-2">

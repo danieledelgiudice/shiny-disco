@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
         <!-- Mostra pulsanti navigazione -->
         <div class="page-header">
             <h1 class="text-center">
@@ -15,9 +15,9 @@
                 </div>
             </div>
         </div>
-
-
-
+    </div>
+        
+    <div class="container-fluid">
         <div class="col-md-2 sidebar bg-faded">
             <ul class="nav nav-pills nav-stacked">
                 <li class="nav-item{{ (isset($active) && $active === 'compagnie_assicurative') ? ' active' : '' }}">
@@ -38,7 +38,7 @@
             </ul>
         </div>
 
-        <main class="col-md-9">
+        <main class="col-md-8">
             @include('common._barra_filiale')
             
             @yield('inner-content')

@@ -201,7 +201,7 @@
             <!-- Parcella presunta -->
             <strong class="col-md-2 form-control-static">Parcella presunta</strong>
             <div class="col-md-4">
-                <p class="form-control-static">{{ ($pratica->parcella_presunta) ? "$pratica->parcella_presunta €" : '' }}</p>
+                <p class="form-control-static">{{ format_money($pratica->parcella_presunta) }}</p>
             </div>
         </div>
     </div>
@@ -253,7 +253,7 @@
             <!-- Valore mezzo liquidato -->
             <strong class="col-md-2 form-control-static">Valore mezzo liquidato</strong>
             <div class="col-md-4">
-                <p class="form-control-static">{{ ($pratica->valore_mezzo_liquidato) ? "$pratica->valore_mezzo_liquidato €" : '' }}</p>
+                <p class="form-control-static">{{ format_money($pratica->valore_mezzo_liquidato) }}</p>
             </div>
         </div>
         
@@ -275,7 +275,7 @@
             <!-- Importo sospeso -->
             <strong class="col-md-2 form-control-static">Importo sospeso</strong>
             <div class="col-md-4">
-               <p class="form-control-static">{{ ($pratica->importo_sospeso) ? "$pratica->importo_sospeso €" : '' }}</p>
+               <p class="form-control-static">{{ format_money($pratica->importo_sospeso) }}</p>
             </div>
         
             <!-- Data sospeso -->
@@ -289,13 +289,13 @@
             <!-- Onorari omnia -->
             <strong class="col-md-2 form-control-static">Onorari omnia</strong>
             <div class="col-md-4">
-               <p class="form-control-static">{{ ($pratica->onorari_omnia) ? "$pratica->onorari_omnia €" : '' }}</p>
+               <p class="form-control-static">{{ format_money($pratica->onorari_omnia) }}</p>
             </div>
         
             <!-- Liquidato omnia -->
             <strong class="col-md-2 form-control-static">Liquidato omnia</strong>
             <div class="col-md-4">
-                <p class="form-control-static">{{ ($pratica->liquidato_omnia) ? "$pratica->liquidato_omnia €" : '' }}</p>
+                <p class="form-control-static">{{ format_money($pratica->liquidato_omnia) }}</p>
             </div>
         </div>
         
@@ -384,7 +384,7 @@
             <!-- Danno presunto -->
             <strong class="col-md-2 form-control-static">Danno presunto</strong>
             <div class="col-md-4">
-                <p class="form-control-static">{{ ($pratica->danno_presunto) ? "$pratica->danno_presunto €" : '' }}</p>
+                <p class="form-control-static">{{ format_money($pratica->danno_presunto) }}</p>
 
             </div>
         </div>

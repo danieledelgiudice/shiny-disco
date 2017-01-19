@@ -99,8 +99,8 @@
         </div>
     </nav>
     
+    @include('common._flash_message')
     
-
     @yield('content')
 
     <!-- JavaScripts -->

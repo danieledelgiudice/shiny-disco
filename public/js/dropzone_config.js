@@ -12,7 +12,7 @@
       dictResponseError: 'Si è verificato un errore durante il caricamento di questo file ({{statusCode}})',
       
       accept: function(file, done) {
-        if (/.*?2\.\w{3,4}/i.test(file.name)) {
+        if (!/.*?\.\w{3,4}/i.test(file.name)) {
           done("Il file non ha un nome nel formato valido");
         }
         else { done(); }

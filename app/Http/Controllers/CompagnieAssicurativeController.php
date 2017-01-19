@@ -48,7 +48,7 @@ class CompagnieAssicurativeController extends Controller
         
         $compagnia_assicurativa->delete();
         
-        return redirect()->back();
+        return redirect()->back()->with('success', 'La compagnia assicurativa è stata eliminata con successo.');
     }
     
     public function update(Request $request, $filiale_id, $compagnia_assicurativa_id)
@@ -72,7 +72,8 @@ class CompagnieAssicurativeController extends Controller
         $compagnia_assicurativa->save();
         
         return redirect()->action('PannelloFilialeController@compagnieAssicurative',
-            ['filiale' => $compagnia_assicurativa->filiale]);
+            ['filiale' => $compagnia_assicurativa->filiale])
+            ->with('success', 'La comapgnia assicurativa è stata modificata con successo.');
     }
     
     public function create(Request $request, $filiale_id)
@@ -105,7 +106,8 @@ class CompagnieAssicurativeController extends Controller
         
         $compagnia_assicurativa->save();
         
-        return redirect()->action('PannelloFilialeController@compagnieAssicurative', ['filiale' => $compagnia_assicurativa->filiale]);
+        return redirect()->action('PannelloFilialeController@compagnieAssicurative', ['filiale' => $compagnia_assicurativa->filiale])
+            ->with('success', 'La compagnia assicurativa è stata salvata con successo.');
     }
     
     private function validateInput(Request $request)

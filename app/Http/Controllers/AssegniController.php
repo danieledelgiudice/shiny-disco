@@ -52,7 +52,8 @@ class AssegniController extends Controller
         $assegno->pratica()->associate($pratica);
         $assegno->save();
         
-        return redirect()->action('PraticheController@show', ['cliente' => $pratica->cliente, 'pratica' => $pratica]);
+        return redirect()->action('PraticheController@show', ['cliente' => $pratica->cliente, 'pratica' => $pratica])
+            ->with('success', 'L\'assegno è stato salvato con successo.');
     }
     
     public function edit(Request $request, $cliente_id, $pratica_id, $assegno_id)
@@ -101,7 +102,8 @@ class AssegniController extends Controller
         $assegno->fill($request->all());
         $assegno->save();
         
-        return redirect()->action('PraticheController@show', ['cliente' => $assegno->pratica->cliente, 'pratica' => $assegno->pratica]);
+        return redirect()->action('PraticheController@show', ['cliente' => $assegno->pratica->cliente, 'pratica' => $assegno->pratica])
+            ->with('success', 'L\'assegno è stato modificato con successo.');
     }
     
     public function destroy(Request $request, $cliente_id, $pratica_id, $assegno_id)
@@ -125,14 +127,15 @@ class AssegniController extends Controller
         
         $assegno->delete();
                 
-        return redirect()->action('PraticheController@show', ['cliente' => $assegno->pratica->cliente, 'pratica' => $assegno->pratica]);
+        return redirect()->action('PraticheController@show', ['cliente' => $assegno->pratica->cliente, 'pratica' => $assegno->pratica])
+            ->with('success', 'L\'assegno è stato eliminato con successo.');
     }
     
     private function validateInput(Request $request)
     {
         $this->validate($request, [
             'data'              => 'required|date_format:d/m/Y',
-            'importo'           => 'required|numeric|max:100000000',
+            'importo'           => 'required|numeric|max:100000000|min:0',
             'banca'             => 'required|max:255',
             'tipologia'         => 'required|in:0,1',
             'data_azione'       => 'required|date_format:d/m/Y',

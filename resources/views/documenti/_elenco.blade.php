@@ -10,7 +10,6 @@
             <table class="table table-hover table-striped">
                 <thead>
                     <th>Nome documento</th>
-                    <th>Tipo documento</th>
                     <th>Data inserimento</th>
                     <th>&nbsp;</th>
                 </thead>
@@ -18,10 +17,9 @@
                     @foreach ($documenti as $documento)
                         <tr class="">
                             <td class="table-text"><div>{{ $documento->descrizione }}</div></td>
-                            <td class="table-text"><div>{{ $documento->mime }}</div></td>
-                            <td class="table-text"><div>{{ format_date($documento->created_at) }}</div></td>
+                            <td class="table-text col-md-2"><div>{{ format_date($documento->created_at) }}</div></td>
                             
-                            <td class="table-text">
+                            <td class="table-text col-md-2">
                                 <!-- Form eliminazione pratica -->
                                 {{ Form::open(['action' => ['DocumentiController@destroy',
                                     'cliente' => $documento->pratica->cliente, 'pratica' => $documento->pratica, 'documento' => $documento],

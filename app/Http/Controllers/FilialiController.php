@@ -44,7 +44,7 @@ class FilialiController extends Controller
             $utente->save();
         }
         
-        return redirect()->action('FilialiController@index');
+        return redirect()->action('FilialiController@index')->with('success', 'La filiale è stata modificata con successo.');
     }
     
     public function create(Request $request)
@@ -69,7 +69,7 @@ class FilialiController extends Controller
         $utente->filiale()->associate($filiale);
         $utente->save();
         
-        return redirect()->action('FilialiController@index');
+        return redirect()->action('FilialiController@index')->with('success', 'La filiale è stata eliminata con successo.');
     }
     
     public function toggleEnabled(Request $request, $filiale_id)
@@ -84,7 +84,8 @@ class FilialiController extends Controller
         $utente->enabled = !$utente->enabled;
         $utente->save();
         
-        return redirect()->back();
+        $msg = $utente->enabled ? 'La filiale è stata riattivata' : 'La filiale è stata disattivata';
+        return redirect()->back()->with('info', $msg);
     }
     
     private function validateInput(Request $request)

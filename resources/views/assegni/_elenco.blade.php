@@ -20,10 +20,10 @@
                 </thead>
                 <tbody>
                     @foreach ($assegni as $index => $assegno)
-                        <tr class="">
+                        <tr>
                             <td class="table-text"><div class="text-center">{{ $index+1 }}</div></td>
                             <td class="table-text"><div>{{ format_date($assegno->data) }}</div></td>
-                            <td class="table-text"><div>{{ $assegno->importo }} €</div></td>
+                            <td class="table-text"><div>{{ format_money($assegno->importo) }}</div></td>
                             <td class="table-text"><div>{{ $assegno->banca }}</div></td>
                             <td class="table-text"><div>{{ $assegno->tipologia ? '' : format_date($assegno->data_azione) }}</div></td>
                             <td class="table-text"><div>{{ $assegno->tipologia ? format_date($assegno->data_azione) : '' }}</div></td>
@@ -50,6 +50,26 @@
                     @endforeach
                 </tbody>
             </table>
+            <div class="row mb-5 totali-assegni">
+                <div class="col-md-2 col-md-offset-2">
+                    <strong>Totale consegnato</strong>
+                     <p>{{ format_money($totale_assegni_consegnati) }}</p>
+                </div>
+                <div class="col-md-1">
+                    <h4>&minus;</h4>
+                </div>
+                <div class="col-md-2">
+                    <strong>Totale restituito</strong>
+                    <p>{{ format_money($totale_assegni_restituiti) }}</p>
+                </div>
+                <div class="col-md-1">
+                    <h4>=</h4>
+                </div>
+                <div class="col-md-2">
+                    <strong>Differenza</strong>
+                    <p>{{ format_money($totale_assegni_consegnati - $totale_assegni_restituiti) }}</p>
+                </div>
+            </div>
         @else
             <p>Non sono presenti assegni relativi alla pratica.</p>
         @endif

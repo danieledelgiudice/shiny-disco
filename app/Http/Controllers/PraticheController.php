@@ -42,8 +42,11 @@ class PraticheController extends Controller
         $documenti = $pratica->documenti()->get();
         $assegni = $pratica->assegni()->oldest('data')->get();
         $promemoria = $pratica->promemoria()->oldest('quando')->get();
+        $totale_assegni_consegnati = $pratica->assegni()->where('tipologia', 0)->sum('importo');
+        $totale_assegni_restituiti = $pratica->assegni()->where('tipologia', 1)->sum('importo');
         
-        return view('pratiche.show', compact('pratica', 'documenti', 'assegni', 'promemoria'));
+        return view('pratiche.show', compact('pratica', 'documenti', 'assegni', 'promemoria', 'totale_assegni_consegnati',
+                                                'totale_assegni_restituiti'));
     }
 
     public function edit(Request $request, $cliente_id, $pratica_id)
@@ -122,7 +125,7 @@ class PraticheController extends Controller
         
         // TODO: mostrare messaggio nella view
         return redirect()->action('PraticheController@show', ['cliente' => $pratica->cliente, 'pratica' => $pratica])
-                    ->with('success', 'Pratica salvato con successo!');
+                    ->with('success', 'Pratica modificata con successo!');
     }
     
     public function create(Request $request, $id)
@@ -201,7 +204,7 @@ class PraticheController extends Controller
         
         // TODO: mostrare messaggio nella view
         return redirect()->action('PraticheController@show', ['cliente' => $pratica->cliente, 'pratica' => $pratica])
-                    ->with('success', 'Pratica salvato con successo!');
+                    ->with('success', 'Pratica salvata con successo!');
     }
     
     public function destroy(Request $request, $cliente_id, $pratica_id)
@@ -251,20 +254,20 @@ class PraticheController extends Controller
             'data_medico_controparte'           => 'max:255',
             'liquidatore'                       => 'max:255',
             'reperibilita_liquidatore'          => 'max:255',
-            'parcella_presunta'                 => 'numeric|max:100000000',
+            'parcella_presunta'                 => 'numeric|max:100000000|min:0',
                 
             'legale'                            => 'max:255',                                             
             'in_data'                           => 'date_format:d/m/Y',
             'controllato'                       => 'numeric|in:' . implode(',', array_keys(\App\Pratica::$enumControllato)),
             'data_ultima_lettera'               => 'date_format:d/m/Y|before:tomorrow',
             'mezzo_liquidato'                   => 'date_format:d/m/Y',
-            'valore_mezzo_liquidato'          => 'numeric|max:100000000',
+            'valore_mezzo_liquidato'            => 'numeric|max:100000000|min:0',
             'rilievi'                           => 'numeric|in:' . implode(',', array_keys(\App\Pratica::$enumRilievi)),
             'data_chiusura'                     => 'date_format:d/m/Y',
-            'importo_sospeso'                   => 'numeric|max:100000000',
+            'importo_sospeso'                   => 'numeric|max:100000000|min:0',
             'data_sospeso'                      => 'date_format:d/m/Y',
-            'onorari_omnia'                     => 'numeric|max:100000000',
-            'liquidato_omnia'                   => 'numeric|max:100000000',
+            'onorari_omnia'                     => 'numeric|max:100000000|min:0',
+            'liquidato_omnia'                   => 'numeric|max:100000000|min:0',
             
             'data_sinistro'                     => 'date_format:d/m/Y|before:tomorrow',
             'ora_sinistro'                      => 'max:255',   //potrebbero voler scrivere "Intorno alle 22" o simili
@@ -274,7 +277,7 @@ class PraticheController extends Controller
             'rivalsa'                           => 'numeric|in:' . implode(',', array_keys(\App\Pratica::$enumRivalsa)),
             'soccorso'                          => 'numeric|in:' . implode(',', array_keys(\App\Pratica::$enumSoccorso)),
             'tipologia_intervento'              => 'max:255',
-            'danno_presunto'                    => 'numeric|max:100000000',
+            'danno_presunto'                    => 'numeric|max:100000000|min:0',
             
             'assicurazione_risarcente'          => 'max:255',
             'assicurazione_responsabile'        => 'max:255',

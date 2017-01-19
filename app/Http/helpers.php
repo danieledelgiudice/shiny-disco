@@ -25,3 +25,8 @@ function url_filiale($value, $f) {
     $replacement = "/filiali/$id/";
     return preg_replace($pattern, $replacement, $value);
 }
+
+function format_money($value) {
+    if ($value == null) return '';
+    return number_format($value, 2, ',', '.') . ' €';
+}

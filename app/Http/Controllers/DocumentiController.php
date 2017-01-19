@@ -36,7 +36,8 @@ class DocumentiController extends Controller
         
         $contents = Storage::disk('local_documents')->get($documento->nome_file);
         
-        return response($contents, 200)->header('Content-Type', $documento->mime);
+        return response($contents, 200)->header('Content-Type', $documento->mime)
+                                       ->header('Content-Disposition', 'inline; filename="'.$documento->nome_file_originale.'"');
     }
     
     public function create(Request $request)
@@ -114,6 +115,7 @@ class DocumentiController extends Controller
         Storage::disk('local_documents')->delete($documento->nome_file);
         $documento->delete();
         
-        return redirect()->action('PraticheController@show', ['cliente' => $documento->pratica->cliente, 'pratica' => $documento->pratica]);
+        return redirect()->action('PraticheController@show', ['cliente' => $documento->pratica->cliente, 'pratica' => $documento->pratica])
+            ->with('success', 'Il documento è stato eliminato con successo.');
     }
 }

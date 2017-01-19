@@ -187,7 +187,7 @@
             <!-- Reddito Cliente -->
             <strong class="col-md-2 form-control-static">Reddito</strong>
             <div class="col-md-4">
-                <p value="" class="form-control-static">{{ ($cliente->reddito) ? "$cliente->reddito €" : '' }}</p>
+                <p value="" class="form-control-static">{{ format_money($cliente->reddito) }}</p>
             </div>
         
             <!-- Numero Card Cliente -->

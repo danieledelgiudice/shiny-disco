@@ -189,4 +189,6 @@ var parseQueryString = function() {
     $('#history-back-btn').click(function() {
         window.history.back();
     });
+    
+    $('.alert.auto-slide').delay(5000).slideUp(350);
 })();
