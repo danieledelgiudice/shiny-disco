@@ -21,6 +21,9 @@ class Pratica extends Model
             foreach($pratica->documenti as $documento) {
                 $documento->delete();
             }
+            foreach($pratica->promemoria as $promemoria) {
+                $promemoria->delete();
+            }
         });
     }
     

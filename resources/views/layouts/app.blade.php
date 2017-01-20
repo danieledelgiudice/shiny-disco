@@ -64,7 +64,7 @@
                         </li>
                         
                         
-                        <li><a href="{{ action('PraticheController@indexAll') }}">Pratiche</a></li>
+                        <!--<li><a href="{{ action('PraticheController@indexAll') }}">Pratiche</a></li>-->
                         <li><a href="{{ action('DocumentiController@create') }}">Carica documenti</a></li>
                     @endif
                 </ul>

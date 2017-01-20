@@ -81,3 +81,7 @@ Route::post( '/filiali/',                                                       
 Route::get( '/filiali/{filiale}/pannello',                                      'PannelloFilialeController@home');
 Route::get( '/filiali/{filiale}/pannello/compagnie_assicurative',               'PannelloFilialeController@compagnieAssicurative');
 Route::get( '/filiali/{filiale}/pannello/totali_omnia',                         'PannelloFilialeController@totaliOmnia');
+
+
+
+Route::get( '/clienti/{cliente}/pratiche/{pratica}/lettere/{lettera}',          'LettereController@show');

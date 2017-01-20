@@ -8,7 +8,8 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
         "laravelcollective/html": "^5.2.0",
-        "tucker-eric/eloquentfilter": "^1.0"
+        "tucker-eric/eloquentfilter": "^1.0",
+        "itbz/fpdf": "^1.7"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
