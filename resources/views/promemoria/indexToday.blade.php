@@ -56,6 +56,17 @@
                     @endif
                 </div>
             </div>
+            
+            @if ($da_confermare)
+                <div class="text-center">
+                    {{ Form::open(['action' => 'PromemoriaController@confermaLettura']) }}
+                        <button type="submit" class="btn btn-success">
+                            <i class="fa fa-fw fa-check"></i>
+                            Confermo di aver letto l'agenda di oggi
+                        </button>
+                    {{ Form::close() }}
+                </div>
+            @endif
         </div>
     </div>
 @endsection

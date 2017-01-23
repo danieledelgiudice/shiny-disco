@@ -11,6 +11,7 @@ class CompagnieAssicurativeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('conferma-promemoria');
     }
     
     public function edit(Request $request, $filiale_id, $compagnia_assicurativa_id)

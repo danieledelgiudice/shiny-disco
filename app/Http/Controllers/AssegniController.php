@@ -11,6 +11,7 @@ class AssegniController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('conferma-promemoria');
     }
     
     public function create(Request $request, $cliente_id, $pratica_id)

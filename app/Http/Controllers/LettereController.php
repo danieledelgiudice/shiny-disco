@@ -11,6 +11,7 @@ class LettereController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('conferma-promemoria');
     }
     
     public function show(Request $request, $cliente_id, $pratica_id, $lettera_id)

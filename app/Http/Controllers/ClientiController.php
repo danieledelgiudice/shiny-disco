@@ -10,6 +10,7 @@ class ClientiController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('conferma-promemoria');
     }
     
     public function index(Request $request)

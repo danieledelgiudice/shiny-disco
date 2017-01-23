@@ -11,6 +11,8 @@ class PromemoriaController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('admin')->only('indexAll');
+        $this->middleware('conferma-promemoria')->except(['indexToday', 'confermaLettura']);
     }
     
     public function indexToday(Request $request, $filiale_id = null)
@@ -30,7 +32,10 @@ class PromemoriaController extends Controller
                         $query->where('id', $filiale->id);
                     })->oldest('quando')->get();
         $filiali = \App\Filiale::all();
-        return view('promemoria.indexToday', compact('filiale', 'promemoria', 'filiali'));
+        
+        $da_confermare = (!$request->user()->isAdmin()) && $request->user()->ultima_conferma < \Carbon\Carbon::today();
+        
+        return view('promemoria.indexToday', compact('filiale', 'promemoria', 'filiali', 'da_confermare'));
     }
     
     public function indexAll(Request $request, $filiale_id = null)
@@ -101,6 +106,15 @@ class PromemoriaController extends Controller
         $promemoria->delete();
                 
         return redirect()->back();
+    }
+    
+    public function confermaLettura(Request $request)
+    {
+        $utente = $request->user();
+        $utente->ultima_conferma = \Carbon\Carbon::now();
+        $utente->save();
+        
+        return redirect()->back()->with('success', 'Hai confermato di aver letto l\'agenda di oggi');
     }
     
     private function validateInput(Request $request)

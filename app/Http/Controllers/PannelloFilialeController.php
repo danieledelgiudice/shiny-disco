@@ -11,6 +11,7 @@ class PannelloFilialeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('conferma-promemoria');
     }
     
     public function home(Request $request, $filiale_id)

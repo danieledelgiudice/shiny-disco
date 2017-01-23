@@ -17,6 +17,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->boolean('admin')->default(false);
             $table->boolean('enabled')->default(true);
+            $table->datetime('ultima_conferma')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
