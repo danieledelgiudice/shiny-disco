@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="page-header text-center">
-            <h1>Agenda di oggi</h1>
+            <h1>Elenco completo promemoria</h1>
             <div>
                 <div class="pull-left">
                 </div>
@@ -28,7 +28,7 @@
                         @if (count($promemoria) > 0)
                             <tbody>
                                 @foreach ($promemoria as $p)
-                                    <tr>
+                                    <tr class="{{ $p->trashed() ? 'trashed' : '' }}">
                                         <td class="table-text col-md-2"><div>{{ $p->chi }}</div></td>
                                         <td class="table-text col-md-2"><div>{{ date_diff_days($p->quando) }}</div></td>
                                         <td class="table-text col-md-6"><div>{{ $p->cosa }}</div></td>
@@ -39,12 +39,14 @@
                                             </a>
                                         </td>
                                         <td class="col-md-1">
-                                            {!! Form::open(['action' => ['PromemoriaController@destroy', 'cliente' => $p->pratica->cliente,
-                                                'pratica' => $p->pratica, 'promemoria' => $p], 'method' => 'delete']) !!}
-                                                <button type="submit" class="btn btn-success">
-                                                    <i class="fa fa-fw fa-check"></i>
-                                                </button>
-                                            {!! Form::close() !!}
+                                            @if (!$p->trashed())
+                                                {!! Form::open(['action' => ['PromemoriaController@destroy', 'cliente' => $p->pratica->cliente,
+                                                    'pratica' => $p->pratica, 'promemoria' => $p], 'method' => 'delete']) !!}
+                                                    <button type="submit" class="btn btn-success">
+                                                        <i class="fa fa-fw fa-check"></i>
+                                                    </button>
+                                                {!! Form::close() !!}
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

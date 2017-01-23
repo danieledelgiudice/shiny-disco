@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Promemoria extends Model
 {
+    use SoftDeletes;
+    
     protected $table = 'promemoria';
     
     /**
@@ -40,6 +43,6 @@ class Promemoria extends Model
      * @var array
      */
     protected $fillable = [ 'chi', 'quando', 'cosa' ];
-    protected $dates = ['quando'];
+    protected $dates = ['quando', 'deleted_at'];
 
 }

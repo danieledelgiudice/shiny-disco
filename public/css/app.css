@@ -60,3 +60,8 @@ table .btn {
 #genera-lettera-btn {
     margin-top: 20px;
 }
+
+.trashed {
+    color: silver;
+    text-decoration:line-through;
+}

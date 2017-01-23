@@ -65,6 +65,7 @@ Route::delete( '/filiali/{filiale}/compagnie_assicurative/{compagnia_assicurativ
 
 
 Route::get( '/filiali/{filiale}/agenda',                                        'PromemoriaController@indexToday');
+Route::get( '/filiali/{filiale}/agendaEstesa',                                  'PromemoriaController@indexAll');
 Route::post('/clienti/{cliente}/pratiche/{pratica}/promemoria/new',             'PromemoriaController@store');
 Route::delete('/clienti/{cliente}/pratiche/{pratica}/promemoria/{promemoria}',  'PromemoriaController@destroy');
 

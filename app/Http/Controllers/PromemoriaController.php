@@ -33,6 +33,27 @@ class PromemoriaController extends Controller
         return view('promemoria.indexToday', compact('filiale', 'promemoria', 'filiali'));
     }
     
+    public function indexAll(Request $request, $filiale_id = null)
+    {
+        if (!$filiale_id)
+            return redirect()->action('PromemoriaController@indexAll', ['filiale' => $request->user()->filiale->id ]);
+            
+        $filiale = \App\Filiale::findOrFail($filiale_id);
+        
+        if($request->user()->cannot('visualizzare-agenda-estesa', $filiale)) {
+            // L'utente non può vedere l'agenda estesa
+            abort(403);
+        }
+        
+        $promemoria = \App\Promemoria::withTrashed()
+                    ->whereHas('pratica.cliente.filiale', function($query) use ($filiale) {
+                        $query->where('id', $filiale->id);
+                    })->latest('quando')->get();
+        $filiali = \App\Filiale::all();
+        return view('promemoria.indexAll', compact('filiale', 'promemoria', 'filiali'));
+    }
+    
+    
     public function store(Request $request, $cliente_id, $pratica_id)
     {
         $pratica = \App\Pratica::findOrFail($pratica_id);
@@ -42,8 +63,8 @@ class PromemoriaController extends Controller
             abort(404);
         }
         
-        if($request->user()->cannot('modificare-pratica', $pratica)) {
-            // L'utente non può aggiungere promemoria a pratiche di altre filiali
+        if($request->user()->cannot('modificare-agenda', $pratica)) {
+            // L'utente non può modificare l'agenda
             abort(403);
         }
         
@@ -72,7 +93,7 @@ class PromemoriaController extends Controller
             abort(404);
         }
         
-        if($request->user()->cannot('modificare-pratica', $promemoria->pratica)) {
+        if($request->user()->cannot('modificare-agenda', $promemoria->pratica)) {
             // L'utente non può modificare assegni di pratiche di altre filiali
             abort(403);
         }

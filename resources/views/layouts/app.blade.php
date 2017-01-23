@@ -87,7 +87,9 @@
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="{{ action('PannelloFilialeController@home', ['filiale' => Auth::user()->filiale]) }}"><i class="fa fa-btn fa-window-maximize"></i>Pannello filiale</a></li>
                                 @if (Auth::user()->isAdmin())
+                                    <li role="separator" class="divider"></li>
                                     <li><a href="{{ action('FilialiController@index') }}"><i class="fa fa-btn fa-gear"></i>Gestione filiali</a></li>
+                                    <li><a href="{{ action('FilialiController@index') }}"><i class="fa fa-btn fa-gear"></i>Elenco promemoria</a></li>
                                 @endif
                                 <li role="separator" class="divider"></li>
                                 <li><a href="{{ secure_url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
