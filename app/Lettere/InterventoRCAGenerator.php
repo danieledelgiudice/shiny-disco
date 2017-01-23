@@ -57,6 +57,7 @@ Resp. Uffici esterni 0586 1734753";
         $f->Write($lineh, $str);
 
         $str = "La presente in nome e per conto del nostro assistito ({$cliente['cognome']} {$cliente['nome']}) quale richiesta di";
+        $str = iconv('UTF-8', 'windows-1252', $str);
         $f->SetFont('Times', '', 11);
         $f->SetXY(35, $f->GetY() + 12);
         $f->Write($lineh, $str);
