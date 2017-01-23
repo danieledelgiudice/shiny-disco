@@ -4,6 +4,8 @@ namespace App\Lettere;
 
 class Art142Generator
 {
+    const NAME = "Articolo 142";
+    
     public function generate($data)
     {
         $pratica = $data['pratica'];
@@ -28,6 +30,7 @@ Di: avere diritto a prestazioni di parte di Istituti che gestiscono assicurazion
         $template = iconv('UTF-8', 'windows-1252', $template);
 
         $f = new \fpdf\FPDF();
+        $f->SetTitle($this::NAME);
         $f->SetMargins(20, 20);
         $f->AddPage();
         

@@ -95,5 +95,9 @@ class AuthServiceProvider extends ServiceProvider
             return $user->filiale->id === $pratica->cliente->filiale->id;
         });
         
+        
+        $gate->define('scegliere-logo', function ($user) {
+            return $user->filiale->id === 0;
+        });
     }
 }

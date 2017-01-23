@@ -27,16 +27,42 @@ class LettereController extends Controller
             abort(403);
         }
         
+        if ($request->logo && $request->user()->cannot('scegliere-logo')) {
+            // L'utente non ha il permesso di generare documenti con logo elisir
+            abort(403);
+        }
+        
         $f = new \App\Lettere\LettereFactory;
         $f->dataSource(['cliente' => $pratica->cliente,
                         'professione' => $pratica->cliente->professione,
                         'pratica' => $pratica,
                         'autorita' => $pratica->autorita,
                         'assicurazione_parte' => $pratica->assicurazione_parte,
-                        'assicurazione_controparte' => $pratica->assicurazione_controparte,]);
+                        'assicurazione_controparte' => $pratica->assicurazione_controparte,
+                        'logo' => $request->logo ? 'elisir.png' : 'elys.jpg']);
         
-        $lettera = $f->generate($lettera_id);
-        
-        return $lettera;
+        $f->generate($lettera_id);
     }
+    
+    public function showOptions(Request $request, $cliente_id, $pratica_id)
+    {
+        $pratica = \App\Pratica::findOrFail($pratica_id);
+
+        if ($pratica->cliente->id != $cliente_id) {
+            // Il cliente nell'url non corrisponde al cliente della pratica
+            abort(404);
+        }
+        
+        if ($request->user()->cannot('generare-lettera', $pratica)) {
+            // L'utente non ha il permesso di generare documenti di pratiche di altre filiali
+            abort(403);
+        }
+        
+        $f = new \App\Lettere\LettereFactory;
+        $lettere = $f->listGenerators();
+        
+        $can_choose_logo = $request->user()->can('scegliere-logo');
+        
+        return view('lettere.options', compact('lettere', 'pratica', 'can_choose_logo'));
+    } 
 }

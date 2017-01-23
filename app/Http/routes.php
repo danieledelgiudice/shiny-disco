@@ -85,3 +85,4 @@ Route::get( '/filiali/{filiale}/pannello/totali_omnia',                         
 
 
 Route::get( '/clienti/{cliente}/pratiche/{pratica}/lettere/{lettera}',          'LettereController@show');
+Route::get( '/clienti/{cliente}/pratiche/{pratica}/lettere/',                   'LettereController@showOptions');

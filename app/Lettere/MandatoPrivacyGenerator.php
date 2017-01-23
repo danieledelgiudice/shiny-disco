@@ -4,6 +4,8 @@ namespace App\Lettere;
 
 class MandatoPrivacyGenerator
 {
+    const NAME = "Mandato privacy";
+   
     public function generate($data)
     {
         $pratica = $data['pratica'];
@@ -13,6 +15,7 @@ class MandatoPrivacyGenerator
         $lineh = 4.5;
         
         $f = new \fpdf\FPDF();
+        $f->SetTitle($this::NAME);
         $f->SetMargins(20, 20);
         $f->AddPage();
         $f->SetFont('Times', '', 10);

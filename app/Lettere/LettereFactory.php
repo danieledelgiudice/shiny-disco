@@ -19,8 +19,12 @@ class LettereFactory
     
     public function dataSource($source)
     {
-        foreach($source as $model => $values) 
-            $this->data[$model] = $values->toArray();
+        foreach($source as $model => $values) {
+            if ($values instanceof \Illuminate\Database\Eloquent\Model)
+                $this->data[$model] = $values->toArray();
+            else
+                $this->data[$model] = $values;
+        }
     }
     
     public function generate($id)
@@ -29,5 +33,14 @@ class LettereFactory
         $generator = new $genClass;
         $letter = $generator->generate($this->data);
         return $letter;
+    }
+    
+    public function listGenerators()
+    {
+        $res = [];
+        foreach($this->generators as $key => $value) {
+            $res[$key] = $value::NAME;
+        }
+        return $res;
     }
 }

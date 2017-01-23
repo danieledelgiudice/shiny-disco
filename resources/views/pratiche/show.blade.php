@@ -33,6 +33,9 @@
                     {{ Form::close() }}
                     <!-- Fine form eliminazione pratica -->
                     
+                    <a href="{{ action('LettereController@showOptions', ['cliente' => $pratica->cliente, 'pratica' => $pratica] ) }}"
+                        class="btn btn-default"><i class="fa fa-fw fa-envelope"></i></a>
+                    
                     <a href="{{ action('PraticheController@edit', ['cliente' => $pratica->cliente, 'pratica' => $pratica] ) }}"
                         class="btn btn-primary"><i class="fa fa-fw fa-pencil"></i></a>
                     

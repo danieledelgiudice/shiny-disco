@@ -196,4 +196,17 @@ var parseQueryString = function() {
         $(this).find("button[type='submit']").prop('disabled',true);
     });
     
+    $('#genera-lettera-btn').click(function() {
+        var url = $(this).data('url');
+        var selected = $('#select-tipo-lettera option:selected').val();
+        url = url.replace('*', selected);
+        
+        var logo_radio = $('input[type=radio][name=logo]:checked');
+        if (logo_radio.length && logo_radio.val() === '1') {
+            url += '?logo=1';
+        }
+        
+        window.location = url;
+    });
+    
 })();

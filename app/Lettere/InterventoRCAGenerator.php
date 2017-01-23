@@ -4,6 +4,8 @@ namespace App\Lettere;
 
 class InterventoRCAGenerator
 {
+    const NAME = "Intervento RCA";
+   
     public function generate($data)
     {
         $pratica = $data['pratica'];
@@ -18,10 +20,15 @@ class InterventoRCAGenerator
         // $template = iconv('UTF-8', 'windows-1252', $template);
 
         $f = new \fpdf\FPDF();
+        $f->SetTitle($this::NAME);
         $f->SetMargins(20, 20);
         $f->AddPage();
-        $f->SetFont('Times', '', 11);
+
+        $logo_elisir = $data['logo'];
+        $logo_url = public_path() . "/images/logos/$logo_elisir";
+        $f->Image($logo_url, 20, 15, 45);
         
+        $f->SetFont('Times', '', 11);
         $str = "P.zza Attias 13 57100 Livorno
 Tel 0586/941901 0586/895118 Linee 5 a ricerca automatica
 Fax 0586 1730113
