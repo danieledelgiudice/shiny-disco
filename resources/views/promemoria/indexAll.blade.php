@@ -54,7 +54,7 @@
                         @endif
                     </table>
                     @if (count($promemoria) == 0)
-                        <p class="text-center">Non sono presenti promemoria da completare per oggi</p>
+                        <p class="text-center">Non sono presenti promemoria nel database</p>
                     @endif
                 </div>
             </div>
