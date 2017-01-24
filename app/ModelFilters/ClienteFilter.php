@@ -23,14 +23,17 @@ class ClienteFilter extends ModelFilter
     
     public function dataNascita($value)
     {
-        // TODO
-        return $this;
+        if (!$value[1]) return $this;
+        
+        $op = ($value[0] == 'lt') ? '<=' : '>=';
+        $element = \Carbon\Carbon::createFromFormat('d/m/Y', $value[1]);
+        
+        return $this->where('data_nascita', $op, $element);
     }
     
     public function sesso($value)
     {
-        // TODO
-        return $this;
+        return $this->where('sesso', $value);
     }
     
     public function codiceFiscale($value)
@@ -97,14 +100,12 @@ class ClienteFilter extends ModelFilter
     
     public function statoCivile($value)
     {
-        // TODO
-        return $this;
+        return $this->where('stato_civile', $value);
     }
     
     public function tipoDocumento($value)
     {
-        // TODO
-        return $this;
+        return $this->where('tipo_documento', $value);
     }
     
     public function numeroDocumento($value)
@@ -114,7 +115,6 @@ class ClienteFilter extends ModelFilter
     
     public function professione($value)
     {
-        // TODO
         return $this->where('professione_id', $value);
     }
     
@@ -125,8 +125,11 @@ class ClienteFilter extends ModelFilter
     
     public function reddito($value)
     {
-        // TODO
-        return $this;
+        if (!$value[1]) return $this;
+        
+        $op = ($value[0] == 'lt') ? '<=' : '>=';
+
+        return $this->where('reddito', $op, $value[1]);
     }
     
     public function numeroCard($value)

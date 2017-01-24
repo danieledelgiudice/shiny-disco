@@ -11,6 +11,34 @@ class ClientiController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('conferma-promemoria');
+        
+        $this->queryFields = [
+            'cognome'                      => ['display' => 'Cognome',                     'type'      => 'string',     ],
+            'nome'                         => ['display' => 'Nome',                        'type'      => 'string',     ],
+            'citta_nascita'                => ['display' => 'Città di nascita',            'type'      => 'string',     ],
+            'data_nascita'                 => ['display' => 'Data di nascita',             'type'      => 'date',       ],
+            'sesso'                        => ['display' => 'Sesso',                       'type'      => 'enum',           'list' => \App\Cliente::$enumSesso ],
+            'codice_fiscale'               => ['display' => 'Codice Fiscale',              'type'      => 'string',     ],
+            
+            'via'                          => ['display' => 'Via',                         'type'      => 'string',     ],
+            'citta_residenza'              => ['display' => 'Città di residenza',          'type'      => 'string',     ],
+            'provincia'                    => ['display' => 'Provincia',                   'type'      => 'string',     ],
+            'cap'                          => ['display' => 'CAP',                         'type'      => 'string',     ],
+            
+            'cellulare'                    => ['display' => 'Cellulare',                   'type'      => 'string',     ],
+            'telefono'                     => ['display' => 'Telefono',                    'type'      => 'string',     ],
+            'email'                        => ['display' => 'Email',                       'type'      => 'string',     ],
+            'fax'                          => ['display' => 'FAX',                         'type'      => 'string',     ],
+            
+            'partita_iva'                  => ['display' => 'P. IVA',                      'type'      => 'string',     ],
+            'stato_civile'                 => ['display' => 'Stato civile',                'type'      => 'enum',           'list' => \App\Cliente::$enumStatoCivile ],
+            'tipo_documento'               => ['display' => 'Tipo documento',              'type'      => 'enum',           'list' => \App\Cliente::$enumTipoDocumento ],
+            'numero_documento'             => ['display' => 'Numero documento',            'type'      => 'string',     ],
+            'professione_id'               => ['display' => 'Professione',                 'type'      => 'enum',           'list' => \App\Professione::pluck('nome', 'id')],
+            'dettagli_professione'         => ['display' => 'Dettagli professione',        'type'      => 'string',     ],
+            'reddito'                      => ['display' => 'Reddito',                     'type'      => 'decimal',    ],
+            'numero_card'                  => ['display' => 'Numero Card',                 'type'      => 'string',     ],
+        ];
     }
     
     public function index(Request $request)
@@ -212,31 +240,6 @@ class ClientiController extends Controller
         ]);
     }
     
-    private $queryFields = [
-        'cognome'                      => ['display' => 'Cognome'                    , 'type'      => 'string'      ],
-        'nome'                         => ['display' => 'Nome'                       , 'type'      => 'string'      ],
-        'citta_nascita'                => ['display' => 'Città di nascita'           , 'type'      => 'string'      ],
-        // data di nascita
-        // sesso
-        'codice_fiscale'               => ['display' => 'Codice Fiscale'             , 'type'      => 'string'      ],
-        
-        'via'                          => ['display' => 'Via'                        , 'type'      => 'string'      ],
-        'citta_residenza'              => ['display' => 'Città di residenza'         , 'type'      => 'string'      ],
-        'provincia'                    => ['display' => 'Provincia'                  , 'type'      => 'string'      ],
-        'cap'                          => ['display' => 'CAP'                        , 'type'      => 'string'      ],
-        
-        'cellulare'                    => ['display' => 'Cellulare'                  , 'type'      => 'string'      ],
-        'telefono'                     => ['display' => 'Telefono'                   , 'type'      => 'string'      ],
-        'email'                        => ['display' => 'Email'                      , 'type'      => 'string'      ],
-        'fax'                          => ['display' => 'FAX'                        , 'type'      => 'string'      ],
-        
-        'partita_iva'                  => ['display' => 'P. IVA'                     , 'type'      => 'string'      ],
-        // stato civile
-        // tipo documento
-        'numero_documento'             => ['display' => 'Numero documento'           , 'type'      => 'string'      ],
-        // professione
-        'dettagli_professione'         => ['display' => 'Dettagli professione'       , 'type'      => 'string'      ],
-        // reddito
-        'numero_card'                  => ['display' => 'Numero Card'                , 'type'      => 'string'      ],
-    ];
+    private $queryFields = [];
+    
 }

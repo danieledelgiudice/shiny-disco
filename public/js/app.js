@@ -184,11 +184,14 @@ var parseQueryString = function() {
         $('#queryBtn i').removeClass('fa-search');
         $('#queryBtn i').addClass('fa-spin fa-refresh');
         
+        var queryData = $(this).serializeArray();
+        console.log(queryData);
+        
         $.ajax({
             type     : "POST",
             cache    : false,
             url      : $(this).attr('action'),
-            data     : $(this).serialize(),
+            data     : $.param(queryData),
             success  : function(data) {
                 $("#queryResult").empty().append(data);
                 
@@ -202,16 +205,106 @@ var parseQueryString = function() {
     $('#newFieldQueryDropdown a').click(function() {
         var name = $(this).data('name');
 
+        if ($(this).closest('form').find(`input[name=${name}]`).length > 0)
+            return;
+
         var display = queryFields[name].display;
-        var newRow = `
-        <div class="form-group">
-            <label for="${name}" class="col-md-2 col-md-offset-1 control-label">${display}</label>
-            <div class="col-md-7">
-                <input type="text" name="${name}" class="form-control"> 
-            </div>
-            <a class="btn btn-default deleteQueryRow"><i class="fa fa-fw fa-times"></i></a>
-        </div>`;
+        var type = queryFields[name].type;
+        var newRow = '';
+        
+        if (type === 'string') {
+            newRow = `
+            <div class="form-group">
+                <label for="${name}" class="col-md-2 col-md-offset-1 control-label">${display}</label>
+                <div class="col-md-7">
+                    <input type="text" name="${name}" class="form-control"> 
+                </div>
+                <a class="btn btn-default deleteQueryRow"><i class="fa fa-fw fa-times"></i></a>
+            </div>`;
+        } else if (type === 'date') {
+            newRow = `
+            <div class="form-group">
+                <label for="${name}" class="col-md-2 col-md-offset-1 control-label">${display}</label>
+                <div class="col-md-7">
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default operatorBtn" type="button"><i class="fa fa-chevron-left"></i></button>
+                            <input type="hidden" name="${name}[]" class="operatorInput" value="lt">
+                        </span>
+                        <input class="form-control date-control" name="${name}[]" type="text" value="" id="${name}">
+                        <span class="input-group-addon"><i class="fa fa-fw fa-calendar"></i></span>
+                    </div>
+                </div>
+                <a class="btn btn-default deleteQueryRow"><i class="fa fa-fw fa-times"></i></a>
+            </div>`;
+        } else if (type === 'decimal') {
+            newRow = `
+            <div class="form-group">
+                <label for="${name}" class="col-md-2 col-md-offset-1 control-label">${display}</label>
+                <div class="col-md-7">
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default operatorBtn" type="button"><i class="fa fa-chevron-left"></i></button>
+                            <input type="hidden" name="${name}[]" class="operatorInput" value="lt">
+                        </span>
+                        <input class="form-control" name="${name}[]" type="text" value="" id="${name}">
+                        <span class="input-group-addon"><i class="fa fa-fw fa-eur"></i></span>
+                    </div>
+                </div>
+                <a class="btn btn-default deleteQueryRow"><i class="fa fa-fw fa-times"></i></a>
+            </div>`;
+        } else if (type === 'enum') {
+            var list = queryFields[name].list;
+            var options = $.map(list, function(v, k) {
+               return `<option value="${k}">${v}</option>`; 
+            }).join('');
+            newRow = `
+            <div class="form-group">
+                <label for="${name}" class="col-md-2 col-md-offset-1 control-label">${display}</label>
+                <div class="col-md-7">
+                    <select class="form-control" name="${name}">
+                    <option></option>
+                    ${options}
+                    </select>
+                </div>
+                <a class="btn btn-default deleteQueryRow"><i class="fa fa-fw fa-times"></i></a>
+            </div>`;
+        } else if (type === 'rel') {
+            var list = queryFields[name].list;
+            var options = $.map(list, function(v, k) {
+               return `<option value="${k}">${v}</option>`; 
+            }).join('');
+            newRow = `
+            <div class="form-group">
+                <label for="${name}" class="col-md-2 col-md-offset-1 control-label">${display}</label>
+                <div class="col-md-7">
+                    <select class="form-control" name="${name}">
+                    <option></option>
+                    ${options}
+                    </select>
+                </div>
+                <a class="btn btn-default deleteQueryRow"><i class="fa fa-fw fa-times"></i></a>
+            </div>`;
+        }
+        
         $(this).closest('.form-group').before(newRow);
+        
+        // Widget input date
+        $('.input-group .date-control').datepicker({
+            format: 'dd/mm/yyyy',
+            weekStart: 1,
+            language: 'it',
+            todayBtn: 'linked',
+        });
+        
+        $('.operatorBtn').click(function() {
+            $(this).children('i').toggleClass('fa-chevron-left').toggleClass('fa-chevron-right');
+            var opInput = $(this).siblings('.operatorInput');
+            if (opInput.val() === 'lt')
+                opInput.val('gt');
+            else
+                opInput.val('lt');
+        });
     });
     
     $('.queryPanel .panel-body').on('click', 'a.deleteQueryRow', function() {

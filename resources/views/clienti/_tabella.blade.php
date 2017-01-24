@@ -1,4 +1,5 @@
 @if (count($clienti) > 0)
+    <p class="pull-right">{{ count($clienti) }} risultati.</p>
     <table class="table table-hover table-striped table-filterable">
         <thead>
             <th>Cognome</th>
@@ -34,7 +35,15 @@
                     
                     @if (isset($requestedFields) && count($requestedFields) >= 3)
                         <td class="table-text col-md-2" data-field="{{ $requestedFields[2] }}">
-                            <div>{{ $cliente->{$requestedFields[2]} }}</div>
+                            @if ($queryFields[$requestedFields[2]]['type'] === 'string')
+                                <div>{{ $cliente->{$requestedFields[2]} }}</div>
+                            @elseif ($queryFields[$requestedFields[2]]['type'] === 'date')
+                                <div>{{ format_date($cliente->{$requestedFields[2]}) }}</div>
+                            @elseif ($queryFields[$requestedFields[2]]['type'] === 'decimal')
+                                <div>{{ format_money($cliente->{$requestedFields[2]}) }}</div>
+                            @elseif ($queryFields[$requestedFields[2]]['type'] === 'enum')
+                                <div>{{ $queryFields[$requestedFields[2]]['list'][$cliente->{$requestedFields[2]}] }}</div>
+                            @endif
                         </td>
                     @else
                         <td class="table-text col-md-2" data-field="codice_fiscale"><div>{{ $cliente->codice_fiscale }}</div></td>
@@ -43,7 +52,15 @@
                     
                     @if (isset($requestedFields) && count($requestedFields) >= 2)
                         <td class="table-text col-md-2" data-field="{{ $requestedFields[1] }}">
-                            <div>{{ $cliente->{$requestedFields[1]} }}</div>
+                            @if ($queryFields[$requestedFields[1]]['type'] === 'string')
+                                <div>{{ $cliente->{$requestedFields[1]} }}</div>
+                            @elseif ($queryFields[$requestedFields[1]]['type'] === 'date')
+                                <div>{{ format_date($cliente->{$requestedFields[1]}) }}</div>
+                            @elseif ($queryFields[$requestedFields[1]]['type'] === 'decimal')
+                                <div>{{ format_money($cliente->{$requestedFields[1]}) }}</div>
+                            @elseif ($queryFields[$requestedFields[1]]['type'] === 'enum')
+                                <div>{{ $queryFields[$requestedFields[1]]['list'][$cliente->{$requestedFields[1]}] }}</div>
+                            @endif
                         </td>
                     @else
                         <td class="table-text col-md-2" data-field-select="professione" data-field-id="{{ $cliente->professione_id }}">
@@ -53,7 +70,15 @@
                     
                     @if (isset($requestedFields) && count($requestedFields) >= 1)
                         <td class="table-text col-md-2" data-field="{{ $requestedFields[0] }}">
-                            <div>{{ $cliente->{$requestedFields[0]} }}</div>
+                            @if ($queryFields[$requestedFields[0]]['type'] === 'string')
+                                <div>{{ $cliente->{$requestedFields[0]} }}</div>
+                            @elseif ($queryFields[$requestedFields[0]]['type'] === 'date')
+                                <div>{{ format_date($cliente->{$requestedFields[0]}) }}</div>
+                            @elseif ($queryFields[$requestedFields[0]]['type'] === 'decimal')
+                                <div>{{ format_money($cliente->{$requestedFields[0]}) }}</div>
+                            @elseif ($queryFields[$requestedFields[0]]['type'] === 'enum')
+                                <div>{{ $queryFields[$requestedFields[0]]['list'][$cliente->{$requestedFields[0]}] }}</div>
+                            @endif
                         </td>
                     @else
                         <td class="table-text col-md-2" data-field-select="filiale" data-field-id="{{ $cliente->filiale_id }}">

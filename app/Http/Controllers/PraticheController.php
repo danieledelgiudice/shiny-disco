@@ -283,6 +283,59 @@ class PraticheController extends Controller
             
             'assicurazione_risarcente'          => 'max:255',
             'assicurazione_responsabile'        => 'max:255',
+            'numero_sinistro'                   => 'max:255',
+            
         ]);
     }
+    
+    private $queryFields = [
+        'numero_pratica'                 => ['display'   => 'Numero pratica'                    , 'type'        => 'string'      ],
+        'numero_registrazione'           => ['display'   => 'Numero registrazione'              , 'type'        => 'string'      ],
+        //'data_apertura'                => ['display'   => 'Data apertura'                     , 'type'        => 'date'        ],
+        //'stato_pratica'                => ['display'   => 'Stato pratica '                    , 'type'        => 'date'        ],
+        //'tipo_pratica'                 => ['display'   => 'Tipo pratica'                      , 'type'        => 'ENUM'        ],
+        
+        'veicolo_parte'                  => ['display'   => 'Veicolo di parte'                  , 'type'        => 'string'      ],
+        'targa_parte'                    => ['display'   => 'Targa di parte'                    , 'type'        => 'string'      ],
+        'numero_polizza_parte'           => ['display'   => 'Numero polizza di parte'           , 'type'        => 'string'      ],
+        //'assicurazione'                => ['display'   => 'Assicurazione'                     , 'type'        => 'rel'         ],
+        
+        'conducente_controparte'         => ['display'   => 'Conducente controparte'            , 'type'        => 'string'      ],
+        'via_controparte'                => ['display'   => 'Via controparte'                   , 'type'        => 'string'      ],
+        'citta_controparte'              => ['display'   => 'Città controparte'                 , 'type'        => 'string'      ],
+        'telefono_controparte'           => ['display'   => 'Telefono controparte'              , 'type'        => 'string'      ],
+        'veicolo_controparte'            => ['display'   => 'Veicolo controparte'               , 'type'        => 'string'      ],
+        'targa_controparte'              => ['display'   => 'Targa controparte'                 , 'type'        => 'string'      ],
+        'numero_polizza_controparte'     => ['display'   => 'Numero polizza controparte'        , 'type'        => 'string'      ],
+        'proprietario_mezzo_responsabile'=> ['display'   => 'Proprietario mezzo responsabile'   , 'type'        => 'string'      ],
+        //'ASSICURAZIONE'                => ['display'   => 'Assicurazione'                     , 'type'        => 'rel'         ],
+        'medico_controparte'             => ['display'   => 'Medico controparte'                , 'type'        => 'string'      ],
+        'parcella_presunta'              => ['display'   => 'Parcella presunta'                 , 'type'        => 'string'      ],
+        
+        'legale'                         => ['display'   => 'Legale'                            , 'type'        => 'string'      ],
+        //'in_data'                      => ['display'   => 'In data'                           , 'type'        => 'date'        ],
+        //'controllato'                  => ['display'   => 'Controllato'                       , 'type'        => 'ENUM'        ],
+        //'data_ultima_lettera'          => ['display'   => 'Data ultima lettera'               , 'type'        => 'date'        ],
+        //'mezzo_luquidato'              => ['display'   => 'Mezzo liquidato'                   , 'type'        => 'date'        ],
+        //'valore_mezzo_liquidato'       => ['display'   => 'Valore mezzo liquidato'            , 'type'        => 'date'        ],
+        //'rilievi'                      => ['display'   => 'Rilievi'                           , 'type'        => 'ENUM'        ],
+        //'data_chiusura    '            => ['display'   => 'Data chiusura'                     , 'type'        => 'date'        ],
+        'importo_sospeso'                => ['display'   => 'Importo sospeso'                   , 'type'        => 'string'      ],
+        'onorari_omnia'                  => ['display'   => 'Onorari omnia'                     , 'type'        => 'string'      ],
+        'liquidato_omnia'                => ['display'   => 'Liquidato omnia'                   , 'type'        => 'string'      ],
+        
+        //'data_sinistro'                => ['display'   => 'Data sinistro'                     , 'type'        => 'date'        ],
+        'luogo_sinistro'                 => ['display'   => 'Luogo sinistro'                    , 'type'        => 'string'      ],
+        'testimoni'                      => ['display'   => 'Testimoni'                         , 'type'        => 'string'      ],
+        'luogo_sinistro'                 => ['display'   => 'Luogo sinistro'                    , 'type'        => 'string'      ],
+        //'autorita'                     => ['display'   => 'Autorità'                          , 'type'        => 'ENUM'        ],   
+        'comando_autorita'               => ['display'   => 'Comando autorità'                  , 'type'        => 'string'      ],
+        //'rivalsa'                      => ['display'   => 'Rivalsa'                           , 'type'        => 'ENUM'        ],
+        //'soccorso'                     => ['display'   => 'Soccorso'                          , 'type'        => 'ENUM'        ],
+        'tipologia_intervento'           => ['display'   => 'Tipologia intervento'              , 'type'        => 'string'      ],
+        'assicurazione_responsabile'     => ['display'   => 'Assicurazione responsabile'        , 'type'        => 'string'      ],
+        'assicurazione_risarcente'       => ['display'   => 'Assicurazione risarcente'          , 'type'        => 'string'      ],
+        'numero_sinistro'                => ['display'   => 'Numero sinistro'                   , 'type'        => 'string'      ],
+        
+    ];
 }
