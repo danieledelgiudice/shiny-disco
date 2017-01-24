@@ -14,7 +14,6 @@
 Route::get('/',                                                                 'PromemoriaController@indexToday');
 
 Route::get( '/clienti',                                                         'ClientiController@index');
-Route::get( '/ajax/clienti/',                                                   'ClientiController@indexAjax');
 Route::get( '/clienti/new',                                                     'ClientiController@create');
 Route::get( '/clienti/{cliente}/edit',                                          'ClientiController@edit');
 Route::get( '/clienti/{cliente}',                                               'ClientiController@show');

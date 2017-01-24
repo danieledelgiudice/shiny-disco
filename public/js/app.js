@@ -198,6 +198,32 @@ var parseQueryString = function() {
             }
         });
     });
+    
+    $('#newFieldQueryDropdown a').click(function() {
+        var name = $(this).data('name');
+
+        var display = queryFields[name].display;
+        var newRow = `
+        <div class="form-group">
+            <label for="${name}" class="col-md-2 col-md-offset-1 control-label">${display}</label>
+            <div class="col-md-7">
+                <input type="text" name="${name}" class="form-control"> 
+            </div>
+            <a class="btn btn-default deleteQueryRow"><i class="fa fa-fw fa-times"></i></a>
+        </div>`;
+        $(this).closest('.form-group').before(newRow);
+    });
+    
+    $('.queryPanel .panel-body').on('click', 'a.deleteQueryRow', function() {
+        var row = $(this).closest('.form-group');
+        row.slideUp("fast", function() { $(this).remove(); } );
+    });
+    
+    $('.queryPanel .panel-heading').click(function() {
+        $(this).children('i').toggleClass('fa-caret-down').toggleClass('fa-caret-up');
+        var body = $(this).siblings('.panel-body');
+        body.slideToggle();
+    });
         
     // // Filtri tabella quando clicchi
     // $('.table-filterable td[data-field]').click(function() {

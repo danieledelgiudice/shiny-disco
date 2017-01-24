@@ -28,17 +28,6 @@ class ClientiController extends Controller
         
         return view('clienti.index', compact('clienti', 'filiali', 'professioni', 'queryFields'));
     }
-    
-    public function indexAjax(Request $request)
-    {
-        if ($request->user()->isAdmin())
-            $clienti = \App\Cliente::filter($request->all())->get();
-        else
-            $clienti = \App\Cliente::where('filiale_id', $request->user()->filiale->id)
-                                     ->filter($request->all())->get();
-        
-        return view('clienti._tabella', compact('clienti'));
-    }
 
     public function show(Request $request, $id)
     {
@@ -155,14 +144,29 @@ class ClientiController extends Controller
     public function filter(Request $request)
     {
         $params = [];
+        $requestedFields = [];
+        $fieldCount = 0;
+        
         foreach($request->all() as $k => $v)
         {
-            if ($k[0] != '_' && $v != '')
-                $params[$k] = $v;
+            if ($k[0] != '_') {
+                if ($v != '')
+                    $params[$k] = $v;
+                if ($k != 'nome' && $k != 'cognome')
+                    $requestedFields[$fieldCount++] = $k;
+            }
         }
+
+        if ($request->user()->isAdmin())
+            $clienti = \App\Cliente::filter($params)->get();
+        else
+            $clienti = \App\Cliente::where('filiale_id', $request->user()->filiale->id)
+                                     ->filter($params)->get();
+                                     
         
-        $query = http_build_query($params);
-        return redirect()->action('ClientiController@indexAjax', $query);
+        $queryFields = $this->queryFields;
+    
+        return view('clienti._tabella', compact('clienti', 'requestedFields', 'queryFields'));
     }
     
     public function toggleImportante(Request $request, $cliente_id)
@@ -209,8 +213,30 @@ class ClientiController extends Controller
     }
     
     private $queryFields = [
-        ['name' => 'nome'                         , 'display' => 'Nome'                       , 'type'      => 'string'      ],
-        ['name' => 'cognome'                      , 'display' => 'Cognome'                    , 'type'      => 'string'      ],
-        ['name' => 'codice_fiscale'               , 'display' => 'Codice Fiscale'             , 'type'      => 'string'      ],
+        'cognome'                      => ['display' => 'Cognome'                    , 'type'      => 'string'      ],
+        'nome'                         => ['display' => 'Nome'                       , 'type'      => 'string'      ],
+        'citta_nascita'                => ['display' => 'Città di nascita'           , 'type'      => 'string'      ],
+        // data di nascita
+        // sesso
+        'codice_fiscale'               => ['display' => 'Codice Fiscale'             , 'type'      => 'string'      ],
+        
+        'via'                          => ['display' => 'Via'                        , 'type'      => 'string'      ],
+        'citta_residenza'              => ['display' => 'Città di residenza'         , 'type'      => 'string'      ],
+        'provincia'                    => ['display' => 'Provincia'                  , 'type'      => 'string'      ],
+        'cap'                          => ['display' => 'CAP'                        , 'type'      => 'string'      ],
+        
+        'cellulare'                    => ['display' => 'Cellulare'                  , 'type'      => 'string'      ],
+        'telefono'                     => ['display' => 'Telefono'                   , 'type'      => 'string'      ],
+        'email'                        => ['display' => 'Email'                      , 'type'      => 'string'      ],
+        'fax'                          => ['display' => 'FAX'                        , 'type'      => 'string'      ],
+        
+        'partita_iva'                  => ['display' => 'P. IVA'                     , 'type'      => 'string'      ],
+        // stato civile
+        // tipo documento
+        'numero_documento'             => ['display' => 'Numero documento'           , 'type'      => 'string'      ],
+        // professione
+        'dettagli_professione'         => ['display' => 'Dettagli professione'       , 'type'      => 'string'      ],
+        // reddito
+        'numero_card'                  => ['display' => 'Numero Card'                , 'type'      => 'string'      ],
     ];
 }

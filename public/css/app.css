@@ -65,3 +65,7 @@ table .btn {
     color: silver;
     text-decoration:line-through;
 }
+
+.queryPanel .panel-heading {
+    cursor: pointer;
+}
