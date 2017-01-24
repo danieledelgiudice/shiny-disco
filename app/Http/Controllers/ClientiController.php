@@ -23,8 +23,21 @@ class ClientiController extends Controller
         
         $filiali = \App\Filiale::pluck('nome', 'id');
         $professioni = \App\Professione::pluck('nome', 'id');
+
+        $queryFields = $this->queryFields;
         
-        return view('clienti.index', compact('clienti', 'filiali', 'professioni'));
+        return view('clienti.index', compact('clienti', 'filiali', 'professioni', 'queryFields'));
+    }
+    
+    public function indexAjax(Request $request)
+    {
+        if ($request->user()->isAdmin())
+            $clienti = \App\Cliente::filter($request->all())->get();
+        else
+            $clienti = \App\Cliente::where('filiale_id', $request->user()->filiale->id)
+                                     ->filter($request->all())->get();
+        
+        return view('clienti._tabella', compact('clienti'));
     }
 
     public function show(Request $request, $id)
@@ -149,7 +162,7 @@ class ClientiController extends Controller
         }
         
         $query = http_build_query($params);
-        return redirect()->action('ClientiController@index', $query);
+        return redirect()->action('ClientiController@indexAjax', $query);
     }
     
     public function toggleImportante(Request $request, $cliente_id)
@@ -194,4 +207,10 @@ class ClientiController extends Controller
             'numero_card'               => 'max:255'
         ]);
     }
+    
+    private $queryFields = [
+        ['name' => 'nome'                         , 'display' => 'Nome'                       , 'type'      => 'string'      ],
+        ['name' => 'cognome'                      , 'display' => 'Cognome'                    , 'type'      => 'string'      ],
+        ['name' => 'codice_fiscale'               , 'display' => 'Codice Fiscale'             , 'type'      => 'string'      ],
+    ];
 }

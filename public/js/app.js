@@ -15,6 +15,12 @@ var parseQueryString = function() {
 
 (function() {
 
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+
     // Widget input date
     $('.input-group.date').datepicker({
         format: 'dd/mm/yyyy',
@@ -22,45 +28,7 @@ var parseQueryString = function() {
         language: 'it',
         todayBtn: 'linked',
     });
-    
-    // Filtri tabella
-    $('.table-filterable td[data-field]').click(function() {
-        var field = $(this).data('field');
-        var value = $(this).text();
-        
-        var params = parseQueryString();
-        params[field] = value;
-        var queryString = $.param(params);
-        
-        window.location.search = queryString;
-    });
-    
-    $('.table-filterable td[data-field-select]').click(function() {
-        var field_select = $(this).data('field-select');
-        var value = $(this).data('field-id');
-        
-        var params = parseQueryString();
-        params[field_select] = value;
-        var queryString = $.param(params);
-        
-        window.location.search = queryString;
-    });
-    
-    (function() {
-        var params = parseQueryString();
-        $('.table-filterable input[type=text]').each(function() {
-            var name = $(this).attr('name');
-            if (params[name])
-                $(this).attr('value', params[name]);
-        });
-        
-        $('.table-filterable select').each(function() {
-            var name = $(this).attr('name');
-            if (params[name]) {
-                $(this).children(`[value=${params[name]}]`).attr('selected', 'selected');
-            }
-        });
-    })();
+
     
     // We can attach the `fileselect` event to all file inputs on the page
     $(document).on('change', ':file', function() {
@@ -208,5 +176,67 @@ var parseQueryString = function() {
         
         window.location = url;
     });
+    
+    $("#queryForm").off('submit').submit(function(e) {
+        e.preventDefault();
+        
+        $('#queryBtn').prop('disabled', true);
+        $('#queryBtn i').removeClass('fa-search');
+        $('#queryBtn i').addClass('fa-spin fa-refresh');
+        
+        $.ajax({
+            type     : "POST",
+            cache    : false,
+            url      : $(this).attr('action'),
+            data     : $(this).serialize(),
+            success  : function(data) {
+                $("#queryResult").empty().append(data);
+                
+                $('#queryBtn i').removeClass('fa-spin fa-refresh');
+                $('#queryBtn i').addClass('fa-search');
+                $('#queryBtn').prop('disabled', false);
+            }
+        });
+    });
+        
+    // // Filtri tabella quando clicchi
+    // $('.table-filterable td[data-field]').click(function() {
+    //     var field = $(this).data('field');
+    //     var value = $(this).text();
+        
+    //     var params = parseQueryString();
+    //     params[field] = value;
+    //     var queryString = $.param(params);
+        
+    //     window.location.search = queryString;
+    // });
+    
+    // $('.table-filterable td[data-field-select]').click(function() {
+    //     var field_select = $(this).data('field-select');
+    //     var value = $(this).data('field-id');
+        
+    //     var params = parseQueryString();
+    //     params[field_select] = value;
+    //     var queryString = $.param(params);
+        
+    //     window.location.search = queryString;
+    // });
+    
+    // // Riempio campi input in base alla query della pagina
+    // (function() {
+    //     var params = parseQueryString();
+    //     $('.table-filterable input[type=text]').each(function() {
+    //         var name = $(this).attr('name');
+    //         if (params[name])
+    //             $(this).attr('value', params[name]);
+    //     });
+        
+    //     $('.table-filterable select').each(function() {
+    //         var name = $(this).attr('name');
+    //         if (params[name]) {
+    //             $(this).children(`[value=${params[name]}]`).attr('selected', 'selected');
+    //         }
+    //     });
+    // })();
     
 })();
