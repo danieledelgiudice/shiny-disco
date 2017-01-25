@@ -146,5 +146,10 @@ class ClienteFilter extends ModelFilter
         return $this->where('filiale_id', $value);
     }
     
+    public function importante($value)
+    {
+        return $this->where('importante', $value);
+    }
+    
     
 }

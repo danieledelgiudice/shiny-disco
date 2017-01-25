@@ -38,7 +38,9 @@ class ClientiController extends Controller
             'dettagli_professione'         => ['display' => 'Dettagli professione',        'type'      => 'string',     ],
             'reddito'                      => ['display' => 'Reddito',                     'type'      => 'decimal',    ],
             'numero_card'                  => ['display' => 'Numero Card',                 'type'      => 'string',     ],
-        ];
+            
+            'filiale_id'                   => ['display' => 'Filiale',                     'type'      => 'enum',           'list' => \App\Filiale::pluck('nome', 'id')],
+            'importante'                   => ['display' => 'Importante',                  'type'      => 'enum',           'list' => [0 => 'No', 1 => 'Sì']],        ];
     }
     
     public function index(Request $request)
