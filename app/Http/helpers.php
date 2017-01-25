@@ -30,3 +30,22 @@ function format_money($value) {
     if ($value == null) return '';
     return number_format($value, 2, ',', '.') . ' €';
 }
+
+function format_field($queryFields, $model, $field) {
+    $type = $queryFields[$field]['type'];
+    
+    if($model->{$field} === null || $model->{$field} === '')
+        return '';
+    
+    if ($type === 'string')
+        return $model->{$field};
+    else if ($type === 'date')
+        return format_date($model->{$field});
+    else if ($type === 'decimal')
+        return format_money($model->{$field});
+    else if ($type === 'enum') {
+        return $queryFields[$field]['list'][$model->{$field}];
+    }
+    
+    return '';
+}

@@ -202,10 +202,16 @@ var parseQueryString = function() {
         });
     });
     
-    $('#newFieldQueryDropdown a').click(function() {
-        var name = $(this).data('name');
+    $('#newFieldQuerySelect').change(function() {
+        var name = $(this).val();
+        
+        var selectize = $(this).selectize()[0].selectize;
+        selectize.clear(true);
+        
 
-        if ($(this).closest('form').find(`input[name=${name}]`).length > 0)
+        if ($(this).closest('form').find(`input[name=${name}]`).length > 0 ||
+            $(this).closest('form').find(`input[name=${name}\\[\\]]`).length > 0 ||
+            $(this).closest('form').find(`select[name=${name}]`).length > 0)
             return;
 
         var display = queryFields[name].display;
@@ -215,7 +221,7 @@ var parseQueryString = function() {
         if (type === 'string') {
             newRow = `
             <div class="form-group">
-                <label for="${name}" class="col-md-2 col-md-offset-1 control-label">${display}</label>
+                <label for="${name}" class="col-md-3 control-label">${display}</label>
                 <div class="col-md-7">
                     <input type="text" name="${name}" class="form-control"> 
                 </div>

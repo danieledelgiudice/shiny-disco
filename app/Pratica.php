@@ -3,11 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use EloquentFilter\Filterable;
 use Collective\Html\Eloquent\FormAccessible;
 
 class Pratica extends Model
 {
     use FormAccessible;
+    use Filterable;
     
     protected $table = 'pratiche';
     

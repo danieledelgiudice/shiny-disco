@@ -14,31 +14,18 @@
                 </script>
                 
                 {{ Form::open(['action' => ['ClientiController@filter'], 'class' => 'form-horizontal', 'id' => 'queryForm']) }}
-                
-                    <!--<div class="form-group">-->
-                    <!--    <div class="col-md-4 col-md-offset-1">-->
-                    <!--        <select id="newFieldQuerySelect" class="form-control" data-selecttype="none">-->
-                    <!--            <option></option>-->
-                    <!--            @foreach ($queryFields as $name => $f)-->
-                    <!--                <option value="{{ $name }}">{{ $f['display'] }}</option>-->
-                    <!--            @endforeach-->
-                    <!--        </select>-->
-                    <!--    </div>-->
-                    <!--</div>-->
-                    
+
                     <div class="form-group">
-                        <div class="dropdown col-md-2 col-md-offset-1" id="newFieldQueryDropdown">
-                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-                                Aggiungi nuovo attributo
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
+                        <div class="col-md-3 col-md-offset-1">
+                            <select id="newFieldQuerySelect" class="form-control" placeholder="Aggiungi nuovo campo">
+                                <option></option>
                                 @foreach ($queryFields as $name => $f)
-                                    <li><a href="#" data-name="{{ $name }}">{{ $f['display'] }}</a></li>
+                                    <option value="{{ $name }}">{{ $f['display'] }}</option>
                                 @endforeach
-                            </ul>
+                            </select>
                         </div>
-                        <div class="col-md-8 text-center">
+                        
+                        <div class="col-md-6 text-center">
                             <button type="submit" id="queryBtn" class="btn btn-primary">
                                    <i class="fa fa-fw fa-search"></i>
                                    Cerca
@@ -48,36 +35,7 @@
                             </a>
                         </div>
                     </div>
-                
-                    <!--<div class="form-group">-->
-                    <!--    <label for="$name" class="col-md-4">$display</label>-->
-                    <!--    <input type="text" name="$name" class="form-control"> -->
-                    <!--</div>-->
-                    
-                    <!--<p>-->
-                    <!--    Nome-->
-                    <!--    <br>-->
-                    <!--    {{ Form::text('nome', null, [ 'class' => 'form-control']) }}-->
-                    <!--</p>-->
-                    
-                    <!--<p>-->
-                    <!--    Codice Fiscale-->
-                    <!--    <br>-->
-                    <!--    {{ Form::text('codice_fiscale', null, [ 'class' => 'form-control']) }}-->
-                    <!--</p>-->
-                    
-                    <!--<p>-->
-                    <!--    Professione-->
-                    <!--    <br>-->
-                    <!--    {{ Form::select('professione', $professioni, null, [ 'placeholder' => '', 'class' => 'form-control' ]) }}-->
-                    <!--</p>-->
-                    
-                    <!--<p>-->
-                    <!--    Filiale-->
-                    <!--    <br>-->
-                    <!--    {{ Form::select('filiale', $filiali, null, [ 'placeholder' => '', 'class' => 'form-control' ]) }}-->
-                    <!--</p>-->
-                    
+
                     <div class="form-group">
                         <div class="text-center">
                             

@@ -12,9 +12,60 @@ class PraticheController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('conferma-promemoria');
+        
+        $this->queryFields = [
+            'numero_pratica'                 => ['display'   => 'Numero pratica',                      'type'        => 'string',      ],
+            'numero_registrazione'           => ['display'   => 'Numero registrazione',                'type'        => 'string',      ],
+            'data_apertura'                  => ['display'   => 'Data apertura',                       'type'        => 'date',        ],
+            'stato_pratica'                  => ['display'   => 'Stato pratica',                       'type'        => 'enum',        'list' => \App\Pratica::$enumStatoPratica],
+            'tipo_pratica'                   => ['display'   => 'Tipo pratica',                        'type'        => 'enum',        'list' => \App\Pratica::$enumTipoPratica],
+            
+            'veicolo_parte'                  => ['display'   => 'Veicolo di parte',                    'type'        => 'string',      ],
+            'targa_parte'                    => ['display'   => 'Targa di parte',                      'type'        => 'string',      ],
+            'numero_polizza_parte'           => ['display'   => 'Numero polizza di parte',             'type'        => 'string',      ],
+            'assicurazione_parte_id'         => ['display'   => 'Assicurazione parte',                 'type'        => 'enum',        'list' => \App\CompagniaAssicurativa::pluck('nome', 'id')],
+            
+            'conducente_controparte'         => ['display'   => 'Conducente controparte',              'type'        => 'string',      ],
+            'via_controparte'                => ['display'   => 'Via controparte',                     'type'        => 'string',      ],
+            'citta_controparte'              => ['display'   => 'Città controparte',                   'type'        => 'string',      ],
+            'telefono_controparte'           => ['display'   => 'Telefono controparte',                'type'        => 'string',      ],
+            'veicolo_controparte'            => ['display'   => 'Veicolo controparte',                 'type'        => 'string',      ],
+            'targa_controparte'              => ['display'   => 'Targa controparte',                   'type'        => 'string',      ],
+            'numero_polizza_controparte'     => ['display'   => 'Numero polizza controparte',          'type'        => 'string',      ],
+            'proprietario_mezzo_responsabile'=> ['display'   => 'Proprietario mezzo responsabile',     'type'        => 'string',      ],
+            'assicurazione_controparte_id'   => ['display'   => 'Assicurazione controparte',           'type'        => 'enum',        'list' => \App\CompagniaAssicurativa::pluck('nome', 'id')],
+            'medico_controparte'             => ['display'   => 'Medico controparte',                  'type'        => 'string',      ],
+            'parcella_presunta'              => ['display'   => 'Parcella presunta',                   'type'        => 'decimal',     ],
+            
+            'legale'                         => ['display'   => 'Legale',                              'type'        => 'string',      ],
+            'in_data'                        => ['display'   => 'In data',                             'type'        => 'date',        ],
+            'controllato'                    => ['display'   => 'Controllato',                         'type'        => 'enum',        'list' => \App\Pratica::$enumControllato],
+            'data_ultima_lettera'            => ['display'   => 'Data ultima lettera',                 'type'        => 'date',        ],
+            'mezzo_liquidato'                => ['display'   => 'Mezzo liquidato',                     'type'        => 'date',        ],
+            'valore_mezzo_liquidato'         => ['display'   => 'Valore mezzo liquidato',              'type'        => 'decimal',     ],
+            'rilievi'                        => ['display'   => 'Rilievi',                             'type'        => 'enum',        'list' => \App\Pratica::$enumRilievi],
+            'data_chiusura'                  => ['display'   => 'Data chiusura',                       'type'        => 'date',        ],
+            'data_sospeso'                   => ['display'   => 'Data sospeso',                        'type'        => 'date',        ], 
+            'importo_sospeso'                => ['display'   => 'Importo sospeso',                     'type'        => 'decimal',     ],
+            'onorari_omnia'                  => ['display'   => 'Onorari omnia',                       'type'        => 'decimal',     ],
+            'liquidato_omnia'                => ['display'   => 'Liquidato omnia',                     'type'        => 'decimal',     ],
+            
+            'data_sinistro'                  => ['display'   => 'Data sinistro',                       'type'        => 'date',        ],
+            'luogo_sinistro'                 => ['display'   => 'Luogo sinistro',                      'type'        => 'string',      ],
+            'testimoni'                      => ['display'   => 'Testimoni',                           'type'        => 'string',      ],
+            'autorita_id'                    => ['display'   => 'Autorità',                            'type'        => 'enum',        'list' => \App\Autorita::pluck('nome', 'id')],   
+            'comando_autorita'               => ['display'   => 'Comando autorità',                    'type'        => 'string',      ],
+            'rivalsa'                        => ['display'   => 'Rivalsa',                             'type'        => 'enum',        'list' => \App\Pratica::$enumRivalsa],
+            'soccorso'                       => ['display'   => 'Soccorso',                            'type'        => 'enum',        'list' => \App\Pratica::$enumSoccorso],
+            'tipologia_intervento'           => ['display'   => 'Tipologia intervento',                'type'        => 'string',      ],
+            'assicurazione_responsabile'     => ['display'   => 'Assicurazione responsabile',          'type'        => 'string',      ],
+            'assicurazione_risarcente'       => ['display'   => 'Assicurazione risarcente',            'type'        => 'string',      ],
+            'numero_sinistro'                => ['display'   => 'Numero sinistro',                     'type'        => 'string',      ],
+            
+        ];
     }
     
-    public function indexAll(Request $request)
+    public function index(Request $request)
     {
         if ($request->user()->isAdmin())
             $pratiche = \App\Pratica::all();
@@ -22,8 +73,12 @@ class PraticheController extends Controller
             $pratiche = \App\Pratica::whereHas('cliente', function($query) use ($request) {
                 $query->where('filiale_id', $request->user()->filiale->id);
             })->get();
+            
+        $queryFields = $this->queryFields;
         
-        return view('pratiche.index', compact('pratiche'));
+        $requestedFields = ['numero_pratica', 'stato_pratica', 'tipo_pratica', 'data_apertura'];
+        
+        return view('pratiche.index', compact('pratiche', 'queryFields', 'requestedFields'));
     }
     
     public function show(Request $request, $cliente_id, $pratica_id)
@@ -230,6 +285,46 @@ class PraticheController extends Controller
                     ->with('success', 'Pratica eliminata con successo!');
     }
     
+    public function filter(Request $request)
+    {
+        $params = [];
+        $requestedFields = ['numero_pratica'];
+        $j = 4;
+        
+        foreach($request->all() as $k => $v)
+        {
+            if ($k[0] != '_') {
+                if ($v != '')
+                    $params[$k] = $v;
+                if ($j > 1 && !in_array($k, $requestedFields))
+                    $requestedFields[--$j] = $k;
+            }
+        }
+        
+        $replacements = ['stato_pratica', 'tipo_pratica', 'data_apertura'];
+        $i = 1;
+        while ($i < $j && !empty($replacements))
+        {
+            $rep = array_shift($replacements);
+            if (!in_array($rep, $requestedFields)) {
+                $requestedFields[$i] = $rep;
+                $i++;
+            }
+        }
+
+        if ($request->user()->isAdmin())
+            $pratiche = \App\Pratica::filter($params)->get();
+        else
+            $pratiche = \App\Pratica::whereHas('cliente', function($query) use ($request) {
+                $query->where('filiale_id', $request->user()->filiale->id);
+            })->filter($params)->get();
+                                     
+        
+        $queryFields = $this->queryFields;
+    
+        return view('pratiche._tabella', compact('pratiche', 'requestedFields', 'queryFields'));
+    }
+    
     private function validateInput(Request $request)
     {
         $this->validate($request, [
@@ -288,54 +383,5 @@ class PraticheController extends Controller
         ]);
     }
     
-    private $queryFields = [
-        'numero_pratica'                 => ['display'   => 'Numero pratica'                    , 'type'        => 'string'      ],
-        'numero_registrazione'           => ['display'   => 'Numero registrazione'              , 'type'        => 'string'      ],
-        //'data_apertura'                => ['display'   => 'Data apertura'                     , 'type'        => 'date'        ],
-        //'stato_pratica'                => ['display'   => 'Stato pratica '                    , 'type'        => 'date'        ],
-        //'tipo_pratica'                 => ['display'   => 'Tipo pratica'                      , 'type'        => 'ENUM'        ],
-        
-        'veicolo_parte'                  => ['display'   => 'Veicolo di parte'                  , 'type'        => 'string'      ],
-        'targa_parte'                    => ['display'   => 'Targa di parte'                    , 'type'        => 'string'      ],
-        'numero_polizza_parte'           => ['display'   => 'Numero polizza di parte'           , 'type'        => 'string'      ],
-        //'assicurazione'                => ['display'   => 'Assicurazione'                     , 'type'        => 'rel'         ],
-        
-        'conducente_controparte'         => ['display'   => 'Conducente controparte'            , 'type'        => 'string'      ],
-        'via_controparte'                => ['display'   => 'Via controparte'                   , 'type'        => 'string'      ],
-        'citta_controparte'              => ['display'   => 'Città controparte'                 , 'type'        => 'string'      ],
-        'telefono_controparte'           => ['display'   => 'Telefono controparte'              , 'type'        => 'string'      ],
-        'veicolo_controparte'            => ['display'   => 'Veicolo controparte'               , 'type'        => 'string'      ],
-        'targa_controparte'              => ['display'   => 'Targa controparte'                 , 'type'        => 'string'      ],
-        'numero_polizza_controparte'     => ['display'   => 'Numero polizza controparte'        , 'type'        => 'string'      ],
-        'proprietario_mezzo_responsabile'=> ['display'   => 'Proprietario mezzo responsabile'   , 'type'        => 'string'      ],
-        //'ASSICURAZIONE'                => ['display'   => 'Assicurazione'                     , 'type'        => 'rel'         ],
-        'medico_controparte'             => ['display'   => 'Medico controparte'                , 'type'        => 'string'      ],
-        'parcella_presunta'              => ['display'   => 'Parcella presunta'                 , 'type'        => 'string'      ],
-        
-        'legale'                         => ['display'   => 'Legale'                            , 'type'        => 'string'      ],
-        //'in_data'                      => ['display'   => 'In data'                           , 'type'        => 'date'        ],
-        //'controllato'                  => ['display'   => 'Controllato'                       , 'type'        => 'ENUM'        ],
-        //'data_ultima_lettera'          => ['display'   => 'Data ultima lettera'               , 'type'        => 'date'        ],
-        //'mezzo_luquidato'              => ['display'   => 'Mezzo liquidato'                   , 'type'        => 'date'        ],
-        //'valore_mezzo_liquidato'       => ['display'   => 'Valore mezzo liquidato'            , 'type'        => 'date'        ],
-        //'rilievi'                      => ['display'   => 'Rilievi'                           , 'type'        => 'ENUM'        ],
-        //'data_chiusura    '            => ['display'   => 'Data chiusura'                     , 'type'        => 'date'        ],
-        'importo_sospeso'                => ['display'   => 'Importo sospeso'                   , 'type'        => 'string'      ],
-        'onorari_omnia'                  => ['display'   => 'Onorari omnia'                     , 'type'        => 'string'      ],
-        'liquidato_omnia'                => ['display'   => 'Liquidato omnia'                   , 'type'        => 'string'      ],
-        
-        //'data_sinistro'                => ['display'   => 'Data sinistro'                     , 'type'        => 'date'        ],
-        'luogo_sinistro'                 => ['display'   => 'Luogo sinistro'                    , 'type'        => 'string'      ],
-        'testimoni'                      => ['display'   => 'Testimoni'                         , 'type'        => 'string'      ],
-        'luogo_sinistro'                 => ['display'   => 'Luogo sinistro'                    , 'type'        => 'string'      ],
-        //'autorita'                     => ['display'   => 'Autorità'                          , 'type'        => 'ENUM'        ],   
-        'comando_autorita'               => ['display'   => 'Comando autorità'                  , 'type'        => 'string'      ],
-        //'rivalsa'                      => ['display'   => 'Rivalsa'                           , 'type'        => 'ENUM'        ],
-        //'soccorso'                     => ['display'   => 'Soccorso'                          , 'type'        => 'ENUM'        ],
-        'tipologia_intervento'           => ['display'   => 'Tipologia intervento'              , 'type'        => 'string'      ],
-        'assicurazione_responsabile'     => ['display'   => 'Assicurazione responsabile'        , 'type'        => 'string'      ],
-        'assicurazione_risarcente'       => ['display'   => 'Assicurazione risarcente'          , 'type'        => 'string'      ],
-        'numero_sinistro'                => ['display'   => 'Numero sinistro'                   , 'type'        => 'string'      ],
-        
-    ];
+    private $queryFields = [];
 }

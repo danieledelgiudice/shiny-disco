@@ -25,11 +25,12 @@ Route::delete( '/clienti/{cliente}',                                            
 
 
 
-Route::get( '/pratiche',                                                        'PraticheController@indexAll');
+Route::get( '/pratiche',                                                        'PraticheController@index');
 Route::get( '/clienti/{cliente}/pratiche/new',                                  'PraticheController@create');
 Route::get( '/clienti/{cliente}/pratiche/{pratica}/edit',                       'PraticheController@edit');
 Route::get( '/clienti/{cliente}/pratiche/{pratica}',                            'PraticheController@show');
 Route::post('/clienti/{cliente}/pratiche',                                      'PraticheController@store');
+Route::post('/pratiche/filter',                                                 'PraticheController@filter');
 Route::put( '/clienti/{cliente}/pratiche/{pratica}',                            'PraticheController@update');
 Route::delete( '/clienti/{cliente}/pratiche/{pratica}',                         'PraticheController@destroy');
 

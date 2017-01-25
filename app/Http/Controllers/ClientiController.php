@@ -55,8 +55,9 @@ class ClientiController extends Controller
         $professioni = \App\Professione::pluck('nome', 'id');
 
         $queryFields = $this->queryFields;
+        $requestedFields = ['cognome', 'nome', 'codice_fiscale', 'professione_id', 'filiale_id'];
         
-        return view('clienti.index', compact('clienti', 'filiali', 'professioni', 'queryFields'));
+        return view('clienti.index', compact('clienti', 'filiali', 'professioni', 'queryFields', 'requestedFields'));
     }
 
     public function show(Request $request, $id)
@@ -174,16 +175,27 @@ class ClientiController extends Controller
     public function filter(Request $request)
     {
         $params = [];
-        $requestedFields = [];
-        $fieldCount = 0;
+        $requestedFields = ['cognome', 'nome'];
+        $j = 5;
         
         foreach($request->all() as $k => $v)
         {
             if ($k[0] != '_') {
                 if ($v != '')
                     $params[$k] = $v;
-                if ($k != 'nome' && $k != 'cognome')
-                    $requestedFields[$fieldCount++] = $k;
+                if ($j > 2 && !in_array($k, $requestedFields))
+                    $requestedFields[--$j] = $k;
+            }
+        }
+        
+        $replacements = ['codice_fiscale', 'professione_id', 'filiale_id'];
+        $i = 2;
+        while ($i < $j && !empty($replacements))
+        {
+            $rep = array_shift($replacements);
+            if (!in_array($rep, $requestedFields)) {
+                $requestedFields[$i] = $rep;
+                $i++;
             }
         }
 
