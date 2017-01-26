@@ -64,6 +64,11 @@ class Pratica extends Model
         return $this->hasMany('\App\Promemoria', 'pratica_id', 'id');
     }
     
+    public function prestazioni_mediche()
+    {
+        return $this->hasMany('\App\PrestazioneMedica', 'pratica_id', 'id');
+    }
+    
     // Mutator data_apertura
     public function setDataAperturaAttribute($value)
     {

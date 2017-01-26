@@ -93,20 +93,9 @@ class PraticheController extends Controller
     
     public function index(Request $request)
     {
-        $max = 100;
-        
-        if ($request->user()->isAdmin())
-            $pratiche = \App\Pratica::take(100)->get();
-        else
-            $pratiche = \App\Pratica::whereHas('cliente', function($query) use ($request) {
-                $query->where('filiale_id', $request->user()->filiale->id);
-            })->take(100)->get();
-            
         $queryFields = $this->queryFields;
         
-        $requestedFields = ['numero_pratica', 'stato_pratica', 'tipo_pratica', 'data_apertura'];
-        
-        return view('pratiche.index', compact('pratiche', 'queryFields', 'requestedFields'));
+        return view('pratiche.index', compact('queryFields'));
     }
     
     public function show(Request $request, $cliente_id, $pratica_id)
@@ -129,8 +118,11 @@ class PraticheController extends Controller
         $totale_assegni_consegnati = $pratica->assegni()->where('tipologia', 0)->sum('importo');
         $totale_assegni_restituiti = $pratica->assegni()->where('tipologia', 1)->sum('importo');
         
+        $prestazioni_mediche_c = $pratica->prestazioni_mediche()->inConvenzione()->get()->groupBy('nome_medico');
+        $prestazioni_mediche_nc = $pratica->prestazioni_mediche()->nonConvenzione()->get();
+        
         return view('pratiche.show', compact('pratica', 'documenti', 'assegni', 'promemoria', 'totale_assegni_consegnati',
-                                                'totale_assegni_restituiti'));
+                                                'totale_assegni_restituiti', 'prestazioni_mediche_nc', 'prestazioni_mediche_c'));
     }
 
     public function edit(Request $request, $cliente_id, $pratica_id)

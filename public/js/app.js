@@ -100,6 +100,17 @@ var parseQueryString = function() {
         $(formSelector).submit();
     });
     
+    $('.showPrestazioneMedicaDestroyModal').click(function() {
+        var id_prestazioneMedica = $(this).data('prestazionemedica');
+        $('#prestazioneMedicaDestroyConfirm').data('prestazionemedica', id_prestazioneMedica);
+    });
+    
+    $('#prestazioneMedicaDestroyConfirm').click(function() {
+        var prestazioneMedica = $(this).data('prestazionemedica');
+        console.log(prestazioneMedica);
+        var formSelector = `#prestazioneMedica${prestazioneMedica}DestroyForm`;
+        $(formSelector).submit();
+    });
     
     $('.showCompagniaDestroyModal').click(function() {
         var id_compagnia = $(this).data('compagnia');
@@ -322,6 +333,13 @@ var parseQueryString = function() {
         $(this).children('i').toggleClass('fa-caret-down').toggleClass('fa-caret-up');
         var body = $(this).siblings('.panel-body');
         body.slideToggle();
+    });
+    
+    $('input[type=radio][name=inConvenzione]').change(function() {
+        if ($(this).val() == "1")
+            $('#group-inConvenzione').slideDown();
+        else
+            $('#group-inConvenzione').slideUp();
     });
         
     // // Filtri tabella quando clicchi

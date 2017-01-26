@@ -33,7 +33,7 @@
             <!-- Professione -->
             <strong class="col-md-2 form-control-static">Professione</strong>
             <div class="col-md-4">
-                <p class="form-control-static">{{ $pratica->cliente->professione->nome }}</p>
+                <p class="form-control-static">{{ $pratica->cliente->professione ? $pratica->cliente->professione->nome : '' }}</p>
             </div>
         </div>
         

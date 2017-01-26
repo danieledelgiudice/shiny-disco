@@ -8,7 +8,7 @@
                 Query
                 <i class="fa fa-fw fa-caret-down pull-right"></i>
             </div>
-            <div class="panel-body" style="display: none">
+            <div class="panel-body">
                 <script>
                     var queryFields = {!! json_encode($queryFields) !!};
                 </script>
@@ -49,7 +49,6 @@
         <div class="panel panel-default">
             <!-- Lista pratiche -->
             <div class="panel-body" id="queryResult">
-                @include('pratiche._tabella')
             </div>
         </div>
        

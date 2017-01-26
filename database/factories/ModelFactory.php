@@ -313,3 +313,40 @@ $factory->define(App\CompagniaAssicurativa::class, function (Faker\Generator $fa
         'filiale_id' => \App\Filiale::all()->random()->id,
     ];
 });
+
+
+$factory->define(App\PrestazioneMedica::class, function (Faker\Generator $faker) {
+    $faker->addProvider(new Faker\Provider\it_IT\Person($faker));
+    $faker->addProvider(new Faker\Provider\it_IT\Address($faker));
+    $faker->addProvider(new Faker\Provider\it_IT\PhoneNumber($faker));
+    $faker->addProvider(new Faker\Provider\it_IT\Company($faker));
+    $faker->addProvider(new Faker\Provider\it_IT\Internet($faker));
+    $faker->addProvider(new Faker\Provider\it_IT\Payment($faker));
+    $faker->addProvider(new Faker\Provider\it_IT\Text($faker));
+    
+    $conv = $faker->boolean;
+    
+    return [
+        'nome_medico' => $faker->randomElement(['Dott. Bruno Rossi', 'Dott. Franco Pinna', 'Dott.sa Sara Mirto', 'Dott.sa Alessia Manca']),
+        'data' => $faker->dateTimeThisDecade(),
+        'percentuale' => $conv ? $faker->randomElement([5, 10, 15, 20, 25]) : 0,
+        'giorni' => $faker->numberBetween(3, 40),
+        'costo' => $faker->numberBetween(0, 300) * 10,
+        
+        'pratica_id' => \App\Pratica::all()->random()->id,
+    ];
+    
+
+    
+    $table->integer('pratica_id')->unsigned();
+
+    return [
+        'nome' => $faker->company,
+        'indirizzo' => $faker->address,
+        'telefono' => $faker->e164PhoneNumber,
+        'fax' => $faker->tollFreePhoneNumber,
+        'email' => $faker->email,
+
+        'filiale_id' => \App\Filiale::all()->random()->id,
+    ];
+});

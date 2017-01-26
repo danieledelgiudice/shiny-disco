@@ -13,6 +13,10 @@
        ['resource' => 'assegno',
         'message' => 'Sei sicuro di voler eliminare l\'assegno? Questa operazione non potrà essere annullata.'])
     
+    @include('common._modal_elimina',
+       ['resource' => 'prestazioneMedica',
+        'message' => 'Sei sicuro di voler eliminare la prestazione medica? Questa operazione non potrà essere annullata.'])
+    
     @include('promemoria._modal_create')
 
     <div class="container">
@@ -62,6 +66,9 @@
         
         <!-- Elenco assegni pratica -->
         @include('assegni._elenco')
+        
+        <!-- Elenco prestazioni mediche pratica -->
+        @include('prestazioni_mediche._elenco')
         
         <!-- Elenco promemoria pratica -->
         @include('promemoria._elenco')

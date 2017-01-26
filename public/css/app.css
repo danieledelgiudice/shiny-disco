@@ -69,3 +69,12 @@ table .btn {
 .queryPanel .panel-heading {
     cursor: pointer;
 }
+
+.table>tbody>.row-subtotal td {
+    font-weight: bold;
+    border-bottom: 20px solid #fff;
+}
+
+.table>tbody>.row-subtotal.orange {
+    background-color: #ffddaa;
+}
