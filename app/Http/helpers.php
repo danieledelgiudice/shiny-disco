@@ -34,6 +34,11 @@ function format_money($value) {
 function format_field($queryFields, $model, $field) {
     $type = $queryFields[$field]['type'];
     
+    if(strpos($field, '-') !== false) {
+        list($rel, $field) = explode('-', $field);
+        $model = $model->{$rel};
+    }
+    
     if($model->{$field} === null || $model->{$field} === '')
         return '';
     

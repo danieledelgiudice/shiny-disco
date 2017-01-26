@@ -6,44 +6,30 @@ use EloquentFilter\ModelFilter;
 
 class PraticaFilter extends ModelFilter
 {
-    // stringa - iniziacon
-    // public function cognome($value)
-    // {
-    //     return $this->whereBeginsWith('cognome', $value);
-    // }
-    
-    // stringa - data
-    // public function dataNascita($value)
-    // {
-    //     if (!$value[1]) return $this;
-        
-    //     $op = ($value[0] == 'lt') ? '<=' : '>=';
-    //     $element = \Carbon\Carbon::createFromFormat('d/m/Y', $value[1]);
-        
-    //     return $this->where('data_nascita', $op, $element);
-    // }
-    
-    // decimal
-    // public function reddito($value)
-    // {
-    //     if (!$value[1]) return $this;
-        
-    //     $op = ($value[0] == 'lt') ? '<=' : '>=';
-
-    //     return $this->where('reddito', $op, $value[1]);
-    // }
-    
-    // enum o relazione
-    // public function sesso(enum)/autorita(rel)($value)
-    // {
-    //     return $this->where('sesso/autorita_id', $value);
-    // }
-    
-    // stringa - contiene
-    // public function via($value)
-    // {
-    //     return $this->whereLike('via', $value);
-    // }
+    public $relations = [
+        'cliente' => [
+            'cognome', 
+            'nome', 
+            'citta_nascita', 
+            'data_nascita', 
+            'sesso', 
+            'codice_fiscale', 
+            'via', 
+            'citta_residenza', 
+            'provincia', 
+            'cap', 
+            'partita_iva', 
+            'stato_civile', 
+            'tipo_documento', 
+            'numero_documento', 
+            'professione_id', 
+            'dettagli_professione', 
+            'reddito', 
+            'numero_card', 
+            'filiale_id', 
+            'importante',
+        ]
+    ];
     
     public function numeroPratica($value)
     {
@@ -310,8 +296,113 @@ class PraticaFilter extends ModelFilter
         return $this->whereLike('assicurazione_risarcente', $value);
     }
     
-   public function numeroSinistro($value)
+    public function numeroSinistro($value)
     {
         return $this->whereBeginsWith('numero_sinistro', $value);
-    }  
+    }
+    
+    
+    ///////////////////////////////////////
+    
+    
+    public function clienteCognome($value)
+    {
+        return $this->push('cognome', $value);
+    }
+    
+    public function clienteNome($value)
+    {
+        return $this->push('nome', $value);
+    }
+    
+    public function clienteCittaNascita($value)
+    {
+        return $this->push('citta_nascita', $value);
+    }
+    
+    public function clienteDataNascita($value)
+    {
+        return $this->push('data_nascita', $value);
+    }
+    
+    public function clienteSesso($value)
+    {
+        return $this->push('sesso', $value);
+    }
+    
+    public function clienteCodiceFiscale($value)
+    {
+        return $this->push('codice_fiscale', $value);
+    }
+    
+    public function clienteVia($value)
+    {
+        return $this->push('via', $value);
+    }
+    
+    public function clienteCittaResidenza($value)
+    {
+        return $this->push('citta_residenza', $value);
+    }
+    
+    public function clienteProvincia($value)
+    {
+        return $this->push('provincia', $value);
+    }
+    
+    public function clienteCap($value)
+    {
+        return $this->push('cap', $value);
+    }
+    
+    public function clientePartitaIva($value)
+    {
+        return $this->push('partita_iva', $value);
+    }
+    
+    public function clienteStatoCivile($value)
+    {
+        return $this->push('stato_civile', $value);
+    }
+    
+    public function clienteTipoDocumento($value)
+    {
+        return $this->push('tipo_documento', $value);
+    }
+    
+    public function clienteNumeroDocumento($value)
+    {
+        return $this->push('numero_documento', $value);
+    }
+    
+    public function clienteProfessione($value)
+    {
+        return $this->push('professione', $value);
+    }
+    
+    public function clienteDettagliProfessione($value)
+    {
+        return $this->push('dettagli_professione', $value);
+    }
+    
+    public function clienteReddito($value)
+    {
+        return $this->push('reddito', $value);
+    }
+    
+    public function clienteNumeroCard($value)
+    {
+        return $this->push('numero_card', $value);
+    }
+    
+    public function clienteFiliale($value)
+    {
+        return $this->push('filiale', $value);
+    }
+    
+    public function clienteImportante($value)
+    {
+        return $this->push('importante', $value);
+    }
+    
 }

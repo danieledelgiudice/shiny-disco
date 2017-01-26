@@ -209,9 +209,9 @@ var parseQueryString = function() {
         selectize.clear(true);
         
 
-        if ($(this).closest('form').find(`input[name=${name}]`).length > 0 ||
-            $(this).closest('form').find(`input[name=${name}\\[\\]]`).length > 0 ||
-            $(this).closest('form').find(`select[name=${name}]`).length > 0)
+        if ($(this).closest('form').find(`input[name="${name}"]`).length > 0 ||
+            $(this).closest('form').find(`input[name="${name}\\[\\]"]`).length > 0 ||
+            $(this).closest('form').find(`select[name="${name}"]`).length > 0)
             return;
 
         var display = queryFields[name].display;

@@ -62,17 +62,45 @@ class PraticheController extends Controller
             'assicurazione_risarcente'       => ['display'   => 'Assicurazione risarcente',            'type'        => 'string',      ],
             'numero_sinistro'                => ['display'   => 'Numero sinistro',                     'type'        => 'string',      ],
             
+            //////////////////////////////////////////
+            
+            'cliente-cognome'                      => ['display' => 'Cognome (Cliente)',                     'type'      => 'string',     ],
+            'cliente-nome'                         => ['display' => 'Nome (Cliente)',                        'type'      => 'string',     ],
+            'cliente-citta_nascita'                => ['display' => 'Città di nascita (Cliente)',            'type'      => 'string',     ],
+            'cliente-data_nascita'                 => ['display' => 'Data di nascita (Cliente)',             'type'      => 'date',       ],
+            'cliente-sesso'                        => ['display' => 'Sesso (Cliente)',                       'type'      => 'enum',           'list' => \App\Cliente::$enumSesso ],
+            'cliente-codice_fiscale'               => ['display' => 'Codice Fiscale (Cliente)',              'type'      => 'string',     ],
+            
+            'cliente-via'                          => ['display' => 'Via (Cliente)',                         'type'      => 'string',     ],
+            'cliente-citta_residenza'              => ['display' => 'Città di residenza (Cliente)',          'type'      => 'string',     ],
+            'cliente-provincia'                    => ['display' => 'Provincia (Cliente)',                   'type'      => 'string',     ],
+            'cliente-cap'                          => ['display' => 'CAP (Cliente)',                         'type'      => 'string',     ],
+
+            'cliente-partita_iva'                  => ['display' => 'P. IVA (Cliente)',                      'type'      => 'string',     ],
+            'cliente-stato_civile'                 => ['display' => 'Stato civile (Cliente)',                'type'      => 'enum',           'list' => \App\Cliente::$enumStatoCivile ],
+            'cliente-tipo_documento'               => ['display' => 'Tipo documento (Cliente)',              'type'      => 'enum',           'list' => \App\Cliente::$enumTipoDocumento ],
+            'cliente-numero_documento'             => ['display' => 'Numero documento (Cliente)',            'type'      => 'string',     ],
+            'cliente-professione_id'               => ['display' => 'Professione (Cliente)',                 'type'      => 'enum',           'list' => \App\Professione::pluck('nome', 'id')],
+            'cliente-dettagli_professione'         => ['display' => 'Dettagli professione (Cliente)',        'type'      => 'string',     ],
+            'cliente-reddito'                      => ['display' => 'Reddito (Cliente)',                     'type'      => 'decimal',    ],
+            'cliente-numero_card'                  => ['display' => 'Numero Card (Cliente)',                 'type'      => 'string',     ],
+            
+            'cliente-filiale_id'                   => ['display' => 'Filiale (Cliente)',                     'type'      => 'enum',           'list' => \App\Filiale::pluck('nome', 'id')],
+            'cliente-importante'                   => ['display' => 'Importante (Cliente)',                  'type'      => 'enum',           'list' => [0 => 'No', 1 => 'Sì']],
+            
         ];
     }
     
     public function index(Request $request)
     {
+        $max = 100;
+        
         if ($request->user()->isAdmin())
-            $pratiche = \App\Pratica::all();
+            $pratiche = \App\Pratica::take(100)->get();
         else
             $pratiche = \App\Pratica::whereHas('cliente', function($query) use ($request) {
                 $query->where('filiale_id', $request->user()->filiale->id);
-            })->get();
+            })->take(100)->get();
             
         $queryFields = $this->queryFields;
         
