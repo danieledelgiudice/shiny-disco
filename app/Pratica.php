@@ -23,8 +23,11 @@ class Pratica extends Model
             foreach($pratica->documenti as $documento) {
                 $documento->delete();
             }
-            foreach($pratica->promemoria as $promemoria) {
-                $promemoria->delete();
+            foreach($pratica->promemoria()->withTrashed()->get() as $promemoria) {
+                $promemoria->forceDelete();
+            }
+            foreach($pratica->prestazioni_mediche as $prestazione_medica) {
+                $prestazione_medica->delete();
             }
         });
     }

@@ -1,4 +1,4 @@
-@if (isset($prestazione_medica))
+@if ($prestazione_medica->id)
     {!! Form::model($prestazione_medica, ['action' => ['PrestazioniMedicheController@update',
         'cliente' => $prestazione_medica->pratica->cliente, 'pratica' => $prestazione_medica->pratica, 'prestazione_medica' => $prestazione_medica],
         'method' => 'put', 'class' => 'form-horizontal']) !!}
@@ -49,14 +49,14 @@
                 <div class="col-md-4">
                     <div class="radio-inline">
                         <label>
-                            {!! Form::radio('inConvenzione', '1', $prestazione_medica->inConvenzione); !!}
+                            {!! Form::radio('inConvenzione', '1', ( old('inConvenzione') == '1' || (old('inConvenzione') == '' && $prestazione_medica->inConvenzione))) !!}
                             In convenzione
                         </label>
                     </div>
                     
                     <div class="radio-inline">
                         <label>
-                            {!! Form::radio('inConvenzione', '0', $prestazione_medica->inConvenzione == false); !!}
+                            {!! Form::radio('inConvenzione', '0', ( old('inConvenzione') == '0' || (old('inConvenzione') == '' && !$prestazione_medica->inConvenzione))) !!}
                             Non in convenzione
                         </label>
                     </div>
@@ -76,7 +76,7 @@
         </div>
     </div>
     
-    @if (isset($prestazione_medica))
+    @if ($prestazione_medica->id)
         <!-- Conferma cambiamenti -->
         <div class="form-group">
             <button type="submit" class="btn btn-primary center-block">

@@ -28,7 +28,10 @@ class PrestazioniMedicheController extends Controller
             abort(403);
         }
         
-        return view('prestazioni_mediche.create', compact('pratica'));
+        $prestazione_medica = new \App\PrestazioneMedica;
+        $prestazione_medica->percentuale = 0;
+        
+        return view('prestazioni_mediche.create', compact('pratica', 'prestazione_medica'));
     }
     
     public function store(Request $request, $cliente_id, $pratica_id)
