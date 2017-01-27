@@ -33,6 +33,7 @@ function format_money($value) {
 
 function format_field($queryFields, $model, $field) {
     $type = $queryFields[$field]['type'];
+    $original_field = $field;
     
     if(strpos($field, '-') !== false) {
         list($rel, $field) = explode('-', $field);
@@ -49,7 +50,7 @@ function format_field($queryFields, $model, $field) {
     else if ($type === 'decimal')
         return format_money($model->{$field});
     else if ($type === 'enum') {
-        return $queryFields[$field]['list'][$model->{$field}];
+        return $queryFields[$original_field]['list'][$model->{$field}];
     }
     
     return '';

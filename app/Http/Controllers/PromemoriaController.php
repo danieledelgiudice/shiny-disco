@@ -105,7 +105,7 @@ class PromemoriaController extends Controller
         
         $promemoria->delete();
                 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Il promemoria è stato eliminato con successo.');
     }
     
     public function confermaLettura(Request $request)
@@ -114,7 +114,7 @@ class PromemoriaController extends Controller
         $utente->ultima_conferma = \Carbon\Carbon::now();
         $utente->save();
         
-        return redirect()->back()->with('success', 'Hai confermato di aver letto l\'agenda di oggi');
+        return redirect()->back()->with('success', 'Hai confermato di aver letto l\'agenda di oggi.');
     }
     
     private function validateInput(Request $request)

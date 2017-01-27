@@ -45,6 +45,14 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
+        if ($e instanceof \Illuminate\Session\TokenMismatchException)
+        {
+            return redirect()
+                ->back()
+                ->withInput($request->except('password', '_token'))
+                ->with('danger', 'La sessione è scaduta. Effettuare un nuovo invio.');
+        }
+        
         return parent::render($request, $e);
     }
 }

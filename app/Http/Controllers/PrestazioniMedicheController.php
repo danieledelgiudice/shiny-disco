@@ -146,7 +146,7 @@ class PrestazioniMedicheController extends Controller
         $prestazione_medica->delete();
                 
         return redirect()->action('PraticheController@show', ['cliente' => $prestazione_medica->pratica->cliente, 'pratica' => $prestazione_medica->pratica])
-            ->with('success', 'La prestazione medica è stato eliminato con successo.');
+            ->with('success', 'La prestazione medica è stata eliminata con successo.');
     }
     
     private function validateInput(Request $request)

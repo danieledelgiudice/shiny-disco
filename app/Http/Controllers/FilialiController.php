@@ -80,7 +80,7 @@ class FilialiController extends Controller
         
         if ($utente == $request->user())
             // Non posso disattivare me stesso
-            return redirect()->back();
+            return redirect()->back()->with('danger', 'Non è possibile disattivare la propria filiale.');
         
         $utente->enabled = !$utente->enabled;
         $utente->save();

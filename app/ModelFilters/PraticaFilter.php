@@ -377,7 +377,7 @@ class PraticaFilter extends ModelFilter
     
     public function clienteProfessione($value)
     {
-        return $this->push('professione', $value);
+        return $this->push('professione_id', $value);
     }
     
     public function clienteDettagliProfessione($value)
@@ -397,7 +397,7 @@ class PraticaFilter extends ModelFilter
     
     public function clienteFiliale($value)
     {
-        return $this->push('filiale', $value);
+        return $this->push('filiale_id', $value);
     }
     
     public function clienteImportante($value)

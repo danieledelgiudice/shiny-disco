@@ -331,6 +331,7 @@ class PraticheController extends Controller
                 $i++;
             }
         }
+        
 
         if ($request->user()->isAdmin())
             $pratiche = \App\Pratica::filter($params)->get();
@@ -341,7 +342,7 @@ class PraticheController extends Controller
                                      
         
         $queryFields = $this->queryFields;
-    
+        
         return view('pratiche._tabella', compact('pratiche', 'requestedFields', 'queryFields'));
     }
     
