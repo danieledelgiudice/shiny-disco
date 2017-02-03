@@ -34,7 +34,7 @@
             <!-- Stato pratica -->
             <strong class="col-md-2 form-control-static">Stato pratica</strong>
             <div class="col-md-4">
-                <p class="form-control-static">{{ \App\Pratica::$enumStatoPratica[$pratica->stato_pratica] }}</p>
+                <p class="form-control-static">{{ isset(\App\Pratica::$enumStatoPratica[$pratica->stato_pratica]) ? \App\Pratica::$enumStatoPratica[$pratica->stato_pratica] : '' }}</p>
             </div>
         </div>
         
@@ -43,7 +43,7 @@
             <!-- Tipo pratica -->    
             <strong class="col-md-2 form-control-static">Tipo pratica</strong>
             <div class="col-md-4">
-                <p class="form-control-static">{{ \App\Pratica::$enumTipoPratica[$pratica->tipo_pratica] }}</p>
+                <p class="form-control-static">{{ isset(\App\Pratica::$enumTipoPratica[$pratica->tipo_pratica]) ? \App\Pratica::$enumTipoPratica[$pratica->tipo_pratica] : '' }}</p>
             </div>
         </div>
     </div>
@@ -233,7 +233,7 @@
             <!-- Controllato -->
             <strong class="col-md-2 form-control-static">Controllato</strong>
             <div class="col-md-4">
-                <p class="form-control-static">{{ \App\Pratica::$enumControllato[$pratica->controllato] }}</p>
+                <p class="form-control-static">{{ isset(\App\Pratica::$enumControllato[$pratica->controllato]) ? \App\Pratica::$enumControllato[$pratica->controllato] : '' }}</p>
             </div>
             
             <!-- Data ultima lettera -->
@@ -261,7 +261,7 @@
             <!-- Rilievi -->
             <strong class="col-md-2 form-control-static">Rilievi</strong>
             <div class="col-md-4">
-                <p class="form-control-static">{{ \App\Pratica::$enumRilievi[$pratica->rilievi] }}</p>
+                <p class="form-control-static">{{ isset(\App\Pratica::$enumRilievi[$pratica->rilievi]) ? \App\Pratica::$enumRilievi[$pratica->rilievi] : '' }}</p>
             </div>
         
             <!-- Data chiusura -->
@@ -364,13 +364,13 @@
             <!-- Rivalsa -->
             <strong class="col-md-2 form-control-static">Rivalsa</strong>
             <div class="col-md-4">
-                <p class="form-control-static">{{ \App\Pratica::$enumRivalsa[$pratica->rivalsa] }}</p>
+                <p class="form-control-static">{{ isset(\App\Pratica::$enumRivalsa[$pratica->rivalsa]) ? \App\Pratica::$enumRivalsa[$pratica->rivalsa] : '' }}</p>
             </div>
         
             <!-- Soccorso -->
             <strong class="col-md-2 form-control-static">Soccorso</strong>
             <div class="col-md-4">
-                <p class="form-control-static">{{ \App\Pratica::$enumSoccorso[$pratica->soccorso] }}</p>
+                <p class="form-control-static">{{ isset(\App\Pratica::$enumSoccorso[$pratica->soccorso]) ? \App\Pratica::$enumSoccorso[$pratica->soccorso] : '' }}</p>
             </div>
         </div>
         

@@ -50,7 +50,9 @@ function format_field($queryFields, $model, $field) {
     else if ($type === 'decimal')
         return format_money($model->{$field});
     else if ($type === 'enum') {
-        return $queryFields[$original_field]['list'][$model->{$field}];
+        $index = $model->{$field};
+        $enum = $queryFields[$original_field]['list'];
+        return isset($enum[$index]) ? $enum[$index] : '';
     }
     
     return '';

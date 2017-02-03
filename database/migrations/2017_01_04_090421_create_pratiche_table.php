@@ -15,7 +15,7 @@ class CreatePraticheTable extends Migration
         Schema::create('pratiche', function (Blueprint $table) {
             $table->increments('id');
             
-            $table->integer('numero_pratica')->unique()->nullable();                // ?
+            $table->integer('numero_pratica')->nullable();                // ?
             $table->integer('numero_registrazione')->nullable();                    // ?
             $table->integer('stato_pratica')->nullable();
             $table->string('tipo_pratica')->nullable();

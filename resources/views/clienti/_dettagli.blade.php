@@ -41,7 +41,7 @@
             <!-- Sesso Cliente -->    
             <strong class="col-md-2 form-control-static">Sesso</strong>
             <div class="col-md-4">
-                <p value="" class="form-control-static">{{ \App\Cliente::$enumSesso[$cliente->sesso] }}</p>
+                <p value="" class="form-control-static">{{ isset(\App\Cliente::$enumSesso[$cliente->sesso]) ? \App\Cliente::$enumSesso[$cliente->sesso] : '' }}</p>
             </div>
 
             
@@ -148,7 +148,7 @@
             <!-- Stato civile Cliente -->
             <strong class="col-md-2 form-control-static">Stato civile</strong>
             <div class="col-md-4">
-                <p value="" class="form-control-static">{{ \App\Cliente::$enumStatoCivile[$cliente->stato_civile] }}</p>
+                <p value="" class="form-control-static">{{ isset(\App\Cliente::$enumStatoCivile[$cliente->stato_civile]) ? \App\Cliente::$enumStatoCivile[$cliente->stato_civile] : '' }}</p>
             </div>
         
             
@@ -159,7 +159,7 @@
             <!-- Tipo documento Cliente -->
             <strong class="col-md-2 form-control-static">Tipo documento</strong>
             <div class="col-md-4">
-                <p value="" class="form-control-static">{{ \App\Cliente::$enumTipoDocumento[$cliente->tipo_documento] }}</p>
+                <p value="" class="form-control-static">{{ isset(\App\Cliente::$enumTipoDocumento[$cliente->tipo_documento]) ? \App\Cliente::$enumTipoDocumento[$cliente->tipo_documento] : '' }}</p>
             </div>
             
             <!-- Numero documento Cliente -->

@@ -11,6 +11,6 @@ class PrestazioniMedicheSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\PrestazioneMedica::class, 2000)->create();
+        factory(App\PrestazioneMedica::class, 100)->create();
     }
 }

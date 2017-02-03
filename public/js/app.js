@@ -185,7 +185,7 @@ var parseQueryString = function() {
             url += '?logo=1';
         }
         
-        window.location = url;
+        window.open(url, '_blank');
     });
     
     $("#queryForm").off('submit').submit(function(e) {

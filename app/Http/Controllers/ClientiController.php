@@ -46,10 +46,10 @@ class ClientiController extends Controller
     public function index(Request $request)
     {
         if ($request->user()->isAdmin())
-            $clienti = \App\Cliente::filter($request->all())->get();
+            $clienti = \App\Cliente::filter($request->all())->take(100)->get();
         else
             $clienti = \App\Cliente::where('filiale_id', $request->user()->filiale->id)
-                                     ->filter($request->all())->get();
+                                     ->filter($request->all())->take(100)->get();
         
         $filiali = \App\Filiale::pluck('nome', 'id');
         $professioni = \App\Professione::pluck('nome', 'id');

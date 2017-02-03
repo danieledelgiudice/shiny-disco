@@ -232,19 +232,7 @@ class Pratica extends Model
 		0 => 'No',
 		1 => 'Sì',
 	];
-    						
-    public static $enumStatoAvanzamento = [
-        0 => 'Sconosciuto',
-		1 => 'Trattabile',
-		2 => 'Attesa importo da direzione',
-		3 => 'Attesa perizia di controparte',
-		4 => 'Attesa importo da cliente',
-		5 => 'Attesa certifizaione medici propri',
-		6 => 'Attesa certificazione medico convenzione',
-		7 => 'In gestione a terzi',
-		8 => 'Attesa perizia di parte',
-	];
-    
+
     public static $enumRilievi = [
 		0 => 'Rilievi non necessari', 
 		1 => 'Rilievi presi',
@@ -261,11 +249,12 @@ class Pratica extends Model
 	];
     				
     public static $enumSoccorso = [
-		0 => 'Da solo', 
-		1 => 'Da terzi',
-		2 => 'Ambulanza',
-		3 => 'Da parenti',
-		4 => 'Dal responsabile',
+        0 => 'Nessuno',
+		1 => 'Da solo', 
+		2 => 'Da terzi',
+		3 => 'Ambulanza',
+		4 => 'Da parenti',
+		5 => 'Dal responsabile',
 	];
     
     /**

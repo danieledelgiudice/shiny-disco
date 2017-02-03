@@ -504,7 +504,7 @@
         <!-- Conferma cambiamenti -->
         <div class="form-group">
             <button type="submit" class="btn btn-primary center-block">
-                <i class="fa fa-btn fa-pencil"></i>Modifica pratica
+                <i class="fa fa-btn fa-pencil"></i>Conferma modifica
             </button>
         </div>
     @else

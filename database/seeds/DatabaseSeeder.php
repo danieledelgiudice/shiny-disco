@@ -11,14 +11,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(FilialiSeeder::class);
+        // $this->call(FilialiSeeder::class);
         $this->call(UsersSeeder::class);
-        $this->call(ProfessioniSeeder::class);
-        $this->call(AutoritaSeeder::class);
-        $this->call(CompagnieAssicurativeSeeder::class);
-        $this->call(ClientiSeeder::class);
-        $this->call(PraticheSeeder::class);
-        $this->call(AssegniSeeder::class);
-        $this->call(PrestazioniMedicheSeeder::class);
+        // $this->call(ProfessioniSeeder::class);
+        // $this->call(AutoritaSeeder::class);
+        // $this->call(CompagnieAssicurativeSeeder::class);
+        // $this->call(ClientiSeeder::class);
+        // $this->call(PraticheSeeder::class);
+        // $this->call(AssegniSeeder::class);
+        // $this->call(PrestazioniMedicheSeeder::class);
     }
 }
