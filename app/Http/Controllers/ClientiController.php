@@ -46,10 +46,10 @@ class ClientiController extends Controller
     public function index(Request $request)
     {
         if ($request->user()->isAdmin())
-            $clienti = \App\Cliente::filter($request->all())->take(100)->get();
+            $clienti = \App\Cliente::filter($request->all())->take(100)->orderBy('cognome')->get();
         else
             $clienti = \App\Cliente::where('filiale_id', $request->user()->filiale->id)
-                                     ->filter($request->all())->take(100)->get();
+                                     ->filter($request->all())->take(100)->orderBy('cognome')->get();
         
         $filiali = \App\Filiale::pluck('nome', 'id');
         $professioni = \App\Professione::pluck('nome', 'id');
@@ -200,10 +200,10 @@ class ClientiController extends Controller
         }
 
         if ($request->user()->isAdmin())
-            $clienti = \App\Cliente::filter($params)->get();
+            $clienti = \App\Cliente::filter($params)->orderBy('cognome')->get();
         else
             $clienti = \App\Cliente::where('filiale_id', $request->user()->filiale->id)
-                                     ->filter($params)->get();
+                                     ->filter($params)->orderBy('cognome')->get();
                                      
         
         $queryFields = $this->queryFields;

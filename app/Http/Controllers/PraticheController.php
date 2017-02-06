@@ -161,10 +161,22 @@ class PraticheController extends Controller
         }
 
         $this->validateInput($request);
-        $this->validate($request, [
-            'numero_pratica'                    => "required|numeric|unique:pratiche,numero_pratica,$pratica->id",
-            'numero_registrazione'              => "required|numeric|unique:pratiche,numero_registrazione,$pratica->id",
-        ]);
+        
+        $pratiche_stesso_numero = \App\Pratica::whereHas('cliente', function($query) use ($pratica) {
+                $query->where('filiale_id', $pratica->cliente->filiale->id);
+            })->where('numero_pratica', $request->numero_pratica)->get();
+
+        if (count($pratiche_stesso_numero) > 0 && $pratiche_stesso_numero[0]->id != $pratica->id) {
+            return redirect()->back()->withInput()->withErrors(['message' => 'Numero pratica già esistente per questa filiale.']);
+        }
+        
+        $pratiche_stessa_registrazione = \App\Pratica::whereHas('cliente', function($query) use ($pratica) {
+                $query->where('filiale_id', $pratica->cliente->filiale->id);
+            })->where('numero_registrazione', $request->numero_registrazione)->get();
+
+        if (count($pratiche_stessa_registrazione) > 0 && $pratiche_stessa_registrazione[0]->id != $pratica->id) {
+            return redirect()->back()->withInput()->withErrors(['message' => 'Numero registrazione già esistente per questa filiale.']);
+        }
 
         $new_values = $request->all();
         
@@ -215,9 +227,12 @@ class PraticheController extends Controller
         
         // Creo pratica  per popolare la form di creazione con valori default
         $pratica = new \App\Pratica;
+        $pratiche_filiale = \App\Pratica::whereHas('cliente', function($query) use ($request) {
+                $query->where('filiale_id', $cliente->filiale->id);
+            })->get();
         $pratica->fill([
-            'numero_pratica'                => \App\Pratica::max('numero_pratica') + 1,
-            'numero_registrazione'          => \App\Pratica::max('numero_registrazione') + 1,
+            'numero_pratica'                => $pratiche_filiale->max('numero_pratica') + 1,
+            'numero_registrazione'          => $pratiche_filiale->max('numero_registrazione') + 1,
             'data_apertura'                 => \Carbon\Carbon::today(),
         ]);
         
@@ -239,10 +254,22 @@ class PraticheController extends Controller
         }
         
         $this->validateInput($request);
-        $this->validate($request, [
-            'numero_pratica'                    => 'required|numeric|unique:pratiche,numero_pratica',
-            'numero_registrazione'              => 'required|numeric|unique:pratiche,numero_registrazione',
-        ]);
+
+        $pratiche_stesso_numero = \App\Pratica::whereHas('cliente', function($query) use ($pratica) {
+                $query->where('filiale_id', $pratica->cliente->filiale->id);
+            })->where('numero_pratica', $request->numero_pratica)->get();
+
+        if (count($pratiche_stesso_numero) > 0) {
+            return redirect()->back()->withInput()->withErrors(['message' => 'Numero pratica già esistente per questa filiale.']);
+        }
+        
+        $pratiche_stessa_registrazione = \App\Pratica::whereHas('cliente', function($query) use ($pratica) {
+                $query->where('filiale_id', $pratica->cliente->filiale->id);
+            })->where('numero_registrazione', $request->numero_registrazione)->get();
+
+        if (count($pratiche_stessa_registrazione) > 0) {
+            return redirect()->back()->withInput()->withErrors(['message' => 'Numero registrazione già esistente per questa filiale.']);
+        }
         
         $pratica = new \App\Pratica;
         $new_values = $request->all();
@@ -309,7 +336,7 @@ class PraticheController extends Controller
     {
         $params = [];
         $requestedFields = ['numero_pratica'];
-        $j = 4;
+        $j = 6;
         
         foreach($request->all() as $k => $v)
         {
@@ -321,12 +348,12 @@ class PraticheController extends Controller
             }
         }
         
-        $replacements = ['stato_pratica', 'tipo_pratica', 'data_apertura'];
+        $replacements = ['stato_pratica', 'tipo_pratica', 'data_apertura', '', '', ''];
         $i = 1;
         while ($i < $j && !empty($replacements))
         {
             $rep = array_shift($replacements);
-            if (!in_array($rep, $requestedFields)) {
+            if (!in_array($rep, $requestedFields) || $rep === '') {
                 $requestedFields[$i] = $rep;
                 $i++;
             }
@@ -349,6 +376,8 @@ class PraticheController extends Controller
     private function validateInput(Request $request)
     {
         $this->validate($request, [
+            'numero_pratica'                    => "required|numeric",
+            'numero_registrazione'              => "required|numeric",
             'stato_pratica'                     => 'numeric|in:' . implode(',', array_keys(\App\Pratica::$enumStatoPratica)),
             'tipo_pratica'                      => 'numeric|in:' . implode(',', array_keys(\App\Pratica::$enumTipoPratica)),
             'data_apertura'                     => 'date_format:d/m/Y|before:tomorrow',

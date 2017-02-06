@@ -32,11 +32,13 @@ class Assegno extends Model
         'banca',
         'data_azione',
         'tipologia',
+        'data_scadenza',
     ];
 
     protected $dates = [
         'data',
-        'data_azione'
+        'data_azione',
+        'data_scadenza'
     ];
     
     // Mutator data
@@ -61,6 +63,17 @@ class Assegno extends Model
             $this->attributes['data_azione'] = $value;
     }
     
+    // Mutator data_scadenza
+    public function setDataScadenzaAttribute($value)
+    {
+        if (is_string($value) && $value !== '')
+            $this->attributes['data_scadenza'] = \Carbon\Carbon::createFromFormat('d/m/Y', $value);
+        else if ($value === '')
+            $this->attributes['data_scadenza'] = null;
+        else
+            $this->attributes['data_scadenza'] = $value;
+    }
+    
     // Form Accessor data
     public function formDataAttribute($value)
     {
@@ -69,6 +82,12 @@ class Assegno extends Model
     
     // Form Accessor data_azione
     public function formDataAzioneAttribute($value)
+    {
+        return format_date($value);
+    }
+    
+    // Form Accessor data_scadenza
+    public function formDataScadenzaAttribute($value)
     {
         return format_date($value);
     }

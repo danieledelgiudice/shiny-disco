@@ -32,8 +32,17 @@
             <div class="form-group">
                 <!-- Banca Assegno -->
                 {!! Form::label('banca', "Banca" , ['class' => 'col-md-2 control-label']) !!}
-                <div class="col-md-10">
+                <div class="col-md-4">
                     {!! Form::text('banca', null, ['class' => 'form-control']) !!}
+                </div>
+                
+                <!-- Data scadenza -->
+                {!! Form::label('data_scadenza', "Scadenza" , ['class' => 'col-md-2 control-label']) !!}
+                <div class="col-md-4">
+                    <div class="input-group date">
+                        {!! Form::text('data_scadenza', null, ['class' => 'form-control date-control']) !!}
+                        <span class="input-group-addon"><i class="fa fa-fw fa-calendar"></i></span>
+                    </div>
                 </div>
             </div>
             
@@ -54,8 +63,6 @@
                             Da restituire
                         </label>
                     </div>
-                    <!--    </label>-->
-                    <!--</div>-->
                 </div>
                 
                 <!-- Data azione Assegno -->

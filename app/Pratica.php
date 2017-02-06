@@ -149,6 +149,28 @@ class Pratica extends Model
             $this->attributes['mezzo_liquidato'] = $value;
     }
     
+    // Mutator data_prescrizione
+    public function setDataPrescrizioneAttribute($value)
+    {
+        if (is_string($value) && $value !== '')
+            $this->attributes['data_prescrizione'] = \Carbon\Carbon::createFromFormat('d/m/Y', $value);
+        else if ($value === '')
+            $this->attributes['data_prescrizione'] = null;
+        else
+            $this->attributes['data_prescrizione'] = $value;
+    }
+    
+    // Mutator data_prossima_udienza
+    public function setDataProssimaUdienzaAttribute($value)
+    {
+        if (is_string($value) && $value !== '')
+            $this->attributes['data_prossima_udienza'] = \Carbon\Carbon::createFromFormat('d/m/Y', $value);
+        else if ($value === '')
+            $this->attributes['data_prossima_udienza'] = null;
+        else
+            $this->attributes['data_prossima_udienza'] = $value;
+    }
+    
     
 
     // Form Accessor data_apertura
@@ -193,6 +215,18 @@ class Pratica extends Model
         return format_date($value);
     }
     
+    // Form Accessor data_prescrizione
+    public function formDataPrescrizioneAttribute($value)
+    {
+        return format_date($value);
+    }
+    
+    // Form Accessor data_prossima_udienza
+    public function formDataProssimaUdienzaAttribute($value)
+    {
+        return format_date($value);
+    }
+    
     
     protected $dates = [
         'data_apertura',
@@ -225,6 +259,8 @@ class Pratica extends Model
 		9 => 'Trasporti Navali', 
 		10 => 'Trasporti su Rotaie', 
 		11 => 'Penale',
+		12 => 'INPS',
+		13 => 'INAIL',
 		100 => 'Altro',
 	];
 
@@ -318,6 +354,8 @@ class Pratica extends Model
         'assicurazione_responsabile',
         'mezzo_visibile',
         'dinamica_sinistro',
-        'note',
+        'scheda_pratica',
+        'data_prescrizione',
+        'data_prossima_udienza',
     ];
 }

@@ -263,7 +263,7 @@ $factory->define(App\Cliente::class, function (Faker\Generator $faker) {
         'mezzo_visibile' => $faker->optional($weight = 0.8)->randomElement(['Carrozzeria Tre Ponti', 'Carrozzeria Interdonato',
                                                                             'Previa telefonata al nostro assistito', 'Demolito']),
         'dinamica_sinistro' => $faker->optional($weight = 0.8)->randomElement($dinamiche),                                                                                                                                                              
-        'note' => $faker->optional()->text,
+        'scheda_pratica' => $faker->optional()->text,
         
         'cliente_id' => $cliente->id,
         'assicurazione_parte_id' =>  App\CompagniaAssicurativa::where('filiale_id', $cliente->filiale->id)->get()->random()->id,

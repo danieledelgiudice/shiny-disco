@@ -60,6 +60,12 @@ class PrestazioniMedicheController extends Controller
         $prestazione_medica = new \App\PrestazioneMedica;
         $prestazione_medica->fill($request->all());
         
+        if ($request->pagato) {
+            $prestazione_medica->pagato = true;
+        } else {
+            $prestazione_medica->pagato = false;
+        }
+        
         $prestazione_medica->pratica()->associate($pratica);
         $prestazione_medica->percentuale = $percentuale;
         $prestazione_medica->save();
@@ -112,10 +118,16 @@ class PrestazioniMedicheController extends Controller
         
         $percentuale = $request->percentuale;
         
-        if($request->inConvenzione == '1') {
+        if ($request->inConvenzione == '1') {
             $this->validate($request, [ 'percentuale' => 'required|numeric|min:1|max:100' ]);
         } else
             $percentuale = 0;
+            
+        if ($request->pagato) {
+            $prestazione_medica->pagato = true;
+        } else {
+            $prestazione_medica->pagato = false;
+        }
             
         $this->validateInput($request);
         

@@ -10,23 +10,23 @@
         @if (count($assegni) > 0)
             <table class="table table-hover table-striped">
                 <thead>
-                    <th class="text-center">#</th>
                     <th>Data</th>
                     <th>Importo</th>
                     <th>Banca</th>
                     <th>Consegnato il</th>
                     <th>Restituito il</th>
+                    <th>Scadenza</th>
                     <th>&nbsp;</th>
                 </thead>
                 <tbody>
                     @foreach ($assegni as $index => $assegno)
                         <tr>
-                            <td class="table-text"><div class="text-center">{{ $index+1 }}</div></td>
                             <td class="table-text"><div>{{ format_date($assegno->data) }}</div></td>
                             <td class="table-text"><div>{{ format_money($assegno->importo) }}</div></td>
                             <td class="table-text"><div>{{ $assegno->banca }}</div></td>
                             <td class="table-text"><div>{{ $assegno->tipologia ? '' : format_date($assegno->data_azione) }}</div></td>
                             <td class="table-text"><div>{{ $assegno->tipologia ? format_date($assegno->data_azione) : '' }}</div></td>
+                            <td class="table-text"><div>{{ $assegno->data_scadenza ? format_date($assegno->data_scadenza) : '' }}</div></td>
                             
                             <td class="table-text">
                                 <!-- Form eliminazione pratica -->

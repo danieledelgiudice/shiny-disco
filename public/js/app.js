@@ -196,8 +196,7 @@ var parseQueryString = function() {
         $('#queryBtn i').addClass('fa-spin fa-refresh');
         
         var queryData = $(this).serializeArray();
-        console.log(queryData);
-        
+
         $.ajax({
             type     : "POST",
             cache    : false,

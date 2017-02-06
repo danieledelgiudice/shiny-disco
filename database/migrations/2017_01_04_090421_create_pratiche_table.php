@@ -20,7 +20,7 @@ class CreatePraticheTable extends Migration
             $table->integer('stato_pratica')->nullable();
             $table->string('tipo_pratica')->nullable();
             $table->date('data_apertura')->nullable();
-            
+
             $table->string('veicolo_parte')->nullable();
             $table->string('targa_parte')->nullable();
             $table->string('numero_polizza_parte')->nullable();
@@ -69,7 +69,10 @@ class CreatePraticheTable extends Migration
             $table->string('assicurazione_responsabile')->nullable();
             $table->text('mezzo_visibile')->nullable();
             $table->text('dinamica_sinistro')->nullable();
-            $table->text('note')->nullable();
+            $table->text('scheda_pratica')->nullable();
+            
+            $table->date('data_prescrizione')->nullable();
+            $table->date('data_prossima_udienza')->nullable();
             
             $table->integer('cliente_id')->unsigned();
 

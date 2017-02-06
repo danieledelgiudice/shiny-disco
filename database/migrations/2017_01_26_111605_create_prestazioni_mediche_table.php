@@ -21,6 +21,8 @@ class CreatePrestazioniMedicheTable extends Migration
             $table->decimal('costo', 10, 2)->unsigned();
             $table->integer('percentuale')->unsigned()->default(0);
             
+            $table->boolean('pagato')->default(false);
+            
             $table->integer('pratica_id')->unsigned();
             $table->foreign('pratica_id')->references('id')->on('pratiche');
             

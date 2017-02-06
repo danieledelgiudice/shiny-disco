@@ -19,6 +19,7 @@
                     <th>%</th>
                     <th>Percentuale</th>
                     <th>A pagare</th>
+                    <th>Pagato</th>
                     <th>&nbsp;</th>
                 </thead>
                 <tbody>
@@ -32,6 +33,7 @@
                                 <td class="table-text"><div>{{ "$p->percentuale%" }}</div></td>
                                 <td class="table-text"><div>{{ format_money($p->quantitaPercentuale) }}</div></td>
                                 <td class="table-text"><div>{{ format_money($p->aPagare) }}</div></td>
+                                <td class="table-text"><div>{{ $p->pagato ? 'Si' : 'No' }}</div></td>
     
                                 <td class="table-text">
                                     <!-- Form eliminazione prestazione -->
@@ -62,6 +64,7 @@
                             <td>{{ format_money($prestazioni_medico->sum('quantitaPercentuale')) }}</td>
                             <td>{{ format_money($prestazioni_medico->sum('aPagare')) }}</td>
                             <td></td>
+                            <td></td>
                         </tr>
                     @endforeach
                     
@@ -73,6 +76,7 @@
                         <td></td>
                         <td>{{ format_money($prestazioni_mediche_c->sum(function($p) { return $p->sum('quantitaPercentuale'); })) }}</td>
                         <td>{{ format_money($prestazioni_mediche_c->sum(function($p) { return $p->sum('aPagare'); })) }}</td>
+                        <td></td>
                         <td></td>
                     </tr>
                 </tbody>

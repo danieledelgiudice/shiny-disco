@@ -61,8 +61,8 @@ class DocumentiController extends Controller
 		$storage_name = time() . uniqid() . ".$ext";
 		
 		$matches = [];
-		if (!preg_match('/(\d+?)\s*-\s*(.+)/i', $original_name, $matches)) {
-            return response()->json('Il file non presenta la struttura del nome adatta: "npratica - nome"', 400);
+		if (!preg_match('/(\d+?)\s*(.+)/i', $original_name, $matches)) {
+            return response()->json('Il file non presenta la struttura del nome adatta: "npratica descrizione"', 400);
         }
         
         $numero_pratica = $matches[1];

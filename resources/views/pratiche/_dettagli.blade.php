@@ -162,23 +162,29 @@
                 <small>{{ $pratica->assicurazione_controparte ? $pratica->assicurazione_controparte->indirizzo : '' }}</small>
             </div>
         
-            <!-- Medico controparte -->
-            <strong class="col-md-2 form-control-static">Medico controparte</strong>
+            <!-- Parcella presunta -->
+            <strong class="col-md-2 form-control-static">Parcella presunta</strong>
             <div class="col-md-4">
-                <p class="form-control-static">{{ $pratica->medico_controparte }}</p>
+                <p class="form-control-static">{{ format_money($pratica->parcella_presunta) }}</p>
             </div>
         </div>
         
         <div class="row">
+            <!-- Medico controparte -->
+            <strong class="col-md-1 form-control-static">Medico controparte</strong>
+            <div class="col-md-3">
+                <p class="form-control-static">{{ $pratica->medico_controparte }}</p>
+            </div>
+            
             <!-- Luogo medico controparte -->
-            <strong class="col-md-2 form-control-static">Luogo medico</strong>
-            <div class="col-md-4">
+            <strong class="col-md-1 form-control-static">Luogo medico</strong>
+            <div class="col-md-3">
                 <p class="form-control-static">{{ $pratica->luogo_medico_controparte }}</p>
             </div>
         
             <!-- Data medico controparte -->
-            <strong class="col-md-2 form-control-static">Data medico</strong>
-            <div class="col-md-4">
+            <strong class="col-md-1 form-control-static">Data medico</strong>
+            <div class="col-md-3">
                 <p class="form-control-static">{{ $pratica->data_medico_controparte }}</p>
             </div>
         </div>
@@ -194,14 +200,6 @@
             <strong class="col-md-2 form-control-static">Reperibilità liquidatore</strong>
             <div class="col-md-4">
                 <p class="form-control-static">{{ $pratica->reperibilita_liquidatore }}</p>
-            </div>
-        </div>
-        
-        <div class="row">
-            <!-- Parcella presunta -->
-            <strong class="col-md-2 form-control-static">Parcella presunta</strong>
-            <div class="col-md-4">
-                <p class="form-control-static">{{ format_money($pratica->parcella_presunta) }}</p>
             </div>
         </div>
     </div>
@@ -296,6 +294,20 @@
             <strong class="col-md-2 form-control-static">Liquidato omnia</strong>
             <div class="col-md-4">
                 <p class="form-control-static">{{ format_money($pratica->liquidato_omnia) }}</p>
+            </div>
+        </div>
+        
+        <div class="row">
+            <!-- Data prescrizione -->
+            <strong class="col-md-2 form-control-static">Data prescrizione</strong>
+            <div class="col-md-4">
+                <p class="form-control-static">{{ format_date($pratica->data_prescrizione) }}</p>
+            </div>
+        
+            <!-- Data prossima udienza -->
+            <strong class="col-md-2 form-control-static">Data prossima udienza</strong>
+            <div class="col-md-4">
+                <p class="form-control-static">{{ format_date($pratica->data_prossima_udienza) }}</p>
             </div>
         </div>
         
@@ -426,10 +438,10 @@
         </div>
         
         <div class="row">
-            <!-- Note -->
-            <strong class="col-md-2 form-control-static">Note</strong>
+            <!-- Scheda Pratica (Note) -->
+            <strong class="col-md-2 form-control-static text-danger">Scheda Pratica</strong>
             <div class="col-md-10">
-               <p class="form-control-static">{{ $pratica->note }}</p>
+               <p class="form-control-static text-newlines">{{ $pratica->scheda_pratica }}</p>
             </div>
         </div>
     </div>

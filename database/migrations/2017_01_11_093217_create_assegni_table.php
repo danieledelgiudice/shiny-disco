@@ -19,8 +19,10 @@ class CreateAssegniTable extends Migration
             $table->decimal('importo', 10, 2);
             $table->string('banca');
             
-            $table->date('data_azione');
+            $table->date('data_azione')->nullable();
             $table->integer('tipologia');
+            
+            $table->date('data_scadenza')->nullable();
             
             $table->integer('pratica_id')->unsigned();
             $table->foreign('pratica_id')->references('id')->on('pratiche');

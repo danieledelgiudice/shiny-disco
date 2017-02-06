@@ -65,11 +65,23 @@
             
             <div class="form-group" id="group-inConvenzione" style="{{ ( old('inConvenzione') == 1 || (old('inConvenzione') == '' && $prestazione_medica->inConvenzione)) ? '' : 'display: none' }}" >
                 <!-- Percentuale -->
-                {!! Form::label('percentuale', "Percentuale" , ['class' => 'col-md-2 control-label']) !!}
+                {!! Form::label('percentuale', "Percentuale" , ['class' => 'col-md-2 col-md-offset-6 control-label']) !!}
                 <div class="col-md-4">
                     <div class="input-group">
                         {!! Form::number('percentuale', null, ['class' => 'form-control']) !!}
                         <span class="input-group-addon"><i class="fa fa-fw fa-percent"></i></span>
+                    </div>
+                </div>
+                </div>
+            
+            <div class="form-group">
+                <!-- Pagato -->
+                <div class="col-md-4 col-md-offset-2">
+                    <div class="checkbox">
+                        <label>
+                            {!! Form::checkbox('pagato', '1', null) !!}
+                            Pagato
+                        </label>
                     </div>
                 </div>
             </div>

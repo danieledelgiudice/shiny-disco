@@ -191,23 +191,32 @@
                     </a>
                 </div>
                 
-                <!-- Medico controparte -->
-                {!! Form::label('medico_controparte', 'Medico controparte' , ['class' => 'col-md-2 control-label']) !!}
+                <!-- Parcella presunta -->
+                {!! Form::label('parcella_presunta', 'Parcella presunta' , ['class' => 'col-md-2 control-label']) !!}
                 <div class="col-md-4">
-                    {!! Form::text('medico_controparte', null, ['class' => 'form-control']) !!}
+                    <div class="input-group">
+                        {!! Form::number('parcella_presunta', null, ['class' => 'form-control']) !!}
+                        <span class="input-group-addon"><i class="fa fa-fw fa-eur"></i></span>
+                    </div>
                 </div>
             </div>
             
             <div class="form-group">
+                <!-- Medico controparte -->
+                {!! Form::label('medico_controparte', 'Medico controparte' , ['class' => 'col-md-1 control-label']) !!}
+                <div class="col-md-3">
+                    {!! Form::text('medico_controparte', null, ['class' => 'form-control']) !!}
+                </div>
+                
                 <!-- Luogo medico controparte -->
-                {!! Form::label('luogo_medico_controparte', 'Luogo medico' , ['class' => 'col-md-2 control-label']) !!}
-                <div class="col-md-4">
+                {!! Form::label('luogo_medico_controparte', 'Luogo medico' , ['class' => 'col-md-1 control-label']) !!}
+                <div class="col-md-3">
                     {!! Form::text('luogo_medico_controparte', null, ['class' => 'form-control']) !!}
                 </div>
             
                 <!-- Data medico controparte -->
-                {!! Form::label('data_medico_controparte', 'Data medico' , ['class' => 'col-md-2 control-label']) !!}
-                <div class="col-md-4">
+                {!! Form::label('data_medico_controparte', 'Data medico' , ['class' => 'col-md-1 control-label']) !!}
+                <div class="col-md-3">
                     {!! Form::text('data_medico_controparte', null, ['class' => 'form-control']) !!}
                 </div>
             </div>
@@ -223,17 +232,6 @@
                 {!! Form::label('reperibilita_liquidatore', 'Reperibilità liquidatore' , ['class' => 'col-md-2 control-label']) !!}
                 <div class="col-md-4">
                     {!! Form::text('reperibilita_liquidatore', null, ['class' => 'form-control']) !!}
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <!-- Parcella presunta -->
-                {!! Form::label('parcella_presunta', 'Parcella presunta' , ['class' => 'col-md-2 control-label']) !!}
-                <div class="col-md-4">
-                    <div class="input-group">
-                        {!! Form::number('parcella_presunta', null, ['class' => 'form-control']) !!}
-                        <span class="input-group-addon"><i class="fa fa-fw fa-eur"></i></span>
-                    </div>
                 </div>
             </div>
         </div>
@@ -354,6 +352,26 @@
                     <div class="input-group">
                         {!! Form::number('liquidato_omnia', null, ['class' => 'form-control']) !!}
                         <span class="input-group-addon"><i class="fa fa-fw fa-eur"></i></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <!-- Data prescrizione -->
+                {!! Form::label('data_prescrizione', 'Data prescrizione' , ['class' => 'col-md-2 control-label']) !!}
+                <div class="col-md-4">
+                    <div class="input-group date">
+                        {!! Form::text('data_prescrizione', null, ['class' => 'form-control date-control']) !!}
+                        <span class="input-group-addon"><i class="fa fa-fw fa-calendar"></i></span>
+                    </div>
+                </div>
+            
+                <!-- Data prossima udienza -->
+                {!! Form::label('data_prossima_udienza', 'Data prossima udienza' , ['class' => 'col-md-2 control-label']) !!}
+                <div class="col-md-4">
+                    <div class="input-group date">
+                        {!! Form::text('data_prossima_udienza', null, ['class' => 'form-control date-control']) !!}
+                        <span class="input-group-addon"><i class="fa fa-fw fa-calendar"></i></span>
                     </div>
                 </div>
             </div>
@@ -483,10 +501,10 @@
                     {!! Form::textarea('mezzo_visibile', null, ['class' => 'form-control']) !!}
                 </div>
                 
-                <!-- Note -->
-                {!! Form::label('note', 'Note' , ['class' => 'col-md-2 control-label']) !!}
+                <!-- Scheda Pratica (Note) -->
+                {!! Form::label('scheda_pratica', 'Scheda Pratica' , ['class' => 'col-md-2 control-label']) !!}
                 <div class="col-md-4">
-                    {!! Form::textarea('note', null, ['class' => 'form-control']) !!}
+                    {!! Form::textarea('scheda_pratica', null, ['class' => 'form-control']) !!}
                 </div>
             </div>
             
