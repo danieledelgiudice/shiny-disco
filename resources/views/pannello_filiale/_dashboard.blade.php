@@ -20,14 +20,24 @@
     <div class="container-fluid">
         <div class="col-md-2 sidebar bg-faded">
             <ul class="nav nav-pills nav-stacked">
-                <li class="nav-item{{ (isset($active) && $active === 'compagnie_assicurative') ? ' active' : '' }}">
-                    <a class="nav-link" href="{{ action('PannelloFilialeController@compagnieAssicurative', ['filiale' => $filiale]) }}">
-                        Compagnie assicurative
+                <li class="nav-item{{ (isset($active) && $active === 'onorari') ? ' active' : '' }}">
+                    <a class="nav-link" href="{{ action('PannelloFilialeController@onorari', ['filiale' => $filiale]) }}">
+                        Onorari
                     </a>
                 </li>
-                <li class="nav-item{{ (isset($active) && $active === 'totali_omnia') ? ' active' : '' }}">
-                    <a class="nav-link" href="{{ action('PannelloFilialeController@totaliOmnia', ['filiale' => $filiale]) }}">
-                        Totali omnia
+                <li class="nav-item{{ (isset($active) && $active === 'liquidato_omnia') ? ' active' : '' }}">
+                    <a class="nav-link" href="{{ action('PannelloFilialeController@liquidatoOmnia', ['filiale' => $filiale]) }}">
+                        Liquidato omnia
+                    </a>
+                </li>
+                <li class="nav-item{{ (isset($active) && $active === 'importo_sospeso') ? ' active' : '' }}">
+                    <a class="nav-link" href="{{ action('PannelloFilialeController@importoSospeso', ['filiale' => $filiale]) }}">
+                        Importo sospeso
+                    </a>
+                </li>
+                <li class="nav-item{{ (isset($active) && $active === 'parcella_presunta') ? ' active' : '' }}">
+                    <a class="nav-link" href="{{ action('PannelloFilialeController@parcellaPresunta', ['filiale' => $filiale]) }}">
+                        Parcella presunta
                     </a>
                 </li>
             </ul>

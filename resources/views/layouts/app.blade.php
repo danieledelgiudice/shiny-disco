@@ -23,6 +23,9 @@
     <style>
         body {
             font-family: 'Lato';
+            @if (isset($background_color))
+                background: linear-gradient(to bottom, #ffffff 1%,{{ $background_color }} 100%);
+            @endif
         }
 
         .fa-btn {

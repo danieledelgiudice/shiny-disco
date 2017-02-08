@@ -106,7 +106,7 @@ class ClientiController extends Controller
         if ($request->professione_id) {
             // Se una professione è specificata la cerco
             $professione = \App\Professione::find($request->professione_id);
-            if ($professione == null)
+            if ($professione === null)
             {
                 // Se la professione non esiste la creo
                 $professione = \App\Professione::create(['nome' => $request->professione_id]);
@@ -143,7 +143,7 @@ class ClientiController extends Controller
         $cliente->filiale()->associate($filiale);
         
         $professione = \App\Professione::find($request->professione_id);
-        if ($professione == null)
+        if ($professione === null)
         {
             // Se la professione non esiste la creo
             $professione = \App\Professione::create(['nome' => $request->professione_id]);

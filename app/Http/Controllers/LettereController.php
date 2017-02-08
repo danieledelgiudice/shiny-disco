@@ -34,13 +34,19 @@ class LettereController extends Controller
         }
         
         $f = new \App\Lettere\LettereFactory;
-        $f->dataSource(['cliente' => $pratica->cliente,
-                        'professione' => $pratica->cliente->professione,
-                        'pratica' => $pratica,
-                        'autorita' => $pratica->autorita,
-                        'assicurazione_parte' => $pratica->assicurazione_parte,
-                        'assicurazione_controparte' => $pratica->assicurazione_controparte,
-                        'logo' => $request->logo ? 'elisir.png' : 'elys.jpg']);
+        $source = ['cliente' => $pratica->cliente,
+            'professione' => $pratica->cliente->professione,
+            'pratica' => $pratica,
+            'autorita' => $pratica->autorita,
+            'prestazioni' => $pratica->prestazioni_mediche,
+            'logo' => $request->logo ? 'elisir.png' : 'elys.jpg'
+            ];
+            
+        foreach ($request->all() as $name => $value)
+            if ($name !== 'logo')
+                $source[$name] = $value;
+            
+        $f->dataSource($source);
         
         $f->generate($lettera_id);
     }

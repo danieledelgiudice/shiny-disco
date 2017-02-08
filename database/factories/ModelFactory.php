@@ -243,7 +243,7 @@ $factory->define(App\Cliente::class, function (Faker\Generator $faker) {
         'data_chiusura' => $faker->optional($weight = 0.8)->dateTimeThisDecade(),
         'importo_sospeso' => $faker->optional($weight = 0.8)->randomFloat($nbMaxDecimals = 2, $min = 500, $max = 3000),
         'data_sospeso' => $faker->optional($weight = 0.8)->dateTimeThisDecade(),
-        'onorari_omnia' => $faker->randomFloat($nbMaxDecimals = 2, $min = 500, $max = 10000),
+        'onorari' => $faker->randomFloat($nbMaxDecimals = 2, $min = 500, $max = 10000),
         'liquidato_omnia' => $faker->randomFloat($nbMaxDecimals = 2, $min = 500, $max = 10000),
         'stato_avanzamento' => $faker->text,
         
@@ -266,8 +266,8 @@ $factory->define(App\Cliente::class, function (Faker\Generator $faker) {
         'scheda_pratica' => $faker->optional()->text,
         
         'cliente_id' => $cliente->id,
-        'assicurazione_parte_id' =>  App\CompagniaAssicurativa::where('filiale_id', $cliente->filiale->id)->get()->random()->id,
-        'assicurazione_controparte_id' => App\CompagniaAssicurativa::where('filiale_id', $cliente->filiale->id)->get()->random()->id,
+        'assicurazione_parte' =>  $faker->company,
+        'assicurazione_controparte' => $faker->company,
         'autorita_id' => \App\Autorita::all()->random()->id,
     ];
 });
@@ -290,27 +290,6 @@ $factory->define(App\Assegno::class, function (Faker\Generator $faker) {
         'tipologia' => $faker->numberBetween(0, 1),
         
         'pratica_id' => App\Pratica::all()->random()->id
-    ];
-});
-
-
-$factory->define(App\CompagniaAssicurativa::class, function (Faker\Generator $faker) {
-    $faker->addProvider(new Faker\Provider\it_IT\Person($faker));
-    $faker->addProvider(new Faker\Provider\it_IT\Address($faker));
-    $faker->addProvider(new Faker\Provider\it_IT\PhoneNumber($faker));
-    $faker->addProvider(new Faker\Provider\it_IT\Company($faker));
-    $faker->addProvider(new Faker\Provider\it_IT\Internet($faker));
-    $faker->addProvider(new Faker\Provider\it_IT\Payment($faker));
-    $faker->addProvider(new Faker\Provider\it_IT\Text($faker));
-    
-    return [
-        'nome' => $faker->company,
-        'indirizzo' => $faker->address,
-        'telefono' => $faker->e164PhoneNumber,
-        'fax' => $faker->tollFreePhoneNumber,
-        'email' => $faker->email,
-
-        'filiale_id' => \App\Filiale::all()->random()->id,
     ];
 });
 

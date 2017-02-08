@@ -46,17 +46,7 @@ class Pratica extends Model
     {
         return $this->hasMany('\App\Assegno', 'pratica_id', 'id');
     }
-    
-    public function assicurazione_parte()
-    {
-        return $this->belongsTo('\App\CompagniaAssicurativa', 'assicurazione_parte_id');
-    }
-    
-    public function assicurazione_controparte()
-    {
-        return $this->belongsTo('\App\CompagniaAssicurativa', 'assicurazione_controparte_id');
-    }
-    
+
     public function autorita()
     {
         return $this->belongsTo('\App\Autorita', 'autorita_id');
@@ -307,6 +297,7 @@ class Pratica extends Model
         
         'veicolo_parte',
         'targa_parte',
+        'assicurazione_parte',
         'numero_polizza_parte',
 
         'conducente_controparte',
@@ -315,6 +306,7 @@ class Pratica extends Model
         'telefono_controparte',
         'veicolo_controparte',
         'targa_controparte',
+        'assicurazione_controparte',
         'numero_polizza_controparte',
         'proprietario_mezzo_responsabile',
         'medico_controparte',
@@ -335,7 +327,7 @@ class Pratica extends Model
         'importo_sospeso',
         'data_sospeso',
         'liquidato_omnia',
-        'onorari_omnia',
+        'onorari',
         'stato_avanzamento',
         
         'data_sinistro',

@@ -194,12 +194,12 @@
         srcRatio = file.width / file.height;
         info.optWidth = this.options.thumbnailWidth;
         info.optHeight = this.options.thumbnailHeight;
-        if ((info.optWidth == null) && (info.optHeight == null)) {
+        if ((info.optWidth === null) && (info.optHeight === null)) {
           info.optWidth = info.srcWidth;
           info.optHeight = info.srcHeight;
-        } else if (info.optWidth == null) {
+        } else if (info.optWidth === null) {
           info.optWidth = srcRatio * info.optHeight;
-        } else if (info.optHeight == null) {
+        } else if (info.optHeight === null) {
           info.optHeight = (1 / srcRatio) * info.optWidth;
         }
         trgRatio = info.optWidth / info.optHeight;
@@ -433,7 +433,7 @@
       if (this.options.forceFallback || !Dropzone.isBrowserSupported()) {
         return this.options.fallback.call(this);
       }
-      if (this.options.url == null) {
+      if (this.options.url === null) {
         this.options.url = this.element.getAttribute("action");
       }
       if (!this.options.url) {
@@ -547,7 +547,7 @@
             }
             _this.hiddenFileInput = document.createElement("input");
             _this.hiddenFileInput.setAttribute("type", "file");
-            if ((_this.options.maxFiles == null) || _this.options.maxFiles > 1) {
+            if ((_this.options.maxFiles === null) || _this.options.maxFiles > 1) {
               _this.hiddenFileInput.setAttribute("multiple", "multiple");
             }
             _this.hiddenFileInput.className = "dz-hidden-input";
@@ -882,7 +882,7 @@
 
     Dropzone.prototype.paste = function(e) {
       var items, _ref;
-      if ((e != null ? (_ref = e.clipboardData) != null ? _ref.items : void 0 : void 0) == null) {
+      if ((e != null ? (_ref = e.clipboardData) != null ? _ref.items : void 0 : void 0) === null) {
         return;
       }
       this.emit("paste", e);
@@ -916,7 +916,7 @@
             _results.push(void 0);
           }
         } else if (item.getAsFile != null) {
-          if ((item.kind == null) || item.kind === "file") {
+          if ((item.kind === null) || item.kind === "file") {
             _results.push(this.addFile(item.getAsFile()));
           } else {
             _results.push(void 0);
@@ -1066,7 +1066,7 @@
 
     Dropzone.prototype.removeAllFiles = function(cancelIfNecessary) {
       var file, _i, _len, _ref;
-      if (cancelIfNecessary == null) {
+      if (cancelIfNecessary === null) {
         cancelIfNecessary = false;
       }
       _ref = this.files.slice();
@@ -1109,10 +1109,10 @@
           file.width = img.width;
           file.height = img.height;
           resizeInfo = _this.options.resize.call(_this, file);
-          if (resizeInfo.trgWidth == null) {
+          if (resizeInfo.trgWidth === null) {
             resizeInfo.trgWidth = resizeInfo.optWidth;
           }
-          if (resizeInfo.trgHeight == null) {
+          if (resizeInfo.trgHeight === null) {
             resizeInfo.trgHeight = resizeInfo.optHeight;
           }
           canvas = document.createElement("canvas");
@@ -1442,7 +1442,7 @@
     if (typeof element === "string") {
       element = document.querySelector(element);
     }
-    if ((element != null ? element.dropzone : void 0) == null) {
+    if ((element != null ? element.dropzone : void 0) === null) {
       throw new Error("No Dropzone found for given element. This is probably because you're trying to access it before Dropzone had the time to initialize. Use the `init` option to setup any additional observers on your Dropzone.");
     }
     return element.dropzone;
@@ -1552,7 +1552,7 @@
     } else if (el.nodeType != null) {
       element = el;
     }
-    if (element == null) {
+    if (element === null) {
       throw new Error("Invalid `" + name + "` option provided. Please provide a CSS selector or a plain HTML element.");
     }
     return element;

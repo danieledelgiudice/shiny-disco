@@ -16,6 +16,7 @@ class UsersSeeder extends Seeder
                 'password' => bcrypt('secret'),
                 'filiale_id' => $filiale->id,
                 'admin' => ($filiale->id == 1),
+                'can_generate_letters' => ($filiale->id == 1),
                 ]);
         }
     }

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app', ['background_color' => 'rgb(229, 255, 188)'])
 
 @section('content')
     @include('common._modal_elimina',
@@ -37,8 +37,10 @@
                     {{ Form::close() }}
                     <!-- Fine form eliminazione pratica -->
                     
-                    <a href="{{ action('LettereController@showOptions', ['cliente' => $pratica->cliente, 'pratica' => $pratica] ) }}"
-                        class="btn btn-default"><i class="fa fa-fw fa-envelope"></i></a>
+                    @if (Auth::user()->canGenerateLetters())
+                        <a href="{{ action('LettereController@showOptions', ['cliente' => $pratica->cliente, 'pratica' => $pratica] ) }}"
+                            class="btn btn-default"><i class="fa fa-fw fa-envelope"></i></a>
+                    @endif
                     
                     <a href="{{ action('PraticheController@edit', ['cliente' => $pratica->cliente, 'pratica' => $pratica] ) }}"
                         class="btn btn-primary"><i class="fa fa-fw fa-pencil"></i></a>

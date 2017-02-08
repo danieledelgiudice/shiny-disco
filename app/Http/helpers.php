@@ -27,7 +27,7 @@ function url_filiale($value, $f) {
 }
 
 function format_money($value) {
-    if ($value == null) return '';
+    if ($value === null) return '';
     return number_format($value, 2, ',', '.') . ' €';
 }
 

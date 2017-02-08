@@ -23,7 +23,7 @@ class PraticheController extends Controller
             'veicolo_parte'                  => ['display'   => 'Veicolo di parte',                    'type'        => 'string',      ],
             'targa_parte'                    => ['display'   => 'Targa di parte',                      'type'        => 'string',      ],
             'numero_polizza_parte'           => ['display'   => 'Numero polizza di parte',             'type'        => 'string',      ],
-            'assicurazione_parte_id'         => ['display'   => 'Assicurazione parte',                 'type'        => 'enum',        'list' => \App\CompagniaAssicurativa::pluck('nome', 'id')],
+            'assicurazione_parte'            => ['display'   => 'Assicurazione parte',                 'type'        => 'string',      ],
             
             'conducente_controparte'         => ['display'   => 'Conducente controparte',              'type'        => 'string',      ],
             'via_controparte'                => ['display'   => 'Via controparte',                     'type'        => 'string',      ],
@@ -33,7 +33,7 @@ class PraticheController extends Controller
             'targa_controparte'              => ['display'   => 'Targa controparte',                   'type'        => 'string',      ],
             'numero_polizza_controparte'     => ['display'   => 'Numero polizza controparte',          'type'        => 'string',      ],
             'proprietario_mezzo_responsabile'=> ['display'   => 'Proprietario mezzo responsabile',     'type'        => 'string',      ],
-            'assicurazione_controparte_id'   => ['display'   => 'Assicurazione controparte',           'type'        => 'enum',        'list' => \App\CompagniaAssicurativa::pluck('nome', 'id')],
+            'assicurazione_controparte'      => ['display'   => 'Assicurazione controparte',           'type'        => 'string',      ],
             'medico_controparte'             => ['display'   => 'Medico controparte',                  'type'        => 'string',      ],
             'parcella_presunta'              => ['display'   => 'Parcella presunta',                   'type'        => 'decimal',     ],
             
@@ -47,7 +47,7 @@ class PraticheController extends Controller
             'data_chiusura'                  => ['display'   => 'Data chiusura',                       'type'        => 'date',        ],
             'data_sospeso'                   => ['display'   => 'Data sospeso',                        'type'        => 'date',        ], 
             'importo_sospeso'                => ['display'   => 'Importo sospeso',                     'type'        => 'decimal',     ],
-            'onorari_omnia'                  => ['display'   => 'Onorari omnia',                       'type'        => 'decimal',     ],
+            'onorari'                        => ['display'   => 'Onorari',                             'type'        => 'decimal',     ],
             'liquidato_omnia'                => ['display'   => 'Liquidato omnia',                     'type'        => 'decimal',     ],
             
             'data_sinistro'                  => ['display'   => 'Data sinistro',                       'type'        => 'date',        ],
@@ -139,11 +139,10 @@ class PraticheController extends Controller
             abort(403);
         }
         
-        $assicurazioni = \App\CompagniaAssicurativa::where('filiale_id', $pratica->cliente->filiale->id)->get();
         $autorita = \App\Autorita::pluck('nome', 'id');
         $filiale = $pratica->cliente->filiale;
         
-        return view('pratiche.edit', compact('pratica', 'assicurazioni', 'filiale', 'autorita'));
+        return view('pratiche.edit', compact('pratica', 'filiale', 'autorita'));
     }
 
     public function update(Request $request, $cliente_id, $pratica_id)
@@ -182,26 +181,8 @@ class PraticheController extends Controller
         
         $pratica->fill($new_values);
         
-        if ($request->assicurazione_parte_id) {
-            // Se una assicurazione parte è specificata la cerco
-            $assicurazione = \App\CompagniaAssicurativa::findOrFail($request->assicurazione_parte_id);
-            $pratica->assicurazione_parte()->associate($assicurazione);
-        } else {
-            // Se non è specificata una assicurazione parte cancello la relazione
-            $pratica->assicurazione_parte()->dissociate();
-        }
-        
-        if ($request->assicurazione_controparte_id) {
-            // Se una assicurazione controparte è specificata la cerco
-            $assicurazione = \App\CompagniaAssicurativa::findOrFail($request->assicurazione_controparte_id);
-            $pratica->assicurazione_controparte()->associate($assicurazione);
-        } else {
-            // Se non è specificata una assicurazione controparte cancello la relazione
-            $pratica->assicurazione_controparte()->dissociate();
-        }
-        
         $autorita = \App\Autorita::find($request->autorita_id);
-        if ($autorita == null)
+        if ($autorita === null)
         {
             // Se l'autorità non esiste la creo
             $autorita = \App\Autorita::create(['nome' => $request->autorita_id]);
@@ -227,7 +208,7 @@ class PraticheController extends Controller
         
         // Creo pratica  per popolare la form di creazione con valori default
         $pratica = new \App\Pratica;
-        $pratiche_filiale = \App\Pratica::whereHas('cliente', function($query) use ($request) {
+        $pratiche_filiale = \App\Pratica::whereHas('cliente', function($query) use ($cliente) {
                 $query->where('filiale_id', $cliente->filiale->id);
             })->get();
         $pratica->fill([
@@ -235,13 +216,11 @@ class PraticheController extends Controller
             'numero_registrazione'          => $pratiche_filiale->max('numero_registrazione') + 1,
             'data_apertura'                 => \Carbon\Carbon::today(),
         ]);
-        
-        $assicurazioni = \App\CompagniaAssicurativa::where('filiale_id', $cliente->filiale->id)->get();
-        
+          
         $filiale = $cliente->filiale;
         $autorita = \App\Autorita::pluck('nome', 'id');
         
-        return view('pratiche.create', compact('cliente', 'pratica', 'assicurazioni', 'filiale', 'autorita'));
+        return view('pratiche.create', compact('cliente', 'pratica', 'filiale', 'autorita'));
     }
     
     public function store(Request $request, $cliente_id)
@@ -255,20 +234,38 @@ class PraticheController extends Controller
         
         $this->validateInput($request);
 
-        $pratiche_stesso_numero = \App\Pratica::whereHas('cliente', function($query) use ($pratica) {
-                $query->where('filiale_id', $pratica->cliente->filiale->id);
+        $pratiche_stesso_numero = \App\Pratica::whereHas('cliente', function($query) use ($cliente) {
+                $query->where('filiale_id', $cliente->filiale->id);
             })->where('numero_pratica', $request->numero_pratica)->get();
 
         if (count($pratiche_stesso_numero) > 0) {
             return redirect()->back()->withInput()->withErrors(['message' => 'Numero pratica già esistente per questa filiale.']);
         }
         
-        $pratiche_stessa_registrazione = \App\Pratica::whereHas('cliente', function($query) use ($pratica) {
-                $query->where('filiale_id', $pratica->cliente->filiale->id);
+        $pratiche_stessa_registrazione = \App\Pratica::whereHas('cliente', function($query) use ($cliente) {
+                $query->where('filiale_id', $cliente->filiale->id);
             })->where('numero_registrazione', $request->numero_registrazione)->get();
 
         if (count($pratiche_stessa_registrazione) > 0) {
             return redirect()->back()->withInput()->withErrors(['message' => 'Numero registrazione già esistente per questa filiale.']);
+        }
+        
+        if ($request->crea_copia) {
+            $pratiche_stesso_numero = \App\Pratica::whereHas('cliente', function($query) use ($cliente) {
+                    $query->where('filiale_id', $cliente->filiale->id);
+                })->where('numero_pratica', $request->numero_pratica + 1)->get();
+    
+            if (count($pratiche_stesso_numero) > 0) {
+                return redirect()->back()->withInput()->withErrors(['message' => 'Numero pratica (per la copia) già esistente per questa filiale.']);
+            }
+            
+            $pratiche_stessa_registrazione = \App\Pratica::whereHas('cliente', function($query) use ($cliente) {
+                    $query->where('filiale_id', $cliente->filiale->id);
+                })->where('numero_registrazione', $request->numero_registrazione + 1)->get();
+    
+            if (count($pratiche_stessa_registrazione) > 0) {
+                return redirect()->back()->withInput()->withErrors(['message' => 'Numero registrazione (per la copia) già esistente per questa filiale.']);
+            }
         }
         
         $pratica = new \App\Pratica;
@@ -276,26 +273,8 @@ class PraticheController extends Controller
         
         $pratica->fill($new_values);
         
-        if ($request->assicurazione_parte_id) {
-            // Se una assicurazione parte è specificata la cerco
-            $assicurazione = \App\CompagniaAssicurativa::findOrFail($request->assicurazione_parte_id);
-            $pratica->assicurazione_parte()->associate($assicurazione);
-        } else {
-            // Se non è specificata una assicurazione parte cancello la relazione
-            $pratica->assicurazione_parte()->dissociate();
-        }
-        
-        if ($request->assicurazione_controparte_id) {
-            // Se una assicurazione controparte è specificata la cerco
-            $assicurazione = \App\CompagniaAssicurativa::findOrFail($request->assicurazione_controparte_id);
-            $pratica->assicurazione_controparte()->associate($assicurazione);
-        } else {
-            // Se non è specificata una assicurazione controparte cancello la relazione
-            $pratica->assicurazione_controparte()->dissociate();
-        }
-        
         $autorita = \App\Autorita::find($request->autorita_id);
-        if ($autorita == null)
+        if ($autorita === null)
         {
             // Se l'autorità non esiste la creo
             $autorita = \App\Autorita::create(['nome' => $request->autorita_id]);
@@ -305,6 +284,26 @@ class PraticheController extends Controller
         
         $pratica->cliente()->associate($cliente);
         $pratica->save();
+        
+        if ($request->crea_copia) {
+            $pratica = new \App\Pratica;
+
+            $pratica->fill($new_values);
+            $pratica->numero_pratica = $request->numero_pratica + 1;
+            $pratica->numero_registrazione = $request->numero_registrazione + 1;
+            
+            $autorita = \App\Autorita::find($request->autorita_id);
+            if ($autorita === null)
+            {
+                // Se l'autorità non esiste la creo
+                $autorita = \App\Autorita::create(['nome' => $request->autorita_id]);
+            }
+            
+            $pratica->autorita()->associate($autorita);
+            
+            $pratica->cliente()->associate($cliente);
+            $pratica->save();
+        }
 
         // TODO: mostrare messaggio nella view
         return redirect()->action('PraticheController@show', ['cliente' => $pratica->cliente, 'pratica' => $pratica])
@@ -413,7 +412,7 @@ class PraticheController extends Controller
             'data_chiusura'                     => 'date_format:d/m/Y',
             'importo_sospeso'                   => 'numeric|max:100000000|min:0',
             'data_sospeso'                      => 'date_format:d/m/Y',
-            'onorari_omnia'                     => 'numeric|max:100000000|min:0',
+            'onorari'                           => 'numeric|max:100000000|min:0',
             'liquidato_omnia'                   => 'numeric|max:100000000|min:0',
             
             'data_sinistro'                     => 'date_format:d/m/Y|before:tomorrow',

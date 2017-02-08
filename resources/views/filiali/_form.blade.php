@@ -47,15 +47,29 @@
             </div>
             
             @if (isset($utente) &&  $utente != Auth::user()) 
-                @if($utente->isEnabled())
-                    <a class="btn btn-danger pull-right" href="#" data-toggle="modal" data-target="#confermaDisattivazioneModal">
-                        <i class="fa fa-fw fa-exclamation"></i>Disattiva accesso filiale
-                    </a>
-                @else
-                    <a class="btn btn-primary pull-right" href="#" data-toggle="modal" data-target="#confermaDisattivazioneModal">
-                        <i class="fa fa-fw fa-exclamation"></i>Riattiva accesso filiale
-                    </a>
-                @endif
+                <div class="form-group" style="padding-right: 15px">
+                    @if($utente->isEnabled())
+                        <a class="btn btn-danger pull-right" href="#" data-toggle="modal" data-target="#confermaDisattivazioneModal">
+                            <i class="fa fa-fw fa-exclamation"></i>Disattiva accesso filiale
+                        </a>
+                    @else
+                        <a class="btn btn-primary pull-right" href="#" data-toggle="modal" data-target="#confermaDisattivazioneModal">
+                            <i class="fa fa-fw fa-exclamation"></i>Riattiva accesso filiale
+                        </a>
+                    @endif
+                </div>
+                <div class="form-group" style="padding-right: 15px">
+                    @if($utente->canGenerateLetters())
+                        <a class="btn btn-danger pull-right" id="toggleCanGenerateLettersBtn">
+                            <i class="fa fa-fw fa-exclamation"></i>Togli permesso di generare lettere
+                        </a>
+                    @else
+                        <a class="btn btn-primary pull-right" id="toggleCanGenerateLettersBtn">
+                            <i class="fa fa-fw fa-exclamation"></i>Dai permesso di generare lettere
+                        </a>
+                    @endif
+                    
+                </div>
             @endif
         </div>
     </div>
@@ -75,5 +89,9 @@
         </div>
     @endif
     
+{!! Form::close() !!}
+
+{!! Form::open(['action' => ['FilialiController@toggleCanGenerateLetters', 'filiale' => $filiale],
+    'id' => 'toggleCanGenerateLettersForm', 'method' => 'put']) !!}
 {!! Form::close() !!}
 <!--</form>-->

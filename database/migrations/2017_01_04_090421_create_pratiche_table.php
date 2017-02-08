@@ -23,6 +23,7 @@ class CreatePraticheTable extends Migration
 
             $table->string('veicolo_parte')->nullable();
             $table->string('targa_parte')->nullable();
+            $table->string('assicurazione_parte')->nullable();
             $table->string('numero_polizza_parte')->nullable();
             
             $table->string('conducente_controparte')->nullable();
@@ -31,6 +32,7 @@ class CreatePraticheTable extends Migration
             $table->string('telefono_controparte')->nullable();
             $table->string('veicolo_controparte')->nullable();
             $table->string('targa_controparte')->nullable();
+            $table->string('assicurazione_controparte')->nullable();
             $table->string('numero_polizza_controparte')->nullable();
             $table->string('proprietario_mezzo_responsabile')->nullable();  // ?
             $table->string('medico_controparte')->nullable();
@@ -50,7 +52,7 @@ class CreatePraticheTable extends Migration
             $table->date('data_chiusura')->nullable();
             $table->decimal('importo_sospeso', 10, 2)->nullable();
             $table->date('data_sospeso')->nullable();
-            $table->decimal('onorari_omnia', 10, 2)->nullable();
+            $table->decimal('onorari', 10, 2)->nullable();
             $table->decimal('liquidato_omnia', 10, 2)->nullable();
             $table->text('stato_avanzamento')->nullable();
 

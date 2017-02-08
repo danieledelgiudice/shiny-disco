@@ -89,6 +89,22 @@ class FilialiController extends Controller
         return redirect()->back()->with('info', $msg);
     }
     
+    public function toggleCanGenerateLetters(Request $request, $filiale_id)
+    {
+        $filiale = \App\Filiale::findOrFail($filiale_id);
+        $utente = $filiale->utente;
+        
+        if ($utente == $request->user())
+            // Non posso i permessi a me stesso
+            return redirect()->back()->with('danger', 'Non è possibile impedire la generazione di lettere alla propria filiale.');
+        
+        $utente->can_generate_letters = !$utente->can_generate_letters;
+        $utente->save();
+        
+        $msg = $utente->can_generate_letters ? 'La filiale adesso può generare lettere' : 'La filiale non può più generare lettere';
+        return redirect()->back()->with('info', $msg);
+    }
+    
     private function validateInput(Request $request)
     {
         $this->validate($request, [

@@ -26,8 +26,8 @@ class PannelloFilialeController extends Controller
         $filiali = \App\Filiale::all();
         return view('pannello_filiale.home', compact('filiale', 'filiali'));
     }
-    
-    public function compagnieAssicurative(Request $request, $filiale_id)
+
+    public function liquidatoOmnia(Request $request, $filiale_id)
     {
         $filiale = \App\Filiale::findOrFail($filiale_id);
         
@@ -36,13 +36,18 @@ class PannelloFilialeController extends Controller
             abort(403);
         }
         
-        $compagnie_assicurative = $filiale->compagnieAssicurative;
+        $pratiche = \App\Pratica::whereHas('cliente', function($query) use ($filiale_id) {
+            $query->where('filiale_id', $filiale_id);
+        })->whereIn('stato_pratica', [0, 3])
+          ->whereNotNull('liquidato_omnia')->get(); //stato pratica: aperte o ss. legale
+        
+        
         $filiali = \App\Filiale::all();
-
-        return view('pannello_filiale.compagnie_assicurative', compact('filiale', 'filiali', 'compagnie_assicurative'));
+        
+        return view('pannello_filiale.liquidato_omnia', compact('filiale', 'filiali', 'pratiche'));
     }
     
-    public function totaliOmnia(Request $request, $filiale_id)
+    public function importoSospeso(Request $request, $filiale_id)
     {
         $filiale = \App\Filiale::findOrFail($filiale_id);
         
@@ -51,14 +56,54 @@ class PannelloFilialeController extends Controller
             abort(403);
         }
         
-        $pratiche_query = \App\Pratica::whereHas('cliente', function($query) use ($filiale_id) {
+        $pratiche = \App\Pratica::whereHas('cliente', function($query) use ($filiale_id) {
             $query->where('filiale_id', $filiale_id);
-        });
+        })->whereIn('stato_pratica', [0, 3])
+          ->whereNotNull('importo_sospeso')->get(); //stato pratica: aperte o ss. legale
         
-        $somma_onorari = $pratiche_query->sum('onorari_omnia');
-        $somma_liquidato = $pratiche_query->sum('liquidato_omnia');
         
         $filiali = \App\Filiale::all();
-        return view('pannello_filiale.totali_omnia', compact('filiale', 'filiali', 'somma_onorari', 'somma_liquidato'));
+        
+        return view('pannello_filiale.importo_sospeso', compact('filiale', 'filiali', 'pratiche'));
+    }
+    
+    public function parcellaPresunta(Request $request, $filiale_id)
+    {
+        $filiale = \App\Filiale::findOrFail($filiale_id);
+        
+        if($request->user()->cannot('visualizzare-pannello-filiale', $filiale)) {
+            // L'utente non puo' visualizzare il pannello filiale di altre filiali
+            abort(403);
+        }
+        
+        $pratiche = \App\Pratica::whereHas('cliente', function($query) use ($filiale_id) {
+            $query->where('filiale_id', $filiale_id);
+        })->whereIn('stato_pratica', [0, 3])
+          ->whereNotNull('parcella_presunta')->get(); //stato pratica: aperte o ss. legale
+        
+        
+        $filiali = \App\Filiale::all();
+        
+        return view('pannello_filiale.parcella_presunta', compact('filiale', 'filiali', 'pratiche'));
+    }
+    
+    public function onorari(Request $request, $filiale_id)
+    {
+        $filiale = \App\Filiale::findOrFail($filiale_id);
+        
+        if($request->user()->cannot('visualizzare-pannello-filiale', $filiale)) {
+            // L'utente non puo' visualizzare il pannello filiale di altre filiali
+            abort(403);
+        }
+        
+        $pratiche = \App\Pratica::whereHas('cliente', function($query) use ($filiale_id) {
+            $query->where('filiale_id', $filiale_id);
+        })->whereIn('stato_pratica', [0, 3])
+          ->whereNotNull('onorari')->get(); //stato pratica: aperte o ss. legale
+        
+        
+        $filiali = \App\Filiale::all();
+        
+        return view('pannello_filiale.onorari', compact('filiale', 'filiali', 'pratiche'));
     }
 }

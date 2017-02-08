@@ -78,7 +78,7 @@ class PraticaFilter extends ModelFilter
     
     public function assicurazioneParte($value)
     {
-        return $this->where('assicurazione_parte_id', $value);
+        return $this->where('assicurazione_parte', $value);
     }
     
     public function conducenteControparte($value)
@@ -123,7 +123,7 @@ class PraticaFilter extends ModelFilter
     
      public function assicurazioneControparte($value)
     {
-        return $this->where('assicurazione_controparte_id', $value);
+        return $this->where('assicurazione_controparte', $value);
     }
     
     public function liquidatore($value)
@@ -223,13 +223,13 @@ class PraticaFilter extends ModelFilter
         return $this->where('importo_sospeso', $op, $value[1]);
     }
     
-    public function onorariOmnia($value)
+    public function onorari($value)
     {
         if (!$value[1]) return $this;
         
         $op = ($value[0] == 'lt') ? '<=' : '>=';
 
-        return $this->where('onorari_omnia', $op, $value[1]);
+        return $this->where('onorari', $op, $value[1]);
     }
     
     public function luquidatoOmnia($value)

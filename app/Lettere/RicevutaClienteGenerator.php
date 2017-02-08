@@ -4,6 +4,7 @@ namespace App\Lettere;
 
 class RicevutaClienteGenerator
 {
+    const REQUIRES = '1';
     const NAME = "Ricevuta cliente";
    
     public function generate($data)

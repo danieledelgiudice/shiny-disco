@@ -112,19 +112,6 @@ var parseQueryString = function() {
         $(formSelector).submit();
     });
     
-    $('.showCompagniaDestroyModal').click(function() {
-        var id_compagnia = $(this).data('compagnia');
-        $('#compagniaDestroyConfirm').data('compagnia', id_compagnia);
-    });
-    
-    $('#compagniaDestroyConfirm').click(function() {
-        var compagnia = $(this).data('compagnia');
-        var formSelector = `#compagnia${compagnia}DestroyForm`;
-        $(formSelector).submit();
-    });
-    
-    $('[data-toggle="tooltip"]').tooltip();
-    
     $('select:not([data-selecttype])').selectize({
         sortField: 'text',
     });
@@ -140,31 +127,9 @@ var parseQueryString = function() {
             }
         }
     });
+
     
-    $('select[data-selecttype="assicurazioni"]').selectize({
-        sortField: 'text',
-        searchField: ['text', 'indirizzo'],
-        render: {
-            option: function(item, escape) {
-                var label = item.text;
-                var caption = item.indirizzo;
-                return '<div>' +
-                    '<strong>' + escape(label) + '</strong><br>' +
-                    (caption ? '<small class="caption">' + escape(caption) + '</small>' : '') +
-                '</div>';
-            },
-            item: function(item, escape) {
-                var label = item.text;
-                var caption = item.indirizzo;
-                return '<div>' +
-                    '<strong>' + escape(label) + '</strong><br>' +
-                    (caption ? '<small class="caption">' + escape(caption) + '</small>' : '') +
-                '</div>';
-            },
-        }
-    });
-    
-    
+
     $('#history-back-btn').click(function() {
         window.history.back();
     });
@@ -180,13 +145,47 @@ var parseQueryString = function() {
         var selected = $('#select-tipo-lettera option:selected').val();
         url = url.replace('*', selected);
         
-        var logo_radio = $('input[type=radio][name=logo]:checked');
-        if (logo_radio.length && logo_radio.val() === '1') {
-            url += '?logo=1';
+        var options = $('.opzioni-lettere:not(.hide)');
+        if (options.length > 0)
+            url += '?';
+        
+        var logo_radio = options.find('input[type=radio][name=logo]:checked');
+        if (logo_radio.length > 0 && logo_radio.val() === '1') {
+            url += '&logo=1';
         }
+        
+        var num_inputs = options.find('input[type=number]');
+        for (var i = 0; i < num_inputs.length; i++) {
+            var $input = $(num_inputs[i]);
+            var name = $input.attr('name');
+            var value = $input.val();
+            url += `&${name}=${value}`;
+        }
+        
         
         window.open(url, '_blank');
     });
+    
+        
+    $('#select-tipo-lettera').selectize({
+        sortField: 'text',
+        render: {
+            item: function (data, escape) {
+                return '<div class="item" data-value="' + escape(data.value) + '" data-requires="' + escape(data.requires) + '">' + escape(data.text) + '</div>';
+            }
+        },
+        onItemAdd: function(v, e) {
+            var requires = e.data('requires');
+            $('.opzioni-lettere').each(function() {
+                var optionid = $(this).data('optionid');
+                if (requires === optionid)
+                    $(this).removeClass('hide');
+                else
+                    $(this).addClass('hide');
+            });
+        }
+    });
+    
     
     $("#queryForm").off('submit').submit(function(e) {
         e.preventDefault();
@@ -340,45 +339,10 @@ var parseQueryString = function() {
         else
             $('#group-inConvenzione').slideUp();
     });
-        
-    // // Filtri tabella quando clicchi
-    // $('.table-filterable td[data-field]').click(function() {
-    //     var field = $(this).data('field');
-    //     var value = $(this).text();
-        
-    //     var params = parseQueryString();
-    //     params[field] = value;
-    //     var queryString = $.param(params);
-        
-    //     window.location.search = queryString;
-    // });
     
-    // $('.table-filterable td[data-field-select]').click(function() {
-    //     var field_select = $(this).data('field-select');
-    //     var value = $(this).data('field-id');
-        
-    //     var params = parseQueryString();
-    //     params[field_select] = value;
-    //     var queryString = $.param(params);
-        
-    //     window.location.search = queryString;
-    // });
     
-    // // Riempio campi input in base alla query della pagina
-    // (function() {
-    //     var params = parseQueryString();
-    //     $('.table-filterable input[type=text]').each(function() {
-    //         var name = $(this).attr('name');
-    //         if (params[name])
-    //             $(this).attr('value', params[name]);
-    //     });
-        
-    //     $('.table-filterable select').each(function() {
-    //         var name = $(this).attr('name');
-    //         if (params[name]) {
-    //             $(this).children(`[value=${params[name]}]`).attr('selected', 'selected');
-    //         }
-    //     });
-    // })();
-    
+    $('#toggleCanGenerateLettersBtn').click(function() {
+       $('#toggleCanGenerateLettersForm').submit();
+       console.log('ok');
+    });
 })();

@@ -65,14 +65,6 @@ Route::put( '/clienti/{cliente}/pratiche/{pratica}/prestazioni_mediche/{prestazi
 Route::delete( '/clienti/{cliente}/pratiche/{pratica}/prestazioni_mediche/{prestazione_medica}',        'PrestazioniMedicheController@destroy');
 
 
-
-Route::get( '/filiali/{filiale}/compagnie_assicurative/new',                            'CompagnieAssicurativeController@create');
-Route::get( '/filiali/{filiale}/compagnie_assicurative/{compagnia_assicurativa}/edit',  'CompagnieAssicurativeController@edit');
-Route::post( '/filiali/{filiale}/compagnie_assicurative/',                              'CompagnieAssicurativeController@store');
-Route::put( '/filiali/{filiale}/compagnie_assicurative/{compagnia_assicurativa}',       'CompagnieAssicurativeController@update');
-Route::delete( '/filiali/{filiale}/compagnie_assicurative/{compagnia_assicurativa}',    'CompagnieAssicurativeController@destroy');
-
-
 Route::get( '/filiali/{filiale}/agenda',                                        'PromemoriaController@indexToday');
 Route::get( '/filiali/{filiale}/agendaEstesa',                                  'PromemoriaController@indexAll');
 Route::post('/agenda/confermaLettura',                                          'PromemoriaController@confermaLettura');
@@ -84,14 +76,18 @@ Route::get( '/filiali',                                                         
 Route::get( '/filiali/new',                                                     'FilialiController@create');
 Route::get( '/filiali/{filiale}/edit',                                          'FilialiController@edit');
 Route::put( '/filiali/{filiale}/toggleEnabled',                                 'FilialiController@toggleEnabled');
+Route::put( '/filiali/{filiale}/toggleCanGenerateLetters',                      'FilialiController@toggleCanGenerateLetters');
 Route::put( '/filiali/{filiale}',                                               'FilialiController@update');
 Route::post( '/filiali/',                                                       'FilialiController@store');
 
 
 
 Route::get( '/filiali/{filiale}/pannello',                                      'PannelloFilialeController@home');
-Route::get( '/filiali/{filiale}/pannello/compagnie_assicurative',               'PannelloFilialeController@compagnieAssicurative');
-Route::get( '/filiali/{filiale}/pannello/totali_omnia',                         'PannelloFilialeController@totaliOmnia');
+Route::get( '/filiali/{filiale}/pannello/liquidato_omnia',                      'PannelloFilialeController@liquidatoOmnia');
+Route::get( '/filiali/{filiale}/pannello/importo_sospeso',                      'PannelloFilialeController@importoSospeso');
+Route::get( '/filiali/{filiale}/pannello/parcella_presunta',                    'PannelloFilialeController@parcellaPresunta');
+Route::get( '/filiali/{filiale}/pannello/onorari',                              'PannelloFilialeController@onorari');
+
 
 
 

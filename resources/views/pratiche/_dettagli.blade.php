@@ -82,8 +82,7 @@
             <!-- Assicurazione di parte -->
             <strong class="col-md-2 form-control-static">Assicurazione di parte</strong>
             <div class="col-md-4">
-               <p class="form-control-static"><strong>{{ $pratica->assicurazione_parte ? $pratica->assicurazione_parte->nome : '' }}</strong></p>
-               <small>{{ $pratica->assicurazione_parte ? $pratica->assicurazione_parte->indirizzo : '' }}</small>
+               <p class="form-control-static">{{ $pratica->assicurazione_parte }}</p>
             </div>
         </div>
     </div>
@@ -158,8 +157,7 @@
             <!-- Assicurazione controparte -->
             <strong class="col-md-2 form-control-static">Assicurazione controparte</strong>
             <div class="col-md-4">
-                <p class="form-control-static"><strong>{{ $pratica->assicurazione_controparte ? $pratica->assicurazione_controparte->nome : '' }}</strong></p>
-                <small>{{ $pratica->assicurazione_controparte ? $pratica->assicurazione_controparte->indirizzo : '' }}</small>
+                <p class="form-control-static">{{ $pratica->assicurazione_controparte }}</p>
             </div>
         
             <!-- Parcella presunta -->
@@ -284,10 +282,10 @@
         </div>
         
         <div class="row">
-            <!-- Onorari omnia -->
-            <strong class="col-md-2 form-control-static">Onorari omnia</strong>
+            <!-- Onorari -->
+            <strong class="col-md-2 form-control-static">Onorari</strong>
             <div class="col-md-4">
-               <p class="form-control-static">{{ format_money($pratica->onorari_omnia) }}</p>
+               <p class="form-control-static">{{ format_money($pratica->onorari) }}</p>
             </div>
         
             <!-- Liquidato omnia -->

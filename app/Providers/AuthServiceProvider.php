@@ -65,21 +65,8 @@ class AuthServiceProvider extends ServiceProvider
         });
         
         
-        
-        $gate->define('visualizzare-compagnia-assicurativa', function ($user, $filiale) {
-            return $user->filiale->id === $filiale->id;
-        });
-        
-        $gate->define('modificare-compagnia-assicurativa', function ($user, $compagnia) {
-            return $user->filiale->id === $compagnia->filiale->id;
-        });
-        
-        $gate->define('eliminare-compagnia-assicurativa', function ($user, $compagnia) {
-            return $user->filiale->id === $compagnia->filiale->id;
-        });
-        
-        
-        
+
+
         
         $gate->define('modificare-agenda', function ($user, $filiale) {
             return false;
@@ -99,7 +86,7 @@ class AuthServiceProvider extends ServiceProvider
         
         
         $gate->define('generare-lettera', function ($user, $pratica) {
-            return $user->filiale->id === $pratica->cliente->filiale->id;
+            return $user->canGenerateLetters() && ($user->filiale->id === $pratica->cliente->filiale->id);
         });
         
         

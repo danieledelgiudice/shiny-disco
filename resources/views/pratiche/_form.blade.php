@@ -89,20 +89,9 @@
                 </div>
                 
                 <!-- Assicurazione di parte -->
-                {!! Form::label('assicurazione_parte_id', 'Assicurazione di parte' , ['class' => 'col-md-2 control-label']) !!}
+                {!! Form::label('assicurazione_parte', 'Assicurazione di parte' , ['class' => 'col-md-2 control-label']) !!}
                 <div class="col-md-4">
-                    <select class="" placeholder="" data-selecttype="assicurazioni" name="assicurazione_parte_id" id="assicurazione_parte_id">
-                        <option value="" {{ (!$pratica->id || !$pratica->assicurazione_parte_id) ? 'selected' : ''}}> </option>
-                        @foreach($assicurazioni as $assicurazione)
-                            <option value="{{ $assicurazione->id }}" data-data="{{ json_encode(['indirizzo' => $assicurazione->indirizzo]) }}"
-                                {{ ($pratica && $pratica->assicurazione_parte_id == $assicurazione->id) ? 'selected' : ''}}>
-                                {{ $assicurazione->nome}}
-                            </option>
-                        @endforeach
-                    </select>
-                    <a href="{{ action('CompagnieAssicurativeController@create', ['filiale' => $filiale]) }}" class="btn btn-primary">
-                        <i class="fa fa-fw fa-plus"></i>
-                    </a>
+                    {!! Form::text('assicurazione_parte', null, ['class' => 'form-control']) !!}
                 </div>
             </div>
         </div>
@@ -175,20 +164,9 @@
             
             <div class="form-group">
                 <!-- Assicurazione controparte -->
-                {!! Form::label('assicurazione_controparte_id', 'Assicurazione controparte' , ['class' => 'control-label col-md-2']) !!}
+                {!! Form::label('assicurazione_controparte', 'Assicurazione controparte' , ['class' => 'col-md-2 control-label']) !!}
                 <div class="col-md-4">
-                    <select class="" placeholder="" data-selecttype="assicurazioni" name="assicurazione_controparte_id" id="assicurazione_controparte_id">
-                        <option value="" {{ (!$pratica->id || !$pratica->assicurazione_parte_id) ? 'selected' : ''}}> </option>
-                        @foreach($assicurazioni as $assicurazione)
-                            <option value="{{ $assicurazione->id }}" data-data="{{ json_encode(['indirizzo' => $assicurazione->indirizzo]) }}"
-                                {{ ($pratica && $pratica->assicurazione_controparte_id == $assicurazione->id) ? 'selected' : ''}}>
-                                {{ $assicurazione->nome}}
-                            </option>
-                        @endforeach
-                    </select>
-                    <a href="{{ action('CompagnieAssicurativeController@create', ['filiale' => $filiale]) }}" class="btn btn-primary">
-                        <i class="fa fa-fw fa-plus"></i>
-                    </a>
+                    {!! Form::text('assicurazione_controparte', null, ['class' => 'form-control']) !!}
                 </div>
                 
                 <!-- Parcella presunta -->
@@ -337,11 +315,11 @@
             </div>
             
             <div class="form-group">
-                <!-- Onorari omnia -->
-                {!! Form::label('onorari_omnia', 'Onorari omnia' , ['class' => 'col-md-2 control-label']) !!}
+                <!-- Onorari -->
+                {!! Form::label('onorari', 'Onorari' , ['class' => 'col-md-2 control-label']) !!}
                 <div class="col-md-4">
                     <div class="input-group">
-                        {!! Form::number('onorari_omnia', null, ['class' => 'form-control']) !!}
+                        {!! Form::number('onorari', null, ['class' => 'form-control']) !!}
                         <span class="input-group-addon"><i class="fa fa-fw fa-eur"></i></span>
                     </div>
                 </div>
@@ -526,6 +504,16 @@
             </button>
         </div>
     @else
+            
+        <div class="form-group pull-right">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="crea_copia">
+                    Crea una copia
+                </label>
+            </div>
+        </div>
+    
         <div class="form-group">
             <button type="submit" class="btn btn-success center-block">
                 <i class="fa fa-btn fa-plus"></i>Inserisci pratica

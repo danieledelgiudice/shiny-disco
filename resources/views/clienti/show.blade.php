@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app', ['background_color' => '#cceaff'])
 
 @section('content')
     @include('common._modal_elimina',

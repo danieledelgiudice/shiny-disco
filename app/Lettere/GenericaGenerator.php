@@ -4,6 +4,7 @@ namespace App\Lettere;
 
 class GenericaGenerator
 {
+    const REQUIRES = '1';
     const NAME = "Generica";
    
     public function generate($data)

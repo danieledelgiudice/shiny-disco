@@ -58,37 +58,45 @@ class DocumentiController extends Controller
 		$mime = $file->getClientMimeType();
 		$original_name = $file->getClientOriginalName();
 		
-		$storage_name = time() . uniqid() . ".$ext";
-		
 		$matches = [];
-		if (!preg_match('/(\d+?)\s*(.+)/i', $original_name, $matches)) {
+		if (!preg_match('/(\d+?)\s+(.+)/i', $original_name, $matches)) {
             return response()->json('Il file non presenta la struttura del nome adatta: "npratica descrizione"', 400);
         }
         
         $numero_pratica = $matches[1];
         $descrizione = $matches[2];
+        
         $pratica = \App\Pratica::where('numero_pratica', '=', $numero_pratica)->first();
         
-        if(!$pratica) {
+        $pratiche = \App\Pratica::whereHas('cliente', function($query) use ($request) {
+            $query->where('filiale_id', $request->user()->filiale->id);
+        })->where('numero_pratica', $numero_pratica)->get();
+        
+        if(count($pratiche) === 0) {
             return response()->json('Il numero della pratica è invalido', 400);
         }
         
-        if ($request->user()->cannot('modificare-pratica', $pratica)) {
-            // L'utente non ha il permesso di salvare documenti in questa pratica
-            return response()->json('Il numero della pratica è invalido', 403);
+        foreach ($pratiche as $pratica) {
+        
+            if ($request->user()->cannot('modificare-pratica', $pratica)) {
+                // L'utente non ha il permesso di salvare documenti in questa pratica
+                return response()->json('Il numero della pratica è invalido', 403);
+            }
+            
+            $storage_name = $numero_pratica . '_' . time() . '_' . uniqid() . ".$ext";
+    
+     		$path = Storage::disk('local_documents')->put($storage_name,  File::get($file));
+    		$documento = new \App\Documento;
+    		$documento->fill([
+    		    'descrizione' => $descrizione,
+    		    'nome_file' => $storage_name,
+    		    'nome_file_originale' => $original_name,
+    		    'mime' => $mime,
+    		    ]);
+    		    
+    		$documento->pratica()->associate($pratica);
+    		$documento->save();
         }
-
- 		$path = Storage::disk('local_documents')->put($storage_name,  File::get($file));
-		$documento = new \App\Documento;
-		$documento->fill([
-		    'descrizione' => $descrizione,
-		    'nome_file' => $storage_name,
-		    'nome_file_originale' => $original_name,
-		    'mime' => $mime,
-		    ]);
-		    
-		$documento->pratica()->associate($pratica);
-		$documento->save();
         
         // TODO: aggiungere messaggio successo
         return response()->json('success', 200);

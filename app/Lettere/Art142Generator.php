@@ -4,6 +4,7 @@ namespace App\Lettere;
 
 class Art142Generator
 {
+    const REQUIRES = '0';
     const NAME = "Articolo 142";
     
     public function generate($data)

@@ -4,6 +4,7 @@ namespace App\Lettere;
 
 class MandatoPrivacyGenerator
 {
+    const REQUIRES = '0';
     const NAME = "Mandato privacy";
    
     public function generate($data)

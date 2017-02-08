@@ -39,4 +39,9 @@ class User extends Authenticatable
     {
         return $this->enabled;
     }
+    
+    public function canGenerateLetters()
+    {
+        return $this->can_generate_letters;
+    }
 }

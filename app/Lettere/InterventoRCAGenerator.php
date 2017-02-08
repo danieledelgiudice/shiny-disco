@@ -4,6 +4,7 @@ namespace App\Lettere;
 
 class InterventoRCAGenerator
 {
+    const REQUIRES = '1';
     const NAME = "Intervento RCA";
    
     public function generate($data)
@@ -12,9 +13,7 @@ class InterventoRCAGenerator
         $cliente = $data['cliente'];
         $professione = $data['professione'];
         $autorita = $data['autorita'];
-        $assicurazione_parte = $data['assicurazione_parte'];
-        $assicurazione_controparte = $data['assicurazione_controparte'];
-        
+
         $lineh = 6;
         
         // $template = iconv('UTF-8', 'windows-1252', $template);
@@ -91,7 +90,7 @@ Resp. Uffici esterni 0586 1734753";
                 ['ANAGRAFICA',              "{$cliente['cognome']} {$cliente['nome']}",     "{$pratica['conducente_controparte']}"],
                 ['TIPO VEICOLO',            "{$pratica['veicolo_parte']}",                  "{$pratica['veicolo_controparte']}"],
                 ['N. POLIZZA',              "{$pratica['numero_polizza_parte']}",           "{$pratica['numero_polizza_controparte']}"],
-                ['ASSICURAZIONE',           "{$assicurazione_parte['nome']}",               "{$assicurazione_controparte['nome']}"],
+                ['ASSICURAZIONE',           "{$pratica['assicurazione_parte']}",            "{$pratica['assicurazione_controparte']}"],
                 ['TARGA',                   "{$pratica['targa_parte']}",                    "{$pratica['targa_controparte']}"],
         ];
         

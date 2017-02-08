@@ -15,6 +15,8 @@ class LettereFactory
         $this->generators[2] = RicevutaClienteGenerator::class;
         $this->generators[3] = InterventoRCAGenerator::class;
         $this->generators[4] = MandatoPrivacyGenerator::class;
+        $this->generators[5] = FrontespizioGenerator::class;
+        $this->generators[6] = RicevutaMediciGenerator::class;
     }
     
     public function dataSource($source)
@@ -39,7 +41,7 @@ class LettereFactory
     {
         $res = [];
         foreach($this->generators as $key => $value) {
-            $res[$key] = $value::NAME;
+            $res[$key] = ['name' => $value::NAME, 'requires' => $value::REQUIRES];
         }
         return $res;
     }

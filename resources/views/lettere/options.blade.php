@@ -32,12 +32,16 @@
                             <p class="form-control-static"><strong>Tipologia lettera</strong></p>    
                         </div>
                         <div class="col-md-8">
-                            {{ Form::select('tipo_lettera', $lettere, null, ['class' => 'form-control', 'id' => 'select-tipo-lettera']) }}
+                            <select name="tipo_lettera" class="form-control" data-selecttype="lettere" id="select-tipo-lettera">
+                            @foreach ($lettere as $k => $lettera)
+                                <option value="{{ $k }}" data-data='{{ json_encode(['requires' => $lettera['requires']]) }}'>{{ $lettera['name'] }}</option>
+                            @endforeach
+                            </select>
                         </div>
                     </div>
                     
                     @if ($can_choose_logo)
-                        <div class="row">
+                        <div class="row opzioni-lettere hide" data-optionid="1">
                             <div class="col-md-4">
                                 <p class="form-control-static"><strong>Logo</strong></p>    
                             </div>
@@ -53,6 +57,44 @@
                             </div>
                         </div>  
                     @endif
+                    
+                    <div class="opzioni-lettere hide" data-optionid="2">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <p class="form-control-static"><strong>Totale</strong></p>    
+                            </div>
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <input class="form-control" name="totale" type="number" value="0.00">
+                                    <span class="input-group-addon"><i class="fa fa-fw fa-eur"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row" style="margin-top: 5px;">
+                            <div class="col-md-4">
+                                <p class="form-control-static"><strong>Onorari</strong></p>    
+                            </div>
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <input class="form-control" name="onorari" type="number" value="0.00">
+                                    <span class="input-group-addon"><i class="fa fa-fw fa-eur"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row" style="margin-top: 5px;">
+                            <div class="col-md-4">
+                                <p class="form-control-static"><strong>Spese varie</strong></p>    
+                            </div>
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <input class="form-control" name="varie" type="number" value="0.00">
+                                    <span class="input-group-addon"><i class="fa fa-fw fa-eur"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     
                     <div class="text-center">
                         <a class="btn btn-primary" id="genera-lettera-btn" href="#"
