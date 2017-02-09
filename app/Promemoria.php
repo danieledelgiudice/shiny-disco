@@ -4,10 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use EloquentFilter\Filterable;
 
 class Promemoria extends Model
 {
     use SoftDeletes;
+    use Filterable;
     
     protected $table = 'promemoria';
     

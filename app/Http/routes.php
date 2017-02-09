@@ -68,7 +68,9 @@ Route::delete( '/clienti/{cliente}/pratiche/{pratica}/prestazioni_mediche/{prest
 Route::get( '/filiali/{filiale}/agenda',                                        'PromemoriaController@indexToday');
 Route::get( '/filiali/{filiale}/agendaEstesa',                                  'PromemoriaController@indexAll');
 Route::post('/agenda/confermaLettura',                                          'PromemoriaController@confermaLettura');
+Route::post( '/filiali/{filiale}/agenda/filter',                                'PromemoriaController@filter');
 Route::post('/clienti/{cliente}/pratiche/{pratica}/promemoria/new',             'PromemoriaController@store');
+Route::put( '/clienti/{cliente}/pratiche/{pratica}/promemoria/{promemoria}',    'PromemoriaController@update');
 Route::delete('/clienti/{cliente}/pratiche/{pratica}/promemoria/{promemoria}',  'PromemoriaController@destroy');
 
 

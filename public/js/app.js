@@ -342,7 +342,64 @@ var parseQueryString = function() {
     
     
     $('#toggleCanGenerateLettersBtn').click(function() {
-       $('#toggleCanGenerateLettersForm').submit();
-       console.log('ok');
+        $('#toggleCanGenerateLettersForm').submit();
     });
+    
+    $(document).on('click', '.promemoriaUpdateBtn', function() {
+        $modal = $('#promemoriaUpdateModal');
+        var id = $(this).data('promemoria');
+        var p = promemoria[id];
+        $modal.find('input[name=chi]').val(p.chi);
+        $modal.find('input[name=cosa]').val(p.cosa);
+        
+        var date = new Date(p.quando);
+        var dd = date.getDate();
+        var mm = date.getMonth()+1;
+        var yyyy = date.getFullYear();
+        
+        if (dd < 10) dd = '0' + dd;
+        if (mm < 10) mm = '0' + mm;
+        
+        var date_h = dd+'/'+mm+'/'+yyyy;
+        
+        $modal.find('input[name=quando]').val(date_h);
+        $('#promemoriaUpdateConfirm').data('promemoria', id);
+    });
+    
+    $('#promemoriaUpdateConfirm').click(function() {
+        var id = $(this).data('promemoria');
+        var formSelector = `#promemoria${id}UpdateForm`;
+        
+        console.log()
+        
+        var $form = $(formSelector);
+        
+        var chi = $('#promemoriaUpdateModal').find('input[name=chi]').val();
+        var quando = $('#promemoriaUpdateModal').find('input[name=quando]').val();
+        var cosa = $('#promemoriaUpdateModal').find('input[name=cosa]').val();
+        
+        $form.find('input[name=chi]').val(chi);
+        $form.find('input[name=quando]').val(quando);
+        $form.find('input[name=cosa]').val(cosa);
+        
+        var $row = $form.closest('tr');
+        
+        $.ajax({
+            type     : "POST",
+            cache    : false,
+            url      : $form.attr('action'),
+            data     : $form.serializeArray(),
+            success  : function(data) {
+                $row.find('p[data-fieldName=chi]').text(data.chi);
+                $row.find('p[data-fieldName=quando]').text(data.quando);
+                $row.find('p[data-fieldName=cosa]').text(data.cosa);
+                // cols[0].text(data.chi);
+                // cols[1].text(data.quando);
+                // cols[2].text(data.cosa);
+            }
+        });
+        
+        $('#promemoriaUpdateModal').modal('hide');
+    })
+    
 })();

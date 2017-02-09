@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+    @include('promemoria._modal_update')
+
     <div class="container">
         <div class="page-header text-center">
             <h1>Agenda di oggi</h1>
@@ -19,41 +21,36 @@
                 <div class="panel-body">
                     <table class="table table-hover table-striped">
                         <thead>
-                            <th>Chi</th>
-                            <th>Quando</th>
-                            <th>Cosa</th>
-                            <th>&nbsp;</th>
-                            <th>&nbsp;</th>
+                            {{ Form::open(['action' => ['PromemoriaController@filter', 'filiale' => $filiale], 'class' => 'form-horizontal', 'id' => 'queryForm']) }}
+                            <th class="col-md-2">
+                                Chi
+                                <br>
+                                <!--{{ Form::text('chi', null, [ 'class' => 'form-control agenda-filter']) }}-->
+                                {{ Form::select('chi', $chis, null, ['class' => 'form-control agenda-filter', 'data-selecttype' => 'chi', 'placeholder' => '']) }}
+                            </th>
+                            <th class="col-md-2">
+                                Quando
+                                <br>
+                                {{ Form::select('quando', ['Oggi', 'Ultima settimana', 'Ultimo mese', 'Ultimo anno', 'Qualsiasi data'], null, ['class' => 'form-control agenda-filter', 'data-selecttype' => 'quando']) }}
+                            </th>
+                            <th class="col-md-5"><p style="margin-bottom: 32px">Cosa</p></th>
+                            <th class="col-md-1">&nbsp;</th>
+                            <th class="col-md-1">
+                                <a href="{{ action('PromemoriaController@indexToday', ['filiale' => $filiale]) }}" class="btn btn-default">
+                                   <i class="fa fa-times fa-fw"></i> 
+                                </a>
+                            </th>
+                            <th class="col-md-1">
+                                <button class="btn btn-primary" id="queryBtn">
+                                   <i class="fa fa-search fa-fw"></i> 
+                                </button>
+                            </th>
+                            {{ Form::close() }}
                         </thead>
-                        @if (count($promemoria) > 0)
-                            <tbody>
-                                @foreach ($promemoria as $p)
-                                    <tr>
-                                        <td class="table-text col-md-2"><div>{{ $p->chi }}</div></td>
-                                        <td class="table-text col-md-2"><div>{{ date_diff_days($p->quando) }}</div></td>
-                                        <td class="table-text col-md-6"><div>{{ $p->cosa }}</div></td>
-                                        <td class="col-md-1">
-                                            <a class="btn btn-default" href="{{ action('PraticheController@show', 
-                                                ['cliente' => $p->pratica->cliente, 'pratica' => $p->pratica])}}">
-                                                <i class="fa fa-fw fa-eye"></i>
-                                            </a>
-                                        </td>
-                                        <td class="col-md-1">
-                                            {!! Form::open(['action' => ['PromemoriaController@destroy', 'cliente' => $p->pratica->cliente,
-                                                'pratica' => $p->pratica, 'promemoria' => $p], 'method' => 'delete']) !!}
-                                                <button type="submit" class="btn btn-success">
-                                                    <i class="fa fa-fw fa-check"></i>
-                                                </button>
-                                            {!! Form::close() !!}
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        @endif
+                        <tbody id="queryResult">
+                            @include('promemoria._tabella')
+                        </tbody>
                     </table>
-                    @if (count($promemoria) == 0)
-                        <p class="text-center">Non sono presenti promemoria da completare per oggi</p>
-                    @endif
                 </div>
             </div>
             

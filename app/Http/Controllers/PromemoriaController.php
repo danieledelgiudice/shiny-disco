@@ -27,15 +27,22 @@ class PromemoriaController extends Controller
             abort(403);
         }
         
-        $promemoria = \App\Promemoria::where('quando', '<', \Carbon\Carbon::tomorrow())
+        $promemoria = \App\Promemoria::where('quando', \Carbon\Carbon::today())
                     ->whereHas('pratica.cliente.filiale', function($query) use ($filiale) {
                         $query->where('id', $filiale->id);
                     })->oldest('quando')->get();
+                    
+        $chis = \App\Promemoria::whereHas('pratica.cliente.filiale', function($query) use ($filiale) {
+                        $query->where('id', $filiale->id);
+                    })->select('chi')->distinct()->pluck('chi')->all();
+        
+        $chis = array_combine($chis, $chis);
+        
         $filiali = \App\Filiale::all();
         
         $da_confermare = (!$request->user()->isAdmin()) && $request->user()->ultima_conferma < \Carbon\Carbon::today();
         
-        return view('promemoria.indexToday', compact('filiale', 'promemoria', 'filiali', 'da_confermare'));
+        return view('promemoria.indexToday', compact('filiale', 'promemoria', 'filiali', 'da_confermare', 'chis'));
     }
     
     public function indexAll(Request $request, $filiale_id = null)
@@ -115,6 +122,46 @@ class PromemoriaController extends Controller
         $utente->save();
         
         return redirect()->back()->with('success', 'Hai confermato di aver letto l\'agenda di oggi.');
+    }
+    
+    public function filter(Request $request, $filiale_id)
+    {
+        $filiale = \App\Filiale::findOrFail($filiale_id);
+        
+        $promemoria = \App\Promemoria::whereHas('pratica.cliente.filiale', function($query) use ($filiale) {
+                        $query->where('id', $filiale->id);
+                    })->filter($request->all())->latest('quando')->get();
+                    
+        return view('promemoria._tabella', compact('promemoria', 'filiale'));
+    }
+    
+    public function update(Request $request, $cliente_id, $pratica_id, $promemoria_id)
+    {
+        $promemoria = \App\Promemoria::findOrFail($promemoria_id);
+        
+        if ($promemoria->pratica->id != $pratica_id) {
+            // La pratica nell'url non corrisponde alla pratica del promemoria
+            abort(404);
+        }
+        
+        if ($promemoria->pratica->cliente->id != $cliente_id) {
+            // Il cliente nell'url non corrisponde al cliente della pratica
+            abort(404);
+        }
+        
+        if($request->user()->cannot('modificare-agenda', $promemoria->pratica)) {
+            // L'utente non può modificare assegni di pratiche di altre filiali
+            abort(403);
+        }
+        
+        $this->validateInput($request);
+        $promemoria->fill($request->all());
+        $promemoria->save();
+        
+        $result = $promemoria->toArray();
+        $result['quando'] = date_diff_days(\Carbon\Carbon::parse($result['quando']));
+                
+        return response()->json($result, 200);
     }
     
     private function validateInput(Request $request)
