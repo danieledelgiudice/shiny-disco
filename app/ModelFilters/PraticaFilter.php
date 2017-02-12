@@ -78,7 +78,7 @@ class PraticaFilter extends ModelFilter
     
     public function assicurazioneParte($value)
     {
-        return $this->where('assicurazione_parte', $value);
+        return $this->whereLike('assicurazione_parte', $value);
     }
     
     public function conducenteControparte($value)
@@ -123,7 +123,7 @@ class PraticaFilter extends ModelFilter
     
      public function assicurazioneControparte($value)
     {
-        return $this->where('assicurazione_controparte', $value);
+        return $this->whereLike('assicurazione_controparte', $value);
     }
     
     public function liquidatore($value)

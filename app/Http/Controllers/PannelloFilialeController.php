@@ -39,7 +39,8 @@ class PannelloFilialeController extends Controller
         $pratiche = \App\Pratica::whereHas('cliente', function($query) use ($filiale_id) {
             $query->where('filiale_id', $filiale_id);
         })->whereIn('stato_pratica', [0, 3])
-          ->whereNotNull('liquidato_omnia')->get(); //stato pratica: aperte o ss. legale
+          ->where('liquidato_omnia', '>', 0)
+          ->latest('data_apertura')->get(); //stato pratica: aperte o ss. legale
         
         
         $filiali = \App\Filiale::all();
@@ -59,7 +60,8 @@ class PannelloFilialeController extends Controller
         $pratiche = \App\Pratica::whereHas('cliente', function($query) use ($filiale_id) {
             $query->where('filiale_id', $filiale_id);
         })->whereIn('stato_pratica', [0, 3])
-          ->whereNotNull('importo_sospeso')->get(); //stato pratica: aperte o ss. legale
+          ->where('importo_sospeso', '>', 0)
+          ->latest('data_apertura')->get(); //stato pratica: aperte o ss. legale
         
         
         $filiali = \App\Filiale::all();
@@ -79,7 +81,8 @@ class PannelloFilialeController extends Controller
         $pratiche = \App\Pratica::whereHas('cliente', function($query) use ($filiale_id) {
             $query->where('filiale_id', $filiale_id);
         })->whereIn('stato_pratica', [0, 3])
-          ->whereNotNull('parcella_presunta')->get(); //stato pratica: aperte o ss. legale
+          ->where('parcella_presunta', '>', 0)
+          ->latest('data_apertura')->get(); //stato pratica: aperte o ss. legale
         
         
         $filiali = \App\Filiale::all();
@@ -99,7 +102,8 @@ class PannelloFilialeController extends Controller
         $pratiche = \App\Pratica::whereHas('cliente', function($query) use ($filiale_id) {
             $query->where('filiale_id', $filiale_id);
         })->whereIn('stato_pratica', [0, 3])
-          ->whereNotNull('onorari')->get(); //stato pratica: aperte o ss. legale
+          ->where('onorari', '>', 0)
+          ->latest('data_apertura')->get(); //stato pratica: aperte o ss. legale
         
         
         $filiali = \App\Filiale::all();

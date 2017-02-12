@@ -176,6 +176,10 @@ class PraticheController extends Controller
         if (count($pratiche_stessa_registrazione) > 0 && $pratiche_stessa_registrazione[0]->id != $pratica->id) {
             return redirect()->back()->withInput()->withErrors(['message' => 'Numero registrazione già esistente per questa filiale.']);
         }
+        
+        if (($request->onorari + 0) && ($request->parcella_presunta + 0)) {
+            return redirect()->back()->withInput()->withErrors(['message' => 'I campi onorari e parcella presunta sono esclusivi.']);
+        }
 
         $new_values = $request->all();
         
@@ -268,19 +272,24 @@ class PraticheController extends Controller
             }
         }
         
+        if (($request->onorari + 0) && ($request->parcella_presunta + 0)) {
+            return redirect()->back()->withInput()->withErrors(['message' => 'I campi onorari e parcella presunta sono esclusivi.']);
+        }
+        
         $pratica = new \App\Pratica;
         $new_values = $request->all();
         
         $pratica->fill($new_values);
         
         $autorita = \App\Autorita::find($request->autorita_id);
-        if ($autorita === null)
+        if ($autorita === null && trim($request->autorita_id) != '')
         {
             // Se l'autorità non esiste la creo
             $autorita = \App\Autorita::create(['nome' => $request->autorita_id]);
         }
         
-        $pratica->autorita()->associate($autorita);
+        if ($autorita !== null)
+            $pratica->autorita()->associate($autorita);
         
         $pratica->cliente()->associate($cliente);
         $pratica->save();
@@ -293,13 +302,15 @@ class PraticheController extends Controller
             $pratica->numero_registrazione = $request->numero_registrazione + 1;
             
             $autorita = \App\Autorita::find($request->autorita_id);
-            if ($autorita === null)
+
+            if ($autorita === null && trim($request->autorita_id) != '')
             {
                 // Se l'autorità non esiste la creo
                 $autorita = \App\Autorita::create(['nome' => $request->autorita_id]);
             }
             
-            $pratica->autorita()->associate($autorita);
+            if ($autorita !== null)
+                $pratica->autorita()->associate($autorita);
             
             $pratica->cliente()->associate($cliente);
             $pratica->save();

@@ -143,13 +143,14 @@ class ClientiController extends Controller
         $cliente->filiale()->associate($filiale);
         
         $professione = \App\Professione::find($request->professione_id);
-        if ($professione === null)
+        if ($professione === null && trim($request->professione_id) != '')
         {
             // Se la professione non esiste la creo
             $professione = \App\Professione::create(['nome' => $request->professione_id]);
         }
         
-        $cliente->professione()->associate($professione);
+        if ($professione !== null)
+            $cliente->professione()->associate($professione);
         
         $cliente->save();
         

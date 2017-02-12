@@ -31,7 +31,10 @@
                             <th class="col-md-2">
                                 Quando
                                 <br>
-                                {{ Form::select('quando', ['Oggi', 'Ultima settimana', 'Ultimo mese', 'Ultimo anno', 'Qualsiasi data'], null, ['class' => 'form-control agenda-filter', 'data-selecttype' => 'quando']) }}
+                                <div class="input-group date">
+                                    {!! Form::text('quando', null, ['class' => 'form-control date-control', 'required' => 'required']) !!}
+                                    <span class="input-group-addon"><i class="fa fa-fw fa-calendar"></i></span>
+                                </div>
                             </th>
                             <th class="col-md-5"><p style="margin-bottom: 32px">Cosa</p></th>
                             <th class="col-md-1">&nbsp;</th>
