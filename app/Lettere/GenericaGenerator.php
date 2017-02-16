@@ -23,7 +23,7 @@ class GenericaGenerator
         $f->AddPage();
         
         $logo_elisir = $data['logo'];
-        $logo_url = public_path() . "/images/logos/$logo_elisir";
+        $logo_url = \URL::asset("/images/logos/$logo_elisir");
         $f->Image($logo_url, 20, 15, 45);
         
         $f->SetFont('Times', '', 11);
