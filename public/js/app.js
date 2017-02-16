@@ -83,7 +83,6 @@ var parseQueryString = function() {
     
     $('#documentoDestroyConfirm').click(function() {
         var documento = $(this).data('documento');
-        console.log(documento);
         var formSelector = `#documento${documento}DestroyForm`;
         $(formSelector).submit();
     });
@@ -107,7 +106,6 @@ var parseQueryString = function() {
     
     $('#prestazioneMedicaDestroyConfirm').click(function() {
         var prestazioneMedica = $(this).data('prestazionemedica');
-        console.log(prestazioneMedica);
         var formSelector = `#prestazioneMedica${prestazioneMedica}DestroyForm`;
         $(formSelector).submit();
     });
@@ -345,8 +343,8 @@ var parseQueryString = function() {
         $('#toggleCanGenerateLettersForm').submit();
     });
     
-    $(document).on('click', '.promemoriaUpdateBtn', function() {
-        $modal = $('#promemoriaUpdateModal');
+    $(document).on('click', '.promemoriaUpdateBtn', function(e) {
+        var $modal = $('#promemoriaUpdateModal');
         var id = $(this).data('promemoria');
         var p = promemoria[id];
         $modal.find('input[name=chi]').val(p.chi);
@@ -369,9 +367,7 @@ var parseQueryString = function() {
     $('#promemoriaUpdateConfirm').click(function() {
         var id = $(this).data('promemoria');
         var formSelector = `#promemoria${id}UpdateForm`;
-        
-        console.log()
-        
+
         var $form = $(formSelector);
         
         var chi = $('#promemoriaUpdateModal').find('input[name=chi]').val();
@@ -393,13 +389,56 @@ var parseQueryString = function() {
                 $row.find('p[data-fieldName=chi]').text(data.chi);
                 $row.find('p[data-fieldName=quando]').text(data.quando);
                 $row.find('p[data-fieldName=cosa]').text(data.cosa);
-                // cols[0].text(data.chi);
-                // cols[1].text(data.quando);
-                // cols[2].text(data.cosa);
             }
         });
         
         $('#promemoriaUpdateModal').modal('hide');
-    })
+    });
+    
+    $('.table-selectable').on('click', '.row-selectable', function(e) {
+        var $row = $(this);
+        if ($.inArray(e.target.nodeName, ['BUTTON', 'I', 'A']) == -1)
+            $row.toggleClass('selected');
+    });
+    
+    $('#spostaPromemoriaBtn').click(function() {
+        var $selected = $('.table-selectable .row-selectable.selected');
+        var quando = $('#spostaPromemoriaQuando').val();
+        
+        if (quando === '')
+            return;
+        
+        $selected.each(function() {
+            var id = $(this).find('.promemoriaUpdateBtn').data('promemoria');
+            
+            var p = promemoria[id];
+            var chi = p.chi;
+            var cosa = p.cosa;
+            
+
+            var formSelector = `#promemoria${id}UpdateForm`;
+            var $form = $(formSelector);
+            
+            $form.find('input[name=chi]').val(chi);
+            $form.find('input[name=quando]').val(quando);
+            $form.find('input[name=cosa]').val(cosa);
+            
+            var $row = $form.closest('tr');
+        
+            $.ajax({
+                type     : "POST",
+                cache    : false,
+                url      : $form.attr('action'),
+                data     : $form.serializeArray(),
+                success  : function(data) {
+                    $row.find('p[data-fieldName=chi]').text(data.chi);
+                    $row.find('p[data-fieldName=quando]').text(data.quando);
+                    $row.find('p[data-fieldName=cosa]').text(data.cosa);
+                    
+                    $row.removeClass('selected');
+                }
+            });
+        });
+    });
     
 })();

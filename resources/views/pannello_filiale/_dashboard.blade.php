@@ -40,6 +40,11 @@
                         Parcella presunta
                     </a>
                 </li>
+                <li class="nav-item{{ (isset($active) && $active === 'sospesi_medici') ? ' active' : '' }}">
+                    <a class="nav-link" href="{{ action('PannelloFilialeController@sospesiMedici', ['filiale' => $filiale]) }}">
+                        Sospesi medici
+                    </a>
+                </li>
             </ul>
         </div>
 

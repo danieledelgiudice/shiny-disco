@@ -31,6 +31,7 @@ class PrestazioneMedica extends Model
         'data',
         'giorni',
         'costo',
+        'pagato',
         'percentuale',
     ];
 

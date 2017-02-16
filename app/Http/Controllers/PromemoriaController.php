@@ -17,24 +17,38 @@ class PromemoriaController extends Controller
     
     public function indexToday(Request $request, $filiale_id = null)
     {
-        if (!$filiale_id)
+        if ($filiale_id === null)
             return redirect()->action('PromemoriaController@indexToday', ['filiale' => $request->user()->filiale->id ]);
+        
+        if ($filiale_id != 0) {
+            $filiale = \App\Filiale::findOrFail($filiale_id);
+        
+            if($request->user()->cannot('visualizzare-agenda', $filiale)) {
+                // L'utente non può vedere l'agenda di altre filiali
+                abort(403);
+            }
             
-        $filiale = \App\Filiale::findOrFail($filiale_id);
-        
-        if($request->user()->cannot('visualizzare-agenda', $filiale)) {
-            // L'utente non può vedere l'agenda di altre filiali
-            abort(403);
+            $promemoria = \App\Promemoria::where('quando', \Carbon\Carbon::today())
+                        ->whereHas('pratica.cliente.filiale', function($query) use ($filiale) {
+                            $query->where('id', $filiale->id);
+                        })->oldest('quando')->get();
+                        
+            $chis = \App\Promemoria::whereHas('pratica.cliente.filiale', function($query) use ($filiale) {
+                $query->where('id', $filiale->id);
+            })->select('chi')->distinct()->pluck('chi')->all();
+        } else {
+            
+            if($request->user()->cannot('visualizzare-agenda-estesa', null)) {
+                // L'utente non può vedere l'agenda estesa
+                abort(403);
+            }
+            
+            $promemoria = \App\Promemoria::where('quando', \Carbon\Carbon::today())->oldest('quando')->get();
+            
+            $chis = \App\Promemoria::select('chi')->distinct()->pluck('chi')->all();
+            
+            $filiale = 0;
         }
-        
-        $promemoria = \App\Promemoria::where('quando', \Carbon\Carbon::today())
-                    ->whereHas('pratica.cliente.filiale', function($query) use ($filiale) {
-                        $query->where('id', $filiale->id);
-                    })->oldest('quando')->get();
-                    
-        $chis = \App\Promemoria::whereHas('pratica.cliente.filiale', function($query) use ($filiale) {
-                        $query->where('id', $filiale->id);
-                    })->select('chi')->distinct()->pluck('chi')->all();
         
         $chis = array_combine($chis, $chis);
         
@@ -126,13 +140,21 @@ class PromemoriaController extends Controller
     
     public function filter(Request $request, $filiale_id)
     {
-        $filiale = \App\Filiale::findOrFail($filiale_id);
-        
-        $promemoria = \App\Promemoria::whereHas('pratica.cliente.filiale', function($query) use ($filiale) {
-                        $query->where('id', $filiale->id);
-                    })->filter($request->all())->latest('quando')->get();
+        if ($filiale_id != 0) {
+            $filiale = \App\Filiale::findOrFail($filiale_id);
+            
+            $promemoria = \App\Promemoria::whereHas('pratica.cliente.filiale', function($query) use ($filiale) {
+                            $query->where('id', $filiale->id);
+                        })->filter($request->all())->latest('quando')->get();
+        } else {
+            if($request->user()->cannot('visualizzare-agenda-estesa', null)) {
+                // L'utente non può vedere l'agenda estesa
+                abort(403);
+            }
+            $promemoria = \App\Promemoria::filter($request->all())->latest('quando')->get();
+        }
                     
-        return view('promemoria._tabella', compact('promemoria', 'filiale'));
+        return view('promemoria._tabella', compact('promemoria'));
     }
     
     public function update(Request $request, $cliente_id, $pratica_id, $promemoria_id)

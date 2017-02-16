@@ -1,6 +1,6 @@
 @if (count($promemoria) > 0)
     @foreach ($promemoria as $p)
-        <tr>
+        <tr class='row-selectable'>
             <td class="table-text col-md-2"><p data-fieldName="chi">{{ $p->chi }}</p></td>
             <td class="table-text col-md-2"><p data-fieldName="quando">{{ date_diff_days($p->quando) }}</p></td>
             <td class="table-text col-md-5"><p data-fieldName="cosa">{{ $p->cosa }}</p></td>

@@ -6,6 +6,9 @@
             <span class="caret"></span>
         </button>
         <ul class="dropdown-menu">
+            @if (isset($mostraOpzioneTutte))
+                <li><a href="{{ url_filiale(URL::current(), $mostraOpzioneTutte) }}">Tutte le filiali</a></li>
+            @endif
             @foreach ($filiali as $f)
                 <li><a href="{{ url_filiale(URL::current(), $f) }}">{{ $f->nome }}</a></li>
             @endforeach

@@ -1,6 +1,6 @@
 @if (count($clienti) > 0)
     <p class="pull-right">{{ count($clienti) }} risultati.</p>
-    <table class="table table-hover table-striped table-filterable">
+    <table class="table table-hover table-striped">
         <thead>
             @for ($i = 0; $i < 5; $i++)
                 <th>{{ $queryFields[$requestedFields[$i]]['display'] }}</th>

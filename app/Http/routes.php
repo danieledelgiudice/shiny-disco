@@ -89,6 +89,7 @@ Route::get( '/filiali/{filiale}/pannello/liquidato_omnia',                      
 Route::get( '/filiali/{filiale}/pannello/importo_sospeso',                      'PannelloFilialeController@importoSospeso');
 Route::get( '/filiali/{filiale}/pannello/parcella_presunta',                    'PannelloFilialeController@parcellaPresunta');
 Route::get( '/filiali/{filiale}/pannello/onorari',                              'PannelloFilialeController@onorari');
+Route::get( '/filiali/{filiale}/pannello/sospesi_medici',                       'PannelloFilialeController@sospesiMedici');
 
 
 

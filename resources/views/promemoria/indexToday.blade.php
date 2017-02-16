@@ -10,7 +10,7 @@
                 <div class="pull-left">
                 </div>
                 <div class="pull-right">
-                    @include ('common._dropdown_selezione_filiale')
+                    @include ('common._dropdown_selezione_filiale', ['mostraOpzioneTutte' => '0'])
                 </div>
             </div>
         </div>
@@ -19,7 +19,7 @@
             <div class="panel panel-default">
                 <!-- Lista promemoria da completare -->
                 <div class="panel-body">
-                    <table class="table table-hover table-striped">
+                    <table class="table table-striped {{ $da_confermare ? '' : 'table-selectable' }}">
                         <thead>
                             {{ Form::open(['action' => ['PromemoriaController@filter', 'filiale' => $filiale], 'class' => 'form-horizontal', 'id' => 'queryForm']) }}
                             <th class="col-md-2">
@@ -39,7 +39,7 @@
                             <th class="col-md-5"><p style="margin-bottom: 32px">Cosa</p></th>
                             <th class="col-md-1">&nbsp;</th>
                             <th class="col-md-1">
-                                <a href="{{ action('PromemoriaController@indexToday', ['filiale' => $filiale]) }}" class="btn btn-default">
+                                <a href="{{ Request::url() }}" class="btn btn-default">
                                    <i class="fa fa-times fa-fw"></i> 
                                 </a>
                             </th>
@@ -54,6 +54,22 @@
                             @include('promemoria._tabella')
                         </tbody>
                     </table>
+                    
+                    @if (!$da_confermare)
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <div class="col-md-2 col-md-offset-8">
+                                    <div class="input-group date">
+                                        {!! Form::text('spostaPromemoriaQuando', null, ['class' => 'form-control date-control', 'required' => 'required', 'id' => 'spostaPromemoriaQuando']) !!}
+                                        <span class="input-group-addon"><i class="fa fa-fw fa-calendar"></i></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <button id="spostaPromemoriaBtn" class="btn btn-primary">Sposta selezione</button>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                 </div>
             </div>
             

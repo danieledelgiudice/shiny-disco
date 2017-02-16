@@ -14,17 +14,30 @@
                 <th>Cosa</th>
                 @can('modificare-agenda', $pratica)
                     <th>&nbsp;</th>
+                    <th>&nbsp;</th>
                 @endcan
             </thead>
             <tbody>
                 @foreach ($promemoria as $p)
                     <tr>
-                        <td class="table-text col-md-2"><div>{{ $p->chi }}</div></td>
-                        <td class="table-text col-md-2"><div>{{ date_diff_days($p->quando) }}</div></td>
-                        <td class="table-text col-md-6"><div>{{ $p->cosa }}</div></td>
+                        <td class="table-text col-md-2"><p data-fieldName="chi">{{ $p->chi }}</p></td>
+                        <td class="table-text col-md-2"><p data-fieldName="quando">{{ date_diff_days($p->quando) }}</p></td>
+                        <td class="table-text col-md-6"><p data-fieldName="cosa">{{ $p->cosa }}</p></td>
                         
                         @can('modificare-agenda', $pratica)
-                            <td class="col-md-2">
+                            <td class="table-text col-md-1">
+                                {{ Form::open(['action' => ['PromemoriaController@update',
+                                    'cliente' => $p->pratica->cliente, 'pratica' => $p->pratica, 'promemoria' => $p],
+                                    'id' => "promemoria{$p->id}UpdateForm", 'method' => 'put']) }}
+                                    <input type='hidden' name='chi' value=''>
+                                    <input type='hidden' name='quando' value=''>
+                                    <input type='hidden' name='cosa' value=''>
+                                {{ Form::close() }}
+                                <button class="btn btn-primary promemoriaUpdateBtn" data-toggle="modal" data-target="#promemoriaUpdateModal" data-promemoria="{{$p->id}}">
+                                    <i class="fa fa-fw fa-pencil"></i>
+                                </button>
+                            </td>
+                            <td class="col-md-1">
                                 {!! Form::open(['action' => ['PromemoriaController@destroy', 'cliente' => $p->pratica->cliente,
                                     'pratica' => $p->pratica, 'promemoria' => $p], 'method' => 'delete']) !!}
                                     <button type="submit" class="btn btn-success">
@@ -49,5 +62,8 @@
             @endcan
         </div>
     </div>
+    <script>
+        var promemoria = {!! json_encode($promemoria->keyBy('id')) !!};
+    </script>
 </div>
 

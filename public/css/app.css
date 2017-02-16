@@ -32,11 +32,6 @@ table .btn {
     margin-left: 10px;
 }
 
-.table-filterable td[data-field],
-.table-filterable td[data-field-select] {
-    cursor: pointer;
-}
-
 
 /* Dettagli cliente */
 #aggiungi-pratica-button,
@@ -81,4 +76,12 @@ table .btn {
 
 .text-newlines {
     white-space: pre-line;
+}
+
+.table>tbody>tr.row-selectable {
+    cursor: pointer;
+}
+
+.table>tbody>tr.row-selectable.selected {
+    background-color: #d9edf7;
 }

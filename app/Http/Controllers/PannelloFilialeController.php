@@ -110,4 +110,27 @@ class PannelloFilialeController extends Controller
         
         return view('pannello_filiale.onorari', compact('filiale', 'filiali', 'pratiche'));
     }
+    
+    public function sospesiMedici(Request $request, $filiale_id)
+    {
+        $filiale = \App\Filiale::findOrFail($filiale_id);
+        
+        if($request->user()->cannot('visualizzare-pannello-filiale', $filiale)) {
+            // L'utente non puo' visualizzare il pannello filiale di altre filiali
+            abort(403);
+        }
+        
+        $prestazioni = \App\PrestazioneMedica::whereHas('pratica.cliente', function($query) use ($filiale_id) {
+            $query->where('filiale_id', $filiale_id);
+        })->whereHas('pratica', function($query) {
+            $query->whereIn('stato_pratica', [0, 3]); //stato pratica: aperte o ss. legale
+        })
+          ->where('percentuale', '>', 0) // in convenzione
+          ->where('pagato', '=', false)->get(); // non pagate
+        
+        
+        $filiali = \App\Filiale::all();
+
+        return view('pannello_filiale.sospesi_medici', compact('filiale', 'filiali', 'prestazioni'));
+    }
 }

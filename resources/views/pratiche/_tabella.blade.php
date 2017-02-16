@@ -1,6 +1,6 @@
 @if (count($pratiche) > 0)
     <p class="pull-right">{{ count($pratiche) }} risultati.</p>
-    <table class="table table-hover table-striped table-filterable">
+    <table class="table table-hover table-striped">
         <thead>
             @for ($i = 0; $i < 6; $i++)
                 @if ($requestedFields[$i])

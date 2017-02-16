@@ -20,7 +20,10 @@ function date_diff_days($value) {
 }
 
 function url_filiale($value, $f) {
-    $id = $f->id;
+    if ($f instanceof \App\Filiale)
+        $id = $f->id;
+    else
+        $id = $f;
     $pattern = '#/filiali/(\d+)/#i';
     $replacement = "/filiali/$id/";
     return preg_replace($pattern, $replacement, $value);

@@ -18,6 +18,8 @@
         'message' => 'Sei sicuro di voler eliminare la prestazione medica? Questa operazione non potrà essere annullata.'])
     
     @include('promemoria._modal_create')
+    
+    @include('promemoria._modal_update')
 
     <div class="container">
         <!-- Mostra pulsanti navigazione -->
