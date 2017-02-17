@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" />
     <link href="{{ URL::asset('css/lib/selectize.bootstrap3.css') }}" rel="stylesheet">
-    
+
     <link href="{{ URL::asset('css/app.css') }}" rel="stylesheet">
 
 
@@ -47,7 +47,7 @@
                 </button>
 
                 <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ secure_url('/') }}">
+                <a class="navbar-brand" href="{{ url('/') }}">
                     Elys Management
                 </a>
             </div>
@@ -57,7 +57,7 @@
                 <ul class="nav navbar-nav">
                     @if (Auth::user())
                         <li><a href="{{ action('PromemoriaController@indexToday', ['filiale' => Auth::user()->filiale]) }}">Agenda</a></li>
-                        
+
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Clienti <span class="caret"></span></a>
                             <ul class="dropdown-menu">
@@ -65,13 +65,13 @@
                                 <li><a href="{{ action('ClientiController@create') }}"><i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Aggiungi cliente</a></li>
                             </ul>
                         </li>
-                        
-                        
+
+
                         <li><a href="{{ action('PraticheController@index') }}">Pratiche</a></li>
                         <li><a href="{{ action('DocumentiController@create') }}">Carica documenti</a></li>
                     @endif
                 </ul>
-                
+
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
                     @if (Auth::guest())
@@ -86,7 +86,7 @@
                                 &nbsp;
                                 <span class="caret"></span>
                             </a>
-                            
+
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="{{ action('PannelloFilialeController@home', ['filiale' => Auth::user()->filiale]) }}"><i class="fa fa-btn fa-window-maximize"></i>Pannello filiale</a></li>
                                 @if (Auth::user()->isAdmin())
@@ -95,7 +95,7 @@
                                     <li><a href="{{ action('PromemoriaController@indexAll', ['filiale' => Auth::user()->filiale]) }}"><i class="fa fa-btn fa-gear"></i>Elenco promemoria</a></li>
                                 @endif
                                 <li role="separator" class="divider"></li>
-                                <li><a href="{{ secure_url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
                         </li>
                     @endif
@@ -103,9 +103,9 @@
             </div>
         </div>
     </nav>
-    
+
     @include('common._flash_message')
-    
+
     @yield('content')
 
     <!-- JavaScripts -->
@@ -117,7 +117,7 @@
     <script type="text/javascript" src="http://spin.js.org/spin.min.js"></script>
     <script type="text/javascript" src="http://spin.js.org/jquery.spin.js"></script>
     <script type="text/javascript" src="{{ URL::asset('js/lib/selectize.min.js') }}"></script>
-    
+
     <script type="text/javascript" src="{{ URL::asset('js/app.js') }}"></script>
 </body>
 </html>

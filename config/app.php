@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'https://shiny-disco-dunox1.c9users.io'),
+    'url' => env('APP_URL', 'http://www.elysinfortunistica.com/gestionale'),
 
     /*
     |--------------------------------------------------------------------------
@@ -155,8 +155,8 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        
-        
+
+
         // Custom Providers
         Collective\Html\HtmlServiceProvider::class,
     ],
@@ -204,7 +204,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        
+
         // Custom Aliases
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,

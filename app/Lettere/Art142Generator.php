@@ -6,13 +6,13 @@ class Art142Generator
 {
     const REQUIRES = '0';
     const NAME = "Articolo 142";
-    
+
     public function generate($data)
     {
         $pratica = $data['pratica'];
         $cliente = $data['cliente'];
         $professione = $data['professione'];
-        
+
         $pratica['data_sinistro'] = format_date(\Carbon\Carbon::parse($pratica['data_sinistro']));
         $cliente['data_nascita'] = format_date(\Carbon\Carbon::parse($cliente['data_nascita']));
 
@@ -34,24 +34,23 @@ Di: avere diritto a prestazioni di parte di Istituti che gestiscono assicurazion
         $f->SetTitle($this::NAME);
         $f->SetMargins(20, 20);
         $f->AddPage();
-        
+
         $f->SetFont('Times', '', 11);
         $f->Write(7, $template);
-        
+
         $f->SetY($f->GetY() + 20);
         $f->Write(7, "Altro");
         $f->Line($f->GetX() + 4, $f->GetY() + 6, 180, $f->GetY() + 6);
-        
+
         $f->SetY($f->GetY() + 10);
         $f->Write(7, "Luogo e Data");
         $f->Line($f->GetX() + 4, $f->GetY() + 6, 100, $f->GetY() + 6);
-        
+
         $f->SetY($f->GetY() + 10);
         $f->Write(7, "Firma");
         $f->Line($f->GetX() + 4, $f->GetY() + 6, 100, $f->GetY() + 6);
-        
-        $f->Output();
-        
-        return $template;
+
+        ob_get_clean();
+        return $f->Output($this::NAME.'.pdf', 'I');
     }
 }
