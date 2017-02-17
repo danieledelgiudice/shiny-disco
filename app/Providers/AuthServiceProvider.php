@@ -31,11 +31,11 @@ class AuthServiceProvider extends ServiceProvider
                 return true;
             }
         });
-        
+
         $gate->define('visualizzare-pratica', function ($user, $pratica) {
             return $user->filiale->id === $pratica->cliente->filiale->id;
         });
-        
+
         $gate->define('creare-pratica', function ($user, $cliente) {
             return $user->filiale->id === $cliente->filiale->id;
         });
@@ -43,19 +43,19 @@ class AuthServiceProvider extends ServiceProvider
         $gate->define('modificare-pratica', function ($user, $pratica) {
             return $user->filiale->id === $pratica->cliente->filiale->id;
         });
-        
+
         $gate->define('eliminare-pratica', function ($user, $pratica) {
             return $user->filiale->id === $pratica->cliente->filiale->id;
         });
-        
-        
-        
-        
-        
+
+
+
+
+
         $gate->define('visualizzare-cliente', function ($user, $cliente) {
             return $user->filiale->id === $cliente->filiale->id;
         });
-        
+
         $gate->define('modificare-cliente', function ($user, $cliente) {
             return $user->filiale->id === $cliente->filiale->id;
         });
@@ -63,33 +63,37 @@ class AuthServiceProvider extends ServiceProvider
         $gate->define('eliminare-cliente', function ($user, $cliente) {
             return $user->filiale->id === $cliente->filiale->id;
         });
-        
-        
 
 
-        
-        $gate->define('modificare-agenda', function ($user, $filiale) {
+
+
+
+        $gate->define('modificare-agenda', function ($user, $pratica) {
             return false;
         });
-        
+
+        $gate->define('completare-promemoria', function ($user, $pratica) {
+            return $user->filiale->id === $pratica->filiale->id;
+        });
+
         $gate->define('visualizzare-agenda', function ($user, $filiale) {
             return $user->filiale->id === $filiale->id;
         });
-        
+
         $gate->define('visualizzare-agenda-estesa', function ($user, $filiale) {
             return false;
         });
-        
+
         $gate->define('visualizzare-pannello-filiale', function ($user, $filiale) {
             return $user->filiale->id === $filiale->id;
         });
-        
-        
+
+
         $gate->define('generare-lettera', function ($user, $pratica) {
             return $user->canGenerateLetters() && ($user->filiale->id === $pratica->cliente->filiale->id);
         });
-        
-        
+
+
         $gate->define('scegliere-logo', function ($user) {
             return $user->filiale->id === 0;
         });
