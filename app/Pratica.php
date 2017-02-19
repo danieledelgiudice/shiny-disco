@@ -225,7 +225,9 @@ class Pratica extends Model
         'data_chiusura',
         'data_sospeso',
         'data_sinistro',
-        'mezzo_liquidato'
+        'mezzo_liquidato',
+        'data_prossima_udienza',
+        'data_prescrizione',
     ];
     
     

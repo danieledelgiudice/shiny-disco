@@ -302,6 +302,26 @@ class PraticaFilter extends ModelFilter
     }
     
     
+    public function dataPrescrizione($value)
+    {
+        if (!$value[1]) return $this;
+        
+        $op = ($value[0] == 'lt') ? '<=' : '>=';
+        $element = \Carbon\Carbon::createFromFormat('d/m/Y', $value[1]);
+        
+        return $this->where('data_prescrizione', $op, $element);
+    }
+    
+    public function dataProssimaUdienza($value)
+    {
+        if (!$value[1]) return $this;
+        
+        $op = ($value[0] == 'lt') ? '<=' : '>=';
+        $element = \Carbon\Carbon::createFromFormat('d/m/Y', $value[1]);
+        
+        return $this->where('data_prossima_udienza', $op, $element);
+    }
+    
     ///////////////////////////////////////
     
     

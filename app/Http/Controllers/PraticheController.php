@@ -61,6 +61,8 @@ class PraticheController extends Controller
             'assicurazione_responsabile'     => ['display'   => 'Assicurazione responsabile',          'type'        => 'string',      ],
             'assicurazione_risarcente'       => ['display'   => 'Assicurazione risarcente',            'type'        => 'string',      ],
             'numero_sinistro'                => ['display'   => 'Numero sinistro',                     'type'        => 'string',      ],
+            'data_prossima_udienza'          => ['display'   => 'Data prossima udienza',               'type'        => 'date',        ],
+            'data_prescrizione'              => ['display'   => 'Data prescrizione',                   'type'        => 'date',        ],
             
             //////////////////////////////////////////
             
@@ -439,6 +441,8 @@ class PraticheController extends Controller
             'assicurazione_risarcente'          => 'max:255',
             'assicurazione_responsabile'        => 'max:255',
             'numero_sinistro'                   => 'max:255',
+            'data_prossima_udienza'             => 'date_format:d/m/Y',
+            'data_prescrizione'                 => 'date_format:d/m/Y',
             
         ]);
     }
