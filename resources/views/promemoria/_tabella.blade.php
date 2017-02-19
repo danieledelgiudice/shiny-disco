@@ -5,16 +5,18 @@
             <td class="table-text col-md-2"><p data-fieldName="quando">{{ date_diff_days($p->quando) }}</p></td>
             <td class="table-text col-md-5"><p data-fieldName="cosa">{{ $p->cosa }}</p></td>
             <td class="table-text col-md-1">
-                {{ Form::open(['action' => ['PromemoriaController@update',
-                    'cliente' => $p->pratica->cliente, 'pratica' => $p->pratica, 'promemoria' => $p],
-                    'id' => "promemoria{$p->id}UpdateForm", 'method' => 'put']) }}
-                    <input type='hidden' name='chi' value=''>
-                    <input type='hidden' name='quando' value=''>
-                    <input type='hidden' name='cosa' value=''>
-                {{ Form::close() }}
-                <button class="btn btn-primary promemoriaUpdateBtn" data-toggle="modal" data-target="#promemoriaUpdateModal" data-promemoria="{{$p->id}}">
-                    <i class="fa fa-fw fa-pencil"></i>
-                </button>
+                @can('modificare-agenda')
+                    {{ Form::open(['action' => ['PromemoriaController@update',
+                        'cliente' => $p->pratica->cliente, 'pratica' => $p->pratica, 'promemoria' => $p],
+                        'id' => "promemoria{$p->id}UpdateForm", 'method' => 'put']) }}
+                        <input type='hidden' name='chi' value=''>
+                        <input type='hidden' name='quando' value=''>
+                        <input type='hidden' name='cosa' value=''>
+                    {{ Form::close() }}
+                    <button class="btn btn-primary promemoriaUpdateBtn" data-toggle="modal" data-target="#promemoriaUpdateModal" data-promemoria="{{$p->id}}">
+                        <i class="fa fa-fw fa-pencil"></i>
+                    </button>
+                @endcan
             </td>
             <td class="col-md-1">
                 <a class="btn btn-default" href="{{ action('PraticheController@show', 
@@ -23,12 +25,14 @@
                 </a>
             </td>
             <td class="col-md-1">
-                {!! Form::open(['action' => ['PromemoriaController@destroy', 'cliente' => $p->pratica->cliente,
-                    'pratica' => $p->pratica, 'promemoria' => $p], 'method' => 'delete']) !!}
-                    <button type="submit" class="btn btn-success">
-                        <i class="fa fa-fw fa-check"></i>
-                    </button>
-                {!! Form::close() !!}
+                @can('completare-promemoria', $p->pratica)
+                    {!! Form::open(['action' => ['PromemoriaController@destroy', 'cliente' => $p->pratica->cliente,
+                        'pratica' => $p->pratica, 'promemoria' => $p], 'method' => 'delete']) !!}
+                        <button type="submit" class="btn btn-success">
+                            <i class="fa fa-fw fa-check"></i>
+                        </button>
+                    {!! Form::close() !!}
+                @endcan
             </td>
         </tr>
     @endforeach

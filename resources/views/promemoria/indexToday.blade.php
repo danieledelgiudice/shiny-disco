@@ -21,55 +21,69 @@
                 <div class="panel-body">
                     <table class="table table-striped {{ $da_confermare ? '' : 'table-selectable' }}">
                         <thead>
-                            {{ Form::open(['action' => ['PromemoriaController@filter', 'filiale' => $filiale], 'class' => 'form-horizontal', 'id' => 'queryForm']) }}
-                            <th class="col-md-2">
-                                Chi
-                                <br>
-                                <!--{{ Form::text('chi', null, [ 'class' => 'form-control agenda-filter']) }}-->
-                                {{ Form::select('chi', $chis, null, ['class' => 'form-control agenda-filter', 'data-selecttype' => 'chi', 'placeholder' => '']) }}
-                            </th>
-                            <th class="col-md-2">
-                                Quando
-                                <br>
-                                <div class="input-group date">
-                                    {!! Form::text('quando', null, ['class' => 'form-control date-control', 'required' => 'required']) !!}
-                                    <span class="input-group-addon"><i class="fa fa-fw fa-calendar"></i></span>
-                                </div>
-                            </th>
-                            <th class="col-md-5"><p style="margin-bottom: 32px">Cosa</p></th>
-                            <th class="col-md-1">&nbsp;</th>
-                            <th class="col-md-1">
-                                <a href="{{ Request::url() }}" class="btn btn-default">
-                                   <i class="fa fa-times fa-fw"></i> 
-                                </a>
-                            </th>
-                            <th class="col-md-1">
-                                <button class="btn btn-primary" id="queryBtn">
-                                   <i class="fa fa-search fa-fw"></i> 
-                                </button>
-                            </th>
-                            {{ Form::close() }}
+                            @if ($da_confermare)
+                                <th class="col-md-2">
+                                    Chi
+                                </th>
+                                <th class="col-md-2">
+                                    Quando
+                                </th>
+                                <th class="col-md-5">Cosa</th>
+                                <th class="col-md-1">&nbsp;</th>
+                                <th class="col-md-1"></th>
+                                <th class="col-md-1"></th>
+                            @else
+                                {{ Form::open(['action' => ['PromemoriaController@filter', 'filiale' => $filiale], 'class' => 'form-horizontal', 'id' => 'queryForm']) }}
+                                <th class="col-md-2">
+                                    Chi
+                                    <br>
+                                    <!--{{ Form::text('chi', null, [ 'class' => 'form-control agenda-filter']) }}-->
+                                    {{ Form::select('chi', $chis, null, ['class' => 'form-control agenda-filter', 'data-selecttype' => 'chi', 'placeholder' => '']) }}
+                                </th>
+                                <th class="col-md-2">
+                                    Quando
+                                    <br>
+                                    <div class="input-group date">
+                                        {!! Form::text('quando', null, ['class' => 'form-control date-control', 'required' => 'required']) !!}
+                                        <span class="input-group-addon"><i class="fa fa-fw fa-calendar"></i></span>
+                                    </div>
+                                </th>
+                                <th class="col-md-5"><p style="margin-bottom: 32px">Cosa</p></th>
+                                <th class="col-md-1">&nbsp;</th>
+                                <th class="col-md-1">
+                                    <a href="{{ Request::url() }}" class="btn btn-default">
+                                       <i class="fa fa-times fa-fw"></i> 
+                                    </a>
+                                </th>
+                                <th class="col-md-1">
+                                    <button class="btn btn-primary" id="queryBtn">
+                                       <i class="fa fa-search fa-fw"></i> 
+                                    </button>
+                                </th>
+                                {{ Form::close() }}
+                            @endif
                         </thead>
                         <tbody id="queryResult">
                             @include('promemoria._tabella')
                         </tbody>
                     </table>
-                    
-                    @if (!$da_confermare)
-                        <div class="form-horizontal">
-                            <div class="form-group">
-                                <div class="col-md-2 col-md-offset-8">
-                                    <div class="input-group date">
-                                        {!! Form::text('spostaPromemoriaQuando', null, ['class' => 'form-control date-control', 'required' => 'required', 'id' => 'spostaPromemoriaQuando']) !!}
-                                        <span class="input-group-addon"><i class="fa fa-fw fa-calendar"></i></span>
+                    @can('modificare-agenda', null)
+                        @if (!$da_confermare)
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <div class="col-md-2 col-md-offset-8">
+                                        <div class="input-group date">
+                                            {!! Form::text('spostaPromemoriaQuando', null, ['class' => 'form-control date-control', 'required' => 'required', 'id' => 'spostaPromemoriaQuando']) !!}
+                                            <span class="input-group-addon"><i class="fa fa-fw fa-calendar"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button id="spostaPromemoriaBtn" class="btn btn-primary">Sposta selezione</button>
                                     </div>
                                 </div>
-                                <div class="col-md-2">
-                                    <button id="spostaPromemoriaBtn" class="btn btn-primary">Sposta selezione</button>
-                                </div>
                             </div>
-                        </div>
-                    @endif
+                        @endif
+                    @endcan
                 </div>
             </div>
             

@@ -14,6 +14,8 @@
                 <th>Cosa</th>
                 @can('modificare-agenda', $pratica)
                     <th>&nbsp;</th>
+                @endcan
+                @can('completare-promemoria', $pratica)
                     <th>&nbsp;</th>
                 @endcan
             </thead>
@@ -37,6 +39,8 @@
                                     <i class="fa fa-fw fa-pencil"></i>
                                 </button>
                             </td>
+                        @endcan
+                        @can('completare-promemoria', $pratica)
                             <td class="col-md-1">
                                 {!! Form::open(['action' => ['PromemoriaController@destroy', 'cliente' => $p->pratica->cliente,
                                     'pratica' => $p->pratica, 'promemoria' => $p], 'method' => 'delete']) !!}
