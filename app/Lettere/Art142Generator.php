@@ -15,8 +15,10 @@ class Art142Generator
 
         $pratica['data_sinistro'] = format_date(\Carbon\Carbon::parse($pratica['data_sinistro']));
         $cliente['data_nascita'] = format_date(\Carbon\Carbon::parse($cliente['data_nascita']));
+        
+        $reddito = format_money($cliente['reddito']);
 
-        $template = "Con riferimento al sinistro accaduto il {$pratica['data_sinistro']} in località {$pratica['luogo_sinistro']} il sottoscritto {$cliente['cognome']} {$cliente['nome']}, nato il {$cliente['data_nascita']} a {$cliente['citta_nascita']} residente a {$cliente['citta_residenza']} ({$cliente['provincia']}) in {$cliente['via']}, Codice Fiscale {$cliente['codice_fiscale']}, professione {$cliente['professione']['nome']}
+        $template = "Con riferimento al sinistro accaduto il {$pratica['data_sinistro']} in località {$pratica['luogo_sinistro']} il sottoscritto {$cliente['cognome']} {$cliente['nome']}, nato il {$cliente['data_nascita']} a {$cliente['citta_nascita']} residente a {$cliente['citta_residenza']} ({$cliente['provincia']}) in {$cliente['via']}, Codice Fiscale {$cliente['codice_fiscale']}, professione {$cliente['professione']['nome']}, reddito {$reddito} 
 ai sensi e agli effetti dell’art. 142 del DLgs 7 settembre 2005, n. 209, Codice delle assicurazioni private, consapevole della responsabilità, anche penale, cui va incontro in caso di dichiarazioni non veritiere
 
 D I C H I A R A
