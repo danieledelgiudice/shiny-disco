@@ -7,6 +7,7 @@
         <table class="table table-hover table-striped">
             <thead>
                 <th>Numero pratica</th>
+                <th class="hidden-xs">Cliente</th>
                 <th class="hidden-xs">Medico</th>
                 <th class="hidden-xs">Importo</th>
                 <th class="hidden-xs">%</th>
@@ -19,6 +20,7 @@
                     @foreach ($prestazioni as $p)
                         <tr>
                             <td class="table-text"><div>{{ $p->pratica->numero_pratica }}</div></td>
+                            <td class="table-text"><div>{{ $p->pratica->cliente->cognome }}</div></td>
                             <td class="table-text"><div>{{ $p->nome_medico }}</div></td>
                             <td class="table-text"><div>{{ format_money($p->costo) }}</div></td>
                             <td class="table-text"><div>{{ $p->percentuale . '%'}}</div></td>
@@ -34,6 +36,7 @@
                     
                     <tr class="orange row-subtotal">
                         <td>Totale</td>
+                        <td></td>
                         <td></td>
                         <td>{{ format_money($prestazioni->sum('costo')) }}</td>
                         <td></td>

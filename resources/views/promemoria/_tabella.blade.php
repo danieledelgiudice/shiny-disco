@@ -3,7 +3,12 @@
         <tr class='row-selectable'>
             <td class="table-text col-md-2"><p data-fieldName="chi">{{ $p->chi }}</p></td>
             <td class="table-text col-md-2"><p data-fieldName="quando">{{ date_diff_days($p->quando) }}</p></td>
-            <td class="table-text col-md-5"><p data-fieldName="cosa">{{ $p->cosa }}</p></td>
+            <td class="table-text col-md-5">
+                <p data-fieldName="cosa">
+                    {{ $p->cosa }} 
+                    <strong>{{ "({$p->pratica->cliente->cognome} {$p->pratica->cliente->nome})" }}</strong>
+                </p>
+            </td>
             <td class="table-text col-md-1">
                 @can('modificare-agenda')
                     {{ Form::open(['action' => ['PromemoriaController@update',

@@ -31,7 +31,13 @@ class PromemoriaController extends Controller
             $promemoria = \App\Promemoria::where('quando', \Carbon\Carbon::today())
                         ->whereHas('pratica.cliente.filiale', function($query) use ($filiale) {
                             $query->where('id', $filiale->id);
-                        })->oldest('quando')->get();
+                        })->oldest('quando');
+            
+            if($request->user()->cannot('visualizzare-agenda-estesa', null)) {
+                $promemoria = $promemoria->where('chi', '<>', 'Elisa');
+            }            
+                
+            $promemoria = $promemoria->get();
 
             $chis = \App\Promemoria::whereHas('pratica.cliente.filiale', function($query) use ($filiale) {
                 $query->where('id', $filiale->id);
@@ -123,6 +129,11 @@ class PromemoriaController extends Controller
             // L'utente non può completare promemoria di pratiche di altre filiali
             abort(403);
         }
+        
+        if(!$request->user()->isAdmin() && $promemoria->chi === 'Elisa') {
+            // L'utente non può completare promemoria di Elisa
+            abort(403);
+        }
 
         $promemoria->delete();
 
@@ -145,7 +156,15 @@ class PromemoriaController extends Controller
 
             $promemoria = \App\Promemoria::whereHas('pratica.cliente.filiale', function($query) use ($filiale) {
                             $query->where('id', $filiale->id);
-                        })->filter($request->all())->latest('quando')->get();
+                        })->filter($request->all())->latest('quando');
+            
+            if($request->user()->cannot('visualizzare-agenda-estesa', null)) {
+                // L'utente non può vedere l'agenda estesa
+                $promemoria = $promemoria->where('chi', '<>', 'Elisa');
+            }
+            
+            $promemoria = $promemoria->get();
+            
         } else {
             if($request->user()->cannot('visualizzare-agenda-estesa', null)) {
                 // L'utente non può vedere l'agenda estesa

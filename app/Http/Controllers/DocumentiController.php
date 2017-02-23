@@ -41,13 +41,27 @@ class DocumentiController extends Controller
                                        ->header('Content-Disposition', 'inline; filename="'.$documento->nome_file_originale.'"');
     }
     
-    public function create(Request $request)
+    public function create(Request $request, $filiale_id)
     {
-        return view('documenti.create');
+        $filiale = \App\Filiale::findOrFail($filiale_id);
+        if ($request->user()->cannot('caricare-documenti', $filiale)) {
+            // L'utente non ha il permesso di caricare documenti su altre filiali
+            abort(403);
+        }
+        
+        $filiali = \App\Filiale::all();
+        
+        return view('documenti.create', compact('filiale', 'filiali'));
     }
     
-    public function store(Request $request)
+    public function store(Request $request, $filiale_id)
     {
+        $filiale = \App\Filiale::findOrFail($filiale_id);
+        if ($request->user()->cannot('caricare-documenti', $filiale)) {
+            // L'utente non ha il permesso di caricare documenti su altre filiali
+            abort(403);
+        }
+        
         $file = $request->documento;
         
         if(!($file && $file->isValid())) {
@@ -66,10 +80,8 @@ class DocumentiController extends Controller
         $numero_pratica = $matches[1];
         $descrizione = $matches[2];
         
-        $pratica = \App\Pratica::where('numero_pratica', '=', $numero_pratica)->first();
-        
-        $pratiche = \App\Pratica::whereHas('cliente', function($query) use ($request) {
-            $query->where('filiale_id', $request->user()->filiale->id);
+        $pratiche = \App\Pratica::whereHas('cliente', function($query) use ($filiale) {
+            $query->where('filiale_id', $filiale->id);
         })->where('numero_pratica', $numero_pratica)->get();
         
         if(count($pratiche) === 0) {

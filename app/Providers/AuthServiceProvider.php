@@ -97,5 +97,11 @@ class AuthServiceProvider extends ServiceProvider
         $gate->define('scegliere-logo', function ($user) {
             return $user->filiale->id === 0;
         });
+        
+        
+        
+        $gate->define('caricare-documenti', function ($user, $filiale) {
+            return $user->filiale->id === $filiale->id;
+        });
     }
 }

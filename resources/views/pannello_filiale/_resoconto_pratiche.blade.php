@@ -4,6 +4,7 @@
         <table class="table table-hover table-striped">
             <thead>
                 <th>Numero pratica</th>
+                <th>Cliente</th>
                 <th class="hidden-xs">Data apertura</th>
                 <th class="hidden-xs">Stato pratica</th>
                 <th class="hidden-xs">Tipo pratica</th>
@@ -15,6 +16,7 @@
                     @foreach ($pratiche as $p)
                         <tr>
                             <td class="table-text"><div>{{ $p->numero_pratica }}</div></td>
+                            <td class="table-text"><div>{{ $p->cliente->cognome }}</div></td>
                             <td class="table-text"><div>{{ format_date($p->data_apertura) }}</div></td>
                             <td class="table-text"><div>{{ isset(\App\Pratica::$enumStatoPratica[$p->stato_pratica]) ? \App\Pratica::$enumStatoPratica[$p->stato_pratica] : '' }}</div></td>
                             <td class="table-text"><div>{{ isset(\App\Pratica::$enumTipoPratica[$p->tipo_pratica]) ? \App\Pratica::$enumTipoPratica[$p->tipo_pratica] : '' }}</div></td>
@@ -29,6 +31,7 @@
                     
                     <tr class="orange row-subtotal">
                         <td>Totale</td>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>

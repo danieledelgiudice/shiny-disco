@@ -68,7 +68,7 @@
 
 
                         <li><a href="{{ action('PraticheController@index') }}">Pratiche</a></li>
-                        <li><a href="{{ action('DocumentiController@create') }}">Carica documenti</a></li>
+                        <li><a href="{{ action('DocumentiController@create', ['filiale' => Auth::user()->filiale->id]) }}">Carica documenti</a></li>
                     @endif
                 </ul>
 

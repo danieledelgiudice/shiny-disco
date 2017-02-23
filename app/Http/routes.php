@@ -36,9 +36,9 @@ Route::delete( '/clienti/{cliente}/pratiche/{pratica}',                         
 
 
 
-Route::get( '/documenti/new',                                                   'DocumentiController@create');
+Route::get( '/filiali/{filiale}/documenti/new',                                 'DocumentiController@create');
 Route::get( '/clienti/{cliente}/pratiche/{pratica}/documenti/{documento}',      'DocumentiController@show');
-Route::post('/documenti',                                                       'DocumentiController@store');
+Route::post('/filiali/{filiale}/documenti',                                     'DocumentiController@store');
 Route::delete('/clienti/{cliente}/pratiche/{pratica}/documenti/{documento}',    'DocumentiController@destroy');
 
 

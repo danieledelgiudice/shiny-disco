@@ -116,7 +116,15 @@ class PraticheController extends Controller
         
         $documenti = $pratica->documenti()->get();
         $assegni = $pratica->assegni()->oldest('data')->get();
-        $promemoria = $pratica->promemoria()->oldest('quando')->get();
+        $promemoria = $pratica->promemoria()->oldest('quando');
+        
+        if($request->user()->cannot('visualizzare-agenda-estesa', null)) {
+            // L'utente non può vedere l'agenda estesa
+            $promemoria = $promemoria->where('chi', '<>', 'Elisa');
+        }
+        
+        $promemoria = $promemoria->get();
+        
         $totale_assegni_consegnati = $pratica->assegni()->where('tipologia', 0)->sum('importo');
         $totale_assegni_restituiti = $pratica->assegni()->where('tipologia', 1)->sum('importo');
         
@@ -170,15 +178,7 @@ class PraticheController extends Controller
         if (count($pratiche_stesso_numero) > 0 && $pratiche_stesso_numero[0]->id != $pratica->id) {
             return redirect()->back()->withInput()->withErrors(['message' => 'Numero pratica già esistente per questa filiale.']);
         }
-        
-        $pratiche_stessa_registrazione = \App\Pratica::whereHas('cliente', function($query) use ($pratica) {
-                $query->where('filiale_id', $pratica->cliente->filiale->id);
-            })->where('numero_registrazione', $request->numero_registrazione)->get();
 
-        if (count($pratiche_stessa_registrazione) > 0 && $pratiche_stessa_registrazione[0]->id != $pratica->id) {
-            return redirect()->back()->withInput()->withErrors(['message' => 'Numero registrazione già esistente per questa filiale.']);
-        }
-        
         if (($request->onorari + 0) && ($request->parcella_presunta + 0)) {
             return redirect()->back()->withInput()->withErrors(['message' => 'I campi onorari e parcella presunta sono esclusivi.']);
         }
@@ -219,7 +219,6 @@ class PraticheController extends Controller
             })->get();
         $pratica->fill([
             'numero_pratica'                => $pratiche_filiale->max('numero_pratica') + 1,
-            'numero_registrazione'          => $pratiche_filiale->max('numero_registrazione') + 1,
             'data_apertura'                 => \Carbon\Carbon::today(),
         ]);
           
@@ -248,14 +247,6 @@ class PraticheController extends Controller
             return redirect()->back()->withInput()->withErrors(['message' => 'Numero pratica già esistente per questa filiale.']);
         }
         
-        $pratiche_stessa_registrazione = \App\Pratica::whereHas('cliente', function($query) use ($cliente) {
-                $query->where('filiale_id', $cliente->filiale->id);
-            })->where('numero_registrazione', $request->numero_registrazione)->get();
-
-        if (count($pratiche_stessa_registrazione) > 0) {
-            return redirect()->back()->withInput()->withErrors(['message' => 'Numero registrazione già esistente per questa filiale.']);
-        }
-        
         if ($request->crea_copia) {
             $pratiche_stesso_numero = \App\Pratica::whereHas('cliente', function($query) use ($cliente) {
                     $query->where('filiale_id', $cliente->filiale->id);
@@ -263,14 +254,6 @@ class PraticheController extends Controller
     
             if (count($pratiche_stesso_numero) > 0) {
                 return redirect()->back()->withInput()->withErrors(['message' => 'Numero pratica (per la copia) già esistente per questa filiale.']);
-            }
-            
-            $pratiche_stessa_registrazione = \App\Pratica::whereHas('cliente', function($query) use ($cliente) {
-                    $query->where('filiale_id', $cliente->filiale->id);
-                })->where('numero_registrazione', $request->numero_registrazione + 1)->get();
-    
-            if (count($pratiche_stessa_registrazione) > 0) {
-                return redirect()->back()->withInput()->withErrors(['message' => 'Numero registrazione (per la copia) già esistente per questa filiale.']);
             }
         }
         
