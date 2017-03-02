@@ -74,6 +74,12 @@
         <!-- Elenco prestazioni mediche pratica -->
         @include('prestazioni_mediche._elenco')
         
+        
+        @can('generare-fatture')
+            <!-- Elenco fatture -->
+            @include('fatture._elenco')
+        @endcan
+        
         <!-- Elenco promemoria pratica -->
         @include('promemoria._elenco')
     </div>

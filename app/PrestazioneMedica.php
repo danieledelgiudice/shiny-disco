@@ -32,6 +32,8 @@ class PrestazioneMedica extends Model
         'giorni',
         'costo',
         'pagato',
+        'sospeso',
+        'fattura',
         'percentuale',
     ];
 

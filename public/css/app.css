@@ -85,3 +85,7 @@ table .btn {
 .table>tbody>tr.row-selectable.selected {
     background-color: #d9edf7;
 }
+
+.table>tbody>tr.row-highlight {
+    background-color: #f3ff14;
+}

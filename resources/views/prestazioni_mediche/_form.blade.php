@@ -76,11 +76,29 @@
             
             <div class="form-group">
                 <!-- Pagato -->
-                <div class="col-md-4 col-md-offset-2">
+                <div class="col-md-3 col-md-offset-2">
                     <div class="checkbox">
                         <label>
                             {!! Form::checkbox('pagato', '1', null) !!}
                             Pagato
+                        </label>
+                    </div>
+                </div>
+                <!-- Sospeso -->
+                <div class="col-md-3">
+                    <div class="checkbox">
+                        <label>
+                            {!! Form::checkbox('sospeso', '1', null) !!}
+                            Sospeso
+                        </label>
+                    </div>
+                </div>
+                <!-- Fattura -->
+                <div class="col-md-3">
+                    <div class="checkbox">
+                        <label>
+                            {!! Form::checkbox('fattura', '1', null) !!}
+                            Fattura
                         </label>
                     </div>
                 </div>

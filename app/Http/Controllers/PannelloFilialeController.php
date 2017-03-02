@@ -122,11 +122,8 @@ class PannelloFilialeController extends Controller
         
         $prestazioni = \App\PrestazioneMedica::whereHas('pratica.cliente', function($query) use ($filiale_id) {
             $query->where('filiale_id', $filiale_id);
-        })->whereHas('pratica', function($query) {
-            $query->whereIn('stato_pratica', [0, 3]); //stato pratica: aperte o ss. legale
-        })
-          ->where('percentuale', '>', 0) // in convenzione
-          ->where('pagato', '=', false)->get(); // non pagate
+        })->where('percentuale', '>', 0) // in convenzione
+          ->where('sospeso', '=', true)->get(); // non pagate
         
         
         $filiali = \App\Filiale::all();

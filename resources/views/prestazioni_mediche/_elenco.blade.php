@@ -10,7 +10,7 @@
         <p class="lead">Prestazioni in convenzione</p>
         
         @if (count($prestazioni_mediche_c) > 0)
-            <table class="table table-hover table-striped">
+            <table class="table table-striped">
                 <thead>
                     <th>Nome medico</th>
                     <th>Data</th>
@@ -20,12 +20,13 @@
                     <th>Percentuale</th>
                     <th>A pagare</th>
                     <th>Pagato</th>
+                    <th>Sospeso</th>
                     <th>&nbsp;</th>
                 </thead>
                 <tbody>
                     @foreach ($prestazioni_mediche_c as $nome_medico => $prestazioni_medico)
                         @foreach ($prestazioni_medico as $p)
-                            <tr>
+                            <tr class="{{ $p->fattura ? 'row-highlight' : '' }}">
                                 <td class="table-text"><div>{{ $p->nome_medico }}</div></td>
                                 <td class="table-text"><div>{{ format_date($p->data) }}</div></td>
                                 <td class="table-text"><div>{{ $p->giorni }}</div></td>
@@ -34,6 +35,17 @@
                                 <td class="table-text"><div>{{ format_money($p->quantitaPercentuale) }}</div></td>
                                 <td class="table-text"><div>{{ format_money($p->aPagare) }}</div></td>
                                 <td class="table-text"><div>{{ $p->pagato ? 'Si' : 'No' }}</div></td>
+                                <td class="table-text">
+                                    <div>
+                                        {{ Form::open(['action' => ['PrestazioniMedicheController@toggleSospeso',
+                                        'cliente' => $p->pratica->cliente, 'pratica' => $p->pratica, 'prestazione_medica' => $p],
+                                        'method' => 'put']) }}
+                                            <button class="btn btn-default">
+                                                <i class="fa fa-fw fa-{{ $p->sospeso ? 'check-square-o' : 'square-o' }}"></i>
+                                            </button>
+                                        {{ Form::close() }}
+                                    </div>
+                                </td>
     
                                 <td class="table-text">
                                     <!-- Form eliminazione prestazione -->
@@ -65,6 +77,7 @@
                             <td>{{ format_money($prestazioni_medico->sum('aPagare')) }}</td>
                             <td></td>
                             <td></td>
+                            <td></td>
                         </tr>
                     @endforeach
                     
@@ -76,6 +89,7 @@
                         <td></td>
                         <td>{{ format_money($prestazioni_mediche_c->sum(function($p) { return $p->sum('quantitaPercentuale'); })) }}</td>
                         <td>{{ format_money($prestazioni_mediche_c->sum(function($p) { return $p->sum('aPagare'); })) }}</td>
+                        <td></td>
                         <td></td>
                         <td></td>
                     </tr>
@@ -99,7 +113,7 @@
                 </thead>
                 <tbody>
                     @foreach ($prestazioni_mediche_nc as $p)
-                        <tr>
+                        <tr class="{{ $p->fattura ? 'row-highlight' : '' }}">
                             <td class="table-text"><div>{{ $p->nome_medico }}</div></td>
                             <td class="table-text"><div>{{ format_date($p->data) }}</div></td>
                             <td class="table-text"><div>{{ $p->giorni }}</div></td>

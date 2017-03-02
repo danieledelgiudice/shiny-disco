@@ -131,8 +131,10 @@ class PraticheController extends Controller
         $prestazioni_mediche_c = $pratica->prestazioni_mediche()->inConvenzione()->get()->groupBy('nome_medico');
         $prestazioni_mediche_nc = $pratica->prestazioni_mediche()->nonConvenzione()->get();
         
+        $fatture = $pratica->fatture()->oldest('created_at')->get();
+        
         return view('pratiche.show', compact('pratica', 'documenti', 'assegni', 'promemoria', 'totale_assegni_consegnati',
-                                                'totale_assegni_restituiti', 'prestazioni_mediche_nc', 'prestazioni_mediche_c'));
+                                                'totale_assegni_restituiti', 'prestazioni_mediche_nc', 'prestazioni_mediche_c', 'fatture'));
     }
 
     public function edit(Request $request, $cliente_id, $pratica_id)

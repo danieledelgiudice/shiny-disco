@@ -103,5 +103,10 @@ class AuthServiceProvider extends ServiceProvider
         $gate->define('caricare-documenti', function ($user, $filiale) {
             return $user->filiale->id === $filiale->id;
         });
+        
+        
+        $gate->define('generare-fatture', function ($user) {
+           return false; 
+        });
     }
 }

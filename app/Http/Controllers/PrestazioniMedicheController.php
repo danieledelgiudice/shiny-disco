@@ -60,12 +60,6 @@ class PrestazioniMedicheController extends Controller
         $prestazione_medica = new \App\PrestazioneMedica;
         $prestazione_medica->fill($request->all());
         
-        if ($request->pagato) {
-            $prestazione_medica->pagato = true;
-        } else {
-            $prestazione_medica->pagato = false;
-        }
-        
         $prestazione_medica->pratica()->associate($pratica);
         $prestazione_medica->percentuale = $percentuale;
         $prestazione_medica->save();
@@ -123,12 +117,6 @@ class PrestazioniMedicheController extends Controller
         } else
             $percentuale = 0;
             
-        if ($request->pagato) {
-            $prestazione_medica->pagato = true;
-        } else {
-            $prestazione_medica->pagato = false;
-        }
-            
         $this->validateInput($request);
         
         $prestazione_medica->fill($request->all());
@@ -162,6 +150,32 @@ class PrestazioniMedicheController extends Controller
                 
         return redirect()->action('PraticheController@show', ['cliente' => $prestazione_medica->pratica->cliente, 'pratica' => $prestazione_medica->pratica])
             ->with('success', 'La prestazione medica è stata eliminata con successo.');
+    }
+    
+    public function toggleSospeso(Request $request, $cliente_id, $pratica_id, $prestazione_medica_id)
+    {
+        $prestazione_medica = \App\PrestazioneMedica::findOrFail($prestazione_medica_id);
+        
+        if ($prestazione_medica->pratica->id != $pratica_id) {
+            // La pratica nell'url non corrisponde alla pratica della prestazione
+            abort(404);
+        }
+        
+        if ($prestazione_medica->pratica->cliente->id != $cliente_id) {
+            // Il cliente nell'url non corrisponde al cliente della pratica
+            abort(404);
+        }
+        
+        if($request->user()->cannot('modificare-pratica', $prestazione_medica->pratica)) {
+            // L'utente non può modificare prestazioni di pratiche di altre filiali
+            abort(403);
+        }
+        
+        $prestazione_medica->sospeso = !$prestazione_medica->sospeso;
+        $prestazione_medica->save();
+
+        return redirect()->action('PraticheController@show', ['cliente' => $prestazione_medica->pratica->cliente, 'pratica' => $prestazione_medica->pratica])
+            ->with('success', 'La prestazione medica è stata modificata con successo.');
     }
     
     private function validateInput(Request $request)

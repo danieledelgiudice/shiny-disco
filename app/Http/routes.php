@@ -58,11 +58,12 @@ Route::delete( '/clienti/{cliente}/pratiche/{pratica}/assegni/{assegno}',       
 
 
 
-Route::get( '/clienti/{cliente}/pratiche/{pratica}/prestazioni_mediche/new',                            'PrestazioniMedicheController@create');
-Route::get( '/clienti/{cliente}/pratiche/{pratica}/prestazioni_mediche/{prestazione_medica}/edit',      'PrestazioniMedicheController@edit');
-Route::post('/clienti/{cliente}/pratiche/{pratica}/prestazioni_mediche/',                               'PrestazioniMedicheController@store');
-Route::put( '/clienti/{cliente}/pratiche/{pratica}/prestazioni_mediche/{prestazione_medica}',           'PrestazioniMedicheController@update');
-Route::delete( '/clienti/{cliente}/pratiche/{pratica}/prestazioni_mediche/{prestazione_medica}',        'PrestazioniMedicheController@destroy');
+Route::get( '/clienti/{cliente}/pratiche/{pratica}/prestazioni_mediche/new',                                'PrestazioniMedicheController@create');
+Route::get( '/clienti/{cliente}/pratiche/{pratica}/prestazioni_mediche/{prestazione_medica}/edit',          'PrestazioniMedicheController@edit');
+Route::post('/clienti/{cliente}/pratiche/{pratica}/prestazioni_mediche/',                                   'PrestazioniMedicheController@store');
+Route::put( '/clienti/{cliente}/pratiche/{pratica}/prestazioni_mediche/{prestazione_medica}',               'PrestazioniMedicheController@update');
+Route::put( '/clienti/{cliente}/pratiche/{pratica}/prestazioni_mediche/{prestazione_medica}/toggleSospeso', 'PrestazioniMedicheController@toggleSospeso');
+Route::delete( '/clienti/{cliente}/pratiche/{pratica}/prestazioni_mediche/{prestazione_medica}',            'PrestazioniMedicheController@destroy');
 
 
 Route::get( '/filiali/{filiale}/agenda',                                        'PromemoriaController@indexToday');
@@ -96,3 +97,8 @@ Route::get( '/filiali/{filiale}/pannello/sospesi_medici',                       
 
 Route::get( '/clienti/{cliente}/pratiche/{pratica}/lettere/{lettera}',          'LettereController@show');
 Route::get( '/clienti/{cliente}/pratiche/{pratica}/lettere/',                   'LettereController@showOptions');
+
+
+Route::get( '/clienti/{cliente}/pratiche/{pratica}/fatture/new',                'FattureController@create');
+Route::get( '/clienti/{cliente}/pratiche/{pratica}/fatture/{fattura}',          'FattureController@show');
+Route::post('/clienti/{cliente}/pratiche/{pratica}/fatture/',                   'FattureController@store');
