@@ -88,7 +88,7 @@ Indirizzo:
         $f->Write($lineh, $str);
 
         $netto = $fattura['importo_netto'] + 0;
-        $iva = $netto * 1.22;
+        $iva = $netto * 0.22;
         $lordo_competenze = $netto + $iva;
         $esente = $fattura['importo_esente'] + 0;
         $lordo_incassato = $lordo_competenze + $esente;
