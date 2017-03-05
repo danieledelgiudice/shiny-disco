@@ -22,7 +22,7 @@ class CreateFattureTable extends Migration
             $table->integer('appartenenza')->unsigned(); // 1 -> elys, 2 -> elisir
             
             $table->integer('pratica_id')->unsigned();
-            $table->foreign('pratica_id')->references('pratiche')->on('id');
+            $table->foreign('pratica_id')->references('id')->on('pratiche');
             
             $table->timestamps();
         });
