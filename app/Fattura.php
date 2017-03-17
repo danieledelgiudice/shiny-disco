@@ -16,6 +16,21 @@ class Fattura extends Model
         return $this->belongsTo('\App\Pratica', 'pratica_id');
     }
     
+    public function getIvaAttribute()
+    {
+        return $this->importo_netto * 0.22;
+    }
+    
+    public function getLordoCompetenzeAttribute()
+    {
+        return $this->importo_netto + $this->iva;
+    }
+    
+    public function getLordoIncassatoAttribute()
+    {
+        return $this->lordo_competenze + $this->importo_esente;
+    }
+    
     
     /**
      * The attributes that are mass assignable.

@@ -94,6 +94,19 @@
                                 </div>
                             </div>
                         </div>
+                        
+                        <div class="row">
+                            <div class="col-md-4">
+                                <p class="form-control-static"><strong>Nascondi percentuali</strong></p>    
+                            </div>
+                            <div class="col-md-8">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="nascondi_percentuali" value="1" />
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     
                     <div class="text-center">

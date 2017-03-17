@@ -152,11 +152,22 @@ var parseQueryString = function() {
             url += '&logo=1';
         }
         
+        var $input, name, value;
+        
         var num_inputs = options.find('input[type=number]');
         for (var i = 0; i < num_inputs.length; i++) {
-            var $input = $(num_inputs[i]);
-            var name = $input.attr('name');
-            var value = $input.val();
+            $input = $(num_inputs[i]);
+            name = $input.attr('name');
+            value = $input.val();
+            url += `&${name}=${value}`;
+        }
+        
+        var checkbox_inputs = options.find('input[type=checkbox]:checked');
+        for (var i = 0; i < checkbox_inputs.length; i++) {
+            $input = $(checkbox_inputs[i]);
+            console.log($input);
+            name = $input.attr('name');
+            value = $input.val();
             url += `&${name}=${value}`;
         }
         

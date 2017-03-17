@@ -45,6 +45,13 @@
                         Sospesi medici
                     </a>
                 </li>
+                @can('generare-fatture')
+                    <li class="nav-item{{ (isset($active) && $active === 'fatture') ? ' active' : '' }}">
+                        <a class="nav-link" href="{{ action('PannelloFilialeController@fatture', ['filiale' => $filiale]) }}">
+                            Fatture
+                        </a>
+                    </li>
+                @endcan
             </ul>
         </div>
 

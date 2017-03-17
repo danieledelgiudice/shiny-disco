@@ -40,7 +40,7 @@ class PannelloFilialeController extends Controller
             $query->where('filiale_id', $filiale_id);
         })->whereIn('stato_pratica', [0, 3])
           ->where('liquidato_omnia', '>', 0)
-          ->latest('data_apertura')->get(); //stato pratica: aperte o ss. legale
+          ->orderBy('numero_pratica', 'desc')->get(); //stato pratica: aperte o ss. legale
         
         
         $filiali = \App\Filiale::all();
@@ -61,7 +61,7 @@ class PannelloFilialeController extends Controller
             $query->where('filiale_id', $filiale_id);
         })->whereIn('stato_pratica', [0, 3])
           ->where('importo_sospeso', '>', 0)
-          ->latest('data_apertura')->get(); //stato pratica: aperte o ss. legale
+          ->orderBy('numero_pratica', 'desc')->get(); //stato pratica: aperte o ss. legale
         
         
         $filiali = \App\Filiale::all();
@@ -82,7 +82,7 @@ class PannelloFilialeController extends Controller
             $query->where('filiale_id', $filiale_id);
         })->whereIn('stato_pratica', [0, 3])
           ->where('parcella_presunta', '>', 0)
-          ->latest('data_apertura')->get(); //stato pratica: aperte o ss. legale
+          ->orderBy('numero_pratica', 'desc')->get(); //stato pratica: aperte o ss. legale
         
         
         $filiali = \App\Filiale::all();
@@ -103,7 +103,7 @@ class PannelloFilialeController extends Controller
             $query->where('filiale_id', $filiale_id);
         })->whereIn('stato_pratica', [0, 3])
           ->where('onorari', '>', 0)
-          ->latest('data_apertura')->get(); //stato pratica: aperte o ss. legale
+          ->orderBy('numero_pratica', 'desc')->get(); //stato pratica: aperte o ss. legale
         
         
         $filiali = \App\Filiale::all();
@@ -123,11 +123,28 @@ class PannelloFilialeController extends Controller
         $prestazioni = \App\PrestazioneMedica::whereHas('pratica.cliente', function($query) use ($filiale_id) {
             $query->where('filiale_id', $filiale_id);
         })->where('percentuale', '>', 0) // in convenzione
-          ->where('sospeso', '=', true)->get(); // non pagate
+          ->where('sospeso', '=', true) // sospese
+          ->orderBy('pratica_id', 'desc')->get();
         
         
         $filiali = \App\Filiale::all();
 
         return view('pannello_filiale.sospesi_medici', compact('filiale', 'filiali', 'prestazioni'));
+    }
+    
+    public function fatture(Request $request, $filiale_id)
+    {
+        $filiale = \App\Filiale::findOrFail($filiale_id);
+        
+        if($request->user()->cannot('generare-fatture')) {
+            abort(403);
+        }
+        
+        $fattureElys = \App\Fattura::where('appartenenza', 1)->get();
+        $fattureElisir = \App\Fattura::where('appartenenza', 2)->get();
+        
+        $filiali = \App\Filiale::all();
+        
+        return view('pannello_filiale.fatture', compact('fattureElys', 'fattureElisir', 'filiali', 'filiale'));
     }
 }

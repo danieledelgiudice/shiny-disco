@@ -15,6 +15,9 @@ class RicevutaMediciGenerator
         $totale = $data['totale'] + 0;
         $onorari = $data['onorari'] + 0;
         $varie = $data['varie'] + 0;
+        $nascondi_percentuali = isset($data['nascondi_percentuali']);
+        
+        $prestazioni = $prestazioni->where('inConvenzione', true);
 
         $totale_importo = $prestazioni->sum('costo');
         $totale_diritti = $prestazioni->sum(function($p) {
@@ -32,7 +35,7 @@ class RicevutaMediciGenerator
         $totale_a_pagare = format_money($totale_a_pagare);
         $da_rimettere = format_money($da_rimettere);
         $netto = format_money($netto);
-
+        
         $lineh = 7;
 
         // $template = iconv('UTF-8', 'windows-1252', $template);
@@ -102,32 +105,35 @@ class RicevutaMediciGenerator
         $f->SetXY(20, $rowY);
         $s = "MEDICO";
         $s = iconv('UTF-8', 'windows-1252', $s);
-        $f->MultiCell(30, $lineh, $s);
+        $f->MultiCell($nascondi_percentuali ? 60 : 30, $lineh, $s);
         if ($f->GetY() > $maxY) $maxY = $f->GetY();
 
-        $f->SetXY(50, $rowY);
+        $f->SetXY($nascondi_percentuali ? 90 : 50, $rowY);
         $s = "IMPORTO";
         $s = iconv('UTF-8', 'windows-1252', $s);
-        $f->MultiCell(20, $lineh, $s, 0, 'R');
+        $f->MultiCell($nascondi_percentuali ? 30 : 20, $lineh, $s, 0, 'R');
         if ($f->GetY() > $maxY) $maxY = $f->GetY();
 
-        $f->SetXY(70, $rowY);
-        $s = '%';
-        $s = iconv('UTF-8', 'windows-1252', $s);
-        $f->MultiCell(10, $lineh, $s, 0, 'R');
-        if ($f->GetY() > $maxY) $maxY = $f->GetY();
-
-        $f->SetXY(80, $rowY);
-        $s = 'DIRITTI';
-        $s = iconv('UTF-8', 'windows-1252', $s);
-        $f->MultiCell(20, $lineh, $s, 0, 'R');
-        if ($f->GetY() > $maxY) $maxY = $f->GetY();
-
-        $f->SetXY(100, $rowY);
-        $s = 'A PAGARE';
-        $s = iconv('UTF-8', 'windows-1252', $s);
-        $f->MultiCell(25, $lineh, $s, 0, 'R');
-        if ($f->GetY() > $maxY) $maxY = $f->GetY();
+        
+        if (!$nascondi_percentuali) {
+            $f->SetXY(70, $rowY);
+            $s = '%';
+            $s = iconv('UTF-8', 'windows-1252', $s);
+            $f->MultiCell(10, $lineh, $s, 0, 'R');
+            if ($f->GetY() > $maxY) $maxY = $f->GetY();
+    
+            $f->SetXY(80, $rowY);
+            $s = 'DIRITTI';
+            $s = iconv('UTF-8', 'windows-1252', $s);
+            $f->MultiCell(20, $lineh, $s, 0, 'R');
+            if ($f->GetY() > $maxY) $maxY = $f->GetY();
+    
+            $f->SetXY(100, $rowY);
+            $s = 'A PAGARE';
+            $s = iconv('UTF-8', 'windows-1252', $s);
+            $f->MultiCell(25, $lineh, $s, 0, 'R');
+            if ($f->GetY() > $maxY) $maxY = $f->GetY();
+        }
 
         $f->SetXY(130, $rowY);
         $s = 'DATA E FIRMA PROFESSIONISTA';
@@ -140,39 +146,41 @@ class RicevutaMediciGenerator
 
         $f->setY($maxY);
 
-        foreach($prestazioni as $p) {
+        foreach ($prestazioni->groupBy('nome_medico') as $nome => $p) {
             $rowY = $f->GetY();
             $maxY = $rowY;
 
             $f->SetXY(20, $rowY);
-            $s = strtoupper($p->nome_medico);
+            $s = strtoupper($nome);
             $s = iconv('UTF-8', 'windows-1252', $s);
-            $f->MultiCell(30, $lineh, $s);
+            $f->MultiCell($nascondi_percentuali ? 60 : 30, $lineh, $s);
             if ($f->GetY() > $maxY) $maxY = $f->GetY();
 
-            $f->SetXY(50, $rowY);
-            $s = format_money($p->costo);
+            $f->SetXY($nascondi_percentuali ? 90 : 50, $rowY);
+            $s = format_money($p->sum('costo'));
             $s = iconv('UTF-8', 'windows-1252', $s);
-            $f->MultiCell(20, $lineh, $s, 0, 'R');
+            $f->MultiCell($nascondi_percentuali ? 30 : 20, $lineh, $s, 0, 'R');
             if ($f->GetY() > $maxY) $maxY = $f->GetY();
 
-            $f->SetXY(70, $rowY);
-            $s = $p->percentuale;
-            $s = iconv('UTF-8', 'windows-1252', $s);
-            $f->MultiCell(10, $lineh, $s, 0, 'R');
-            if ($f->GetY() > $maxY) $maxY = $f->GetY();
-
-            $f->SetXY(80, $rowY);
-            $s = format_money($p->quantitaPercentuale);
-            $s = iconv('UTF-8', 'windows-1252', $s);
-            $f->MultiCell(20, $lineh, $s, 0, 'R');
-            if ($f->GetY() > $maxY) $maxY = $f->GetY();
-
-            $f->SetXY(100, $rowY);
-            $s = format_money($p->aPagare);
-            $s = iconv('UTF-8', 'windows-1252', $s);
-            $f->MultiCell(25, $lineh, $s, 0, 'R');
-            if ($f->GetY() > $maxY) $maxY = $f->GetY();
+            if (!$nascondi_percentuali) {
+                $f->SetXY(70, $rowY);
+                $s = $p[0]->percentuale;
+                $s = iconv('UTF-8', 'windows-1252', $s);
+                $f->MultiCell(10, $lineh, $s, 0, 'R');
+                if ($f->GetY() > $maxY) $maxY = $f->GetY();
+    
+                $f->SetXY(80, $rowY);
+                $s = format_money($p->sum('quantitaPercentuale'));
+                $s = iconv('UTF-8', 'windows-1252', $s);
+                $f->MultiCell(20, $lineh, $s, 0, 'R');
+                if ($f->GetY() > $maxY) $maxY = $f->GetY();
+    
+                $f->SetXY(100, $rowY);
+                $s = format_money($p->sum('aPagare'));
+                $s = iconv('UTF-8', 'windows-1252', $s);
+                $f->MultiCell(25, $lineh, $s, 0, 'R');
+                if ($f->GetY() > $maxY) $maxY = $f->GetY();                
+            }
 
             $f->Line(130, $maxY - 2, 200, $maxY - 2);
 
@@ -185,22 +193,24 @@ class RicevutaMediciGenerator
         $f->SetXY(20, $rowY);
         $s = "TOTALI";
         $s = iconv('UTF-8', 'windows-1252', $s);
-        $f->MultiCell(30, $lineh, $s);
+        $f->MultiCell($nascondi_percentuali ? 60 : 30, $lineh, $s);
 
-        $f->SetXY(50, $rowY);
+        $f->SetXY($nascondi_percentuali ? 90 : 50, $rowY);
         $s = "{$totale_importo}";
         $s = iconv('UTF-8', 'windows-1252', $s);
-        $f->MultiCell(20, $lineh, $s, 0, 'R');
+        $f->MultiCell($nascondi_percentuali ? 30 : 20, $lineh, $s, 0, 'R');
 
-        $f->SetXY(80, $rowY);
-        $s = "{$totale_diritti}";
-        $s = iconv('UTF-8', 'windows-1252', $s);
-        $f->MultiCell(20, $lineh, $s, 0, 'R');
-
-        $f->SetXY(100, $rowY);
-        $s = "{$totale_a_pagare}";
-        $s = iconv('UTF-8', 'windows-1252', $s);
-        $f->MultiCell(25, $lineh, $s, 0, 'R');
+        if(!$nascondi_percentuali) {
+            $f->SetXY(80, $rowY);
+            $s = "{$totale_diritti}";
+            $s = iconv('UTF-8', 'windows-1252', $s);
+            $f->MultiCell(20, $lineh, $s, 0, 'R');
+    
+            $f->SetXY(100, $rowY);
+            $s = "{$totale_a_pagare}";
+            $s = iconv('UTF-8', 'windows-1252', $s);
+            $f->MultiCell(25, $lineh, $s, 0, 'R');            
+        }
 
         $f->SetFont('Times', '', 10);
 
