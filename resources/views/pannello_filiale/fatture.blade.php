@@ -8,7 +8,7 @@
         <table class="table table-hover table-striped">
             <thead>
                 <th>Filiale</th>
-                <th>Numero assegno</th>
+                <th>Numero fattura</th>
                 <th>Numero pratica</th>
                 <th>Dettaglio prestazione</th>
                 <th>Importo netto</th>
@@ -67,7 +67,7 @@
         <table class="table table-hover table-striped">
             <thead>
                 <th>Filiale</th>
-                <th>Numero assegno</th>
+                <th>Numero fattura</th>
                 <th>Numero pratica</th>
                 <th>Dettaglio prestazione</th>
                 <th>Importo netto</th>

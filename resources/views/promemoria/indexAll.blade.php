@@ -15,10 +15,37 @@
         <div>
             @include('common._barra_filiale')
             <div class="panel panel-default">
+               <div class="panel-body">
+                    {{ Form::open(['action' => ['PromemoriaController@indexAll', 'filiale' => $filiale], 'class' => 'form-horizontal', 'method' => 'GET' ]) }}
+    
+                        <div class="form-group">
+                            <div class="col-md-2 col-md-offset-1">
+                                <strong>Numero pratica</strong>
+                            </div>
+                            
+                            <div class="col-md-3">
+                                {!! Form::number('pratica_numero_pratica', $numero_pratica, ['class' => 'form-control']) !!}
+                            </div>
+                            
+                            <div class="col-md-6 text-center">
+                                <button type="submit" class="btn btn-primary">
+                                       <i class="fa fa-fw fa-search"></i>
+                                       Cerca
+                                </button>
+                                <a href="{{ action('PromemoriaController@indexAll', ['filiale' => $filiale]) }}" class="btn btn-default">
+                                       <i class="fa fa-times"></i> 
+                                </a>
+                            </div>
+                        </div>
+                    {{ Form::close() }}
+                </div>
+            </div>
+            <div class="panel panel-default">
                 <!-- Lista promemoria da completare -->
                 <div class="panel-body">
                     <table class="table table-hover table-striped">
                         <thead>
+                            <th>Numero pratica</th>
                             <th>Chi</th>
                             <th>Quando</th>
                             <th>Cosa</th>
@@ -29,6 +56,7 @@
                             <tbody>
                                 @foreach ($promemoria as $p)
                                     <tr class="{{ $p->trashed() ? 'trashed' : '' }}">
+                                        <td class="table-text col-md-2"><div>{{ $p->pratica->numero_pratica }}</div></td>
                                         <td class="table-text col-md-2"><div>{{ $p->chi }}</div></td>
                                         <td class="table-text col-md-2"><div>{{ date_diff_days($p->quando) }}</div></td>
                                         <td class="table-text col-md-6"><div>{{ $p->cosa }}</div></td>
@@ -55,6 +83,10 @@
                     </table>
                     @if (count($promemoria) == 0)
                         <p class="text-center">Non sono presenti promemoria nel database</p>
+                    @else
+                        <div class="text-center">
+                            {{ $promemoria->appends(['pratica_numero_pratica' => $numero_pratica])->links() }}    
+                        </div>
                     @endif
                 </div>
             </div>

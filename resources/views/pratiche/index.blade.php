@@ -16,6 +16,14 @@
                 {{ Form::open(['action' => ['PraticheController@filter'], 'class' => 'form-horizontal', 'id' => 'queryForm']) }}
                 
                     <div class="form-group">
+                        <label for="numero_pratica" class="col-md-3 control-label">Numero pratica</label>
+                        <div class="col-md-7">
+                            <input type="text" name="numero_pratica" class="form-control"> 
+                        </div>
+                        <a class="btn btn-default deleteQueryRow"><i class="fa fa-fw fa-times"></i></a>
+                    </div>
+                
+                    <div class="form-group">
                         <div class="col-md-3 col-md-offset-1">
                             <select id="newFieldQuerySelect" class="form-control" placeholder="Aggiungi nuovo campo">
                                 <option></option>

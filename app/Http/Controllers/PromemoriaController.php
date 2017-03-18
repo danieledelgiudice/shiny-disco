@@ -80,9 +80,10 @@ class PromemoriaController extends Controller
         $promemoria = \App\Promemoria::withTrashed()
                     ->whereHas('pratica.cliente.filiale', function($query) use ($filiale) {
                         $query->where('id', $filiale->id);
-                    })->latest('quando')->get();
+                    })->latest('quando')->filter($request->all())->paginate(50);
         $filiali = \App\Filiale::all();
-        return view('promemoria.indexAll', compact('filiale', 'promemoria', 'filiali'));
+        $numero_pratica = $request->pratica_numero_pratica;
+        return view('promemoria.indexAll', compact('filiale', 'promemoria', 'filiali', 'numero_pratica'));
     }
 
 
