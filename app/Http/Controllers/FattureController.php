@@ -88,6 +88,35 @@ class FattureController extends Controller
         return $lettera;
     }
     
+    public function destroy(Request $request, $cliente_id, $pratica_id, $fattura_id)
+    {
+        $fattura = \App\Fattura::findOrFail($fattura_id);
+        
+        if ($fattura->pratica->cliente->id != $cliente_id) {
+            // Il cliente nell'url non corrisponde al cliente della pratica
+            abort(404);
+        }
+        
+        if ($fattura->pratica->id != $pratica_id) {
+            // La pratica nell'url non corrisponde alla pratica della fattura
+            abort(404);
+        }
+        
+        if($request->user()->cannot('cancellare-fatture')) {
+            // L'utente non può cancellare fatture
+            abort(403);
+        }
+        
+        if (\App\Fattura::where('appartenenza', $fattura->appartenenza)
+                        ->where('numero', '>', $fattura->numero)
+                        ->count() > 0) {
+            return redirect()->back()->with('warning', 'La fattura che si sta tentando di eliminare non è l\'ultima');
+        }
+        
+        $fattura->delete();
+        return redirect()->back()->with('success', 'La fattura é stata eliminata con successo!');
+    }
+    
     private function validateInput(Request $request)
     {
         $this->validate($request, [

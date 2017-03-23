@@ -57,6 +57,10 @@
                 </tr>
             </tbody>
         </table>
+        {{ Form::open(['action' => ['FattureController@destroy', 'cliente' => $fattura->pratica->cliente, 'pratica' => $fattura->pratica, 'fattura' => $fattura],
+            'id' => 'destroyUltimaFatturaElisirBtn', 'method' => 'delete']) }}
+            <button class="btn btn-danger pull-right"><i class="fa fa-fw fa-trash"></i> Elimina ultima fattura Elys</button>
+        {{ Form::close() }}
     </div>
 </div>
 
@@ -116,6 +120,11 @@
                 </tr>
             </tbody>
         </table>
+        {{ Form::open(['action' => ['FattureController@destroy', 'cliente' => $fattura->pratica->cliente, 'pratica' => $fattura->pratica, 'fattura' => $fattura],
+            'id' => 'destroyUltimaFatturaElisirBtn', 'method' => 'delete']) }}
+            <button class="btn btn-danger pull-right"><i class="fa fa-fw fa-trash"></i> Elimina ultima fattura Elisir</button>
+        {{ Form::close() }}
+        
     </div>
 </div>
 

@@ -29,6 +29,9 @@ class Pratica extends Model
             foreach($pratica->prestazioni_mediche as $prestazione_medica) {
                 $prestazione_medica->delete();
             }
+            foreach($pratica->fatture as $fattura) {
+                $fattura->delete();
+            }
         });
     }
     
