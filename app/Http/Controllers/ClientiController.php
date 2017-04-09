@@ -237,7 +237,7 @@ class ClientiController extends Controller
             'citta_nascita'             => 'max:255',
             'data_nascita'              => 'date_format:d/m/Y|before:today',
             'sesso'                     => 'numeric|in:' . implode(',', array_keys(\App\Cliente::$enumSesso)),
-            'codice_fiscale'            => 'regex:/^[a-z]{6}[0-9]{2}[a-z][0-9]{2}[a-z][0-9]{3}[a-z]$/i',
+            'codice_fiscale'            => 'max:255',
             'via'                       => 'max:255',
             'citta_residenza'           => 'max:255',
             'provincia'                 => 'alpha|max:2',

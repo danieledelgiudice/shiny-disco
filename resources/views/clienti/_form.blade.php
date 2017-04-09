@@ -69,7 +69,7 @@
                 {!! Form::label('codice_fiscale', "Codice Fiscale" , ['class' => 'col-md-2 control-label']) !!}
                 <div class="col-md-4">
                     <div class="input-group">
-                        {!! Form::text('codice_fiscale', null, ['class' => 'form-control', 'maxlength' => '16']) !!}
+                        {!! Form::text('codice_fiscale', null, ['class' => 'form-control']) !!}
                         <span class="input-group-btn">
                             <a href="http://codicefiscale.com" target="_blank" class="btn btn-primary">
                                 Genera &nbsp;

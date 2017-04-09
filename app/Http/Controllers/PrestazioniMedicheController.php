@@ -121,6 +121,11 @@ class PrestazioniMedicheController extends Controller
         
         $prestazione_medica->fill($request->all());
         $prestazione_medica->percentuale = $percentuale;
+        
+        $prestazione_medica->pagato = isset($request['pagato']);
+        $prestazione_medica->sospeso = isset($request['sospeso']);
+        $prestazione_medica->fattura = isset($request['fattura']);
+        
         $prestazione_medica->save();
         
         return redirect()->action('PraticheController@show', ['cliente' => $prestazione_medica->pratica->cliente, 'pratica' => $prestazione_medica->pratica])

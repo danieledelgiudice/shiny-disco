@@ -8,12 +8,20 @@
                 Query
                 <i class="fa fa-fw fa-caret-down pull-right"></i>
             </div>
-            <div class="panel-body" style="display: none">
+            <div class="panel-body">
                 <script>
                     var queryFields = {!! json_encode($queryFields) !!};
                 </script>
                 
                 {{ Form::open(['action' => ['ClientiController@filter'], 'class' => 'form-horizontal', 'id' => 'queryForm']) }}
+                    
+                    <div class="form-group">
+                        <label for="cognome" class="col-md-3 control-label">Cognome</label>
+                        <div class="col-md-7">
+                            <input type="text" name="cognome" class="form-control"> 
+                        </div>
+                        <a class="btn btn-default deleteQueryRow"><i class="fa fa-fw fa-times"></i></a>
+                    </div>
 
                     <div class="form-group">
                         <div class="col-md-3 col-md-offset-1">
