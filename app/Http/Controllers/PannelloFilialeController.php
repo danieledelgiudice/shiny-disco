@@ -36,16 +36,18 @@ class PannelloFilialeController extends Controller
             abort(403);
         }
         
-        $pratiche = \App\Pratica::whereHas('cliente', function($query) use ($filiale_id) {
+        $pratiche_query = \App\Pratica::whereHas('cliente', function($query) use ($filiale_id) {
             $query->where('filiale_id', $filiale_id);
         })->whereIn('stato_pratica', [0, 3])
           ->where('liquidato_omnia', '>', 0)
-          ->orderBy('numero_pratica', 'desc')->get(); //stato pratica: aperte o ss. legale
+          ->orderBy('numero_pratica', 'desc'); //stato pratica: aperte o ss. legale
         
+        $pratiche_query = $this->filtraPratiche($request, $pratiche_query);
+        $pratiche = $pratiche_query->get();
         
         $filiali = \App\Filiale::all();
         
-        return view('pannello_filiale.liquidato_omnia', compact('filiale', 'filiali', 'pratiche'));
+        return view('pannello_filiale.liquidato_omnia', compact('filiale', 'filiali', 'pratiche', 'request'));
     }
     
     public function importoSospeso(Request $request, $filiale_id)
@@ -57,16 +59,18 @@ class PannelloFilialeController extends Controller
             abort(403);
         }
         
-        $pratiche = \App\Pratica::whereHas('cliente', function($query) use ($filiale_id) {
+        $pratiche_query = \App\Pratica::whereHas('cliente', function($query) use ($filiale_id) {
             $query->where('filiale_id', $filiale_id);
         })->whereIn('stato_pratica', [0, 3])
           ->where('importo_sospeso', '>', 0)
-          ->orderBy('numero_pratica', 'desc')->get(); //stato pratica: aperte o ss. legale
-        
+          ->orderBy('numero_pratica', 'desc'); //stato pratica: aperte o ss. legale
+
+        $pratiche_query = $this->filtraPratiche($request, $pratiche_query);
+        $pratiche = $pratiche_query->get();
         
         $filiali = \App\Filiale::all();
         
-        return view('pannello_filiale.importo_sospeso', compact('filiale', 'filiali', 'pratiche'));
+        return view('pannello_filiale.importo_sospeso', compact('filiale', 'filiali', 'pratiche', 'request'));
     }
     
     public function parcellaPresunta(Request $request, $filiale_id)
@@ -78,16 +82,19 @@ class PannelloFilialeController extends Controller
             abort(403);
         }
         
-        $pratiche = \App\Pratica::whereHas('cliente', function($query) use ($filiale_id) {
+        $pratiche_query = \App\Pratica::whereHas('cliente', function($query) use ($filiale_id) {
             $query->where('filiale_id', $filiale_id);
         })->whereIn('stato_pratica', [0, 3])
           ->where('parcella_presunta', '>', 0)
-          ->orderBy('numero_pratica', 'desc')->get(); //stato pratica: aperte o ss. legale
+          ->orderBy('numero_pratica', 'desc'); //stato pratica: aperte o ss. legale
+        
+        $pratiche_query = $this->filtraPratiche($request, $pratiche_query);
+        $pratiche = $pratiche_query->get();
         
         
         $filiali = \App\Filiale::all();
         
-        return view('pannello_filiale.parcella_presunta', compact('filiale', 'filiali', 'pratiche'));
+        return view('pannello_filiale.parcella_presunta', compact('filiale', 'filiali', 'pratiche', 'request'));
     }
     
     public function onorari(Request $request, $filiale_id)
@@ -99,16 +106,18 @@ class PannelloFilialeController extends Controller
             abort(403);
         }
         
-        $pratiche = \App\Pratica::whereHas('cliente', function($query) use ($filiale_id) {
+        $pratiche_query = \App\Pratica::whereHas('cliente', function($query) use ($filiale_id) {
             $query->where('filiale_id', $filiale_id);
         })->whereIn('stato_pratica', [0, 3])
           ->where('onorari', '>', 0)
-          ->orderBy('numero_pratica', 'desc')->get(); //stato pratica: aperte o ss. legale
+          ->orderBy('numero_pratica', 'desc'); //stato pratica: aperte o ss. legale
         
-        
+        $pratiche_query = $this->filtraPratiche($request, $pratiche_query);
+        $pratiche = $pratiche_query->get();
+
         $filiali = \App\Filiale::all();
         
-        return view('pannello_filiale.onorari', compact('filiale', 'filiali', 'pratiche'));
+        return view('pannello_filiale.onorari', compact('filiale', 'filiali', 'pratiche', 'request'));
     }
     
     public function sospesiMedici(Request $request, $filiale_id)
@@ -124,12 +133,14 @@ class PannelloFilialeController extends Controller
             $query->where('filiale_id', $filiale_id);
         })->where('percentuale', '>', 0) // in convenzione
           ->where('sospeso', '=', true) // sospese
-          ->orderBy('pratica_id', 'desc')->get();
+          ->whereHas('pratica', function($query) use ($request) {
+            $this->filtraPratiche($request, $query);    
+        })->orderBy('pratica_id', 'desc')->get();
         
         
         $filiali = \App\Filiale::all();
 
-        return view('pannello_filiale.sospesi_medici', compact('filiale', 'filiali', 'prestazioni'));
+        return view('pannello_filiale.sospesi_medici', compact('filiale', 'filiali', 'prestazioni', 'request'));
     }
     
     public function fatture(Request $request, $filiale_id)
@@ -146,5 +157,28 @@ class PannelloFilialeController extends Controller
         $filiali = \App\Filiale::all();
         
         return view('pannello_filiale.fatture', compact('fattureElys', 'fattureElisir', 'filiali', 'filiale'));
+    }
+    
+    private function filtraPratiche(Request $request, $pratiche_query) {
+        $numero_pratica_gt = $request->numero_pratica_gt;
+        $numero_pratica_lt = $request->numero_pratica_lt;
+
+        if ($numero_pratica_gt != NULL && $numero_pratica_lt != NULL) {
+            // sono entrambi con valore
+            $pratiche_query = $pratiche_query->whereBetween('numero_pratica', [$numero_pratica_gt, $numero_pratica_lt]);
+        } else if ($numero_pratica_gt != NULL) {
+            $pratiche_query = $pratiche_query->where('numero_pratica', '>=', $numero_pratica_gt);
+        } else if ($numero_pratica_lt != NULL) {
+            $pratiche_query = $pratiche_query->where('numero_pratica', '<=', $numero_pratica_lt);
+        }
+        
+        $mese_apertura = $request->mese_apertura;
+        if ($mese_apertura != NULL) {
+            list($mese, $anno) = explode('/', $mese_apertura);
+            $pratiche_query = $pratiche_query->whereMonth('data_apertura', '=', $mese)
+                                             ->whereYear('data_apertura', '=', $anno);
+        }
+        
+        return $pratiche_query;
     }
 }

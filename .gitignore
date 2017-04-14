@@ -3,7 +3,7 @@
 Homestead.yaml
 Homestead.json
 /storage
-.log
+*.log
 
 
 ### Laravel ###

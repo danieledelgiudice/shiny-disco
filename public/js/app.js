@@ -21,6 +21,14 @@ var parseQueryString = function() {
       }
     });
 
+    // Widget input month
+    $('.input-group.date.month').datepicker({
+        format: 'mm/yyyy',
+        language: 'it',
+        minViewMode: 1,
+        maxViewMode: 3
+    });
+    
     // Widget input date
     $('.input-group.date').datepicker({
         format: 'dd/mm/yyyy',
@@ -28,7 +36,6 @@ var parseQueryString = function() {
         language: 'it',
         todayBtn: 'linked',
     });
-
     
     // We can attach the `fileselect` event to all file inputs on the page
     $(document).on('change', ':file', function() {

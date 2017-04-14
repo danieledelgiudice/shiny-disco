@@ -1,6 +1,8 @@
 @extends('pannello_filiale._dashboard', ['active' => 'sospesi_medici'])
 @section('inner-content')
 
+@include('pannello_filiale._pannello_ricerca')
+
 <div class="panel panel-default">
     <!-- Lista pratiche -->
     <div class="panel-body">
