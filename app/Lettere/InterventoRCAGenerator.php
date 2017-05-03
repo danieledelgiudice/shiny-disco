@@ -31,11 +31,18 @@ class InterventoRCAGenerator
         $str = "P.zza Attias 13 57100 Livorno
 Tel 0586/941901 0586/895118 Linee 5 a ricerca automatica
 Fax 0586 1730113
-Resp. Uffici esterni 0586 1734753";
+Resp. Uffici esterni 0586 1734753
+";
+    
+        if ($logo_elisir == 'elisir.png') {
+            $str = $str . "elisirinfortunistica@pec.it
+daniela.burini@elisirinfortunistica.it";
+        }
+
         $f->SetXY(80, 15);
         $f->MultiCell(0, $lineh, $str);
 
-        $str = "Livorno " . format_date(\Carbon\Carbon::today()) . "\n n.p.";
+        $str = "Livorno " . format_date(\Carbon\Carbon::today()) . "\n n.p. " .  $pratica['numero_pratica'];
         $f->SetXY(20, 60);
         $f->MultiCell(0, $lineh, $str);
 

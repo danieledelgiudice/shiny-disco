@@ -40,7 +40,8 @@ P.zza Attias 13 57100 Livorno
 Tel 0586/941901 0586/895118 Linee 5 a ricerca automatica
 Fax 0586 1730113
 Resp. Uffici esterni 0586 1734753
-Partita IVA 01682480494";
+Partita IVA 01682480494
+elisirinfortunistica@pec.it    daniela.burini@elisirinfortunistica.it";
 
         }
 
@@ -48,7 +49,7 @@ Partita IVA 01682480494";
         $f->Image($logo_url, 20, 15, 45);
 
         $f->SetFont('Times', '', 11);
-        $f->SetXY(80, 15);
+        $f->SetXY(80, 10);
         $str = iconv('UTF-8', 'windows-1252', $str);
         $f->MultiCell(0, $lineh, $str);
 
