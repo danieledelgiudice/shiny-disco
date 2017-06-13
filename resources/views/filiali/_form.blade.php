@@ -1,4 +1,6 @@
-@include('filiali._modal_conferma_disattivazione')
+@if (isset($utente))
+    @include('filiali._modal_conferma_disattivazione')
+@endif
 
 @if (isset($filiale))
     {!! Form::model($filiale, ['action' => ['FilialiController@update', 'filiale' => $filiale],
@@ -91,7 +93,9 @@
     
 {!! Form::close() !!}
 
+@if (isset($filiale))
 {!! Form::open(['action' => ['FilialiController@toggleCanGenerateLetters', 'filiale' => $filiale],
     'id' => 'toggleCanGenerateLettersForm', 'method' => 'put']) !!}
 {!! Form::close() !!}
+@endif
 <!--</form>-->
