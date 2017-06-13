@@ -45,6 +45,7 @@ class FattureController extends Controller
             abort(403);
         }
         
+        $this->validate($request, ['appartenenza' => 'required|numeric|max:2|min:1']);
         $this->validateInput($request);
         
         $numero = \App\Fattura::where('appartenenza', $request->appartenenza)->max('numero') + 1;
@@ -59,6 +60,59 @@ class FattureController extends Controller
         
         return redirect()->action('PraticheController@show', ['cliente' => $pratica->cliente, 'pratica' => $pratica])
             ->with('success', 'La fattura è stata salvata con successo.');
+    }
+    
+    public function edit(Request $request, $cliente_id, $pratica_id, $fattura_id)
+    {
+        $fattura = \App\Fattura::findOrFail($fattura_id);
+        
+        if ($fattura->pratica->id != $pratica_id) {
+            // La pratica nell'url non corrisponde alla pratica della prestazione
+            abort(404);
+        }
+        
+        if ($fattura->pratica->cliente->id != $cliente_id) {
+            // Il cliente nell'url non corrisponde al cliente della pratica
+            abort(404);
+        }
+        
+        if($request->user()->cannot('generare-fatture', $fattura->pratica)) {
+            // L'utente non può modificare fatture di altre filiali
+            abort(403);
+        }
+        
+        return view('fatture.edit', compact('fattura'));
+    }
+    
+    public function update(Request $request, $cliente_id, $pratica_id, $fattura_id)
+    {
+        $fattura = \App\Fattura::findOrFail($fattura_id);
+        
+        if ($fattura->pratica->id != $pratica_id) {
+            // La pratica nell'url non corrisponde alla pratica della prestazione
+            abort(404);
+        }
+        
+        if ($fattura->pratica->cliente->id != $cliente_id) {
+            // Il cliente nell'url non corrisponde al cliente della pratica
+            abort(404);
+        }
+        
+        if($request->user()->cannot('generare-fatture', $fattura->pratica)) {
+            // L'utente non può modificare fatture di altre filiali
+            abort(403);
+        }
+        
+        $this->validateInput($request);
+        
+        $fattura->dettaglio_prestazione = $request->dettaglio_prestazione;
+        $fattura->importo_netto = $request->importo_netto;
+        $fattura->importo_esente = $request->importo_esente;
+        
+        $fattura->save();
+        
+        return redirect()->action('PraticheController@show', ['cliente' => $fattura->pratica->cliente, 'pratica' => $fattura->pratica])
+            ->with('success', 'La fattura è stata modificata con successo.');
     }
     
     public function show(Request $request, $cliente_id, $pratica_id, $fattura_id)
@@ -123,7 +177,6 @@ class FattureController extends Controller
             'dettaglio_prestazione'       => 'required|max:255',
             'importo_netto'               => 'required|numeric|max:100000000|min:0',
             'importo_esente'              => 'required|numeric|max:100000000|min:0',
-            'appartenenza'                => 'required|numeric|max:2|min:1',
         ]);
     }
 }

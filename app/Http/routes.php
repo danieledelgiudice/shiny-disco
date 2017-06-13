@@ -102,5 +102,7 @@ Route::get( '/clienti/{cliente}/pratiche/{pratica}/lettere/',                   
 
 Route::get( '/clienti/{cliente}/pratiche/{pratica}/fatture/new',                'FattureController@create');
 Route::get( '/clienti/{cliente}/pratiche/{pratica}/fatture/{fattura}',          'FattureController@show');
+Route::get( '/clienti/{cliente}/pratiche/{pratica}/fatture/{fattura}/edit',     'FattureController@edit');
+Route::put( '/clienti/{cliente}/pratiche/{pratica}/fatture/{fattura}',          'FattureController@update');
 Route::post('/clienti/{cliente}/pratiche/{pratica}/fatture/',                   'FattureController@store');
 Route::delete( '/clienti/{cliente}/pratiche/{pratica}/fatture/{fattura}',       'FattureController@destroy');

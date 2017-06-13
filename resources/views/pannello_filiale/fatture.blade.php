@@ -41,6 +41,12 @@
                                 class="btn btn-default">
                                 <i class="fa fa-fw fa-eye"></i>
                             </a>
+                            
+                            <a href="{{ action('FattureController@edit',
+                                    ['cliente' => $fattura->pratica->cliente, 'pratica' => $fattura->pratica, 'fattura' => $fattura]) }}"
+                                    class="btn btn-primary">
+                                    <i class="fa fa-fw fa-pencil"></i>
+                            </a>
                         </td>
                     </tr>
                 @endforeach
@@ -103,6 +109,11 @@
                                 ['cliente' => $fattura->pratica->cliente, 'pratica' => $fattura->pratica, 'fattura' => $fattura]) }}"
                                 class="btn btn-default">
                                 <i class="fa fa-fw fa-eye"></i>
+                            </a>
+                            <a href="{{ action('FattureController@edit',
+                                    ['cliente' => $fattura->pratica->cliente, 'pratica' => $fattura->pratica, 'fattura' => $fattura]) }}"
+                                    class="btn btn-primary">
+                                    <i class="fa fa-fw fa-pencil"></i>
                             </a>
                         </td>
                     </tr>

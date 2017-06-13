@@ -32,6 +32,16 @@ class Fattura extends Model
     }
     
     
+    public function getNomeFilialeAttribute()
+    {
+        switch($this->appartenenza)
+        {
+            case 1: return 'Ely\'s';
+            case 2: return 'Elisir';
+            default: return '';
+        }
+    }
+    
     /**
      * The attributes that are mass assignable.
      *
