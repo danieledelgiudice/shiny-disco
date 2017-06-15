@@ -50,7 +50,7 @@ class PraticheController extends Controller
             'onorari'                        => ['display'   => 'Onorari',                             'type'        => 'decimal',     ],
             'liquidato_omnia'                => ['display'   => 'Liquidato omnia',                     'type'        => 'decimal',     ],
             
-            'data_sinistro'                  => ['display'   => 'Data sinistro',                       'type'        => 'date',        ],
+            'data_sinistro'                  => ['display'   => 'Data sinistro',                       'type'        => 'date_eq',     ],
             'luogo_sinistro'                 => ['display'   => 'Luogo sinistro',                      'type'        => 'string',      ],
             'testimoni'                      => ['display'   => 'Testimoni',                           'type'        => 'string',      ],
             'autorita_id'                    => ['display'   => 'Autorità',                            'type'        => 'enum',        'list' => \App\Autorita::pluck('nome', 'id')],   
@@ -220,7 +220,7 @@ class PraticheController extends Controller
                 $query->where('filiale_id', $cliente->filiale->id);
             })->get();
         $pratica->fill([
-            'numero_pratica'                => $pratiche_filiale->max('numero_pratica') + 1,
+            //'numero_pratica'                => $pratiche_filiale->max('numero_pratica') + 1,
             'data_apertura'                 => \Carbon\Carbon::today(),
         ]);
           
@@ -366,7 +366,6 @@ class PraticheController extends Controller
                                      
         
         $queryFields = $this->queryFields;
-        
         return view('pratiche._tabella', compact('pratiche', 'requestedFields', 'queryFields'));
     }
     

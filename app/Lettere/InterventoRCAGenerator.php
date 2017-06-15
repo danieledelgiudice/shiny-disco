@@ -22,12 +22,12 @@ class InterventoRCAGenerator
         $f->SetTitle($this::NAME);
         $f->SetMargins(20, 20);
         $f->AddPage();
+        $f->SetFont('Times', '', 11);
 
         $logo_elisir = $data['logo'];
         $logo_url = \URL::asset("/images/logos/$logo_elisir");
         $f->Image($logo_url, 20, 15, 45);
 
-        $f->SetFont('Times', '', 11);
         $str = "P.zza Attias 13 57100 Livorno
 Tel 0586/941901 0586/895118 Linee 5 a ricerca automatica
 Fax 0586 1730113
@@ -87,11 +87,86 @@ daniela.burini@elisirinfortunistica.it";
         $f->SetXY(20, $f->GetY() + 15);
         $f->Write($lineh, $str);
 
-        $str = "DATA {$pratica['data_sinistro']}, ORA {$pratica['ora_sinistro']}, LUOGO {$pratica['luogo_sinistro']}, AUTORITÀ {$autorita['nome']}, COMANDO DI {$pratica['comando_autorita']}, TIP. INTERVENTO {$pratica['tipologia_intervento']}, SINISTRO N. {$pratica['numero_sinistro']}, TESTIMONI {$pratica['testimoni']}";
+        $str = "DATA";
         $str = iconv('UTF-8', 'windows-1252', $str);
+        $f->SetFont('Times', 'BU', 11);
         $f->SetXY(20, $f->GetY() + $lineh);
         $f->Write($lineh, $str);
-
+        
+        $str = " {$pratica['data_sinistro']}, ";
+        $str = iconv('UTF-8', 'windows-1252', $str);
+        $f->SetFont('Times', '', 11);
+        $f->Write($lineh, $str);
+        
+        $str = "ORA";
+        $str = iconv('UTF-8', 'windows-1252', $str);
+        $f->SetFont('Times', 'BU', 11);
+        $f->Write($lineh, $str);
+        
+        $str = " {$pratica['ora_sinistro']}, ";
+        $str = iconv('UTF-8', 'windows-1252', $str);
+        $f->SetFont('Times', '', 11);
+        $f->Write($lineh, $str);
+        
+        $str = "LUOGO";
+        $str = iconv('UTF-8', 'windows-1252', $str);
+        $f->SetFont('Times', '', 11);
+        $f->Write($lineh, $str);
+        
+        $str = " {$pratica['luogo_sinistro']}, ";
+        $str = iconv('UTF-8', 'windows-1252', $str);
+        $f->SetFont('Times', '', 11);
+        $f->Write($lineh, $str);
+        
+        $str = "AUTORITÀ";
+        $str = iconv('UTF-8', 'windows-1252', $str);
+        $f->SetFont('Times', 'BU', 11);
+        $f->Write($lineh, $str);
+        
+        $str = " {$autorita['nome']}, ";
+        $str = iconv('UTF-8', 'windows-1252', $str);
+        $f->SetFont('Times', '', 11);
+        $f->Write($lineh, $str);
+        
+        $str = "COMANDO DI";
+        $str = iconv('UTF-8', 'windows-1252', $str);
+        $f->SetFont('Times', 'BU', 11);
+        $f->Write($lineh, $str);
+        
+        $str = " {$pratica['comando_autorita']}, ";
+        $str = iconv('UTF-8', 'windows-1252', $str);
+        $f->SetFont('Times', '', 11);
+        $f->Write($lineh, $str);
+        
+        $str = "TIP. INTERVENTO";
+        $str = iconv('UTF-8', 'windows-1252', $str);
+        $f->SetFont('Times', 'BU', 11);
+        $f->Write($lineh, $str);
+        
+        $str = " {$pratica['tipologia_intervento']}, ";
+        $str = iconv('UTF-8', 'windows-1252', $str);
+        $f->SetFont('Times', '', 11);
+        $f->Write($lineh, $str);
+        
+        $str = "SINISTRO N.";
+        $str = iconv('UTF-8', 'windows-1252', $str);
+        $f->SetFont('Times', 'BU', 11);
+        $f->Write($lineh, $str);
+        
+        $str = " {$pratica['numero_sinistro']}, ";
+        $str = iconv('UTF-8', 'windows-1252', $str);
+        $f->SetFont('Times', '', 11);
+        $f->Write($lineh, $str);
+        
+        $str = "TESTIMONI";
+        $str = iconv('UTF-8', 'windows-1252', $str);
+        $f->SetFont('Times', 'BU', 11);
+        $f->Write($lineh, $str);
+        
+        $str = " {$pratica['testimoni']}, ";
+        $str = iconv('UTF-8', 'windows-1252', $str);
+        $f->SetFont('Times', '', 11);
+        $f->Write($lineh, $str);
 
         $str = [['',                        'DATI DI PARTE',                                'DATI DI CONTROPARTE'],
                 ['ANAGRAFICA',              "{$cliente['cognome']} {$cliente['nome']}",     "{$pratica['conducente_controparte']}"],

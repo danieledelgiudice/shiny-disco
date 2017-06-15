@@ -89,3 +89,12 @@ table .btn {
 .table>tbody>tr.row-highlight {
     background-color: #f3ff14;
 }
+
+.fa-equal {
+    font-family: Arial;
+    font-weight: bold;
+}
+
+.fa-equal:before {
+    content: "=";
+}

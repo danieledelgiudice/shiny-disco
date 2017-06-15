@@ -50,6 +50,8 @@ function format_field($queryFields, $model, $field) {
         return $model->{$field};
     else if ($type === 'date')
         return format_date($model->{$field});
+    else if ($type === 'date_eq')
+        return format_date($model->{$field});
     else if ($type === 'decimal')
         return format_money($model->{$field});
     else if ($type === 'enum') {

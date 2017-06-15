@@ -268,6 +268,21 @@ var parseQueryString = function() {
                 </div>
                 <a class="btn btn-default deleteQueryRow"><i class="fa fa-fw fa-times"></i></a>
             </div>`;
+        } else if (type === 'date_eq') {
+            newRow = `
+            <div class="form-group">
+                <label for="${name}" class="col-md-2 col-md-offset-1 control-label">${display}</label>
+                <div class="col-md-7">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="fa fa-equal"></i>
+                        </span>
+                        <input class="form-control date-control" name="${name}" type="text" value="" id="${name}">
+                        <span class="input-group-addon"><i class="fa fa-fw fa-calendar"></i></span>
+                    </div>
+                </div>
+                <a class="btn btn-default deleteQueryRow"><i class="fa fa-fw fa-times"></i></a>
+            </div>`;
         } else if (type === 'decimal') {
             newRow = `
             <div class="form-group">
@@ -327,15 +342,16 @@ var parseQueryString = function() {
             language: 'it',
             todayBtn: 'linked',
         });
-        
-        $('.operatorBtn').click(function() {
-            $(this).children('i').toggleClass('fa-chevron-left').toggleClass('fa-chevron-right');
+
+    });
+    
+    $('.queryPanel .panel-body').on('click', '.operatorBtn', function() {
+        $(this).children('i').toggleClass('fa-chevron-left').toggleClass('fa-chevron-right');
             var opInput = $(this).siblings('.operatorInput');
             if (opInput.val() === 'lt')
                 opInput.val('gt');
             else
                 opInput.val('lt');
-        });
     });
     
     $('.queryPanel .panel-body').on('click', 'a.deleteQueryRow', function() {

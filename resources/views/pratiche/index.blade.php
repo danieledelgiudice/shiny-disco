@@ -17,10 +17,21 @@
                 
                     <div class="form-group">
                         <label for="numero_pratica" class="col-md-3 control-label">Numero pratica</label>
-                        <div class="col-md-7">
-                            <input type="text" name="numero_pratica" class="form-control"> 
+                        
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-fw fa-chevron-right"></i></span>
+                                <input type="number" min="0" name="numero_pratica[]" class="form-control" />
+                            </div>
                         </div>
-                        <a class="btn btn-default deleteQueryRow"><i class="fa fa-fw fa-times"></i></a>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-fw fa-chevron-left"></i></span>
+                                <input type="number" min="0" name="numero_pratica[]" class="form-control" />
+                            </div>
+                        </div>
+                        
+                        <!--<a class="btn btn-default deleteQueryRow"><i class="fa fa-fw fa-times"></i></a>-->
                     </div>
                 
                     <div class="form-group">

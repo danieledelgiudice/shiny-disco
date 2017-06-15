@@ -33,7 +33,14 @@ class PraticaFilter extends ModelFilter
     
     public function numeroPratica($value)
     {
-        return $this->whereBeginsWith('numero_pratica', $value);
+        $q = $this;
+        
+        if ($value[0])
+            $q = $q->where('numero_pratica', '>=', $value[0]);
+        if ($value[1])
+            $q = $q->where('numero_pratica', '<=', $value[1]);
+            
+        return $q;
     }
     
     public function numeroRegistrazione($value)
@@ -243,12 +250,15 @@ class PraticaFilter extends ModelFilter
     
     public function dataSinistro($value)
     {
-        if (!$value[1]) return $this;
+        // if (!$value[1]) return $this;
         
-        $op = ($value[0] == 'lt') ? '<=' : '>=';
-        $element = \Carbon\Carbon::createFromFormat('d/m/Y', $value[1]);
-        
-        return $this->where('data_sinistro', $op, $element);
+        // $op = ($value[0] == 'lt') ? '<=' : '>=';
+        // $element = \Carbon\Carbon::createFromFormat('d/m/Y', $value[1]);
+        $element = \Carbon\Carbon::createFromFormat('d/m/Y', $value);
+
+        //return $this->where('data_sinistro', '=', $element);
+        $this->whereDate('data_sinistro', '=', $element->toDateString());
+ 
     }
    
    public function luogoSinistro($value)
