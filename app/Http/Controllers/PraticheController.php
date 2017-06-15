@@ -337,7 +337,7 @@ class PraticheController extends Controller
         
         foreach($request->all() as $k => $v)
         {
-            if ($k[0] != '_') {
+            if ($k[0] != '_' && $k != 'page') {
                 if ($v != '')
                     $params[$k] = $v;
                 if ($j > 1 && !in_array($k, $requestedFields))
@@ -358,14 +358,17 @@ class PraticheController extends Controller
         
 
         if ($request->user()->isAdmin())
-            $pratiche = \App\Pratica::filter($params)->get();
+            $pratiche = \App\Pratica::filter($params);
         else
             $pratiche = \App\Pratica::whereHas('cliente', function($query) use ($request) {
                 $query->where('filiale_id', $request->user()->filiale->id);
-            })->filter($params)->get();
+            })->filter($params);
                                      
         
         $queryFields = $this->queryFields;
+        
+        $pratiche = $pratiche->paginate(50);
+        
         return view('pratiche._tabella', compact('pratiche', 'requestedFields', 'queryFields'));
     }
     

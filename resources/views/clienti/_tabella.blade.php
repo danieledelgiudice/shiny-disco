@@ -1,5 +1,5 @@
 @if (count($clienti) > 0)
-    <p class="pull-right">{{ count($clienti) }} risultati.</p>
+    <p class="pull-right">{{ $clienti->total() }} risultati.</p>
     <table class="table table-hover table-striped">
         <thead>
             @for ($i = 0; $i < 5; $i++)
@@ -30,6 +30,10 @@
             @endforeach
         </tbody>
     </table>
+    
+    <div class="clienti links text-center">
+        {{ $clienti->render() }}    
+    </div>
 @else
     <p class="text-center">Non sono presenti clienti</p>
 @endif

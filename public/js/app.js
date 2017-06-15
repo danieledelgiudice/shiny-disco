@@ -202,20 +202,19 @@ var parseQueryString = function() {
         }
     });
     
-    
-    $("#queryForm").off('submit').submit(function(e) {
-        e.preventDefault();
+    var executeQuery = function(page) {
+        var $form = $("#queryForm");
         
         $('#queryBtn').prop('disabled', true);
         $('#queryBtn i').removeClass('fa-search');
         $('#queryBtn i').addClass('fa-spin fa-refresh');
         
-        var queryData = $(this).serializeArray();
+        var queryData = $form.serializeArray();
 
         $.ajax({
             type     : "POST",
             cache    : false,
-            url      : $(this).attr('action'),
+            url      : `${$form.attr('action')}?page=${page}`,
             data     : $.param(queryData),
             success  : function(data) {
                 $("#queryResult").empty().append(data);
@@ -225,6 +224,13 @@ var parseQueryString = function() {
                 $('#queryBtn').prop('disabled', false);
             }
         });
+    };
+    
+    
+    $("#queryForm").off('submit').submit(function(e) {
+        e.preventDefault();
+        
+        executeQuery('1');
     });
     
     $('#newFieldQuerySelect').change(function() {
@@ -475,4 +481,9 @@ var parseQueryString = function() {
         });
     });
     
+    $(document).on('click', '.links .pagination a', function (e) {
+        var page = $(this).attr('href').split('page=')[1];
+        executeQuery(page);
+        e.preventDefault();
+    });
 })();

@@ -46,11 +46,13 @@ class ClientiController extends Controller
     public function index(Request $request)
     {
         if ($request->user()->isAdmin())
-            $clienti = \App\Cliente::filter($request->all())->take(100)->orderBy('cognome')->get();
+            $clienti = \App\Cliente::filter($request->all())->orderBy('cognome');
         else
             $clienti = \App\Cliente::where('filiale_id', $request->user()->filiale->id)
-                                     ->filter($request->all())->take(100)->orderBy('cognome')->get();
-        
+                                     ->filter($request->all())->orderBy('cognome');
+                                    
+        $clienti = $clienti->paginate(50);
+                                     
         $filiali = \App\Filiale::pluck('nome', 'id');
         $professioni = \App\Professione::pluck('nome', 'id');
 
@@ -181,7 +183,7 @@ class ClientiController extends Controller
         
         foreach($request->all() as $k => $v)
         {
-            if ($k[0] != '_') {
+            if ($k[0] != '_' && $k != 'page') {
                 if ($v != '')
                     $params[$k] = $v;
                 if ($j > 2 && !in_array($k, $requestedFields))
@@ -201,10 +203,12 @@ class ClientiController extends Controller
         }
 
         if ($request->user()->isAdmin())
-            $clienti = \App\Cliente::filter($params)->orderBy('cognome')->get();
+            $clienti = \App\Cliente::filter($params)->orderBy('cognome');
         else
             $clienti = \App\Cliente::where('filiale_id', $request->user()->filiale->id)
-                                     ->filter($params)->orderBy('cognome')->get();
+                                     ->filter($params)->orderBy('cognome');
+                                     
+        $clienti = $clienti->paginate(50);
                                      
         
         $queryFields = $this->queryFields;
