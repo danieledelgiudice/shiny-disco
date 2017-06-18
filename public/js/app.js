@@ -202,6 +202,10 @@ var parseQueryString = function() {
         }
     });
     
+    // contiene i parametri di ricerca utilizzati per supportare la navigazione delle pagine
+    // che contengono i risultati
+    var queryData = undefined;
+    
     var executeQuery = function(page) {
         var $form = $("#queryForm");
         
@@ -209,7 +213,8 @@ var parseQueryString = function() {
         $('#queryBtn i').removeClass('fa-search');
         $('#queryBtn i').addClass('fa-spin fa-refresh');
         
-        var queryData = $form.serializeArray();
+        // salvo i parametri usati
+        queryData = $form.serializeArray();
 
         $.ajax({
             type     : "POST",
@@ -479,11 +484,36 @@ var parseQueryString = function() {
                 }
             });
         });
-    });
+    }); 
     
     $(document).on('click', '.links .pagination a', function (e) {
         var page = $(this).attr('href').split('page=')[1];
-        executeQuery(page);
+        
+        var $form = $("#queryForm");
+        
+        $('#queryBtn').prop('disabled', true);
+        $('#queryBtn i').removeClass('fa-search');
+        $('#queryBtn i').addClass('fa-spin fa-refresh');
+        
+        if (!queryData) {
+            // se esistevano dati del pannello di ricerca li riutilizzo, altrimenti li ottengo dalla form
+            queryData = $form.serializeArray();
+        }
+
+        $.ajax({
+            type     : "POST",
+            cache    : false,
+            url      : `${$form.attr('action')}?page=${page}`,
+            data     : $.param(queryData),
+            success  : function(data) {
+                $("#queryResult").empty().append(data);
+                
+                $('#queryBtn i').removeClass('fa-spin fa-refresh');
+                $('#queryBtn i').addClass('fa-search');
+                $('#queryBtn').prop('disabled', false);
+            }
+        });
+        
         e.preventDefault();
     });
 })();

@@ -110,7 +110,7 @@ daniela.burini@elisirinfortunistica.it";
         
         $str = "LUOGO";
         $str = iconv('UTF-8', 'windows-1252', $str);
-        $f->SetFont('Times', '', 11);
+        $f->SetFont('Times', 'BU', 11);
         $f->Write($lineh, $str);
         
         $str = " {$pratica['luogo_sinistro']}, ";

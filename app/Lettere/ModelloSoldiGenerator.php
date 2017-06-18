@@ -5,7 +5,7 @@ namespace App\Lettere;
 class ModelloSoldiGenerator
 {
     const REQUIRES = '0';
-    const NAME = "ModelloSoldiGenerator";
+    const NAME = "Modello consegna denaro (nome temporaneo)";
 
     public function generate($data)
     {
