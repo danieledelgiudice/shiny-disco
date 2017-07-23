@@ -117,6 +117,18 @@ var parseQueryString = function() {
         $(formSelector).submit();
     });
     
+    $('.showFatturaDestroyModal').click(function() {
+        var id_fattura = $(this).data('fattura');
+        $('#fatturaDestroyConfirm').data('fattura', id_fattura);
+    });
+    
+    $('#fatturaDestroyConfirm').click(function() {
+        var fattura = $(this).data('fattura');
+        var formSelector = `#fattura${fattura}DestroyForm`;
+        $(formSelector).submit();
+    });
+    
+    
     $('select:not([data-selecttype])').selectize({
         sortField: 'text',
     });

@@ -54,11 +54,9 @@
                         </div>
                         
                         <div class="form-group">
-                            <div class="col-md-4">
-                                <strong class="pull-right">Numero fattura</strong>
-                            </div>
+                            {!! Form::label('numero', 'Numero fattura', ['class' => 'col-md-4 control-label']) !!}    
                             <div class="col-md-8">
-                                {{ $fattura->numero }}
+                                {!! Form::number('numero', null, ['class' => 'form-control col-md-8', 'min' => '1', 'required' => 'true']) !!}
                             </div>
                         </div>
     
@@ -66,6 +64,16 @@
                             {!! Form::label('dettaglio_prestazione', 'Dettaglio prestazione', ['class' => 'col-md-4 control-label']) !!}    
                             <div class="col-md-8">
                                 {!! Form::text('dettaglio_prestazione', null, ['class' => 'form-control col-md-8']) !!}
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            {!! Form::label('data_emissione', "Data di emissione" , ['class' => 'col-md-4 control-label']) !!}
+                            <div class="col-md-8">
+                                <div class="input-group date">
+                                    {!! Form::text('data_emissione', format_date($fattura->data_emissione), ['class' => 'form-control date-control']) !!}
+                                    <span class="input-group-addon"><i class="fa fa-fw fa-calendar"></i></span>
+                                </div>
                             </div>
                         </div>
                         

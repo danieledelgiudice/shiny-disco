@@ -54,7 +54,7 @@ elisirinfortunistica@pec.it    daniela.burini@elisirinfortunistica.it";
         $f->MultiCell(0, $lineh, $str);
 
 
-        $data_fattura = format_date(\Carbon\Carbon::parse($fattura['created_at']));
+        $data_fattura = format_date(\Carbon\Carbon::parse($fattura['data_emissione']));
         $f->SetFont('Times', 'B', 11);
         $str = "Data:
 Numero fattura:
@@ -105,7 +105,6 @@ Indirizzo:
         $f->Ln();
         
         
-        $data_fattura = format_date(\Carbon\Carbon::parse($fattura['created_at']));
         $y = $f->GetY();
         $f->SetFont('Times', 'B', 11);
         $str = "Importo netto:

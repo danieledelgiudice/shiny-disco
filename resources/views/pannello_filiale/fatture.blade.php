@@ -1,6 +1,10 @@
 @extends('pannello_filiale._dashboard', ['active' => 'fatture'])
 @section('inner-content')
 
+@include('common._modal_elimina',
+       ['resource' => 'fattura',
+        'message' => 'Sei sicuro di voler eliminare la fattura? Questa operazione non potrà essere annullata.'])
+
 <div class="panel panel-default">
     <div class="panel-body">
         <!-- Lista fatture Elys -->
@@ -14,7 +18,7 @@
                 <th>Importo netto</th>
                 <th>Importo esente</th>
                 <th>Lordo incassato</th>
-                <th>Data creazione</th>
+                <th>Data emissione</th>
                 <th>&nbsp;</th>
             </thead>
             <tbody>
@@ -33,7 +37,7 @@
                         <td class="table-text"><div>{{ format_money($fattura->importo_esente) }}</div></td>
                         <td class="table-text"><div>{{ format_money($fattura->lordo_incassato) }}</div></td>
                         
-                        <td class="table-text">{{ format_date($fattura->created_at) }}</td>
+                        <td class="table-text">{{ format_date($fattura->data_emissione) }}</td>
                         
                         <td class="table-text col-md-2">
                             <a href="{{ action('FattureController@show',
@@ -47,6 +51,16 @@
                                     class="btn btn-primary">
                                     <i class="fa fa-fw fa-pencil"></i>
                             </a>
+                            
+                            <a href="#" class="btn btn-danger showFatturaDestroyModal"
+                                    data-toggle="modal" data-target="#fatturaDestroyModal" data-fattura="{{$fattura->id}}">
+                                <i class="fa fa-fw fa-trash"></i>
+                            </a>
+                            
+                            {{ Form::open(['action' => ['FattureController@destroy', 'cliente' => $fattura->pratica->cliente,
+                                           'pratica' => $fattura->pratica, 'fattura' => $fattura], 'method' => 'delete', 'style' => 'display:inline;',
+                                           'id' => "fattura{$fattura->id}DestroyForm"]) }}
+                            {{ Form::close() }}
                         </td>
                     </tr>
                 @endforeach
@@ -63,10 +77,6 @@
                 </tr>
             </tbody>
         </table>
-        {{ Form::open(['action' => ['FattureController@destroy', 'cliente' => $fattura->pratica->cliente, 'pratica' => $fattura->pratica, 'fattura' => $fattura],
-            'id' => 'destroyUltimaFatturaElisirBtn', 'method' => 'delete']) }}
-            <button class="btn btn-danger pull-right"><i class="fa fa-fw fa-trash"></i> Elimina ultima fattura Elys</button>
-        {{ Form::close() }}
     </div>
 </div>
 
@@ -83,7 +93,7 @@
                 <th>Importo netto</th>
                 <th>Importo esente</th>
                 <th>Lordo incassato</th>
-                <th>Data creazione</th>
+                <th>Data emissione</th>
                 <th>&nbsp;</th>
             </thead>
             <tbody>
@@ -102,7 +112,7 @@
                         <td class="table-text"><div>{{ format_money($fattura->importo_esente) }}</div></td>
                         <td class="table-text"><div>{{ format_money($fattura->lordo_incassato) }}</div></td>
                         
-                        <td class="table-text">{{ format_date($fattura->created_at) }}</td>
+                        <td class="table-text">{{ format_date($fattura->data_emissione) }}</td>
                         
                         <td class="table-text col-md-2">
                             <a href="{{ action('FattureController@show',
@@ -115,6 +125,16 @@
                                     class="btn btn-primary">
                                     <i class="fa fa-fw fa-pencil"></i>
                             </a>
+                            
+                            <a href="#" class="btn btn-danger showFatturaDestroyModal"
+                                    data-toggle="modal" data-target="#fatturaDestroyModal" data-fattura="{{$fattura->id}}">
+                                <i class="fa fa-fw fa-trash"></i>
+                            </a>
+                            
+                            {{ Form::open(['action' => ['FattureController@destroy', 'cliente' => $fattura->pratica->cliente,
+                                           'pratica' => $fattura->pratica, 'fattura' => $fattura], 'method' => 'delete', 'style' => 'display:inline;',
+                                           'id' => "fattura{$fattura->id}DestroyForm"]) }}
+                            {{ Form::close() }}
                         </td>
                     </tr>
                 @endforeach
@@ -131,11 +151,6 @@
                 </tr>
             </tbody>
         </table>
-        {{ Form::open(['action' => ['FattureController@destroy', 'cliente' => $fattura->pratica->cliente, 'pratica' => $fattura->pratica, 'fattura' => $fattura],
-            'id' => 'destroyUltimaFatturaElisirBtn', 'method' => 'delete']) }}
-            <button class="btn btn-danger pull-right"><i class="fa fa-fw fa-trash"></i> Elimina ultima fattura Elisir</button>
-        {{ Form::close() }}
-        
     </div>
 </div>
 

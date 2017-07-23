@@ -54,6 +54,7 @@ Firma del Sig. _________________________________ quale obbligato in solido
         $str = iconv('UTF-8', 'windows-1252', $str);
         $f->Write($lineh, $str);
 
+        ob_get_clean();
         return $f->Output($this::NAME.'.pdf', 'I');
 
     }

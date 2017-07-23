@@ -151,8 +151,8 @@ class PannelloFilialeController extends Controller
             abort(403);
         }
         
-        $fattureElys = \App\Fattura::where('appartenenza', 1)->get();
-        $fattureElisir = \App\Fattura::where('appartenenza', 2)->get();
+        $fattureElys = \App\Fattura::where('appartenenza', 1)->orderBy('numero')->get();
+        $fattureElisir = \App\Fattura::where('appartenenza', 2)->orderBy('numero')->get();
         
         $filiali = \App\Filiale::all();
         

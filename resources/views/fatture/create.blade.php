@@ -27,7 +27,7 @@
                     Dati fattura
                 </div>
                 <div class="panel-body">
-                    {!! Form::open(['action' => ['FattureController@store', 'cliente' => $pratica->cliente, 'pratica' => $pratica], 'class' => 'form-horizontal']) !!}
+                    {!! Form::model($fattura, ['action' => ['FattureController@store', 'cliente' => $pratica->cliente, 'pratica' => $pratica], 'class' => 'form-horizontal']) !!}
                         <div class="form-group">
                             {!! Form::label('filiale', 'Filiale', ['class' => 'col-md-4 control-label']) !!}
                             <div class="col-md-8">
@@ -43,9 +43,26 @@
                         </div>  
     
                         <div class="form-group">
+                            {!! Form::label('numero', 'Numero fattura', ['class' => 'col-md-4 control-label']) !!}    
+                            <div class="col-md-8">
+                                {!! Form::number('numero', null, ['class' => 'form-control col-md-8', 'min' => '1', 'placeholder' => 'Lasciare vuoto per assegnare automaticamente' ]) !!}
+                            </div>
+                        </div>
+    
+                        <div class="form-group">
                             {!! Form::label('dettaglio_prestazione', 'Dettaglio prestazione', ['class' => 'col-md-4 control-label']) !!}    
                             <div class="col-md-8">
                                 {!! Form::text('dettaglio_prestazione', null, ['class' => 'form-control col-md-8']) !!}
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            {!! Form::label('data_emissione', "Data di emissione" , ['class' => 'col-md-4 control-label']) !!}
+                            <div class="col-md-8">
+                                <div class="input-group date">
+                                    {!! Form::text('data_emissione', format_date($fattura->data_emissione), ['class' => 'form-control date-control']) !!}
+                                    <span class="input-group-addon"><i class="fa fa-fw fa-calendar"></i></span>
+                                </div>
                             </div>
                         </div>
                         

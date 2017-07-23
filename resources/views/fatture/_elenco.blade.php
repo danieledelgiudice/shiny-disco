@@ -14,7 +14,7 @@
                     <th>Dettaglio prestazione</th>
                     <th>Importo netto</th>
                     <th>Importo esente</th>
-                    <th>Data creazione</th>
+                    <th>Data emissione</th>
                     <th>&nbsp;</th>
                 </thead>
                 <tbody>
@@ -25,7 +25,7 @@
                             <td class="table-text"><div>{{ $fattura->dettaglio_prestazione }}</div></td>
                             <td class="table-text"><div>{{ format_money($fattura->importo_netto) }}</div></td>
                             <td class="table-text"><div>{{ format_money($fattura->importo_esente) }}</div></td>
-                            <td class="table-text">{{ format_date($fattura->created_at) }}</td>
+                            <td class="table-text">{{ format_date($fattura->data_emissione) }}</td>
                             
                             <td class="table-text col-md-2">
                                 <a href="{{ action('FattureController@show',

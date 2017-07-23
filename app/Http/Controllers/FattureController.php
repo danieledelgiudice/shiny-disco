@@ -28,7 +28,10 @@ class FattureController extends Controller
             abort(403);
         }
         
-        return view('fatture.create', compact('pratica'));
+        $fattura = new \App\Fattura;
+        $fattura->data_emissione = \Carbon\Carbon::today();
+        
+        return view('fatture.create', compact('pratica', 'fattura'));
     }
     
     public function store(Request $request, $cliente_id, $pratica_id)
@@ -48,14 +51,25 @@ class FattureController extends Controller
         $this->validate($request, ['appartenenza' => 'required|numeric|max:2|min:1']);
         $this->validateInput($request);
         
-        $numero = \App\Fattura::where('appartenenza', $request->appartenenza)->max('numero') + 1;
+        // Assegnazione automatica numero fattura, non più richiesta
+        // $numero = \App\Fattura::where('appartenenza', $request->appartenenza)->max('numero') + 1;
         
+        if (\App\Fattura::where('appartenenza', $request->appartenenza)
+                        ->where('numero', $request->numero)->first())
+        {
+            // Esiste già una fattura per la solita "appartenenza" con il numero specificato
+            return redirect()->back()->withInput()->withErrors(['message' => 'Numero fattura: esiste già una fattura con il numero specificato.']);
+        }
         
         $fattura = new \App\Fattura;
         $fattura->fill($request->all());
         
         $fattura->pratica()->associate($pratica);
-        $fattura->numero = $numero;
+        
+        if (!$request->numero) {
+            $fattura->numero = \App\Fattura::where('appartenenza', $request->appartenenza)->max('numero') + 1;
+        }
+        
         $fattura->save();
         
         return redirect()->action('PraticheController@show', ['cliente' => $pratica->cliente, 'pratica' => $pratica])
@@ -105,7 +119,18 @@ class FattureController extends Controller
         
         $this->validateInput($request);
         
+        if (\App\Fattura::where('id', '<>', $fattura->id)
+                        ->where('appartenenza', $fattura->appartenenza)
+                        ->where('numero', $request->numero)->first())
+        {
+            // Esiste già una fattura per la solita "appartenenza" con il numero specificato,
+            // che pero' non e' la fattura stessa
+            return redirect()->back()->withInput()->withErrors(['message' => 'Numero fattura: esiste già una fattura con il numero specificato.']);
+        }
+        
+        $fattura->numero = $request->numero;
         $fattura->dettaglio_prestazione = $request->dettaglio_prestazione;
+        $fattura->data_emissione = $request->data_emissione;
         $fattura->importo_netto = $request->importo_netto;
         $fattura->importo_esente = $request->importo_esente;
         
@@ -160,13 +185,7 @@ class FattureController extends Controller
             // L'utente non può cancellare fatture
             abort(403);
         }
-        
-        if (\App\Fattura::where('appartenenza', $fattura->appartenenza)
-                        ->where('numero', '>', $fattura->numero)
-                        ->count() > 0) {
-            return redirect()->back()->with('warning', 'La fattura che si sta tentando di eliminare non è l\'ultima');
-        }
-        
+
         $fattura->delete();
         return redirect()->back()->with('success', 'La fattura é stata eliminata con successo!');
     }
@@ -175,6 +194,7 @@ class FattureController extends Controller
     {
         $this->validate($request, [
             'dettaglio_prestazione'       => 'required|max:255',
+            'numero'                      => 'numeric|max:100000000|min:1',
             'importo_netto'               => 'required|numeric|max:100000000|min:0',
             'importo_esente'              => 'required|numeric|max:100000000|min:0',
         ]);
