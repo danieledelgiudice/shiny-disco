@@ -48,7 +48,7 @@ class FattureController extends Controller
             abort(403);
         }
         
-        $this->validate($request, ['appartenenza' => 'required|numeric|max:2|min:1']);
+        $this->validate($request, ['appartenenza' => 'required|numeric|max:3|min:1']);
         $this->validateInput($request);
         
         // Assegnazione automatica numero fattura, non più richiesta

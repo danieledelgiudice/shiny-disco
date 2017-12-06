@@ -24,10 +24,13 @@ class RicevutaClienteGenerator
 
         $logo_elisir = $data['logo'];
         $logo_url = \URL::asset("/images/logos/$logo_elisir");
-        $f->Image($logo_url, 20, 15, 45);
-
+        
+        if (!env('APP_DEBUG')) {
+            $f->Image($logo_url, 20, 15, 45);
+        }
+        
         $f->SetFont('Times', '', 11);
-        $str = "P.zza Attias 13 57100 Livorno
+        $str = "P.zza Attias 37, 4° piano - 57100 Livorno
 Tel 0586/941901 0586/895118 Linee 5 a ricerca automatica
 Fax 0586 1730113
 Resp. Uffici esterni 0586 1734753
@@ -35,10 +38,15 @@ Resp. Uffici esterni 0586 1734753
 
         if ($logo_elisir == 'elisir.png') {
             $str = $str . "elisirinfortunistica@pec.it
-daniela.burini@elisirinfortunistica.it";
+daniela.burini@elisirinfortunistica.it
+Partita IVA 01682480494";
+        } else {
+            $str = $str . "
+Partita IVA 01724020498";
         }
 
         $f->SetXY(80, 15);
+        $str = iconv('UTF-8', 'windows-1252', $str);
         $f->MultiCell(0, $lineh, $str);
 
         $str = "Livorno " . format_date(\Carbon\Carbon::today()) . "\n n.p. " .  $pratica['numero_pratica'];

@@ -71,15 +71,17 @@
                         @if (!$da_confermare)
                             <div class="form-horizontal">
                                 <div class="form-group">
-                                    <div class="col-md-2 col-md-offset-8">
+                                    <div class="col-md-2 col-md-offset-6">
                                         <div class="input-group date">
                                             {!! Form::text('spostaPromemoriaQuando', null, ['class' => 'form-control date-control', 'required' => 'required', 'id' => 'spostaPromemoriaQuando']) !!}
                                             <span class="input-group-addon"><i class="fa fa-fw fa-calendar"></i></span>
                                         </div>
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-4">
                                         <button id="spostaPromemoriaBtn" class="btn btn-primary">Sposta selezione</button>
+                                        <button id="eliminaPromemoriaBtn" class="btn btn-success">Elimina selezione</button>
                                     </div>
+                                    
                                 </div>
                             </div>
                         @endif

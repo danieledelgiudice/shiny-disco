@@ -38,6 +38,7 @@ class Fattura extends Model
         {
             case 1: return 'Ely\'s';
             case 2: return 'Elisir';
+            case 3: return 'Ely\'s Elisir Group';
             default: return '';
         }
     }

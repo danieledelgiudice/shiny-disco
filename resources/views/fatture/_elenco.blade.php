@@ -20,7 +20,7 @@
                 <tbody>
                     @foreach ($fatture as $fattura)
                         <tr class="">
-                            <td class="table-text"><div>{{ $fattura->appartenenza == 1 ? 'Ely\'s' : 'Elisir' }}</div></td>
+                            <td class="table-text"><div>{{ $fattura->nomeFiliale }}</div></td>
                             <td class="table-text"><div>{{ $fattura->numero }}</div></td>
                             <td class="table-text"><div>{{ $fattura->dettaglio_prestazione }}</div></td>
                             <td class="table-text"><div>{{ format_money($fattura->importo_netto) }}</div></td>

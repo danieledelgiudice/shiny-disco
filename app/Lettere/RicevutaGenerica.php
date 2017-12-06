@@ -2,10 +2,10 @@
 
 namespace App\Lettere;
 
-class ModelloSoldiGenerator
+class RicevutaGenerica
 {
     const REQUIRES = '0';
-    const NAME = "Modello consegna denaro (nome temporaneo)";
+    const NAME = "Ricevuta generica";
 
     public function generate($data)
     {

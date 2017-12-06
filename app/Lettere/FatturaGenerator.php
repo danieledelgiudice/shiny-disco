@@ -26,7 +26,7 @@ class FatturaGenerator
             // Ely's
             $logo_url = \URL::asset("/images/logos/elys.jpg");
             $str = "Ely's consulenze
-P.zza Attias 13 57100 Livorno
+P.zza Attias 37, 4° piano - 57100 Livorno
 Tel 0586/941901 0586/895118 Linee 5 a ricerca automatica
 Fax 0586 1730113 Resp. Uffici esterni 0586 1734753
 Partita IVA 01724020498";
@@ -35,18 +35,31 @@ Partita IVA 01724020498";
             
             // Elisir
             $logo_url = \URL::asset("/images/logos/elisir.png");
-            $str = "Elisir consulenze
-P.zza Attias 13 57100 Livorno
+            $str = "Studio di consulenza Elisir
+P.zza Attias 37, 4° piano - 57100 Livorno
 Tel 0586/941901 0586/895118 Linee 5 a ricerca automatica
 Fax 0586 1730113
 Resp. Uffici esterni 0586 1734753
 Partita IVA 01682480494
 elisirinfortunistica@pec.it    daniela.burini@elisirinfortunistica.it";
 
+        } else if ($fattura['appartenenza'] == 3) {
+            
+            // Elisir
+            // $logo_url = \URL::asset("/images/logos/elisir.png"); // manca logo
+            $str = "Ely's Elisir Group SRL 
+P.zza Attias 37, 4° piano - 57100 Livorno
+P.I. 01868050491
+C.F. 01868050491
+Iscritta alla Camera di Commercio di Livorno n. LI-20276
+Capitale Sociale € 10.000,00";
+
         }
 
         // $f->Rect(20, 15, 45, 34);
-        $f->Image($logo_url, 20, 15, 45);
+        if (!env('APP_DEBUG')) {
+            $f->Image($logo_url, 20, 15, 45);
+        }
 
         $f->SetFont('Times', '', 11);
         $f->SetXY(80, 10);
@@ -139,7 +152,12 @@ $lordo_incassato_h
         } else if ($fattura['appartenenza'] == 2) {
             
             // Elisir
-            $str = "Elisir consulenza";
+            $str = "Studio di consulenza Elisir";
+
+        } else if ($fattura['appartenenza'] == 3) {
+            
+            // Elisir
+            $str = "Ely's Elisir Group SRL";
 
         }
         

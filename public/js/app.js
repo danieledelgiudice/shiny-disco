@@ -498,6 +498,38 @@ var parseQueryString = function() {
         });
     }); 
     
+    function eliminaPromemoria(id) {
+        var formSelector = `#promemoria${id}DestroyForm`;
+        var $form = $(formSelector);
+
+        var $row = $form.closest('tr');
+
+        $.ajax({
+            type     : "POST",
+            cache    : false,
+            url      : $form.attr('action'),
+            data     : $form.serializeArray(),
+            success  : function(data) {
+                $row.removeClass('selected');
+                $row.hide();
+            }
+        });
+    }
+    
+    $('#eliminaPromemoriaBtn').click(function() {
+        var $selected = $('.table-selectable .row-selectable.selected');
+        
+        $selected.each(function() {
+            var id = $(this).find('.promemoriaDestroyBtn').data('promemoria');
+            eliminaPromemoria(id);
+        });
+    });
+    
+    $(document).on('click', '.promemoriaDestroyBtn', function() {
+        var id = $(this).data('promemoria');
+        eliminaPromemoria(id);
+    });
+    
     $(document).on('click', '.links .pagination a', function (e) {
         var page = $(this).attr('href').split('page=')[1];
         

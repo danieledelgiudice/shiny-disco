@@ -32,11 +32,12 @@
             <td class="col-md-1">
                 @can('completare-promemoria', $p->pratica)
                     {!! Form::open(['action' => ['PromemoriaController@destroy', 'cliente' => $p->pratica->cliente,
-                        'pratica' => $p->pratica, 'promemoria' => $p], 'method' => 'delete']) !!}
-                        <button type="submit" class="btn btn-success">
-                            <i class="fa fa-fw fa-check"></i>
-                        </button>
+                        'pratica' => $p->pratica, 'promemoria' => $p], 'method' => 'delete',
+                        'id' => "promemoria{$p->id}DestroyForm"]) !!}
                     {!! Form::close() !!}
+                    <button class="btn btn-success promemoriaDestroyBtn" data-promemoria="{{$p->id}}">
+                        <i class="fa fa-fw fa-check"></i>
+                    </button>
                 @endcan
             </td>
         </tr>

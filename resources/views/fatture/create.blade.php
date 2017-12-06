@@ -38,6 +38,9 @@
                                     <label class="btn btn-default">
                                         <input type="radio" name="appartenenza" value="2" autocomplete="off"> Elisir
                                     </label>
+                                    <label class="btn btn-default">
+                                        <input type="radio" name="appartenenza" value="3" autocomplete="off"> Ely's Elisir Group
+                                    </label>
                                 </div>
                             </div>
                         </div>  

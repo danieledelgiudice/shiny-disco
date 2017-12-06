@@ -23,11 +23,24 @@
                                 <strong>Numero pratica</strong>
                             </div>
                             
-                            <div class="col-md-3">
-                                {!! Form::number('pratica_numero_pratica', $numero_pratica, ['class' => 'form-control']) !!}
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-fw fa-chevron-right"></i></span>
+                                            <input type="number" min="0" name="numero_pratica[]" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-fw fa-chevron-left"></i></span>
+                                            <input type="number" min="0" name="numero_pratica[]" class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             
-                            <div class="col-md-6 text-center">
+                            <div class="col-md-3 text-center">
                                 <button type="submit" class="btn btn-primary">
                                        <i class="fa fa-fw fa-search"></i>
                                        Cerca
@@ -85,7 +98,7 @@
                         <p class="text-center">Non sono presenti promemoria nel database</p>
                     @else
                         <div class="text-center">
-                            {{ $promemoria->appends(['pratica_numero_pratica' => $numero_pratica])->links() }}    
+                            {{ $promemoria->appends(Request::except('page'))->links() }}    
                         </div>
                     @endif
                 </div>

@@ -17,7 +17,7 @@ class LettereFactory
         $this->generators[4] = MandatoPrivacyGenerator::class;
         $this->generators[5] = FrontespizioGenerator::class;
         $this->generators[6] = RicevutaMediciGenerator::class;
-        $this->generators[7] = ModelloSoldiGenerator::class;
+        $this->generators[7] = RicevutaGenerica::class;
     }
     
     public function dataSource($source)

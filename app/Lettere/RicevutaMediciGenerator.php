@@ -53,7 +53,7 @@ class RicevutaMediciGenerator
         $f->MultiCell(0, $lineh, $str, 0);
 
         $f->SetY($f->getY() + 3);
-        $str = "SPETT.LE ELY'S CONSULENZE";
+        $str = "SPETT.LE ELY'S CONSULENZE/STUDIO DI CONSULENZA ELISIR";
         $str = iconv('UTF-8', 'windows-1252', $str);
         $f->MultiCell(0, $lineh, $str, 0);
 

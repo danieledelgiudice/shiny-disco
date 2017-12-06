@@ -22,7 +22,7 @@
                 {!! Form::label('importo', "Importo" , ['class' => 'col-md-2 control-label']) !!}
                 <div class="col-md-4">
                     <div class="input-group">
-                        {!! Form::number('importo', null, ['class' => 'form-control']) !!}
+                        {!! Form::number('importo', null, ['class' => 'form-control', 'step' => '0.01']) !!}
                         <span class="input-group-addon"><i class="fa fa-fw fa-eur"></i></span>
                     </div>
                 </div>
