@@ -93,6 +93,7 @@
                                     <li role="separator" class="divider"></li>
                                     <li><a href="{{ action('FilialiController@index') }}"><i class="fa fa-btn fa-gear"></i>Gestione filiali</a></li>
                                     <li><a href="{{ action('PromemoriaController@indexAll', ['filiale' => Auth::user()->filiale]) }}"><i class="fa fa-btn fa-gear"></i>Elenco promemoria</a></li>
+                                    <li><a href="{{ action('StrumentiController@index') }}"><i class="fa fa-btn fa-gear"></i>Strumenti</a></li>
                                 @endif
                                 <li role="separator" class="divider"></li>
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>

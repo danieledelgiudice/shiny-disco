@@ -106,3 +106,8 @@ Route::get( '/clienti/{cliente}/pratiche/{pratica}/fatture/{fattura}/edit',     
 Route::put( '/clienti/{cliente}/pratiche/{pratica}/fatture/{fattura}',          'FattureController@update');
 Route::post('/clienti/{cliente}/pratiche/{pratica}/fatture/',                   'FattureController@store');
 Route::delete( '/clienti/{cliente}/pratiche/{pratica}/fatture/{fattura}',       'FattureController@destroy');
+
+
+
+Route::get( '/strumenti',                                                       'StrumentiController@index');
+Route::get( '/strumenti/export/clienti',                                        'StrumentiController@exportClients');

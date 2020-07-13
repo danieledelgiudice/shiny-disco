@@ -106,11 +106,16 @@ class AuthServiceProvider extends ServiceProvider
         
         
         $gate->define('generare-fatture', function ($user) {
-           return false; 
+            return false;
         });
         
         $gate->define('cancellare-fatture', function ($user) {
-           return false; 
+            return false;
+        });
+
+
+        $gate->define('generare-export', function ($user) {
+            return false;
         });
     }
 }
