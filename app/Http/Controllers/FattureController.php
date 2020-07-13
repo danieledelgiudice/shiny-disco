@@ -51,14 +51,15 @@ class FattureController extends Controller
         $this->validate($request, ['appartenenza' => 'required|numeric|max:3|min:1']);
         $this->validateInput($request);
         
-        // Assegnazione automatica numero fattura, non più richiesta
-        // $numero = \App\Fattura::where('appartenenza', $request->appartenenza)->max('numero') + 1;
         
+        $year = \Carbon\Carbon::createFromFormat('d/m/Y', $request->data_emissione)->year;
         if (\App\Fattura::where('appartenenza', $request->appartenenza)
-                        ->where('numero', $request->numero)->first())
+                        ->where('numero', $request->numero)
+                        ->whereRaw('YEAR(data_emissione) = ?', [$year])
+                        ->first())
         {
-            // Esiste già una fattura per la solita "appartenenza" con il numero specificato
-            return redirect()->back()->withInput()->withErrors(['message' => 'Numero fattura: esiste già una fattura con il numero specificato.']);
+            // Esiste già una fattura per la solita "appartenenza" e il solito anno con il numero specificato
+            return redirect()->back()->withInput()->withErrors(['message' => 'Numero fattura: esiste già una fattura con il numero specificato per questo anno.']);
         }
         
         $fattura = new \App\Fattura;
@@ -67,7 +68,10 @@ class FattureController extends Controller
         $fattura->pratica()->associate($pratica);
         
         if (!$request->numero) {
-            $fattura->numero = \App\Fattura::where('appartenenza', $request->appartenenza)->max('numero') + 1;
+            $fattura->numero = 
+                \App\Fattura::where('appartenenza', $request->appartenenza)
+                ->whereRaw('YEAR(data_emissione) = ?', [$year])
+                ->max('numero') + 1;
         }
         
         $fattura->save();
@@ -119,11 +123,13 @@ class FattureController extends Controller
         
         $this->validateInput($request);
         
+        $year = \Carbon\Carbon::createFromFormat('d/m/Y', $request->data_emissione)->year;
         if (\App\Fattura::where('id', '<>', $fattura->id)
                         ->where('appartenenza', $fattura->appartenenza)
-                        ->where('numero', $request->numero)->first())
+                        ->where('numero', $request->numero)
+                        ->whereRaw('YEAR(data_emissione) = ?', [$year])->first())
         {
-            // Esiste già una fattura per la solita "appartenenza" con il numero specificato,
+            // Esiste già una fattura per la solita "appartenenza" ed anno con il numero specificato,
             // che pero' non e' la fattura stessa
             return redirect()->back()->withInput()->withErrors(['message' => 'Numero fattura: esiste già una fattura con il numero specificato.']);
         }

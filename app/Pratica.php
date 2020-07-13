@@ -359,5 +359,6 @@ class Pratica extends Model
         'scheda_pratica',
         'data_prescrizione',
         'data_prossima_udienza',
+        'segnalato_da',
     ];
 }

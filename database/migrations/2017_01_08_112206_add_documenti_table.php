@@ -19,6 +19,7 @@ class AddDocumentiTable extends Migration
             $table->string('mime');
             $table->string('nome_file');
             $table->string('nome_file_originale');
+            $table->integer('categoria');
             
             $table->integer('pratica_id')->unsigned();
             

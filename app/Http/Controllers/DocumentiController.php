@@ -62,7 +62,13 @@ class DocumentiController extends Controller
             abort(403);
         }
         
+        $this->validate($request, [
+            'documento' => 'file',
+            'categoria' => 'required|numeric|min:1|max:5',
+        ]);
+        
         $file = $request->documento;
+        $categoria = $request->categoria;
         
         if(!($file && $file->isValid())) {
             return response()->json('Si è verificato un errore durante il caricamento del file', 400);
@@ -103,6 +109,7 @@ class DocumentiController extends Controller
     		    'descrizione' => $descrizione,
     		    'nome_file' => $storage_name,
     		    'nome_file_originale' => $original_name,
+    		    'categoria' => $categoria,
     		    'mime' => $mime,
     		    ]);
     		    

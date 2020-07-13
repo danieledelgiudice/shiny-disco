@@ -53,6 +53,9 @@
                                     <label class="btn btn-default">
                                         <input type="radio" name="logo" value="1" autocomplete="off"> Elisir
                                     </label>
+                                    <label class="btn btn-default">
+                                        <input type="radio" name="logo" value="2" autocomplete="off"> Ely'S Elisir group
+                                    </label>
                                 </div>
                             </div>
                         </div>  

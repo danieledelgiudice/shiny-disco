@@ -151,12 +151,13 @@ class PannelloFilialeController extends Controller
             abort(403);
         }
         
-        $fattureElys = \App\Fattura::where('appartenenza', 1)->orderBy('numero')->get();
-        $fattureElisir = \App\Fattura::where('appartenenza', 2)->orderBy('numero')->get();
+        $fattureElys = \App\Fattura::where('appartenenza', 1)->orderByRaw('YEAR(data_emissione) DESC, numero ASC')->get();
+        $fattureElisir = \App\Fattura::where('appartenenza', 2)->orderByRaw('YEAR(data_emissione) DESC, numero ASC')->get();
+        $fattureGroup = \App\Fattura::where('appartenenza', 3)->orderByRaw('YEAR(data_emissione) DESC, numero ASC')->get();
         
         $filiali = \App\Filiale::all();
         
-        return view('pannello_filiale.fatture', compact('fattureElys', 'fattureElisir', 'filiali', 'filiale'));
+        return view('pannello_filiale.fatture', compact('fattureElys', 'fattureElisir', 'fattureGroup', 'filiali', 'filiale'));
     }
     
     private function filtraPratiche(Request $request, $pratiche_query) {

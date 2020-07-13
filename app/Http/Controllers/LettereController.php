@@ -32,15 +32,28 @@ class LettereController extends Controller
             // L'utente non ha il permesso di generare documenti con logo elisir
             abort(403);
         }
+        
+        switch($request->logo) {
+            case 1:
+                $logo = 'elisir.png';
+                break;
+            case 2:
+                $logo = 'group.jpg';
+                break;
+            default:
+                $logo = 'elys.jpg';
+                break;
+        }
 
         $f = new \App\Lettere\LettereFactory;
-        $source = ['cliente' => $pratica->cliente,
+        $source = [
+            'cliente' => $pratica->cliente,
             'professione' => $pratica->cliente->professione,
             'pratica' => $pratica,
             'autorita' => $pratica->autorita,
             'prestazioni' => $pratica->prestazioni_mediche,
-            'logo' => $request->logo ? 'elisir.png' : 'elys.jpg'
-            ];
+            'logo' => $logo,
+        ];
 
         foreach ($request->all() as $name => $value)
             if ($name !== 'logo')

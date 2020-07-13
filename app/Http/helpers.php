@@ -62,3 +62,23 @@ function format_field($queryFields, $model, $field) {
     
     return '';
 }
+
+function appartenenza_fatture($appartenenza) {
+    switch($appartenenza) {
+        case 1:
+            return 'Ely\'s';
+        case 2:
+            return 'Elisir';
+        case 3:
+            return 'Ely\'s Elisir Group';
+        default:
+            return '';
+    }
+}
+
+function formatta_testo($s) {
+    $s = e($s);
+    $s = preg_replace('#\*(.*?)\*#', '<b>$1</b>', $s);   // bold
+    $s = preg_replace('#_(.*?)_#', '<del>$1</del>', $s); // strikethrough
+    return $s;
+}

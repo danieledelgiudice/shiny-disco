@@ -20,29 +20,30 @@ class GenericaGenerator
         $f = new \fpdf\FPDF();
         $f->SetTitle($this::NAME);
         $f->SetMargins(20, 20);
+        $f->SetFont('Times', '', 11);
         $f->AddPage();
 
-        $logo_elisir = $data['logo'];
-        $logo_url = \URL::asset("/images/logos/$logo_elisir");
+        $logo = $data['logo'];
+        $logo_url = \URL::asset("/images/logos/$logo");
         
-        if (!env('APP_DEBUG')) {
-            $f->Image($logo_url, 20, 15, 45);
-        }
+        $f->Image($logo_url, 20, 15, 45);
 
-        $f->SetFont('Times', '', 11);
         $str = "P.zza Attias 37, 4° piano - 57100 Livorno
 Tel 0586/941901 0586/895118 Linee 5 a ricerca automatica
 Fax 0586 1730113
 Resp. Uffici esterni 0586 1734753
 ";
 
-        if ($logo_elisir == 'elisir.png') {
-            $str = $str . "elisirinfortunistica@pec.it
+        switch($logo) {
+            case 'elisir.png':
+                $str = $str . "elisirinfortunistica@pec.it
 daniela.burini@elisirinfortunistica.it
 Partita IVA 01682480494";
-        } else {
-            $str = $str . "
+                break;
+            case 'elys.jpg':
+                $str = $str . "
 Partita IVA 01724020498";
+                break;
         }
 
         $f->SetXY(80, 15);
@@ -111,6 +112,5 @@ All";
         $f->Write($lineh, $str);
 
         return $f->Output($this::NAME.'.pdf', 'I');
-
     }
 }

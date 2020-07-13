@@ -23,6 +23,7 @@ class MandatoPrivacyGenerator
 
         $str = "Spett.le Ely’s consulenza
 Spett.le ELISIR
+Spett.le Ely'S Elisir group
 Il sottoscritto  {$cliente['nome']} {$cliente['cognome']} ( {$cliente['codice_fiscale']} ) di seguito denominato mandante";
         $str = iconv('UTF-8', 'windows-1252', $str);
         $f->SetXY(20, 20);

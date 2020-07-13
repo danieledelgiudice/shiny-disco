@@ -63,6 +63,7 @@ class PraticheController extends Controller
             'numero_sinistro'                => ['display'   => 'Numero sinistro',                     'type'        => 'string',      ],
             'data_prossima_udienza'          => ['display'   => 'Data prossima udienza',               'type'        => 'date',        ],
             'data_prescrizione'              => ['display'   => 'Data prescrizione',                   'type'        => 'date',        ],
+            'segnalato_da'                   => ['display'   => 'Segnalato da',                        'type'        => 'string',      ],
             
             //////////////////////////////////////////
             

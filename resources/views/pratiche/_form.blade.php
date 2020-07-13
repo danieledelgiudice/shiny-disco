@@ -353,6 +353,14 @@
                     </div>
                 </div>
             </div>
+            
+            <div class="form-group">
+                <!-- Segnalato da -->
+                {!! Form::label('segnalato_da', 'Segnalato da' , ['class' => 'col-md-2 control-label']) !!}
+                <div class="col-md-4">
+                    {!! Form::text('segnalato_da', null, ['class' => 'form-control']) !!}
+                </div>
+            </div>
 
             <div class="form-group">
                 <!-- Stato avanzamento pratica -->

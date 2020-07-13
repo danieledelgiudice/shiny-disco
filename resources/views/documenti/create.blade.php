@@ -26,6 +26,13 @@
         <div class="panel panel-default col-md-6 col-md-offset-3">
             <div class="panel-body">
                 {!! Form::open(['action' => ['DocumentiController@store', 'filiale' => $filiale], 'files' => true, 'class' => 'dropzone', 'id' => 'myDropzone']) !!}
+                <select name="categoria">
+                    <option value="1">Old</option>
+                    <option value="2" selected>Posta entrata/uscita</option>
+                    <option value="3">Certificazioni mediche</option>
+                    <option value="4">Atti vari</option>
+                    <option value="5">Perizie medico legale</option>
+                </select>
                 {{ Form::close() }}
                 <p class="text-center">I documenti devono essere chiamati nel formato <code class="text-nowrap">&lt;num. pratica&gt;&nbsp;&lt;descrizione file&gt;</code></p>
             </div>

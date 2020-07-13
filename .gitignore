@@ -3,12 +3,10 @@
 Homestead.yaml
 Homestead.json
 /storage
-*.log
 
 
 ### Laravel ###
 vendor/
-vendor/*
 node_modules/
 
 # Laravel 4 specific

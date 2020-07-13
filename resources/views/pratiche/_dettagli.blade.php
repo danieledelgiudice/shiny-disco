@@ -308,6 +308,14 @@
                 <p class="form-control-static">{{ format_date($pratica->data_prossima_udienza) }}</p>
             </div>
         </div>
+        
+        <div class="row">
+            <!-- Segnalato da -->
+            <strong class="col-md-2 form-control-static">Segnalato da</strong>
+            <div class="col-md-4">
+                <p class="form-control-static">{{ $pratica->segnalato_da }}</p>
+            </div>
+        </div>
 
         <div class="row">
             <!-- Stato avanzamento pratica -->
@@ -439,7 +447,7 @@
             <!-- Scheda Pratica (Note) -->
             <strong class="col-md-2 form-control-static text-danger">Scheda Pratica</strong>
             <div class="col-md-10">
-               <p class="form-control-static text-newlines">{{ $pratica->scheda_pratica }}</p>
+               <p class="form-control-static text-newlines">{!! formatta_testo($pratica->scheda_pratica) !!}</p>
             </div>
         </div>
     </div>

@@ -332,6 +332,11 @@ class PraticaFilter extends ModelFilter
         return $this->where('data_prossima_udienza', $op, $element);
     }
     
+    public function segnalatoDa($value)
+    {
+        return $this->whereBeginsWith('segnalato_da', $value);
+    }
+    
     ///////////////////////////////////////
     
     
