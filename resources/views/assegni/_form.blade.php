@@ -50,24 +50,42 @@
                 <!-- Tipologia Assegno -->
                 {!! Form::label('tipologia', "Tipologia" , ['class' => 'col-md-2 control-label']) !!}
                 <div class="col-md-4">
-                    <div class="radio-inline">
+                    <div class="radio">
                         <label>
                             {!! Form::radio('tipologia', '0', old('tipologia') == 0); !!}
                             Da consegnare
                         </label>
                     </div>
                     
-                    <div class="radio-inline">
+                    <div class="radio">
                         <label>
                             {!! Form::radio('tipologia', '1', old('tipologia') == 1); !!}
                             Da restituire
                         </label>
                     </div>
+                    
+                    <div class="radio">
+                        <label>
+                            {!! Form::radio('tipologia', '2', old('tipologia') == 2); !!}
+                            Annullato/Scaduto
+                        </label>
+                    </div>
                 </div>
                 
                 <!-- Data azione Assegno -->
-                {!! Form::label('data_azione', (isset($assegno) && $assegno->tipologia) ? "Restituito a impresa il" : "Consegnato il",
-                    ['class' => 'col-md-2 control-label', 'id' => 'label_data_azione']) !!}
+                @php
+                    $label = 'Consegnato il';
+                    if (isset($assegno)) {
+                        if($assegno->tipologia == 0) {
+                            $label = "Consegnato il";
+                        } else if($assegno->tipologia == 1) {
+                            $label = "Restituito a impresa il";
+                        } else if($assegno->tipologia == 2) {
+                            $label = "Annullato/Scaduto";
+                        }
+                    }
+                @endphp
+                {!! Form::label('data_azione', $label, ['class' => 'col-md-2 control-label', 'id' => 'label_data_azione']) !!}
                 <div class="col-md-4">
                     <div class="input-group date">
                         {!! Form::text('data_azione', null, ['class' => 'form-control date-control']) !!}

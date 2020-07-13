@@ -15,6 +15,7 @@
                     <th>Banca</th>
                     <th>Consegnato il</th>
                     <th>Restituito a impresa il</th>
+                    <th>Annullato/Scaduto</th>
                     <th>Scadenza</th>
                     <th>&nbsp;</th>
                 </thead>
@@ -24,8 +25,9 @@
                             <td class="table-text"><div>{{ format_date($assegno->data) }}</div></td>
                             <td class="table-text"><div>{{ format_money($assegno->importo) }}</div></td>
                             <td class="table-text"><div>{{ $assegno->banca }}</div></td>
-                            <td class="table-text"><div>{{ $assegno->tipologia ? '' : format_date($assegno->data_azione) }}</div></td>
-                            <td class="table-text"><div>{{ $assegno->tipologia ? format_date($assegno->data_azione) : '' }}</div></td>
+                            <td class="table-text"><div>{{ $assegno->tipologia === 0 ? format_date($assegno->data_azione) : ''}}</div></td>
+                            <td class="table-text"><div>{{ $assegno->tipologia === 1 ? format_date($assegno->data_azione) : '' }}</div></td>
+                            <td class="table-text"><div>{{ $assegno->tipologia === 2 ? format_date($assegno->data_azione) : '' }}</div></td>
                             <td class="table-text"><div>{{ $assegno->data_scadenza ? format_date($assegno->data_scadenza) : '' }}</div></td>
                             
                             <td class="table-text">
@@ -52,22 +54,16 @@
             </table>
             <div class="row mb-5 totali-assegni">
                 <div class="col-md-2 col-md-offset-2">
-                    <strong>Totale consegnato</strong>
+                    <strong>Totale consegnati</strong>
                      <p>{{ format_money($totale_assegni_consegnati) }}</p>
                 </div>
-                <div class="col-md-1">
-                    <h4>&minus;</h4>
-                </div>
-                <div class="col-md-2">
-                    <strong>Totale restituito</strong>
+                <div class="col-md-2 col-md-offset-1">
+                    <strong>Totale restituiti a impresa</strong>
                     <p>{{ format_money($totale_assegni_restituiti) }}</p>
                 </div>
-                <div class="col-md-1">
-                    <h4>=</h4>
-                </div>
-                <div class="col-md-2">
-                    <strong>Differenza</strong>
-                    <p>{{ format_money($totale_assegni_consegnati - $totale_assegni_restituiti) }}</p>
+                <div class="col-md-2 col-md-offset-1">
+                    <strong>Totale annullati/scaduti</strong>
+                    <p>{{ format_money($totale_assegni_annullati) }}</p>
                 </div>
             </div>
         @else

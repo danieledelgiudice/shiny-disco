@@ -138,7 +138,7 @@ class AssegniController extends Controller
             'data'              => 'required|date_format:d/m/Y',
             'importo'           => 'required|numeric|max:100000000|min:0',
             'banca'             => 'required|max:255',
-            'tipologia'         => 'required|in:0,1',
+            'tipologia'         => 'required|in:0,1,2',
             'data_azione'       => 'date_format:d/m/Y',
             'data_scadenza'     => 'date_format:d/m/Y',
         ]);

@@ -61,8 +61,10 @@ var parseQueryString = function() {
     $('input[type=radio][name=tipologia]').change(function() {
         if ($(this).val() == 0)
             $('#label_data_azione').text('Consegnato il');
-        else
+        else if ($(this).val() == 1)
             $('#label_data_azione').text('Restituito a impresa il');
+        else if ($(this).val() == 2)
+            $('#label_data_azione').text('Annullato/Scaduto');
     });
     
     $('#elenco-errori li').each(function() {
