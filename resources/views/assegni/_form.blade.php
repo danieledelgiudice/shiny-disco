@@ -66,7 +66,7 @@
                 </div>
                 
                 <!-- Data azione Assegno -->
-                {!! Form::label('data_azione', (isset($assegno) && $assegno->tipologia) ? "Restituito il" : "Consegnato il",
+                {!! Form::label('data_azione', (isset($assegno) && $assegno->tipologia) ? "Restituito a impresa il" : "Consegnato il",
                     ['class' => 'col-md-2 control-label', 'id' => 'label_data_azione']) !!}
                 <div class="col-md-4">
                     <div class="input-group date">

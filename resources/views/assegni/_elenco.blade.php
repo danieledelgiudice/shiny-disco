@@ -14,7 +14,7 @@
                     <th>Importo</th>
                     <th>Banca</th>
                     <th>Consegnato il</th>
-                    <th>Restituito il</th>
+                    <th>Restituito a impresa il</th>
                     <th>Scadenza</th>
                     <th>&nbsp;</th>
                 </thead>

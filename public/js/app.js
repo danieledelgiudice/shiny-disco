@@ -62,7 +62,7 @@ var parseQueryString = function() {
         if ($(this).val() == 0)
             $('#label_data_azione').text('Consegnato il');
         else
-            $('#label_data_azione').text('Restituito il');
+            $('#label_data_azione').text('Restituito a impresa il');
     });
     
     $('#elenco-errori li').each(function() {
