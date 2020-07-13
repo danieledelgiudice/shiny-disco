@@ -35,7 +35,7 @@
                                         {{ Form::close() }}
                                         <!-- Fine form eliminazione pratica -->
                                         
-                                        <a class="btn btn-default" href="{{ action('DocumentiController@show',
+                                        <a class="btn btn-default" target="_blank" href="{{ action('DocumentiController@show',
                                             ['cliente' => $pratica->cliente, 'pratica' => $pratica, 'documento' => $documento ]) }}">
                                             <i class="fa fa-fw fa-eye"></i>
                                         </a>
