@@ -70,7 +70,7 @@ class FilialiController extends Controller
         $utente->filiale()->associate($filiale);
         $utente->save();
         
-        return redirect()->action('FilialiController@index')->with('success', 'La filiale è stata eliminata con successo.');
+        return redirect()->action('FilialiController@index')->with('success', 'La filiale è stata creata con successo.');
     }
     
     public function toggleEnabled(Request $request, $filiale_id)

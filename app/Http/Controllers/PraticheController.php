@@ -204,10 +204,14 @@ class PraticheController extends Controller
         $pratica->fill($new_values);
         
         $autorita = \App\Autorita::find($request->autorita_id);
-        if ($autorita === null)
+        if (!$autorita) {
+            // Provo a cercarla per nome
+            $autorita = \App\Autorita::where('nome', $request->autorita_id)->first();
+        }
+        if (!$autorita)
         {
-            // Se l'autorità non esiste la creo
-            $autorita = \App\Autorita::create(['nome' => $request->autorita_id]);
+            // Se non esiste la creo
+            $autorita = \App\Autorita::create(['nome' => strtoupper($request->autorita_id)]);
         }
         
         $pratica->autorita()->associate($autorita);

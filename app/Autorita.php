@@ -13,7 +13,7 @@ class Autorita extends Model
      */
     public function pratiche()
     {
-        return $this->hasMany('\App\Pratiche', 'autorita_id', 'id');
+        return $this->hasMany('\App\Pratica', 'autorita_id', 'id');
     }
     
     
