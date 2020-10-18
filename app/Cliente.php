@@ -127,4 +127,19 @@ class Cliente extends Model
     {
         return format_date($value);
     }
+
+    // Helper
+    public function accessibileDa(User $user) {
+        if ($this->filiale->id === $user->filiale->id) {
+            return true;
+        }
+
+        foreach($this->pratiche as $pratica) {
+            if ($pratica->accessibileDa($user)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

@@ -74,6 +74,11 @@ class Pratica extends Model
     {
         return $this->hasMany('\App\Pagamento', 'pratica_id', 'id');
     }
+
+    public function filialiConAccesso()
+    {
+        return $this->belongsToMany('\App\Filiale', 'condivisioni', 'pratica_id', 'filiale_id');
+    }
     
     // Mutator data_apertura
     public function setDataAperturaAttribute($value)
@@ -228,6 +233,12 @@ class Pratica extends Model
     public function formDataProssimaUdienzaAttribute($value)
     {
         return format_date($value);
+    }
+
+    // Helper
+    public function accessibileDa(User $user) {
+        return $this->cliente->filiale->id === $user->filiale->id ||
+            $this->filialiConAccesso()->where('filiale_id', $user->filiale->id)->exists();
     }
     
     

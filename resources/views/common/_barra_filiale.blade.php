@@ -1,5 +1,4 @@
 <!-- Solo se admin -->
-@if ( Auth::user()->isAdmin())
 <div class="panel panel-warning">
     <div class="panel-heading">
         <i class="fa fa-id-card"></i>
@@ -16,4 +15,3 @@
         @endif
     </div>
 </div>
-@endif

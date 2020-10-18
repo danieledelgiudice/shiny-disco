@@ -86,8 +86,13 @@ class DocumentiController extends Controller
         $numero_pratica = $matches[1];
         $descrizione = $matches[2];
         
-        $pratiche = \App\Pratica::whereHas('cliente', function($query) use ($filiale) {
-            $query->where('filiale_id', $filiale->id);
+        $pratiche = \App\Pratica::where(function($query) use ($filiale) {
+            $query->whereHas('cliente', function($query) use ($filiale) {
+                $query->where('filiale_id', $filiale->id);
+            });
+            $query->orWhereHas('filialiConAccesso', function($query) use ($filiale) {
+                $query->where('filiale_id', $filiale->id);
+            });
         })->where('numero_pratica', $numero_pratica)->get();
         
         if(count($pratiche) === 0) {

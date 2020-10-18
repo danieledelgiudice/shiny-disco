@@ -17,6 +17,11 @@ class Filiale extends Model
     {
         return $this->hasOne('\App\User', 'filiale_id', 'id');
     }
+    
+    public function praticheCondivise()
+    {
+        return $this->belongsToMany('\App\Pratica', 'condivisioni', 'filiale_id', 'pratica_id');
+    }
 
     /**
      * The attributes that are mass assignable.

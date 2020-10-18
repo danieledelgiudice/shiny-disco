@@ -71,7 +71,10 @@ class ClientiController extends Controller
             abort(403);
         }
         
-        $pratiche = $cliente->pratiche()->latest('data_apertura')->get();
+        $pratiche = $cliente->pratiche()->latest('data_apertura')->get()
+            ->filter(function($pratica) use ($request) {
+                return $pratica->accessibileDa($request->user());
+            });
         
         return view('clienti.show', compact('cliente', 'pratiche'));
     }

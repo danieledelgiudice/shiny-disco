@@ -33,7 +33,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         $gate->define('visualizzare-pratica', function ($user, $pratica) {
-            return $user->filiale->id === $pratica->cliente->filiale->id;
+            return $pratica->accessibileDa($user);
         });
 
         $gate->define('creare-pratica', function ($user, $cliente) {
@@ -41,7 +41,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         $gate->define('modificare-pratica', function ($user, $pratica) {
-            return $user->filiale->id === $pratica->cliente->filiale->id;
+            return $pratica->accessibileDa($user);
         });
 
         $gate->define('eliminare-pratica', function ($user, $pratica) {
@@ -53,11 +53,11 @@ class AuthServiceProvider extends ServiceProvider
 
 
         $gate->define('visualizzare-cliente', function ($user, $cliente) {
-            return $user->filiale->id === $cliente->filiale->id;
+            return $cliente->accessibileDa($user);
         });
 
         $gate->define('modificare-cliente', function ($user, $cliente) {
-            return $user->filiale->id === $cliente->filiale->id;
+            return $cliente->accessibileDa($user);
         });
 
         $gate->define('eliminare-cliente', function ($user, $cliente) {
@@ -90,7 +90,7 @@ class AuthServiceProvider extends ServiceProvider
 
 
         $gate->define('generare-lettera', function ($user, $pratica) {
-            return $user->canGenerateLetters() && ($user->filiale->id === $pratica->cliente->filiale->id);
+            return $user->canGenerateLetters() && $pratica->accessibileDa($user);
         });
 
 
