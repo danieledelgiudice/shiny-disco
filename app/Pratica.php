@@ -69,6 +69,11 @@ class Pratica extends Model
     {
         return $this->hasMany('\App\Fattura', 'pratica_id', 'id');
     }
+
+    public function pagamenti()
+    {
+        return $this->hasMany('\App\Pagamento', 'pratica_id', 'id');
+    }
     
     // Mutator data_apertura
     public function setDataAperturaAttribute($value)
