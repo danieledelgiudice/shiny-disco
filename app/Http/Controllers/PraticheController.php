@@ -370,12 +370,17 @@ class PraticheController extends Controller
             }
         }
         
-
+        $user = $request->user();
         if ($request->user()->isAdmin())
             $pratiche = \App\Pratica::filter($params);
         else
-            $pratiche = \App\Pratica::whereHas('cliente', function($query) use ($request) {
-                $query->where('filiale_id', $request->user()->filiale->id);
+            $pratiche = \App\Pratica::where(function($query) use ($user) {
+                $query->whereHas('cliente', function($query) use ($user) {
+                    $query->where('filiale_id', $user->filiale->id);
+                });
+                $query->orWhereHas('filialiConAccesso', function($query) use ($user) {
+                    $query->where('filiale_id', $user->filiale->id);
+                });
             })->filter($params);
                                      
         

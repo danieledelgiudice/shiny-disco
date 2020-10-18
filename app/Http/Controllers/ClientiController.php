@@ -45,12 +45,23 @@ class ClientiController extends Controller
     
     public function index(Request $request)
     {
-        if ($request->user()->isAdmin())
+        $user = $request->user();
+
+        if ($user->isAdmin())
             $clienti = \App\Cliente::filter($request->all())->orderBy('cognome');
         else
-            $clienti = \App\Cliente::where('filiale_id', $request->user()->filiale->id)
-                                     ->filter($request->all())->orderBy('cognome');
-                                    
+            $clienti = \App\Cliente::where(function($query) use ($user) {
+                $filiale_id = $user->filiale->id;
+                $query->where('filiale_id', $filiale_id);
+                $query->orWhereHas('pratiche', function($query) use ($filiale_id) {
+                    $query->orWhereHas('filialiConAccesso', function($query) use ($filiale_id) {
+                        $query->where('filiale_id', $filiale_id);
+                    });
+                });
+            })
+            ->filter($request->all())
+            ->orderBy('cognome');
+
         $clienti = $clienti->paginate(50);
                                      
         $filiali = \App\Filiale::pluck('nome', 'id');
@@ -205,11 +216,22 @@ class ClientiController extends Controller
             }
         }
 
-        if ($request->user()->isAdmin())
+        $user = $request->user();
+
+        if ($user->isAdmin())
             $clienti = \App\Cliente::filter($params)->orderBy('cognome');
         else
-            $clienti = \App\Cliente::where('filiale_id', $request->user()->filiale->id)
-                                     ->filter($params)->orderBy('cognome');
+            $clienti = \App\Cliente::where(function($query) use ($user) {
+                $filiale_id = $user->filiale->id;
+                $query->where('filiale_id', $filiale_id);
+                $query->orWhereHas('pratiche', function($query) use ($filiale_id) {
+                    $query->orWhereHas('filialiConAccesso', function($query) use ($filiale_id) {
+                        $query->where('filiale_id', $filiale_id);
+                    });
+                });
+            })
+            ->filter($params)
+            ->orderBy('cognome');
                                      
         $clienti = $clienti->paginate(50);
                                      

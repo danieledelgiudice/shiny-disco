@@ -134,12 +134,8 @@ class Cliente extends Model
             return true;
         }
 
-        foreach($this->pratiche as $pratica) {
-            if ($pratica->accessibileDa($user)) {
-                return true;
-            }
-        }
-
-        return false;
+        return $this->pratiche()->whereHas('filialiConAccesso', function($query) use ($user) {
+            $query->where('filiale_id', $user->filiale->id);
+        })->exists();
     }
 }
