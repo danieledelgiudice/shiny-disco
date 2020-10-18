@@ -38,9 +38,11 @@
                     
                     <a href="{{ action('ClientiController@edit', $cliente) }}" class="btn btn-primary"><i class="fa fa-fw fa-pencil"></i></a>
                     
+                    @can('eliminare-cliente', $cliente)
                     <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#clienteDestroyModal">
                         <i class="fa fa-fw fa-trash"></i>
                     </a>
+                    @endcan
                 </div>
             </div>
         </div>

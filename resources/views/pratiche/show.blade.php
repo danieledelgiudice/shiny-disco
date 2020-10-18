@@ -51,8 +51,10 @@
                     <a href="{{ action('PraticheController@edit', ['cliente' => $pratica->cliente, 'pratica' => $pratica] ) }}"
                         class="btn btn-primary"><i class="fa fa-fw fa-pencil"></i></a>
                     
+                    @can('eliminare-pratica', $pratica)
                     <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#praticaDestroyModal">
                         <i class="fa fa-fw fa-trash"></i>
+                    @endcan
                     </a>
                 </div>
             </div>
