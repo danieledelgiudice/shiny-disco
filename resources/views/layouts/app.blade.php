@@ -115,8 +115,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/locales/bootstrap-datepicker.it-CH.min.js"></script>
 
-    <script type="text/javascript" src="http://spin.js.org/spin.min.js"></script>
-    <script type="text/javascript" src="http://spin.js.org/jquery.spin.js"></script>
     <script type="text/javascript" src="{{ URL::asset('js/lib/selectize.min.js') }}"></script>
 
     <script type="text/javascript" src="{{ URL::asset('js/app.js') }}"></script>
