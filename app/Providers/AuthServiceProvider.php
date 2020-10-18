@@ -117,5 +117,10 @@ class AuthServiceProvider extends ServiceProvider
         $gate->define('generare-export', function ($user) {
             return false;
         });
+
+
+        $gate->define('condividere-pratica', function ($user, $pratica) {
+            return false;
+        });
     }
 }

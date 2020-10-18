@@ -119,3 +119,10 @@ Route::delete( '/clienti/{cliente}/pratiche/{pratica}/fatture/{fattura}',       
 
 Route::get( '/strumenti',                                                       'StrumentiController@index');
 Route::get( '/strumenti/export/clienti',                                        'StrumentiController@exportClients');
+
+
+
+
+Route::get( '/clienti/{cliente}/pratiche/{pratica}/condivisioni',               'CondivisioniController@show');
+Route::post( '/clienti/{cliente}/pratiche/{pratica}/condivisioni',              'CondivisioniController@store');
+Route::delete( '/clienti/{cliente}/pratiche/{pratica}/condivisioni/{filiale}',  'CondivisioniController@destroy');

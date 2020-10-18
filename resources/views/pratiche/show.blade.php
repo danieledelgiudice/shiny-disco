@@ -42,6 +42,11 @@
                         'id' => 'praticaDestroyForm', 'method' => 'delete']) }}
                     {{ Form::close() }}
                     <!-- Fine form eliminazione pratica -->
+
+                    @can('condividere-pratica', $pratica)
+                    <a href="{{ action('CondivisioniController@show', ['cliente' => $pratica->cliente, 'pratica' => $pratica] ) }}"
+                        class="btn btn-success"><i class="fa fa-fw fa-share-alt"></i></a>
+                    @endcan
                     
                     @if (Auth::user()->canGenerateLetters())
                         <a href="{{ action('LettereController@showOptions', ['cliente' => $pratica->cliente, 'pratica' => $pratica] ) }}"
