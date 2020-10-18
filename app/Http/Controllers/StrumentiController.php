@@ -35,11 +35,11 @@ class StrumentiController extends Controller
         $columns = ['Nome', 'Cognome', 'Email', 'Cellulare', 'Telefono'];
         $rows = Cliente::all()->map(function ($cliente) {
             return [
-                $cliente->nome,
-                $cliente->cognome,
-                $cliente->email,
-                $cliente->cellulare,
-                $cliente->telefono,
+                "{$cliente->nome}",
+                "{$cliente->cognome}",
+                "{$cliente->email}",
+                "{$cliente->cellulare}",
+                "{$cliente->telefono}",
             ];
         });
 
@@ -52,6 +52,7 @@ class StrumentiController extends Controller
         ];
         $callback = function () use ($columns, $rows) {
             $file = fopen('php://output', 'w');
+            fwrite($file, "sep=,\n");
             fputcsv($file, $columns);
             foreach ($rows as $row) {
                 fputcsv($file, $row);
