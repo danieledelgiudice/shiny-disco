@@ -116,6 +116,7 @@ class PraticheController extends Controller
         }
         
         $documenti = $pratica->documenti()->get();
+        $pagamenti = $pratica->pagamenti()->oldest('data')->get();
         $assegni = $pratica->assegni()->oldest('data')->get();
         $promemoria = $pratica->promemoria()->oldest('quando');
         
@@ -138,6 +139,7 @@ class PraticheController extends Controller
         return view('pratiche.show', compact(
             'pratica',
             'documenti',
+            'pagamenti',
             'assegni',
             'promemoria',
             'totale_assegni_consegnati',

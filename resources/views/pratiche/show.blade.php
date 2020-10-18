@@ -10,6 +10,10 @@
         'message' => 'Sei sicuro di voler eliminare il documento? Questa operazione non potrà essere annullata.'])
         
     @include('common._modal_elimina',
+       ['resource' => 'pagamento',
+        'message' => 'Sei sicuro di voler eliminare il pagamento? Questa operazione non potrà essere annullata.'])
+        
+    @include('common._modal_elimina',
        ['resource' => 'assegno',
         'message' => 'Sei sicuro di voler eliminare l\'assegno? Questa operazione non potrà essere annullata.'])
     
@@ -67,6 +71,9 @@
         
         <!-- Elenco documenti pratica -->
         @include('documenti._elenco')
+        
+        <!-- Elenco pagamenti pratica -->
+        @include('pagamenti._elenco')
         
         <!-- Elenco assegni pratica -->
         @include('assegni._elenco')

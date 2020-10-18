@@ -50,6 +50,14 @@ Route::post('/login',                                                           
 
 
 
+Route::get( '/clienti/{cliente}/pratiche/{pratica}/pagamenti/new',              'PagamentiController@create');
+Route::get( '/clienti/{cliente}/pratiche/{pratica}/pagamenti/{pagamento}/edit', 'PagamentiController@edit');
+Route::post('/clienti/{cliente}/pratiche/{pratica}/pagamenti/',                 'PagamentiController@store');
+Route::put( '/clienti/{cliente}/pratiche/{pratica}/pagamenti/{pagamento}',      'PagamentiController@update');
+Route::delete( '/clienti/{cliente}/pratiche/{pratica}/pagamenti/{pagamento}',   'PagamentiController@destroy');
+
+
+
 Route::get( '/clienti/{cliente}/pratiche/{pratica}/assegni/new',                'AssegniController@create');
 Route::get( '/clienti/{cliente}/pratiche/{pratica}/assegni/{assegno}/edit',     'AssegniController@edit');
 Route::post('/clienti/{cliente}/pratiche/{pratica}/assegni/',                   'AssegniController@store');

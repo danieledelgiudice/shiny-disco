@@ -97,6 +97,18 @@ var parseQueryString = function() {
     });
     
     
+    $('.showPagamentoDestroyModal').click(function() {
+        var id_pagamento = $(this).data('pagamento');
+        $('#pagamentoDestroyConfirm').data('pagamento', id_pagamento);
+    });
+    
+    $('#pagamentoDestroyConfirm').click(function() {
+        var pagamento = $(this).data('pagamento');
+        var formSelector = `#pagamento${pagamento}DestroyForm`;
+        $(formSelector).submit();
+    });
+
+
     $('.showAssegnoDestroyModal').click(function() {
         var id_assegno = $(this).data('assegno');
         $('#assegnoDestroyConfirm').data('assegno', id_assegno);

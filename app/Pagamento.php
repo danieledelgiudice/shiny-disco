@@ -2,10 +2,13 @@
 
 namespace App;
 
+use Collective\Html\Eloquent\FormAccessible;
 use Illuminate\Database\Eloquent\Model;
 
 class Pagamento extends Model
 {
+    use FormAccessible;
+    
     protected $table = 'pagamenti';
 
     protected $fillable = [
@@ -18,6 +21,12 @@ class Pagamento extends Model
 
     protected $dates = [
         'data',
+    ];
+
+    protected $casts = [
+        'cose' => 'boolean',
+        'persone' => 'boolean',
+        'spese_mediche' => 'boolean',
     ];
 
     /**
