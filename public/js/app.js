@@ -222,8 +222,8 @@ var parseQueryString = function () {
     if (options.length > 0) url += "?";
 
     var logo_radio = options.find("input[type=radio][name=logo]:checked");
-    if (logo_radio.length > 0 && logo_radio.val() === "1") {
-      url += "&logo=1";
+    if (logo_radio.length > 0) {
+      url += "&logo=" + logo_radio.val();
     }
 
     var $input, name, value;
@@ -620,5 +620,16 @@ var parseQueryString = function () {
     });
 
     e.preventDefault();
+  });
+
+  $(".document-category-header").click(function () {
+    const $open = $(".document-category.open").first();
+    const $opening = $(this).closest(".document-category");
+    if ($open.is($opening)) return;
+    $(".document-category.open").removeClass("open");
+    $opening.addClass("open");
+
+    $(".toDeleteDocument").prop("checked", false);
+    $(".showDocumentiMultipliDestroyModal").addClass("hidden");
   });
 })();

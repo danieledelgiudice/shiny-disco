@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" />
     <link href="{{ URL::asset('css/lib/selectize.bootstrap3.css') }}" rel="stylesheet">
 
-    <link href="{{ URL::asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('css/app.css') }}?ver={{ filemtime(public_path('css/app.css')) }}" rel="stylesheet">
 
 
     <style>

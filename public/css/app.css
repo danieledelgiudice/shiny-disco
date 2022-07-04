@@ -98,3 +98,30 @@ table .btn {
 .fa-equal:before {
     content: "=";
 }
+
+.document-category .document-category-content {
+    display: none;
+}
+
+.document-category.open .document-category-content {
+    display: block;
+}
+
+.document-category .document-category-header {
+    cursor: pointer;
+    transform: 0.25s ease-out color;
+}
+
+.document-category.open .document-category-header {
+    cursor: pointer;
+    color: #d9534f;
+}
+
+.document-category .chevron {
+    transition: 0.25s ease-out transform;
+    transform: rotate(0);
+}
+
+.document-category.open .chevron {
+    transform: rotate(-90deg);
+}
