@@ -117,6 +117,6 @@
 
     <script type="text/javascript" src="{{ URL::asset('js/lib/selectize.min.js') }}"></script>
 
-    <script type="text/javascript" src="{{ URL::asset('js/app.js') }}?ver={{ filemtime(public_path('js/app.js'))"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/app.js') }}?ver={{ filemtime(public_path('js/app.js')) }}"></script>
 </body>
 </html>
