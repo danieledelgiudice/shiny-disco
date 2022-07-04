@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Support\Facades\Storage;
+
 $factory->define(App\User::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
@@ -314,18 +316,35 @@ $factory->define(App\PrestazioneMedica::class, function (Faker\Generator $faker)
         
         'pratica_id' => \App\Pratica::all()->random()->id,
     ];
-    
+});
 
-    
-    $table->integer('pratica_id')->unsigned();
+$factory->define(App\Documento::class, function (Faker\Generator $faker) {
+    $faker->addProvider(new Faker\Provider\it_IT\Text($faker));
+
+    $pratica = App\Pratica::inRandomOrder()->first();
+    $numero_pratica = $pratica->numero_pratica;
+    $descrizione = $faker->sentence() . "jpg";
+    $nome_file_originale = $numero_pratica . " " . $descrizione;
+
+    $imageUrl = "https://picsum.photos/500/500";
+    $nome_file = $numero_pratica . '_' . time() . '_' . uniqid() . ".jpg";
+    Storage::disk('local_documents')->put($nome_file, file_get_contents($imageUrl));
+
+    $categoria = $faker->randomElement([
+        App\Documento::OLD,
+        App\Documento::POSTA_ENTRATA_USCITA,
+        App\Documento::CERTIFICAZIONI_MEDICHE,
+        App\Documento::ATTI_VARI,
+        App\Documento::PERIZIA_MEDICO_LEGALE,
+    ]);
 
     return [
-        'nome' => $faker->company,
-        'indirizzo' => $faker->address,
-        'telefono' => $faker->e164PhoneNumber,
-        'fax' => $faker->tollFreePhoneNumber,
-        'email' => $faker->email,
+        'descrizione' => $descrizione,
+        'nome_file' => $nome_file,
+        'nome_file_originale' => $nome_file_originale,
+        'categoria' => $categoria,
+        'mime' => 'image/jpeg',
 
-        'filiale_id' => \App\Filiale::all()->random()->id,
+        'pratica_id' => $pratica->id,
     ];
 });

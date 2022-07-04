@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Storage;
+use Illuminate\Support\Facades\Storage;
 
 class Documento extends Model
 {
