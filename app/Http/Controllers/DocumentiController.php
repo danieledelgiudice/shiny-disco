@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Documento;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
-use Storage;
-use File;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class DocumentiController extends Controller
 {
@@ -150,5 +151,39 @@ class DocumentiController extends Controller
         
         return redirect()->action('PraticheController@show', ['cliente' => $documento->pratica->cliente, 'pratica' => $documento->pratica])
             ->with('success', 'Il documento è stato eliminato con successo.');
+    }
+    
+    public function destroyMultiple(Request $request, $cliente_id, $pratica_id)
+    {
+        $pratica = \App\Pratica::findOrFail($pratica_id);
+        
+        if ($pratica->cliente->id != $cliente_id) {
+            // Il cliente nell'url non corrisponde al cliente della pratica
+            abort(404);
+        }
+        
+        if ($request->user()->cannot('modificare-pratica', $pratica)) {
+            // L'utente non ha il permesso di modificare documenti di pratiche di altre filiali
+            abort(403);
+        }
+
+        $documenti = $request->input('documenti');
+
+        foreach($documenti as $id_documento) {
+            $documento = $pratica->documenti()
+                ->where('id', $id_documento)
+                ->first();
+
+            if (!$documento) {
+                continue;
+            }
+            
+            Storage::disk('local_documents')->delete($documento->nome_file);
+            $documento->delete();
+        }
+        
+        
+        return redirect()->action('PraticheController@show', ['cliente' => $documento->pratica->cliente, 'pratica' => $documento->pratica])
+            ->with('success', 'I documenti sono stati eliminati con successo.');
     }
 }

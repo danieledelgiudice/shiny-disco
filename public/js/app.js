@@ -95,6 +95,47 @@ var parseQueryString = function () {
     $(formSelector).submit();
   });
 
+  // Enable and disable delete all documents button
+  $(".toDeleteDocument").change(function () {
+    const $checked = $(".documenti-table .toDeleteDocument:checked");
+    const count = $checked.size();
+    $(".showDocumentiMultipliDestroyModal").toggleClass("hidden", count === 0);
+  });
+
+  // Show modal with correct data
+  $(".showDocumentiMultipliDestroyModal").click(function () {
+    const $checked = $(".documenti-table .toDeleteDocument:checked");
+    const $descrizioni = $checked.map(function () {
+      return $("<li>").text($(this).data("descrizione"));
+    });
+    const $list = $("#documentiMultipliDestroyModal #descrizioniList");
+    $list.empty();
+    $list.append(...$descrizioni);
+
+    const ids = $checked
+      .map(function () {
+        return $(this).data("documento");
+      })
+      .get();
+    $("#documentiMultipliDestroyConfirm").data("documenti", ids.join("|"));
+  });
+
+  $("#documentiMultipliDestroyConfirm").click(function () {
+    const $form = $(`#documentiMultipliDestroyForm`);
+    const $list = $form.find(".documenti");
+    const $inputs = $(this)
+      .data("documenti")
+      .split("|")
+      .map(function (document) {
+        return $('<input type="hidden" name="documenti[]">').val(document);
+      });
+
+    $list.empty();
+    $list.append(...$inputs);
+
+    $form.submit();
+  });
+
   $(".showPagamentoDestroyModal").click(function () {
     var id_pagamento = $(this).data("pagamento");
     $("#pagamentoDestroyConfirm").data("pagamento", id_pagamento);

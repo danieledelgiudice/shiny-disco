@@ -40,6 +40,7 @@ Route::get( '/filiali/{filiale}/documenti/new',                                 
 Route::get( '/clienti/{cliente}/pratiche/{pratica}/documenti/{documento}',      'DocumentiController@show');
 Route::post('/filiali/{filiale}/documenti',                                     'DocumentiController@store');
 Route::delete('/clienti/{cliente}/pratiche/{pratica}/documenti/{documento}',    'DocumentiController@destroy');
+Route::delete('/clienti/{cliente}/pratiche/{pratica}/documenti',                'DocumentiController@destroyMultiple');
 
 
 
