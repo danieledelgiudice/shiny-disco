@@ -1,34 +1,34 @@
-# Software gestionale
+# Management software
 
-Sistema gestionale realizzato in PHP e Javascript, basato sul framework Laravel.
+Management system developed in PHP and Javascript, based on the Laravel framework.
 
-Ideato per l'utilizzo in studi di consulenza legale.
+Designed for use in legal consulting firms.
 
-## Funzionalità
+## Features
 
-### Composizione visuale query di ricerca
+### Visual composition of search queries
 
-![Shiny Disco ricerca pratiche](https://i.imgur.com/adqNcBx.png)
+![Shiny Disco search practices](https://i.imgur.com/adqNcBx.png)
 
-Il sistema permette la ricerca di pratiche e clienti rispetto a qualsiasi combinazione di campi. La query di ricerca è facilmente generabile tramite un'interfaccia grafica.
-
-
-### Gestione avanzata delle pratiche
-
-![Shiny Disco pratiche](https://i.imgur.com/qTzDNSV.png)
-
-Il sistema permette l'associazione di assegni, fatture, pratiche mediche, documenti caricabili dal proprio computer e promemoria visibili poi da un'agenda giornaliera. Inoltre è possibile generare lettere .pdf basate su determinati modelli, contenenti dati relativi alle pratiche stesse. 
+The system allows the search for practices and clients with respect to any combination of fields. The search query is easily generated through a graphical interface.
 
 
-## Supporto a multipli utenti
+### Advanced practice management
 
-![Shiny Disco filiali](https://i.imgur.com/cDrztxp.png)
+![Shiny Disco practices](https://i.imgur.com/qTzDNSV.png)
 
-Il sistema supporta l'accesso da parte di molteplici utenti, ciascuno responsabile della propria filiale. L'utente amministratore è in grado di accedere ai dati di qualsiasi filiale, nonché assegnare e revocare una gamma di permessi specifici.
+The system allows the association of checks, invoices, medical practices, documents uploadable from your computer and reminders then visible from a daily agenda. It is also possible to generate .pdf letters based on certain models, containing data related to the practices themselves.
 
 
-### Possibilità di generare resoconti
+## Support for multiple users
 
-![Shiny Disco pannello filiale](https://i.imgur.com/BLpzYeT.png)
+![Shiny Disco branches](https://i.imgur.com/cDrztxp.png)
 
-Il sistema contiene un pannello filiale che fornisce resoconti sullo stato della propria filiale, o su quello globale.
+The system supports access by multiple users, each responsible for their own branch. The administrator user is able to access the data of any branch, as well as assign and revoke a range of specific permissions.
+
+
+### Possibility to generate reports
+
+![Shiny Disco branch panel](https://i.imgur.com/BLpzYeT.png)
+
+The system contains a branch panel that provides reports on the status of your branch, or on the global one.
