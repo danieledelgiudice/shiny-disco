@@ -9,19 +9,23 @@
             <div class="panel-body">
                 <table class="table table-hover table-striped">
                     <thead>
+                        <th>Nome assistito</th>
                         <th>Numero pratica</th>
                         <th>Stato pratica</th>
                         <th>Tipo pratica</th>
                         <th>Data apertura</th>
+                        <th>Data sinistro</th>
                         <th>&nbsp;</th>
                     </thead>
                     <tbody>
                         @foreach ($pratiche as $pratica)
                             <tr class="">
+                                <td class="table-text"><div>{{ $cliente->cognome }} {{ $cliente->nome }}</div></td>
                                 <td class="table-text"><div>{{ $pratica->numero_pratica }}</div></td>
                                 <td class="table-text"><div>{{ \App\Pratica::$enumStatoPratica[$pratica->stato_pratica] }}</div></td>
                                 <td class="table-text"><div>{{ \App\Pratica::$enumTipoPratica[$pratica->tipo_pratica] }}</div></td>
                                 <td class="table-text"><div>{{ format_date($pratica->data_apertura) }}</div></td>
+                                <td class="table-text"><div>{{ format_date($pratica->data_sinistro) }}</div></td>
 
                                 <!-- Dettagli/Modifica pratica -->
                                 <td>
