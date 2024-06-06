@@ -272,6 +272,7 @@ class Pratica extends Model
         4 => 'RCT',
         5 => 'Infortuni',
         6 => 'Malattia',
+        7 => 'Globale Fabbricati',
         11 => 'Penale',
         12 => 'INPS',
         13 => 'INAIL',
@@ -284,7 +285,6 @@ class Pratica extends Model
         20 => 'RCT comune/enti',
         21 => 'Incendio',
         22 => 'Furto',
-        23 => 'Globale Fabbricati',
         100 => 'Altro',
     ];
 

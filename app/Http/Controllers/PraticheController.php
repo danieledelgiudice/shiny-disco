@@ -195,7 +195,7 @@ class PraticheController extends Controller
             return redirect()->back()->withInput()->withErrors(['message' => 'Numero pratica già esistente per questa filiale.']);
         }
 
-        if (($request->onorari ?? 0) && ($request->parcella_presunta ?? 0)) {
+        if (($request->onorari + 0) && ($request->parcella_presunta + 0)) {
             return redirect()->back()->withInput()->withErrors(['message' => 'I campi onorari e parcella presunta sono esclusivi.']);
         }
 
