@@ -366,7 +366,13 @@
                 <!-- Stato avanzamento pratica -->
                 {!! Form::label('stato_avanzamento', 'Stato avanzamento pratica' , ['class' => 'col-md-2 control-label']) !!}
                 <div class="col-md-10">
-                    {!! Form::textarea('stato_avanzamento', null, ['class' => 'form-control']) !!}
+                    @php
+                        $statoAvanzamentoEnum = \App\Pratica::$enumStatoAvanzamento;
+                        if (!isset($statoAvanzamentoEnum[$pratica->stato_avanzamento])) {
+                            $statoAvanzamentoEnum[$pratica->stato_avanzamento] = $pratica->stato_avanzamento;
+                        }
+                    @endphp
+                    {!! Form::select('stato_avanzamento', $statoAvanzamentoEnum, null, ['class' => 'form-control']) !!}
                 </div>
             </div>
         </div>

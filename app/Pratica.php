@@ -10,41 +10,42 @@ class Pratica extends Model
 {
     use FormAccessible;
     use Filterable;
-    
+
     protected $table = 'pratiche';
-    
-    protected static function boot() {
+
+    protected static function boot()
+    {
         parent::boot();
 
-        static::deleting(function($pratica) {
-            foreach($pratica->assegni as $assegno) {
+        static::deleting(function ($pratica) {
+            foreach ($pratica->assegni as $assegno) {
                 $assegno->delete();
             }
-            foreach($pratica->documenti as $documento) {
+            foreach ($pratica->documenti as $documento) {
                 $documento->delete();
             }
-            foreach($pratica->promemoria()->withTrashed()->get() as $promemoria) {
+            foreach ($pratica->promemoria()->withTrashed()->get() as $promemoria) {
                 $promemoria->forceDelete();
             }
-            foreach($pratica->prestazioni_mediche as $prestazione_medica) {
+            foreach ($pratica->prestazioni_mediche as $prestazione_medica) {
                 $prestazione_medica->delete();
             }
-            foreach($pratica->fatture as $fattura) {
+            foreach ($pratica->fatture as $fattura) {
                 $fattura->delete();
             }
         });
     }
-    
+
     public function cliente()
     {
         return $this->belongsTo('\App\Cliente', 'cliente_id');
     }
-    
+
     public function documenti()
     {
         return $this->hasMany('\App\Documento', 'pratica_id', 'id');
     }
-    
+
     public function assegni()
     {
         return $this->hasMany('\App\Assegno', 'pratica_id', 'id');
@@ -54,17 +55,17 @@ class Pratica extends Model
     {
         return $this->belongsTo('\App\Autorita', 'autorita_id');
     }
-    
+
     public function promemoria()
     {
         return $this->hasMany('\App\Promemoria', 'pratica_id', 'id');
     }
-    
+
     public function prestazioni_mediche()
     {
         return $this->hasMany('\App\PrestazioneMedica', 'pratica_id', 'id');
     }
-    
+
     public function fatture()
     {
         return $this->hasMany('\App\Fattura', 'pratica_id', 'id');
@@ -79,7 +80,7 @@ class Pratica extends Model
     {
         return $this->belongsToMany('\App\Filiale', 'condivisioni', 'pratica_id', 'filiale_id');
     }
-    
+
     // Mutator data_apertura
     public function setDataAperturaAttribute($value)
     {
@@ -112,7 +113,7 @@ class Pratica extends Model
         else
             $this->attributes['data_ultima_lettera'] = $value;
     }
-    
+
     // Mutator data_chiusura
     public function setDataChiusuraAttribute($value)
     {
@@ -123,7 +124,7 @@ class Pratica extends Model
         else
             $this->attributes['data_chiusura'] = $value;
     }
-    
+
     // Mutator data_sospeso
     public function setDataSospesoAttribute($value)
     {
@@ -134,7 +135,7 @@ class Pratica extends Model
         else
             $this->attributes['data_sospeso'] = $value;
     }
-    
+
     // Mutator data_sinistro
     public function setDataSinistroAttribute($value)
     {
@@ -145,7 +146,7 @@ class Pratica extends Model
         else
             $this->attributes['data_sinistro'] = $value;
     }
-    
+
     // Mutator mezzo_liquidato
     public function setMezzoLiquidatoAttribute($value)
     {
@@ -156,7 +157,7 @@ class Pratica extends Model
         else
             $this->attributes['mezzo_liquidato'] = $value;
     }
-    
+
     // Mutator data_prescrizione
     public function setDataPrescrizioneAttribute($value)
     {
@@ -167,7 +168,7 @@ class Pratica extends Model
         else
             $this->attributes['data_prescrizione'] = $value;
     }
-    
+
     // Mutator data_prossima_udienza
     public function setDataProssimaUdienzaAttribute($value)
     {
@@ -178,57 +179,57 @@ class Pratica extends Model
         else
             $this->attributes['data_prossima_udienza'] = $value;
     }
-    
-    
+
+
 
     // Form Accessor data_apertura
     public function formDataAperturaAttribute($value)
     {
         return format_date($value);
     }
-    
+
     // Form Accessor in_data
     public function formInDataAttribute($value)
     {
         return format_date($value);
     }
-    
+
     // Form Accessor data_ultima_lettera
     public function formDataUltimaLetteraAttribute($value)
     {
         return format_date($value);
     }
-    
+
     // Form Accessor data_chiusura
     public function formDataChiusuraAttribute($value)
     {
         return format_date($value);
     }
-    
+
     // Form Accessor data_sospeso
     public function formDataSospesoAttribute($value)
     {
         return format_date($value);
     }
-    
+
     // Form Accessor data_sospeso
     public function formDataSinistroAttribute($value)
     {
         return format_date($value);
     }
-    
+
     // Form Accessor mezzo_liquidato
     public function formMezzoLiquidatoAttribute($value)
     {
         return format_date($value);
     }
-    
+
     // Form Accessor data_prescrizione
     public function formDataPrescrizioneAttribute($value)
     {
         return format_date($value);
     }
-    
+
     // Form Accessor data_prossima_udienza
     public function formDataProssimaUdienzaAttribute($value)
     {
@@ -236,12 +237,13 @@ class Pratica extends Model
     }
 
     // Helper
-    public function accessibileDa(User $user) {
+    public function accessibileDa(User $user)
+    {
         return $this->cliente->filiale->id === $user->filiale->id ||
             $this->filialiConAccesso()->where('filiale_id', $user->filiale->id)->exists();
     }
-    
-    
+
+
     protected $dates = [
         'data_apertura',
         'in_data',
@@ -253,62 +255,82 @@ class Pratica extends Model
         'data_prossima_udienza',
         'data_prescrizione',
     ];
-    
-    
+
+
     public static $enumStatoPratica = [
-		0 => 'Aperto',
-		1 => 'Chiuso',
-		2 => 'SS',
-		3 => 'SS. Legale',
-	];
+        0 => 'Aperto',
+        1 => 'Chiuso',
+        2 => 'SS',
+        3 => 'SS. Legale',
+    ];
 
     public static $enumTipoPratica = [
         0 => 'Sconosciuto',
-		1 => 'RCA',
-		2 => 'RCA Lesioni',
-		3 => 'RCA Lesioni e Cose',
-		4 => 'RCT',
-		5 => 'Infortuni',
-		6 => 'Malattia',
-		7 => 'Globale Fabbricati', 
-		8 => 'Trasporti Gommati',
-		9 => 'Trasporti Navali', 
-		10 => 'Trasporti su Rotaie', 
-		11 => 'Penale',
-		12 => 'INPS',
-		13 => 'INAIL',
-		100 => 'Altro',
-	];
+        1 => 'RCA',
+        2 => 'RCA lesioni i.d.',
+        3 => 'RCA lesioni e cose i.d.',
+        4 => 'RCT',
+        5 => 'Infortuni',
+        6 => 'Malattia',
+        11 => 'Penale',
+        12 => 'INPS',
+        13 => 'INAIL',
+        14 => 'RCA cose i.d.',
+        15 => 'RCA lesioni non i.d.',
+        16 => 'RCA cose non i.d.',
+        17 => 'RCA lesioni e cose non i.d.',
+        18 => 'RCT generale',
+        19 => 'RCT malasanità',
+        20 => 'RCT comune/enti',
+        21 => 'Incendio',
+        22 => 'Furto',
+        23 => 'Globale Fabbricati',
+        100 => 'Altro',
+    ];
 
-	public static $enumControllato = [
-		0 => 'No',
-		1 => 'Sì',
-	];
+    public static $enumControllato = [
+        0 => 'No',
+        1 => 'Sì',
+    ];
 
     public static $enumRilievi = [
-		0 => 'Rilievi non necessari', 
-		1 => 'Rilievi presi',
-		2 => 'Rilievi da prendere',
-		3 => 'Rilievi portati da cliente',
-	];
-    						
+        0 => 'Rilievi non necessari',
+        1 => 'Rilievi presi',
+        2 => 'Rilievi da prendere',
+        3 => 'Rilievi portati da cliente',
+    ];
+
     public static $enumRivalsa = [
-		0 => 'No rivalsa',
-		1 => 'Da verificare',
-		2 => 'Rivalsa INPS',
-		3 => 'Rivalsa INAIL',
-		4 => 'Rivalsa altre ass',
-	];
-    				
+        0 => 'No rivalsa',
+        1 => 'Da verificare',
+        2 => 'Rivalsa INPS',
+        3 => 'Rivalsa INAIL',
+        4 => 'Rivalsa altre ass',
+    ];
+
     public static $enumSoccorso = [
         0 => 'Nessuno',
-		1 => 'Da solo', 
-		2 => 'Da terzi',
-		3 => 'Ambulanza',
-		4 => 'Da parenti',
-		5 => 'Dal responsabile',
-	];
-    
+        1 => 'Da solo',
+        2 => 'Da terzi',
+        3 => 'Ambulanza',
+        4 => 'Da parenti',
+        5 => 'Dal responsabile',
+    ];
+
+    public static $enumStatoAvanzamento = [
+        'In gestione' => 'In gestione',
+        'In attesa documentazione da parte del cliente' => 'In attesa documentazione da parte del cliente',
+        'In attesa verbali' => 'In attesa verbali',
+        'In attesa ricorso sanzione' => 'In attesa ricorso sanzione',
+        'In attesa certificazione medici propri' => 'In attesa certificazione medici propri',
+        'In attesa perizia danno a cose' => 'In attesa perizia danno a cose',
+        'In attesa perizia medico legale di parte' => 'In attesa perizia medico legale di parte',
+        'In attesa perizia medico legale di controparte' => 'In attesa perizia medico legale di controparte',
+        'Trattabile danno al mezzo' => 'Trattabile danno al mezzo',
+        'Trattabile lesioni' => 'Trattabile lesioni',
+        'Trattabile totale' => 'Trattabile totale',
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -320,7 +342,7 @@ class Pratica extends Model
         'stato_pratica',
         'tipo_pratica',
         'data_apertura',
-        
+
         'veicolo_parte',
         'targa_parte',
         'assicurazione_parte',
@@ -341,7 +363,7 @@ class Pratica extends Model
         'liquidatore',
         'reperibilita_liquidatore',
         'parcella_presunta',
-        
+
         'legale',
         'in_data',
         'controllato',
@@ -355,7 +377,7 @@ class Pratica extends Model
         'liquidato_omnia',
         'onorari',
         'stato_avanzamento',
-        
+
         'data_sinistro',
         'ora_sinistro',
         'luogo_sinistro',
@@ -367,7 +389,7 @@ class Pratica extends Model
         'tipologia_intervento',
         'danno_presunto',
         'numero_sinistro',
-        
+
         'assicurazione_risarcente',
         'assicurazione_responsabile',
         'mezzo_visibile',

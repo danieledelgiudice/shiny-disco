@@ -384,10 +384,10 @@ var parseQueryString = function () {
                 <a class="btn btn-default deleteQueryRow"><i class="fa fa-fw fa-times"></i></a>
             </div>`;
     } else if (type === "enum") {
-      var list = queryFields[name].list;
-      var options = $.map(list, function (v, k) {
-        return `<option value="${k}">${v}</option>`;
-      }).join("");
+      const options = Object.entries(queryFields[name].list)
+        .sort((a, b) => a[1].localeCompare(b[1]))
+        .map(([k, v]) => `<option value="${k}">${v}</option>`)
+        .join("");
       newRow = `
             <div class="form-group">
                 <label for="${name}" class="col-md-2 col-md-offset-1 control-label">${display}</label>
