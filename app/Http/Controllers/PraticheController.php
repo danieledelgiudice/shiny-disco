@@ -40,6 +40,7 @@ class PraticheController extends Controller
             'legale'                         => ['display'   => 'Legale',                              'type'        => 'string',],
             'in_data'                        => ['display'   => 'In data',                             'type'        => 'date',],
             'controllato'                    => ['display'   => 'Controllato',                         'type'        => 'enum',        'list' => \App\Pratica::$enumControllato],
+            'stato_avanzamento'              => ['display'   => 'Stato avanzamento',                   'type'        => 'enum',        'list' => \App\Pratica::$enumStatoAvanzamento],
             'data_ultima_lettera'            => ['display'   => 'Data ultima lettera',                 'type'        => 'date',],
             'mezzo_liquidato'                => ['display'   => 'Mezzo liquidato',                     'type'        => 'date',],
             'valore_mezzo_liquidato'         => ['display'   => 'Valore mezzo liquidato',              'type'        => 'decimal',],
