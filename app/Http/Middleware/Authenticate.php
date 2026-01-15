@@ -24,12 +24,12 @@ class Authenticate
                 return redirect()->guest('login');
             }
         }
-        
-        if (Auth::user()->isEnabled())
-            return $next($request);
-        else {
+
+        if (!Auth::user()->isEnabled()) {
             Auth::logout();
-            return redirect()->guest('login');
+            return redirect('login')->withErrors(['filiale_id' => 'Il tuo account è disabilitato. Contatta l\'amministratore.']);
         }
+
+        return $next($request);
     }
 }
