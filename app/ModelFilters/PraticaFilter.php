@@ -33,14 +33,18 @@ class PraticaFilter extends ModelFilter
 
     public function numeroPratica($value)
     {
-        $q = $this;
+        if (is_array($value)) {
+            $q = $this;
 
-        if ($value[0])
-            $q = $q->where('numero_pratica', '>=', $value[0]);
-        if ($value[1])
-            $q = $q->where('numero_pratica', '<=', $value[1]);
+            if ($value[0])
+                $q = $q->where('numero_pratica', '>=', $value[0]);
+            if ($value[1])
+                $q = $q->where('numero_pratica', '<=', $value[1]);
 
-        return $q;
+            return $q;
+        }
+
+        return $this->whereBeginsWith('numero_pratica', $value);
     }
 
     public function numeroRegistrazione($value)
