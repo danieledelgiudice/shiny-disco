@@ -90,7 +90,7 @@ class PraticheController extends Controller
             'cliente-reddito'                      => ['display' => 'Reddito (Cliente)',                     'type'      => 'decimal',],
             'cliente-numero_card'                  => ['display' => 'Numero Card (Cliente)',                 'type'      => 'string',],
 
-            'cliente-filiale_id'                   => ['display' => 'Filiale (Cliente)',                     'type'      => 'enum',           'list' => \App\Filiale::pluck('nome', 'id')],
+            'cliente-filiale_id'                   => ['display' => 'Filiale (Cliente)',                     'type'      => 'enum',           'list' => \App\Filiale::whereNotNull('id')->enabled()->pluck('nome', 'id')],
             'cliente-importante'                   => ['display' => 'Importante (Cliente)',                  'type'      => 'enum',           'list' => [0 => 'No', 1 => 'Sì']],
 
         ];

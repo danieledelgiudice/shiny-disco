@@ -17,9 +17,10 @@ class FilialiController extends Controller
     
     public function index(Request $request)
     {
-        $filiali = \App\Filiale::all();
+        $filiali = \App\Filiale::whereNotNull('id')->enabled()->get();
+        $filialiDisabilitate = \App\Filiale::whereNotNull('id')->disabled()->get();
         
-        return view('filiali.index', compact('filiali'));
+        return view('filiali.index', compact('filiali', 'filialiDisabilitate'));
     }
     
     public function edit(Request $request, $filiale_id)

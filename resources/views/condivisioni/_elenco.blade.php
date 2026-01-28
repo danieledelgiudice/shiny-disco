@@ -16,14 +16,19 @@
                 <li>Generare lettere per la pratica (solo se hanno il permesso di generare lettere)</li>
             </ul>
         </p>
-        @if (count($pratica->filialiConAccesso) > 0)
+        @php
+            $filialiConAccesso = $pratica->filialiConAccesso->filter(function ($filiale) {
+                return $filiale->utente && $filiale->utente->enabled;
+            });
+        @endphp
+        @if (count($filialiConAccesso) > 0)
             <table class="table table-hover table-striped">
                 <thead>
                     <th>Filiali con accesso</th>
                     <th>&nbsp;</th>
                 </thead>
                 <tbody>
-                    @foreach ($pratica->filialiConAccesso as $filiale)
+                    @foreach ($filialiConAccesso as $filiale)
                         <tr>
                             <td class="table-text">
                                 <div>

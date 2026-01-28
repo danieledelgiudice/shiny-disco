@@ -50,7 +50,7 @@ class DocumentiController extends Controller
             abort(403);
         }
         
-        $filiali = \App\Filiale::all();
+        $filiali = \App\Filiale::whereNotNull('id')->enabled()->get();
         
         return view('documenti.create', compact('filiale', 'filiali'));
     }

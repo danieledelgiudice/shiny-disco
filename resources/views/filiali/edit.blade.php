@@ -17,6 +17,12 @@
         </div>
 
         <div class="col-md-offset-1 col-md-10">
+            @if (!$utente->enabled)
+                <div class="alert alert-warning">
+                    <i class="fa fa-fw fa-exclamation-triangle"></i>
+                    Questa filiale è attualmente disabilitata.
+                </div>
+            @endif
             <!-- Mostra errori di validazione -->
             @include('common.errors')
             

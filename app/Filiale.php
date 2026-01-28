@@ -23,6 +23,20 @@ class Filiale extends Model
         return $this->belongsToMany('\App\Pratica', 'condivisioni', 'filiale_id', 'pratica_id');
     }
 
+    public function scopeEnabled($query)
+    {
+        return $query->whereHas('utente', function ($q) {
+            $q->where('enabled', true);
+        });
+    }
+
+    public function scopeDisabled($query)
+    {
+        return $query->whereHas('utente', function ($q) {
+            $q->where('enabled', false);
+        });
+    }
+
     /**
      * The attributes that are mass assignable.
      *

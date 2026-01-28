@@ -58,7 +58,7 @@ class PromemoriaController extends Controller
 
         $chis = array_combine($chis, $chis);
 
-        $filiali = \App\Filiale::all();
+        $filiali = \App\Filiale::whereNotNull('id')->enabled()->get();
 
         $da_confermare = (!$request->user()->isAdmin()) && $request->user()->ultima_conferma < \Carbon\Carbon::today();
 
@@ -81,7 +81,7 @@ class PromemoriaController extends Controller
                     ->whereHas('pratica.cliente.filiale', function($query) use ($filiale) {
                         $query->where('id', $filiale->id);
                     })->latest('quando')->filter($request->all())->paginate(50);
-        $filiali = \App\Filiale::all();
+        $filiali = \App\Filiale::whereNotNull('id')->enabled()->get();
         $numero_pratica = $request->pratica_numero_pratica;
         return view('promemoria.indexAll', compact('filiale', 'promemoria', 'filiali', 'numero_pratica'));
     }

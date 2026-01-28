@@ -23,7 +23,7 @@ class PannelloFilialeController extends Controller
             abort(403);
         }
         
-        $filiali = \App\Filiale::all();
+        $filiali = \App\Filiale::whereNotNull('id')->enabled()->get();
         return view('pannello_filiale.home', compact('filiale', 'filiali'));
     }
 
@@ -45,7 +45,7 @@ class PannelloFilialeController extends Controller
         $pratiche_query = $this->filtraPratiche($request, $pratiche_query);
         $pratiche = $pratiche_query->get();
         
-        $filiali = \App\Filiale::all();
+        $filiali = \App\Filiale::whereNotNull('id')->enabled()->get();
         
         return view('pannello_filiale.liquidato_omnia', compact('filiale', 'filiali', 'pratiche', 'request'));
     }
@@ -68,7 +68,7 @@ class PannelloFilialeController extends Controller
         $pratiche_query = $this->filtraPratiche($request, $pratiche_query);
         $pratiche = $pratiche_query->get();
         
-        $filiali = \App\Filiale::all();
+        $filiali = \App\Filiale::whereNotNull('id')->enabled()->get();
         
         return view('pannello_filiale.importo_sospeso', compact('filiale', 'filiali', 'pratiche', 'request'));
     }
@@ -92,7 +92,7 @@ class PannelloFilialeController extends Controller
         $pratiche = $pratiche_query->get();
         
         
-        $filiali = \App\Filiale::all();
+        $filiali = \App\Filiale::whereNotNull('id')->enabled()->get();
         
         return view('pannello_filiale.parcella_presunta', compact('filiale', 'filiali', 'pratiche', 'request'));
     }
@@ -115,7 +115,7 @@ class PannelloFilialeController extends Controller
         $pratiche_query = $this->filtraPratiche($request, $pratiche_query);
         $pratiche = $pratiche_query->get();
 
-        $filiali = \App\Filiale::all();
+        $filiali = \App\Filiale::whereNotNull('id')->enabled()->get();
         
         return view('pannello_filiale.onorari', compact('filiale', 'filiali', 'pratiche', 'request'));
     }
@@ -138,7 +138,7 @@ class PannelloFilialeController extends Controller
         })->orderBy('pratica_id', 'desc')->get();
         
         
-        $filiali = \App\Filiale::all();
+        $filiali = \App\Filiale::whereNotNull('id')->enabled()->get();
 
         return view('pannello_filiale.sospesi_medici', compact('filiale', 'filiali', 'prestazioni', 'request'));
     }
@@ -155,7 +155,7 @@ class PannelloFilialeController extends Controller
         $fattureElisir = \App\Fattura::where('appartenenza', 2)->orderByRaw('YEAR(data_emissione) DESC, numero ASC')->get();
         $fattureGroup = \App\Fattura::where('appartenenza', 3)->orderByRaw('YEAR(data_emissione) DESC, numero ASC')->get();
         
-        $filiali = \App\Filiale::all();
+        $filiali = \App\Filiale::whereNotNull('id')->enabled()->get();
         
         return view('pannello_filiale.fatture', compact('fattureElys', 'fattureElisir', 'fattureGroup', 'filiali', 'filiale'));
     }

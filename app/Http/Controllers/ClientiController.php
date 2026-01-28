@@ -39,7 +39,7 @@ class ClientiController extends Controller
             'reddito'                      => ['display' => 'Reddito',                     'type'      => 'decimal',    ],
             'numero_card'                  => ['display' => 'Numero Card',                 'type'      => 'string',     ],
             
-            'filiale_id'                   => ['display' => 'Filiale',                     'type'      => 'enum',           'list' => \App\Filiale::pluck('nome', 'id')],
+            'filiale_id'                   => ['display' => 'Filiale',                     'type'      => 'enum',           'list' => \App\Filiale::whereNotNull('id')->enabled()->pluck('nome', 'id')],
             'importante'                   => ['display' => 'Importante',                  'type'      => 'enum',           'list' => [0 => 'No', 1 => 'Sì']],        ];
     }
     
@@ -64,7 +64,7 @@ class ClientiController extends Controller
 
         $clienti = $clienti->paginate(50);
                                      
-        $filiali = \App\Filiale::pluck('nome', 'id');
+        $filiali = \App\Filiale::whereNotNull('id')->enabled()->pluck('nome', 'id');
         $professioni = \App\Professione::pluck('nome', 'id');
 
         $queryFields = $this->queryFields;

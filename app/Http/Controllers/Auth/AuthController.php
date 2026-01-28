@@ -73,7 +73,7 @@ class AuthController extends Controller
     
     protected function showLoginForm(Request $request)
     {
-        $filiali = \App\Filiale::all()->pluck('nome', 'id');
+        $filiali = \App\Filiale::whereNotNull('id')->enabled()->pluck('nome', 'id');
         
         return view('auth.login', compact('filiali'));
     }

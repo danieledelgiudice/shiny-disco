@@ -51,6 +51,57 @@
                 </div>
             </div>
         </div>
+
+        @if (count($filialiDisabilitate) > 0)
+            <div class="panel panel-warning">
+                <div class="panel-heading" role="button" data-toggle="collapse" data-target="#filialiDisabilitate" aria-expanded="false" style="cursor: pointer;">
+                    <strong>Filiali disabilitate</strong>
+                    <span class="text-muted">({{ count($filialiDisabilitate) }})</span>
+                    <i class="fa fa-fw fa-caret-down pull-right"></i>
+                </div>
+                <div id="filialiDisabilitate" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <table class="table table-hover table-striped">
+                            <thead>
+                                <th>Id</th>
+                                <th>Nome filiale</th>
+                                <th>Indirizzo</th>
+                                <th>Telefono</th>
+                                <th>Abilitata</th>
+                                <th>&nbsp;</th>
+                            </thead>
+                            <tbody>
+                                @foreach ($filialiDisabilitate as $filiale)
+                                <tr>
+                                    <td class="table-text">
+                                        <div>{{ $filiale->id }}</div>
+                                    </td>
+                                    <td class="table-text">
+                                        <div>{{ $filiale->nome }}</div>
+                                    </td>
+                                    <td class="table-text">
+                                        <div>{{ $filiale->indirizzo }}</div>
+                                    </td>
+                                    <td class="table-text">
+                                        <div>{{ $filiale->telefono }}</div>
+                                    </td>
+                                    <td class="table-text">
+                                        <div>{{ $filiale->utente->enabled ? '✅' : '❌' }}</div>
+                                    </td>
+
+                                    <td class="col-md-1">
+                                        <a class="btn btn-primary" href="{{ action('FilialiController@edit', ['filiale' => $filiale]) }}">
+                                            <i class="fa fa-fw fa-pencil"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        @endif
     </div>
 </div>
 @endsection

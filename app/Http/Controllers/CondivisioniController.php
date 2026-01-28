@@ -21,7 +21,8 @@ class CondivisioniController extends Controller
             abort(403);
         }
 
-        $filialiSenzaAccesso = \App\Filiale::where('id', '<>', $request->user()->filiale->id)
+        $filialiSenzaAccesso = \App\Filiale::whereNotNull('id')->enabled()
+            ->where('id', '<>', $request->user()->filiale->id)
             ->whereNotIn('id', $pratica->filialiConAccesso()->pluck('id'))
             ->get();
         
