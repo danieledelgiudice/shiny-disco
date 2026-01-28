@@ -31,6 +31,24 @@
             <h1 class="text-center">
                 Dettagli Pratica
             </h1>
+            @php
+                $subtitleParts = [];
+                $subtitleSeparator = ' <span class="subtitle-sep" style="border-left:1px solid #999; margin:0 8px;"></span> ';
+                if (!empty($pratica->numero_pratica)) {
+                    $subtitleParts[] = '<strong>Numero pratica:</strong> ' . e($pratica->numero_pratica);
+                }
+                if (!empty($pratica->data_sinistro)) {
+                    $subtitleParts[] = '<strong>Data sinistro:</strong> ' . e(format_date($pratica->data_sinistro));
+                }
+                if (!empty($pratica->numero_sinistro)) {
+                    $subtitleParts[] = '<strong>Numero sinistro:</strong> ' . e($pratica->numero_sinistro);
+                }
+            @endphp
+            @if (!empty($subtitleParts))
+                <p class="text-center text-muted">
+                    {!! implode($subtitleSeparator, $subtitleParts) !!}
+                </p>
+            @endif
             <div>
                 <div class="pull-left">
                     <a href="{{ action('ClientiController@show', ['cliente' => $pratica->cliente] ) }}"
