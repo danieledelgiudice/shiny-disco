@@ -163,6 +163,14 @@
             </div>
 
             <div class="form-group">
+                <!-- Proprietario mezzo controparte -->
+                {!! Form::label('proprietario_mezzo_controparte', 'Proprietario mezzo controparte' , ['class' => 'col-md-2 control-label']) !!}
+                <div class="col-md-4">
+                    {!! Form::text('proprietario_mezzo_controparte', null, ['class' => 'form-control']) !!}
+                </div>
+            </div>
+
+            <div class="form-group">
                 <!-- Assicurazione controparte -->
                 {!! Form::label('assicurazione_controparte', 'Assicurazione controparte' , ['class' => 'col-md-2 control-label']) !!}
                 <div class="col-md-4">

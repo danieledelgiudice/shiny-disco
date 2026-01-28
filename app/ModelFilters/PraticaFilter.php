@@ -133,6 +133,11 @@ class PraticaFilter extends ModelFilter
         return $this->whereBeginsWith('proprietario_mezzo_responsabile', $value);
     }
 
+    public function proprietarioMezzoControparte($value)
+    {
+        return $this->whereBeginsWith('proprietario_mezzo_controparte', $value);
+    }
+
     public function assicurazioneControparte($value)
     {
         return $this->whereLike('assicurazione_controparte', $value);

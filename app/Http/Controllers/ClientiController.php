@@ -48,7 +48,7 @@ class ClientiController extends Controller
         $user = $request->user();
 
         if ($user->isAdmin())
-            $clienti = \App\Cliente::filter($request->all())->orderBy('cognome');
+            $clienti = \App\Cliente::whereNotNull('id')->filter($request->all())->orderBy('cognome');
         else
             $clienti = \App\Cliente::where(function($query) use ($user) {
                 $filiale_id = $user->filiale->id;
@@ -219,7 +219,7 @@ class ClientiController extends Controller
         $user = $request->user();
 
         if ($user->isAdmin())
-            $clienti = \App\Cliente::filter($params)->orderBy('cognome');
+            $clienti = \App\Cliente::whereNotNull('id')->filter($params)->orderBy('cognome');
         else
             $clienti = \App\Cliente::where(function($query) use ($user) {
                 $filiale_id = $user->filiale->id;

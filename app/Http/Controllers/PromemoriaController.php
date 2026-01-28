@@ -171,7 +171,7 @@ class PromemoriaController extends Controller
                 // L'utente non può vedere l'agenda estesa
                 abort(403);
             }
-            $promemoria = \App\Promemoria::filter($request->all())->latest('quando')->get();
+            $promemoria = \App\Promemoria::whereNotNull('id')->filter($request->all())->latest('quando')->get();
         }
 
         return view('promemoria._tabella', compact('promemoria'));

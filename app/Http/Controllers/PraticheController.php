@@ -33,6 +33,7 @@ class PraticheController extends Controller
             'targa_controparte'              => ['display'   => 'Targa controparte',                   'type'        => 'string',],
             'numero_polizza_controparte'     => ['display'   => 'Numero polizza controparte',          'type'        => 'string',],
             'proprietario_mezzo_responsabile' => ['display'   => 'Proprietario mezzo responsabile',     'type'        => 'string',],
+            'proprietario_mezzo_controparte' => ['display'   => 'Proprietario mezzo controparte',      'type'        => 'string',],
             'assicurazione_controparte'      => ['display'   => 'Assicurazione controparte',           'type'        => 'string',],
             'medico_controparte'             => ['display'   => 'Medico controparte',                  'type'        => 'string',],
             'parcella_presunta'              => ['display'   => 'Parcella presunta',                   'type'        => 'decimal',],
@@ -372,7 +373,7 @@ class PraticheController extends Controller
 
         $user = $request->user();
         if ($request->user()->isAdmin())
-            $pratiche = \App\Pratica::filter($params);
+            $pratiche = \App\Pratica::whereNotNull('id')->filter($params);
         else
             $pratiche = \App\Pratica::where(function ($query) use ($user) {
                 $query->whereHas('cliente', function ($query) use ($user) {
@@ -413,6 +414,7 @@ class PraticheController extends Controller
             'targa_controparte'                 => 'max:255',
             'numero_polizza_controparte'        => 'max:255',
             'proprietario_mezzo_responsabile'   => 'max:255',
+            'proprietario_mezzo_controparte'    => 'max:255',
             'assicurazione_controparte'         => 'max:255',
             'medico_controparte'                => 'max:255',
             'luogo_medico_controparte'          => 'max:255',

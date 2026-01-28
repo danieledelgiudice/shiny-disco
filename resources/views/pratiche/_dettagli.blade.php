@@ -154,6 +154,14 @@
         </div>
 
         <div class="row">
+            <!-- Proprietario mezzo controparte -->
+            <strong class="col-md-2 form-control-static">Proprietario mezzo controparte</strong>
+            <div class="col-md-4">
+                <p class="form-control-static">{{ $pratica->proprietario_mezzo_controparte }}</p>
+            </div>
+        </div>
+
+        <div class="row">
             <!-- Assicurazione controparte -->
             <strong class="col-md-2 form-control-static">Assicurazione controparte</strong>
             <div class="col-md-4">
