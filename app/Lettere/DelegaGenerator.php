@@ -26,7 +26,7 @@ class DelegaGenerator
         $f->SetFont('Times', '', 14);
         $data_sinistro = format_date(\Carbon\Carbon::parse($pratica['data_sinistro']));
         $data_nascita = format_date(\Carbon\Carbon::parse($cliente['data_nascita']));
-        $str = "Io sottoscritto {$cliente['nome']} {$cliente['cognome']} nato a {$cliente['citta_nascita']} il {$data_nascita} e residente in ${cliente['via']}, ${cliente['citta_residenza']}, delego lo studio Ely'S Consulenze sito in Piazza Attias 37 a Livorno a ritirare copia dei verbali redatti per il sinistro da me subito in data ${data_sinistro}.";
+        $str = "Io sottoscritto {$cliente['nome']} {$cliente['cognome']} nato a {$cliente['citta_nascita']} il {$data_nascita} e residente in ${cliente['via']}, ${cliente['citta_residenza']}, delego lo studio Ely'S Consulenze sito in Via Cogorano 25, 5° piano - 57123 Livorno a ritirare copia dei verbali redatti per il sinistro da me subito in data ${data_sinistro}.";
         $str = iconv('UTF-8', 'windows-1252', $str);
         $f->MultiCell(0, $lineh, $str, 0);
 

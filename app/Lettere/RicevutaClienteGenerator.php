@@ -28,7 +28,7 @@ class RicevutaClienteGenerator
         
         $f->Image($logo_url, 20, 15, 45);
 
-        $str = "P.zza Attias 37, 4° piano - 57100 Livorno
+        $str = "Via Cogorano 25, 5° piano - 57123 Livorno
 Tel 0586/941901 0586/895118 Linee 5 a ricerca automatica
 Fax 0586 1730113
 Resp. Uffici esterni 0586 1734753

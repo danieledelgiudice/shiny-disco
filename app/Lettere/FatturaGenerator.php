@@ -26,7 +26,7 @@ class FatturaGenerator
             // Ely's
             $logo_url = \URL::asset("/images/logos/elys.jpg");
             $str = "Ely's consulenze
-P.zza Attias 37, 4° piano - 57100 Livorno
+Via Cogorano 25, 5° piano - 57123 Livorno
 Tel 0586/941901 0586/895118 Linee 5 a ricerca automatica
 Fax 0586 1730113 Resp. Uffici esterni 0586 1734753
 Partita IVA 01724020498";
@@ -36,7 +36,7 @@ Partita IVA 01724020498";
             // Elisir
             $logo_url = \URL::asset("/images/logos/elisir.png");
             $str = "Studio di consulenza Elisir
-P.zza Attias 37, 4° piano - 57100 Livorno
+Via Cogorano 25, 5° piano - 57123 Livorno
 Tel 0586/941901 0586/895118 Linee 5 a ricerca automatica
 Fax 0586 1730113
 Resp. Uffici esterni 0586 1734753
@@ -48,7 +48,7 @@ elisirinfortunistica@pec.it    daniela.burini@elisirinfortunistica.it";
             // Group
             $logo_url = \URL::asset("/images/logos/group.jpg");
             $str = "Ely's Elisir Group SRL
-P.zza Attias 37, 4° piano - 57100 Livorno
+Via Cogorano 25, 5° piano - 57123 Livorno
 P.I. 01868050491
 C.F. 01868050491
 Iscritta alla Camera di Commercio di Livorno n. LI-20276
