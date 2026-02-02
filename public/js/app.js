@@ -383,6 +383,20 @@ var parseQueryString = function () {
                 </div>
                 <a class="btn btn-default deleteQueryRow"><i class="fa fa-fw fa-times"></i></a>
             </div>`;
+    } else if (type === "range") {
+      newRow = `
+            <div class="form-group">
+                <label for="${name}" class="col-md-2 col-md-offset-1 control-label">${display}</label>
+                <div class="col-md-7">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-fw fa-chevron-right"></i></span>
+                        <input class="form-control" name="${name}[]" type="number" value="" id="${name}">
+                        <span class="input-group-addon"><i class="fa fa-fw fa-chevron-left"></i></span>
+                        <input class="form-control" name="${name}[]" type="number" value="">
+                    </div>
+                </div>
+                <a class="btn btn-default deleteQueryRow"><i class="fa fa-fw fa-times"></i></a>
+            </div>`;
     } else if (type === "enum") {
       const options = Object.entries(queryFields[name].list)
         .sort((a, b) => a[1].localeCompare(b[1]))

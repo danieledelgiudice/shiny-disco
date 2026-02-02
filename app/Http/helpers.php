@@ -42,11 +42,15 @@ function format_field($queryFields, $model, $field) {
         list($rel, $field) = explode('-', $field);
         $model = $model->{$rel};
     }
+
+    if ($type === 'range' && substr($field, -6) === '_range') {
+        $field = substr($field, 0, -6);
+    }
     
     if($model->{$field} === null || $model->{$field} === '')
         return '';
     
-    if ($type === 'string')
+    if ($type === 'string' || $type === 'range')
         return $model->{$field};
     else if ($type === 'date')
         return format_date($model->{$field});

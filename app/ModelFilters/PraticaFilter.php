@@ -47,6 +47,22 @@ class PraticaFilter extends ModelFilter
         return $this->whereBeginsWith('numero_pratica', $value);
     }
 
+    public function numeroPraticaRange($value)
+    {
+        if (!is_array($value)) {
+            return $this;
+        }
+
+        $q = $this;
+
+        if (isset($value[0]) && $value[0] !== '')
+            $q = $q->where('numero_pratica', '>=', $value[0]);
+        if (isset($value[1]) && $value[1] !== '')
+            $q = $q->where('numero_pratica', '<=', $value[1]);
+
+        return $q;
+    }
+
     public function numeroRegistrazione($value)
     {
         return $this->whereBeginsWith('numero_registrazione', $value);

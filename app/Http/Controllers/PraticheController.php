@@ -15,6 +15,7 @@ class PraticheController extends Controller
 
         $this->queryFields = [
             'numero_pratica'                 => ['display'   => 'Numero pratica',                      'type'        => 'string',],
+            'numero_pratica_range'           => ['display'   => 'Numero pratica (<>)',                 'type'        => 'range',],
             'numero_registrazione'           => ['display'   => 'Numero registrazione',                'type'        => 'string',],
             'data_apertura'                  => ['display'   => 'Data apertura',                       'type'        => 'date',],
             'stato_pratica'                  => ['display'   => 'Stato pratica',                       'type'        => 'enum',        'list' => \App\Pratica::$enumStatoPratica],
@@ -348,13 +349,32 @@ class PraticheController extends Controller
 
     public function filter(Request $request)
     {
+        $hasFilterValue = function ($value) {
+            if (is_array($value)) {
+                $values = array_values($value);
+                if (count($values) === 2 && in_array($values[0], ['lt', 'gt'], true)) {
+                    return $values[1] !== '' && $values[1] !== null;
+                }
+
+                foreach ($values as $item) {
+                    if ($item !== '' && $item !== null) {
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+
+            return $value !== '' && $value !== null;
+        };
+
         $params = [];
         $requestedFields = ['numero_pratica'];
         $j = 6;
 
         foreach ($request->all() as $k => $v) {
             if ($k[0] != '_' && $k != 'page') {
-                if ($v != '')
+                if ($hasFilterValue($v))
                     $params[$k] = $v;
                 if ($j > 1 && !in_array($k, $requestedFields))
                     $requestedFields[--$j] = $k;
