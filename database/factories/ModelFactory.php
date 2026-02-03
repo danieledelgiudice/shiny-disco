@@ -228,7 +228,7 @@ $factory->define(App\Cliente::class, function (Faker\Generator $faker) {
         'targa_controparte' => strtoupper($faker->bothify('??###??')),
         'numero_polizza_controparte' => strtoupper($faker->bothify('????######??##?#??')),
         'proprietario_mezzo_responsabile' => $faker->optional($weight = 0.2)->name,
-        'proprietario_mezzo_controparte' => $faker->optional($weight = 0.2)->name,
+        'proprietario_mezzo_parte' => $faker->optional($weight = 0.2)->name,
         'medico_controparte' => $faker->optional($weight = 0.8)->name,
         'luogo_medico_controparte' => $faker->streetAddress,
         'data_medico_controparte' => strtoupper($faker->bothify('##/##/## ORE ##:##')),

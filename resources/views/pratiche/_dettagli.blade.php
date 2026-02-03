@@ -85,6 +85,14 @@
                <p class="form-control-static">{{ $pratica->assicurazione_parte }}</p>
             </div>
         </div>
+
+        <div class="row">
+            <!-- Proprietario mezzo parte -->
+            <strong class="col-md-2 form-control-static">Proprietario mezzo</strong>
+            <div class="col-md-4">
+                <p class="form-control-static">{{ $pratica->proprietario_mezzo_parte }}</p>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -153,13 +161,6 @@
             </div>
         </div>
 
-        <div class="row">
-            <!-- Proprietario mezzo controparte -->
-            <strong class="col-md-2 form-control-static">Proprietario mezzo controparte</strong>
-            <div class="col-md-4">
-                <p class="form-control-static">{{ $pratica->proprietario_mezzo_controparte }}</p>
-            </div>
-        </div>
 
         <div class="row">
             <!-- Assicurazione controparte -->

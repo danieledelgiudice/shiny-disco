@@ -94,6 +94,14 @@
                     {!! Form::text('assicurazione_parte', null, ['class' => 'form-control']) !!}
                 </div>
             </div>
+
+            <div class="form-group">
+                <!-- Proprietario mezzo parte -->
+                {!! Form::label('proprietario_mezzo_parte', 'Proprietario mezzo' , ['class' => 'col-md-2 control-label']) !!}
+                <div class="col-md-4">
+                    {!! Form::text('proprietario_mezzo_parte', null, ['class' => 'form-control']) !!}
+                </div>
+            </div>
         </div>
     </div>
 
@@ -162,13 +170,6 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <!-- Proprietario mezzo controparte -->
-                {!! Form::label('proprietario_mezzo_controparte', 'Proprietario mezzo controparte' , ['class' => 'col-md-2 control-label']) !!}
-                <div class="col-md-4">
-                    {!! Form::text('proprietario_mezzo_controparte', null, ['class' => 'form-control']) !!}
-                </div>
-            </div>
 
             <div class="form-group">
                 <!-- Assicurazione controparte -->
