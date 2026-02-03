@@ -24,7 +24,7 @@ class FatturaGenerator
         if ($fattura['appartenenza'] == 1) {
 
             // Ely's
-            $logo_url = \URL::asset("/images/logos/elys.jpg");
+            $logo_url = public_path("images/logos/elys.jpg");
             $str = "Ely's consulenze
 Via Claudio Cogorano 25, 5° piano - 57123 Livorno
 Tel 0586/941901 0586/895118
@@ -34,7 +34,7 @@ Partita IVA 01724020498";
         } else if ($fattura['appartenenza'] == 2) {
 
             // Elisir
-            $logo_url = \URL::asset("/images/logos/elisir.png");
+            $logo_url = public_path("images/logos/elisir.png");
             $str = "Studio di consulenza Elisir
 Via Claudio Cogorano 25, 5° piano - 57123 Livorno
 Tel 0586/941901 0586/895118
@@ -45,7 +45,7 @@ elisirinfortunistica@pec.it    daniela.burini@elisirinfortunistica.it";
         } else if ($fattura['appartenenza'] == 3) {
 
             // Group
-            $logo_url = \URL::asset("/images/logos/group.jpg");
+            $logo_url = public_path("images/logos/group.jpg");
             $str = "Ely's Elisir Group SRL
 Via Claudio Cogorano 25, 5° piano - 57123 Livorno
 P.I. 01868050491

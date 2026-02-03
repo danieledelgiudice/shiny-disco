@@ -24,7 +24,7 @@ class GenericaGenerator
         $f->AddPage();
 
         $logo = $data['logo'];
-        $logo_url = \URL::asset("/images/logos/$logo");
+        $logo_url = public_path("images/logos/$logo");
         
         $f->Image($logo_url, 20, 15, 45);
 

@@ -15,6 +15,7 @@ class InterventoRCAGenerator
         $autorita = $data['autorita'];
 
         $lineh = 6;
+        $tableLineh = 5;
 
         // $template = iconv('UTF-8', 'windows-1252', $template);
 
@@ -25,7 +26,7 @@ class InterventoRCAGenerator
         $f->SetFont('Times', '', 11);
 
         $logo = $data['logo'];
-        $logo_url = \URL::asset("/images/logos/$logo");
+        $logo_url = public_path("images/logos/$logo");
         
         $f->Image($logo_url, 20, 15, 45);
 
@@ -182,10 +183,18 @@ Partita IVA 01724020498";
                 ['N. POLIZZA',              "{$pratica['numero_polizza_parte']}",           "{$pratica['numero_polizza_controparte']}"],
                 ['ASSICURAZIONE',           "{$pratica['assicurazione_parte']}",            "{$pratica['assicurazione_controparte']}"],
                 ['TARGA',                   "{$pratica['targa_parte']}",                    "{$pratica['targa_controparte']}"],
+                ['PROPRIETARIO MEZZO',      "{$pratica['proprietario_mezzo_parte']}",       "{$pratica['proprietario_mezzo_responsabile']}"],
+                ['DINAMICA',                "{$pratica['dinamica_sinistro']}",              ""],
+                ['MEZZO VISIBILE',          "{$pratica['mezzo_visibile']}",                 ""],
         ];
 
         $f->Ln();
-        $f->SetY($f->GetY() + 4);
+        $f->SetY($f->GetY() + 2);
+
+        $f->SetDrawColor(220, 220, 220);
+        $f->SetLineWidth(0.1);
+
+        $lastIndex = count($str) - 1;
 
         foreach($str as $i => $row) {
             $rowY = $f->GetY();
@@ -195,53 +204,40 @@ Partita IVA 01724020498";
             $s = $row[0];
             $s = iconv('UTF-8', 'windows-1252', $s);
             $f->SetFont('Times', 'B', 11);
-            $f->MultiCell(40, $lineh, $s);
+            $f->MultiCell(40, $tableLineh, $s, 0, 'L');
             if ($f->GetY() > $maxY) $maxY = $f->GetY();
+
+            $isSpan = trim($row[2]) === '';
 
             $f->SetXY(60, $rowY);
             $s = $row[1];
             $s = iconv('UTF-8', 'windows-1252', $s);
             $f->SetFont('Times', $i ? '' : 'B', 11);
-            $f->MultiCell(60, $lineh, $s);
+            $f->MultiCell($isSpan ? 130 : 60, $tableLineh, $s, 0, 'L');
             if ($f->GetY() > $maxY) $maxY = $f->GetY();
 
-            $f->SetXY(125, $rowY);
-            $s = $row[2];
-            $s = iconv('UTF-8', 'windows-1252', $s);
-            $f->SetFont('Times', $i ? '' : 'B', 11);
-            $f->MultiCell(60, $lineh, $s);
-            if ($f->GetY() > $maxY) $maxY = $f->GetY();
+            if (!$isSpan) {
+                $f->SetXY(125, $rowY);
+                $s = $row[2];
+                $s = iconv('UTF-8', 'windows-1252', $s);
+                $f->SetFont('Times', $i ? '' : 'B', 11);
+                $f->MultiCell(60, $tableLineh, $s, 0, 'L');
+                if ($f->GetY() > $maxY) $maxY = $f->GetY();
+            }
 
-            $f->setY($maxY);
+            $lineY = $maxY + 0.5;
+            if ($i < $lastIndex) {
+                $f->Line(20, $lineY, 190, $lineY);
+            }
+            $f->setY($lineY + 0.5);
         }
 
-        $str = "DINAMICA ";
-        $f->SetFont('Times', 'B', 11);
-        $str = iconv('UTF-8', 'windows-1252', $str);
-        $f->SetXY(20, $f->GetY() + $lineh);
-        $f->Write($lineh, $str);
-
-        $str = "{$pratica['dinamica_sinistro']}";
-        $f->SetFont('Times', '', 11);
-        $str = iconv('UTF-8', 'windows-1252', $str);
-        $f->SetX(60);
-        $f->Write($lineh, $str);
-
-        $str = "MEZZO VISIBILE ";
-        $f->SetFont('Times', 'B', 11);
-        $str = iconv('UTF-8', 'windows-1252', $str);
-        $f->SetXY(20, $f->GetY() + $lineh);
-        $f->Write($lineh, $str);
-
-        $str = "{$pratica['mezzo_visibile']}";
-        $f->SetFont('Times', '', 11);
-        $str = iconv('UTF-8', 'windows-1252', $str);
-        $f->SetX(60);
-        $f->Write($lineh, $str);
+        $f->SetDrawColor(0, 0, 0);
+        $f->SetLineWidth(0.2);
 
         $str = "I dati contenuti nella presente lettera di intervento sono esaustivi a quanto le attuali normative di legge richiedono, tuttavia possono essere integrati, variati, modificati a seconda di nuove informazioni che dovessero pervenire alla scrivente società. I dati vengono forniti sotto il più stretto riservo e dovranno essere utilizzati dal destinatario esclusivamente nell’ottica della gestione della vertenza.";
         $str = iconv('UTF-8', 'windows-1252', $str);
-        $f->SetXY(20, $f->GetY() + 10);
+        $f->SetXY(20, $f->GetY() + 5);
         $f->Write($lineh, $str);
 
 
